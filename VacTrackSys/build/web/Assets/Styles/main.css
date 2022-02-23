@@ -1,0 +1,82 @@
+/*
+
+*/
+/* 
+    Created on : Feb 18, 2022, 7:49:35 PM
+    Author     : DeShane Sims
+*/
+
+@charset "utf-8";
+
+/*
+ title:JODEAC19.css
+by: DeShane` Sims
+
+*/
+
+header {
+text-align: center;
+color: rgb(0, 0, 0);
+border: 2px solid;
+box-shadow: green;
+width: 100%;
+margin-top: 5%;
+}
+
+header ul li {
+display: inline-block;
+width: 20%;
+font-size: 30px;
+background-color: none;
+}
+hr{
+    color: rgb(255,255,255);
+}
+nav a {
+color: white;
+}
+
+img {
+width: 500px;
+height: 500px;
+}
+
+div#Welcome {
+display: flex;
+flex-wrap: wrap;
+flex-direction: row;
+flex: 2 1;
+}
+
+
+h1 {
+color: white;
+text-align: left;
+}
+
+h2 {
+color: white;
+}
+
+div#Welcome h1{
+text-align: center;
+color: green;
+font-size: 5em;
+width: 40%;
+}
+
+div#Welcome h2 {
+text-align: center;
+color: green;
+font-size: 4em;
+width: 40%
+}
+
+a:visited {
+color: white;
+}
+
+footer {
+color: gray;
+text-align: center;
+}
