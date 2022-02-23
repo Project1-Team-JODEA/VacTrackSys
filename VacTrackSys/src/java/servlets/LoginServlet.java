@@ -57,7 +57,7 @@ public class LoginServlet extends HttpServlet {
             ServletContext context = getServletContext();
            p = request.getPathInfo(); 
            System.out.print("Path: " + p);
-            String ur = context.getRealPath("/WEB-INF/MoVaxDB.accdb");
+            String ur = context.getRealPath("WEB-INF/MoVaxDB.accdb");
             Connection conn = DriverManager.getConnection("jdbc:ucanaccess://"+ur);
 //            String p = request
             Statement s = conn.createStatement();
