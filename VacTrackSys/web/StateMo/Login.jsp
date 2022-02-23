@@ -18,7 +18,7 @@
         <header>
             <nav>
                 <ul>
-                    <li><a href="../index.html">Welcome</a></li>
+                    <li><a href="../index2.html">Welcome</a></li>
                     <li><a href="../Patient/PatientSearch.jsp">Patients</a></li>
                     <li><a href="../CDC/Login.jsp">Center of Disease Control</a></li>
                       <li><a href="../Member/Login.jsp">Member Login</a></li>

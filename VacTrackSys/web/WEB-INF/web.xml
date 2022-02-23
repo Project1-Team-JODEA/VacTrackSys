@@ -2,7 +2,7 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>DBActionServlet</servlet-name>
-        <servlet-class>servlets.DBActionServlet</servlet-class>
+        <jsp-file>/Member/VaccinationDB.jsp</jsp-file>
     </servlet>
     <servlet>
         <servlet-name>NewAccountServlet</servlet-name>
@@ -38,6 +38,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
+        <welcome-file>Member/Login.jsp</welcome-file>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 </web-app>

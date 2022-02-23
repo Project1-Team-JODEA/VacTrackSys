@@ -26,7 +26,7 @@
     <body style="background-color: black;">
         <nav>
                 <ul>
-                    <li><a href="../index.html">Welcome</a></li>
+                    <li><a href="../index2.html">Welcome</a></li>
                     
                     <li><a href="../Patients/PatientSearch.jsp">Patients</a></li>
                      <li><a href="Login.jsp">Member Login</a></li>
@@ -61,7 +61,7 @@
             </table>
         </form>
         <br>
-        <a href="../index.html">Return to Homepage</a>
+        <a href="../index2.html">Return to Homepage</a>
         ${msg}
     </body>
 </html>

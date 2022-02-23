@@ -12,7 +12,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Vac Track System - Member Login</title>
-        <link rel="stylesheet" href="../Assets/Styles/main.css" type="text/css" />
+        <!--<link rel="stylesheet" href="../Assets/Styles/main.css" type="text/css" />-->
+        <link rel="stylesheet" href="../Assets/Styles/loginStyle.css">
+        
         <style>
             body {
                 background-image: url("../Assets/Images/Homepage.png");
@@ -22,39 +24,59 @@
             }
         </style>
     </head>
-    <body style="background-color: black;">
-        <header>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Welcome</a></li>
-                    <li><a href="../Patients/PatientSearch.jsp">Patients</a></li>
-                    <li><a href="Login.jsp">Member Login</a></li>
-                    <li><a href="CDC/Login.jsp">Center of Disease Control</a></li>
-                    <li><a href="../StateMo/Login.jsp">State of Missouri</a></li>
-                </ul>
-            </nav>
-        </header>
-        <form id="memLogin" action="login" method="post">
-            <h1>Member Login</h1>
-            <table>
-                <tr>
-                    <td style="color: white;">Username:</td>
-                    <td><input type="text" name="userid" id="userid" size="15"></td>
-                </tr>
-                <tr>
-                    <td style="color: white;">Password:</td>
-                    <td><input type="password" name="passwd" id="passwd" size="15"></td>
-                </tr>
-                <tr>
-                    <td><input type="submit" value="Login"></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-        </form>
-        <a style="color: white;" href="NewAccount.jsp">Create User Account</a>
-        <footer>
+    <body >
+        <div class="hero">
+        <div class="form-box">
+            <div class="button-box">
+                <div id="btn"></div>
+                <button type="button" class="toggle-btn" onclick="login()">Log In</button>
+                <button type="button" class="toggle-btn" onclick="register()">Register</button>
+            </div>
+            <div class="social-icons">
+                <a href="https://www.mypatientchart.org/MyChart/Authentication/Login?"> 
+                     <img src="../Assets/Images/download.png">
+                 </a> 
+                 <a href="https://physicians.wustl.edu/for-patients/mychart-patient-portal/"> 
+                     <img src="../Assets/Images/washu2.png">
+                 </a>
+                 <a href="https://www.mymercy.net/login"> 
+                     <img src="../Assets/Images/mercy.jpg">
+                 </a>
+            </div>
+            <form id="login" class="input-group">
+                <input type="text" class="input-field" id="userid" placeholder="User ID" required>
+                <input type="text" class="input-field" id="passwd" placeholder="Enter Password" required>
+                <input type="checkbox" class="check-box"><span>Remember Password</span>
+                <button type="submit" class="submit-btn">Login</button>
+            </form>
+            <form id="register" class="input-group" action="">
+                <input type="text" class="input-field" placeholder="User ID" required>
+                <input type="email" class="input-field" placeholder="Email ID" required>
+                <input type="text" class="input-field" placeholder="Enter Password" required>
+                <input type="checkbox" class="check-box"><span>I agree to the terms & conditions</span>
+                <button type="submit" class="submit-btn">Register</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+    var x = document.getElementById("login");
+    var y = document.getElementById("register");
+    var z = document.getElementById("btn");
 
-        </footer>
-    </body>
+    
+    function register(){
+        x.style.left = "-400px";
+        y.style.left = "50px";
+        z.style.left = "110px";
+    }
+
+    function login(){
+        x.style.left = "50px";
+        y.style.left = "450px";
+        z.style.left = "0px";
+    }
+
+    </script>
+    
 </html>

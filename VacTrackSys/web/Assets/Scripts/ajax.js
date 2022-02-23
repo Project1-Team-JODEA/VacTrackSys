@@ -1,10 +1,5 @@
 // ajax.js
 
-/*	This page defines a function for creating an Ajax request object.
- *	This page should be included by other pages that 
- *	need to perform an XMLHttpRequest.
- */
- 
 /*	Function for creating the XMLHttpRequest object.
  *	Function takes no arguments.
  *	Function returns a browser-specific XMLHttpRequest object

@@ -23,7 +23,7 @@ public Connect(String path){
         
     
     }catch(Exception e){
-        
+        System.out.print(e);
     }
 }
 }
