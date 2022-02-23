@@ -7,22 +7,17 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html><%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Vac Track System - Member Login</title>
         <!--<link rel="stylesheet" href="../Assets/Styles/main.css" type="text/css" />-->
         <link rel="stylesheet" href="../Assets/Styles/loginStyle.css">
+        <script src="../Assets/Scripts/validatescript.js" type="text/javascript"></script>
+        <script src="../Assets/Scripts/validatescript.js" type="text/javascript"></script>
         
-        <style>
-            body {
-                background-image: url("../Assets/Images/Homepage.png");
-                background-repeat: no-repeat;
-                background-attachment: fixed;
-                background-size: cover;
-            }
-        </style>
+        
     </head>
     <body >
         <div class="hero">
@@ -43,20 +38,24 @@
                      <img src="../Assets/Images/mercy.jpg">
                  </a>
             </div>
-            <form id="login" class="input-group">
-                <input type="text" class="input-field" id="userid" placeholder="User ID" required>
-                <input type="text" class="input-field" id="passwd" placeholder="Enter Password" required>
+            <form id="login" action="Login"method="post" class="input-group">
+                <input type="text" class="input-field" id="userid" value="" placeholder="User ID" required>
+                <input type="password" class="input-field" id="passwd" value="" placeholder="Enter Password" required>
                 <input type="checkbox" class="check-box"><span>Remember Password</span>
-                <button type="submit" class="submit-btn">Login</button>
+                <button type="submit" class="submit-btn" onclick="ValidateL
+                    ogin()">Login</button>
             </form>
-            <form id="register" class="input-group" action="">
-                <input type="text" class="input-field" placeholder="User ID" required>
-                <input type="email" class="input-field" placeholder="Email ID" required>
-                <input type="text" class="input-field" placeholder="Enter Password" required>
+            <form id="register" action="/NewAccount" method="post" class="input-group" action="">
+                <input type="text" class="input-field" id="userid" placeholder="User ID" required>
+                <input type="email" class="input-field" id="email" placeholder="Email ID" required>
+                <input type="text" class="input-field" id="passwd" placeholder="Enter Password" required>
+                <input type="text" class="input-field" id="confpasswd" placeholder="Confirm Password" required>
                 <input type="checkbox" class="check-box"><span>I agree to the terms & conditions</span>
-                <button type="submit" class="submit-btn">Register</button>
+                <button type="submit" id="newacct" class="submit-btn">Register</button>
             </form>
+            
         </div>
+            
     </div>
     
     <script>

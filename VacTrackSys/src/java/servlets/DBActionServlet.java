@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author eVmPr
  */
-@WebServlet(name = "DBActionServlet", urlPatterns = {"/DBActionServlet"})
+@WebServlet(name = "DBActionServlet", urlPatterns = {"/DBAction"})
 public class DBActionServlet extends HttpServlet {
 
     /**

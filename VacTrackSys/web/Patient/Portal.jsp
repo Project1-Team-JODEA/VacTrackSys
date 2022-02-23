@@ -24,7 +24,7 @@
             <a href="#" class="logo"> <i class="fas fa-heartbeat"></i> J.O.D.E.A Vaccination Tracking</a>
 
             <nav class="navbar">
-                <a href="index.html">home</a>
+                <a href="../index.html">home</a>
                 <a href="#services">services</a>
                 <a href="#about">about</a>
                 <a href="#doctors">dev team</a>

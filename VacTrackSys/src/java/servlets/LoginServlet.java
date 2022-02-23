@@ -28,8 +28,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author alexs
  */
-@WebServlet(name = "loginServlet", urlPatterns = {"/login"})
-public class loginServlet extends HttpServlet {
+@WebServlet(name = "LoginServlet", urlPatterns = {"Member/Login", "CDC/Login"})
+public class LoginServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,7 +44,7 @@ public class loginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String URL = "", msg = "", sql="", username="";
-        User u;
+        User u;String p="";
         String dbURL = "jdbc:ucanaccess://localhost:3306/MoVaxDB";
         String dbUSER = "root";
         String dbPWD = "sesame";
@@ -55,12 +55,13 @@ public class loginServlet extends HttpServlet {
             // load and register JDBC driver for mySql
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             ServletContext context = getServletContext();
-            
-            String ur = context.getRealPath("/WEB-INF/MoVaxDB.accb");
+           p = request.getPathInfo(); 
+           System.out.print("Path: " + p);
+            String ur = context.getRealPath("/WEB-INF/MoVaxDB.accdb");
             Connection conn = DriverManager.getConnection("jdbc:ucanaccess://"+ur);
 //            String p = request
             Statement s = conn.createStatement();
-            sql = "SELECT * FROM usertbl WHERE username = '" + username + "'";
+            sql = "SELECT * FROM Users WHERE username = '" + username + "'";
             ResultSet r = s.executeQuery(sql);
             if (r.next()){
                 u = new User();
