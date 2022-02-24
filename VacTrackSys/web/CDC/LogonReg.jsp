@@ -14,9 +14,7 @@
         <title>Vac Track System - Member Login</title>
         <!--<link rel="stylesheet" href="../Assets/Styles/main.css" type="text/css" />-->
         <link rel="stylesheet" href="../Assets/Styles/loginStyle.css">
-        <script src="../Assets/Scripts/validatescript.js" type="text/javascript"></script>
-        <script src="../Assets/Scripts/validatescript.js" type="text/javascript"></script>
-        
+        <script src="../Assets/Scripts/validatescript.js" type="text/javascript"></script> 
         
     </head>
     <body >
@@ -42,8 +40,7 @@
                 <input type="text" class="input-field" id="userid" value="" placeholder="User ID" required>
                 <input type="password" class="input-field" id="passwd" value="" placeholder="Enter Password" required>
                 <input type="checkbox" class="check-box"><span>Remember Password</span>
-                <button type="submit" class="submit-btn" onclick="ValidateL
-                    ogin()">Login</button>
+                <button type="submit" class="submit-btn">Login</button>
             </form>
             <form id="register" action="/NewAccount" method="post" class="input-group" action="">
                 <input type="text" class="input-field" id="userid" placeholder="User ID" required>
@@ -53,7 +50,7 @@
                 <input type="checkbox" class="check-box"><span>I agree to the terms & conditions</span>
                 <button type="submit" id="newacct" class="submit-btn">Register</button>
             </form>
-            
+            <span id="message">message : ${msg}</span>
         </div>
             
     </div>

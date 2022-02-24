@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String URL = "", msg = "", sql="", username="";
-        User u;String p="";
+        User u;
         String dbURL = "jdbc:ucanaccess://localhost:3306/MoVaxDB";
         String dbUSER = "root";
         String dbPWD = "sesame";
@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
             // load and register JDBC driver for mySql
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             ServletContext context = getServletContext();
-           p = request.getPathInfo(); 
+         String  p = request.getPathInfo(); 
            System.out.print("Path: " + p);
             String ur = context.getRealPath("WEB-INF/MoVaxDB.accdb");
             Connection conn = DriverManager.getConnection("jdbc:ucanaccess://"+ur);
@@ -88,11 +88,13 @@ public class LoginServlet extends HttpServlet {
             conn.close();
         } catch (ClassNotFoundException e){
             msg += "JDBC Driver not found in project.<br>";
+            
         } catch (SQLException e){
             msg += "Connection error: " + e.getMessage() + ".<br>";
         } catch (Exception e){
             msg += "Servlet error: " + e.getMessage() + ".<br>";
         }
+        URL = "CDC/LogonReg.jsp";
         request.setAttribute("msg", msg);
         RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);
         disp.forward(request, response);
