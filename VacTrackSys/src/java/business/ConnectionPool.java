@@ -1,4 +1,6 @@
-
+/**
+ * @author Alexander Breitenbach
+ */
 package business;
 
 import java.sql.*;
@@ -6,13 +8,13 @@ import javax.naming.Context;
 import javax.sql.DataSource;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-/**
- * @author alexs
- */
+
 public class ConnectionPool {
     private static ConnectionPool pool = null;
     private static DataSource dataSource = null;
-    
+    /**
+     * 
+     */
     private ConnectionPool() {
         try {
             InitialContext ic = new InitialContext();
@@ -23,14 +25,20 @@ public class ConnectionPool {
             System.out.println(e);
         }
     }
-    
+    /**
+     * 
+     * @return 
+     */
     public static synchronized ConnectionPool getInstance() {
         if (pool == null) {
             pool = new ConnectionPool();
         }
         return pool;
     }
-    
+    /**
+     * 
+     * @return 
+     */
     public Connection getConnection() {
         try {
             return dataSource.getConnection();            

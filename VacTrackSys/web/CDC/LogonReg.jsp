@@ -36,13 +36,13 @@
                      <img src="../Assets/Images/mercy.jpg">
                  </a>
             </div>
-            <form id="login" action="Login"method="post" class="input-group">
+            <form id="login" action="Login" method="post" class="input-group">
                 <input type="text" class="input-field" id="userid" value="" placeholder="User ID" required>
                 <input type="password" class="input-field" id="passwd" value="" placeholder="Enter Password" required>
                 <input type="checkbox" class="check-box"><span>Remember Password</span>
                 <button type="submit" class="submit-btn">Login</button>
             </form>
-            <form id="register" action="/NewAccount" method="post" class="input-group" action="">
+            <form id="register" action="NewAccount" method="post" class="input-group" action="">
                 <input type="text" class="input-field" id="userid" placeholder="User ID" required>
                 <input type="email" class="input-field" id="email" placeholder="Email ID" required>
                 <input type="text" class="input-field" id="passwd" placeholder="Enter Password" required>
