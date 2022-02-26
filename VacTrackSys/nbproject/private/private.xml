@@ -3,20 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/Assets/Scripts/pageAction.js</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/Assets/Scripts/dbaction.js</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/business/Vaccine.java</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/servlets/CreateReportServlet.java</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/Member/Logon.html</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/Member/Login.jsp</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/business/Patient.java</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/business/User.java</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/Member/NewAccount.jsp</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/business/Connect.java</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/Assets/Scripts/ajax.js</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/index.html</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/Assets/Scripts/validatescript.js</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/Member/VaccinationDB.jsp</file>
+            <file>file:/C:/Java3Projects/VacTrackSys/VacTrackSys/VacTrackSys/web/Member/LogonReg.jsp</file>
+            <file>file:/C:/Java3Projects/VacTrackSys/VacTrackSys/VacTrackSys/web/index.html</file>
+            <file>file:/C:/Java3Projects/VacTrackSys/VacTrackSys/VacTrackSys/src/java/servlets/LoginServlet.java</file>
+            <file>file:/C:/Java3Projects/VacTrackSys/VacTrackSys/VacTrackSys/src/java/business/User.java</file>
         </group>
     </open-files>
 </project-private>

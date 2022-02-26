@@ -37,15 +37,15 @@
                  </a>
             </div>
             <form id="login" action="Login" method="post" class="input-group">
-                <input type="text" class="input-field" id="userid" value="" placeholder="User ID" required>
-                <input type="password" class="input-field" id="passwd" value="" placeholder="Enter Password" required>
+                <input type="text" class="input-field" name="userid" id="uid" value="" placeholder="User ID" required>
+                <input type="password" class="input-field" name="passwd" id="upwd" value="" placeholder="Enter Password" required>
                 <input type="checkbox" class="check-box"><span>Remember Password</span>
                 <button type="submit" class="submit-btn">Login</button>
             </form>
             <form id="register" action="NewAccount" method="post" class="input-group" action="">
-                <input type="text" class="input-field" id="userid" placeholder="User ID" required>
+                <input type="text" class="input-field" id="uid" placeholder="User ID" required>
                 <input type="email" class="input-field" id="email" placeholder="Email ID" required>
-                <input type="text" class="input-field" id="passwd" placeholder="Enter Password" required>
+                <input type="text" class="input-field" id="upwd" placeholder="Enter Password" required>
                 <input type="text" class="input-field" id="confpasswd" placeholder="Confirm Password" required>
                 <input type="checkbox" class="check-box"><span>I agree to the terms & conditions</span>
                 <button type="submit" id="newacct" class="submit-btn">Register</button>

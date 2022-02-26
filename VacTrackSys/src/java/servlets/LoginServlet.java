@@ -50,18 +50,18 @@ public class LoginServlet extends HttpServlet {
         String dbPWD = "sesame";
         try{
             // get Username and Passattempt from form
-            username = "";
-            String passattempt = "";
+            username = request.getParameter("userid").trim();
+            String passattempt = request.getParameter("passwd").trim();
             // load and register JDBC driver for mySql
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             ServletContext context = getServletContext();
          String  p = request.getPathInfo(); 
            System.out.print("Path: " + p);
-            String ur = context.getRealPath("WEB-INF/MoVaxDB.accdb");
+            String ur = context.getRealPath("/Team_JODEA1.accdb");
             Connection conn = DriverManager.getConnection("jdbc:ucanaccess://"+ur);
 //            String p = request
             Statement s = conn.createStatement();
-            sql = "SELECT * FROM Users WHERE username = '" + username + "'";
+            sql = "SELECT * FROM USERS WHERE Username = '" + username + "'";
             ResultSet r = s.executeQuery(sql);
             if (r.next()){
                 u = new User();
@@ -69,11 +69,9 @@ public class LoginServlet extends HttpServlet {
                 u.setPassword(r.getString("Password"));
                 u.setPassattempt(passattempt);
                 if (u.isAuthenticated()){
-                    u.setFname("FirstName");
-                    u.setMname("MiddleName");
-                    u.setLname("LastName");
+                    u.setAccesslevel("Access_Level");
+                    u.setEmail("Email_Address");
                     u.setLocation("Location");
-                    u.setRole("Role");
                     msg += "User " + username + " authenticated! <br>";
                     URL = "";
                 } else {
@@ -94,7 +92,7 @@ public class LoginServlet extends HttpServlet {
         } catch (Exception e){
             msg += "Servlet error: " + e.getMessage() + ".<br>";
         }
-        URL = "CDC/LogonReg.jsp";
+        URL = "/CDC/LogonReg.jsp";
         request.setAttribute("msg", msg);
         RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);
         disp.forward(request, response);
