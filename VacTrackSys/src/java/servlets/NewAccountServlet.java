@@ -4,6 +4,7 @@
  */
 package servlets;
 
+import business.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -37,45 +38,51 @@ public class NewAccountServlet extends HttpServlet {
         String URL = "Member/NewAccount.jsp";
         String msg = "", sql = "";
 
-        String email = "", userid = "", passwd = "", confpasswd="";
-
         try {//Connecting to database
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             ServletContext context = getServletContext();
-            String dbURL = context.getRealPath("/WEB-INF/MoVaxDB.accb");
-            Connection conn = DriverManager.getConnection("jdbc:ucanaccess://"+dbURL);
-            userid = request.getParameter("userid");
-            email = request.getParameter("email"); 
-            passwd = request.getParameter("passwd");
-            confpasswd = request.getParameter("confpasswd"); 
+            String ur = context.getRealPath("/Team_JODEA1.accdb");
+            Connection conn = DriverManager.getConnection("jdbc:ucanaccess://"+ur);
+            User u = new User();
+            u.setUsername(request.getParameter("userid"));
+            u.setEmail(request.getParameter("email"));
+            // need location field.  Hardcoding for now
+            u.setLocation("First Hospital East");
+            //u.setLocation(request.getParameter("location"));
+            u.setPassword(request.getParameter("passwd"));
+            // need url check for u.setAccessLevel()
+            // hardcoding for now
+                u.setAccesslevel("MedicalStaff");
             /* check for empty strings in  input */
-            if (userid.equals("")){
+            if (u.getUsername().equals("")){
                 msg += "Please enter username. <br>";
-            } else if (passwd.equals("")){
+            } else if (u.getPassword().equals("")){
                 msg += "Please enter password. <br>";
-            } else if (confpasswd.equals("")){
-                msg += "Password Invalid. Please Confirm Password <br>";
-            }else if (email.equals("")){
+            //} else if (confpasswd.equals("")){
+            //    msg += "Password Invalid. Please Confirm Password <br>";
+            }else if (u.getEmail().equals("")){
                 msg += "Missing Email Address. <br>";
+            } else if (u.getLocation().equals("")){
+                msg += "Missing Location. <br>";
             }
             else {
                 //Check Username, Password and Confirmation Password, 
                 //if 
-                if (userid.length() > 6){//
+                if (u.getUsername().length() > 6){//
                     msg = "";
-                } if (passwd.length() > 8){
+                } if (u.getPassword().length() > 8){
                     msg = "";
                 } 
-                if (passwd.equalsIgnoreCase(userid)){
+                if (u.getPassword().equalsIgnoreCase(u.getUsername())){
                     msg = "Password Cannot be the same as your username.";
                 }
-                if (!confpasswd.matches(passwd)){
-                    msg = "Password Invalid <br>";
-                }
+                //if (!confpasswd.matches(passwd)){
+                  //  msg = "Password Invalid <br>";
+                //}
                 //Create User Account
                 
-                sql = "INSERT INTO Users (Username, Password, Email_Address) "
-                        + "VALUES ("+ " ) ";
+                sql = "INSERT INTO USERS (Username, Password, Email_Address, Location, Access_Level) "
+                        + "VALUES (" + u.getUsername() +"," + u.getPassword() + "," + u.getEmail() + "," + u.getLocation() + "," + u.getAccesslevel() + ")";
             }
         
         } catch (ClassNotFoundException ex) {

@@ -5,6 +5,9 @@
         <group>
             <file>file:/C:/Java3Projects/VacTrackSys/VacTrackSys/VacTrackSys/web/Member/LogonReg.jsp</file>
             <file>file:/C:/Java3Projects/VacTrackSys/VacTrackSys/VacTrackSys/web/index.html</file>
+            <file>file:/C:/Java3Projects/VacTrackSys/VacTrackSys/VacTrackSys/src/java/servlets/addRecordServlet.java</file>
+            <file>file:/C:/Java3Projects/VacTrackSys/VacTrackSys/VacTrackSys/src/java/servlets/NewAccountServlet.java</file>
+            <file>file:/C:/Java3Projects/VacTrackSys/VacTrackSys/VacTrackSys/src/java/business/ConnectionPool.java</file>
             <file>file:/C:/Java3Projects/VacTrackSys/VacTrackSys/VacTrackSys/src/java/servlets/LoginServlet.java</file>
             <file>file:/C:/Java3Projects/VacTrackSys/VacTrackSys/VacTrackSys/src/java/business/User.java</file>
         </group>

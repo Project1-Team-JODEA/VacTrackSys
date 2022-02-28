@@ -45,7 +45,7 @@
             </div>
             <form id="login" class="input-group" action="Login" method="post">
                 <input type="text" class="input-field" name="userid" id="userid" placeholder="User ID" required>
-                <input type="text" class="input-field" name="passwd" aid="passwd" placeholder="Enter Password" required>
+                <input type="text" class="input-field" name="passwd" id="passwd" placeholder="Enter Password" required>
                 <input type="checkbox" class="check-box"><span>Remember Password</span>
                 <button type="submit" class="submit-btn">Login</button>
             </form>
