@@ -7,6 +7,7 @@ New Main Project - Vaccination Tracking System
   - Osama Aater
   - Alex Breitenbach
   - Jaccob Stanton
+  - DeShane Sims
 # Contents
 VacTrackSys - MainProject Project
 Server/tomcat-8.5.72 - Server Used to run project
