@@ -16,9 +16,7 @@
         <title> Vaccination Database</title>
         <link rel="stylesheet" href="../Assets/Styles/dbformstyle.css" type="text/css">
         <script src="../Assets/Scripts/pageAction.js"></script>
-        <style>
-            
-        </style>
+        
     </head>
     <body>
         <!-- Authentication -->
@@ -59,7 +57,7 @@
             <input type="text" name="midinit" id="midinit" required> 
             <input type="date" name="dob" id="dob" required>
             <input type="button" name="btnClear" value="Clear">
-            <input type="submit" name="clear" value="Clear" onclick="clrscrn()")>
+            <input type="submit" name="clear" value="Clear" onclick="clrscrn()">
 
             <input type="hidden" name="action" id="action" > 
         </form>

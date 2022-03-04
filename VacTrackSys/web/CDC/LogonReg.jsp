@@ -50,7 +50,7 @@
                 <input type="checkbox" class="check-box"><span>I agree to the terms & conditions</span>
                 <button type="submit" id="newacct" class="submit-btn">Register</button>
             </form>
-            <span id="message">message : ${msg}</span>
+            <span id="message"> ${msg}</span>
         </div>
             
     </div>

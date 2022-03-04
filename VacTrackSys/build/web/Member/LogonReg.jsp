@@ -15,14 +15,7 @@
         <!--<link rel="stylesheet" href="../Assets/Styles/main.css" type="text/css" />-->
         <link rel="stylesheet" href="../Assets/Styles/loginStyle.css">
         
-        <style>
-            body {
-                background-image: url("../Assets/Images/Homepage.png");
-                background-repeat: no-repeat;
-                background-attachment: fixed;
-                background-size: cover;
-            }
-        </style>
+        
     </head>
     <body >
         <div class="hero">
@@ -56,6 +49,7 @@
                 <input type="checkbox" class="check-box"><span>I agree to the terms & conditions</span>
                 <button type="submit" class="submit-btn">Register</button>
             </form>
+            <span id="message"> ${msg}</span>
         </div>
     </div>
     

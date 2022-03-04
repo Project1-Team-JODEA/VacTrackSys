@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             ServletContext context = getServletContext();
          String  p = request.getPathInfo(); 
-           System.out.print("Path: " + p);
+//           System.out.print("Path: " + p);
             String ur = context.getRealPath("/Team_JODEA1.accdb");
             Connection conn = DriverManager.getConnection("jdbc:ucanaccess://"+ur);
 //            String p = request
