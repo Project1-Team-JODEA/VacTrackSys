@@ -18,7 +18,8 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>NewAccountServlet</servlet-name>
-        <url-pattern>/NewAccount</url-pattern>
+        <url-pattern>/CDC/NewAccount</url-pattern>
+        <url-pattern>/Member/NewAccount</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>addRecordServlet</servlet-name>
