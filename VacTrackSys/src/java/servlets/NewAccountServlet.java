@@ -81,6 +81,8 @@ public class NewAccountServlet extends HttpServlet {
                 //}
                 //Create User Account
                 
+                // Add validation to look for duplicate usernames (Primary Key)
+                
                 sql = "INSERT INTO USERS (Username, Password, Email_Address, Location, Access_Level) "
                         + "VALUES (" + u.getUsername() +"," + u.getPassword() + "," + u.getEmail() + "," + u.getLocation() + "," + u.getAccesslevel() + ")";
             }
