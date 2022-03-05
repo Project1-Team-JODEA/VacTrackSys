@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -61,7 +63,7 @@ public class DBActionServlet extends HttpServlet {
                 
             }else if (action.equalsIgnoreCase("create")){
                 //TODO: Add Vaccine Objects for patient object
-                
+                sql="INSERT INTO PATIENTS VALUES";
                 Patient p = new Patient();
                 p.setFname(request.getParameter("fname"));
                 p.setLname(request.getParameter("lname"));
@@ -72,7 +74,16 @@ public class DBActionServlet extends HttpServlet {
 //                p.setVac1();
             }
             else if (action.equalsIgnoreCase("view")){
-                sql = "";
+                sql = "SELECT * FROM PERSONS "
+                        + "WHERE Vaccine_ID = ?"
+                        + "AND Batch_Number = ?;";
+                ArrayList <Patient> p = new ArrayList<>();
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setString(1, request.getParameter("vid"));
+                ps.setString(2, request.getParameter("batnum"));
+                //
+                
+                
             }
         
         } catch (ClassNotFoundException e) {
