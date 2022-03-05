@@ -1,12 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+
+/**
+ *
+ * @author eVmPr
+ * 
+ * TODO: Add attributes to JSPs:
+ * 
  */
 package servlets;
 
+import business.Patient;
+import business.Vaccine;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -15,10 +25,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author eVmPr
- */
 @WebServlet(name = "DBActionServlet", urlPatterns = {"/DBAction"})
 public class DBActionServlet extends HttpServlet {
 
@@ -39,10 +45,14 @@ public class DBActionServlet extends HttpServlet {
         try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             ServletContext context = getServletContext();
-            String ur = context.getRealPath("/WEB-INF/MoVaxDB.accb");
+//            String ur = context.getRealPath("/WEB-INF/MoVaxDB.accb");
+            String ur = context.getRealPath("/Team_JODEA1.accdb");
+            
+            Connection conn = DriverManager.getConnection("jdbc:ucanaccess://"+ur);
              action = request.getParameter("actiontype");// for DB Action
             if  (action.equals("")){
-                
+                msg += "Error: Undable to Perform Action <br>";
+                URL = "Member/VaccinationDB.jsp";
             } else if (action.equalsIgnoreCase("")){
                 msg += "Error: Undable to Perform Action <br>";
                 URL = "Member/VaccinationDB.jsp";
@@ -50,13 +60,25 @@ public class DBActionServlet extends HttpServlet {
                 // code editing script
                 
             }else if (action.equalsIgnoreCase("create")){
+                //TODO: Add Vaccine Objects for patient object
                 
-            }else if (action.equalsIgnoreCase("view")){
+                Patient p = new Patient();
+                p.setFname(request.getParameter("fname"));
+                p.setLname(request.getParameter("lname"));
+                p.setMname(request.getParameter("init"));
+                p.setRid(Integer.parseInt(request.getParameter("")));
+                p.setDob(request.getParameter("dob"));
                 
+//                p.setVac1();
+            }
+            else if (action.equalsIgnoreCase("view")){
+                sql = "";
             }
         
         } catch (ClassNotFoundException e) {
                 msg = "Error: Class Not Found <br>";
+        } catch (SQLException ex) {
+            msg+= "Error: " + ex + "<br>";
         }
 
         

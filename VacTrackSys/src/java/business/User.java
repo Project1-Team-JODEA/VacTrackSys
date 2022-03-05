@@ -58,6 +58,7 @@ public class User {
     private String username, password, accesslevel, email, location, passattempt;
     
     // default constructor
+    
     public User(){
         this.username = "";
         this.password = "";
@@ -76,7 +77,11 @@ public class User {
         this.location = location;
         this.passattempt = passattempt;
     }
-    
+    /**
+     * Returns true if User password mataches
+     * @return boolean
+     * 
+     */
     public boolean isAuthenticated(){
         if (this.getPassword().equals(this.getPassattempt())){
             return true;
