@@ -20,6 +20,7 @@
         <servlet-name>NewAccountServlet</servlet-name>
         <url-pattern>/CDC/NewAccount</url-pattern>
         <url-pattern>/Member/NewAccount</url-pattern>
+        <url-pattern>/DoctorLogin/NewAccount</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>addRecordServlet</servlet-name>
@@ -29,11 +30,14 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/CDC/Login</url-pattern>
         <url-pattern>/Member/Login</url-pattern>
+        <url-pattern>/DoctorLogin/Login</url-pattern>
+        
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DBActionServlet</servlet-name>
         <url-pattern>/CDC/DBAction</url-pattern>
         <url-pattern>/Member/DBAction</url-pattern>
+        <url-pattern>/DoctorLogin/DBAction</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -41,7 +45,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>Member/Login.jsp</welcome-file>
+        <welcome-file>DoctorLogin/index1.jsp</welcome-file>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 </web-app>

@@ -60,6 +60,7 @@ public class DBActionServlet extends HttpServlet {
                 URL = "Member/VaccinationDB.jsp";
             } else if (action.equalsIgnoreCase("edit")){
                 // code editing script
+                sql="";
                 
             }else if (action.equalsIgnoreCase("create")){
                 //TODO: Add Vaccine Objects for patient object

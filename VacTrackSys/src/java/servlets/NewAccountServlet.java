@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "NewAccountServlet", urlPatterns = {"/CDC/NewAccount", "/Member/NewAccount"})
+@WebServlet(name = "NewAccountServlet", urlPatterns = {"/CDC/NewAccount", "/Member/NewAccount", "/DoctorLogin/NewAccount"})
 public class NewAccountServlet extends HttpServlet {
 
     /**
@@ -37,10 +37,23 @@ public class NewAccountServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String URL = "Member/NewAccount.jsp";
-        String msg = "", sql = "", testmsg = "";
-
+        
+        String URL = "DoctorLogin/index1.jsp";
+        String msg = "", sql = "", testmsg = "", webloc="", ac_lvl; //ac_lvl = access level
+        // Check Location in web
+            String x = String.valueOf(request.getRequestURL());
+            if (x.contains("DoctorLogin")){
+                webloc = "/DoctorLogin";
+                ac_lvl = "MedicalStaff";
+            } else if (x.contains("PatientLogin")){
+                webloc = "/PatientLogin";
+                ac_lvl = "Patient";
+            }else if (x.contains("AdminConsole")){
+                webloc = "/AdminConsole";
+                ac_lvl = "Administrator";
+            }else if (x.contains("CDC")){
+                
+            }
         try {//Connecting to database
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             ServletContext context = getServletContext();
@@ -52,12 +65,14 @@ public class NewAccountServlet extends HttpServlet {
             u.setEmail(request.getParameter("email2"));
             testmsg += u.getEmail();
             // need location field.  Hardcoding for now
-            u.setLocation("First Hospital East");
+//            u.setLocation("First Hospital East");
+            u.setLocation(request.getParameter("loc"));
             //u.setLocation(request.getParameter("location"));
             u.setPassword(request.getParameter("passwd2"));
             // need url check for u.setAccessLevel()
             // hardcoding for now
                 u.setAccesslevel("MedicalStaff");
+               
             /* check for empty strings in  input */
             if (false){
                 
