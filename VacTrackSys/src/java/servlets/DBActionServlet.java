@@ -8,17 +8,13 @@
  */
 package servlets;
 
-import business.Patient;
-import business.Vaccine;
+import business.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -64,7 +60,7 @@ public class DBActionServlet extends HttpServlet {
                 
             }else if (action.equalsIgnoreCase("create")){
                 //TODO: Add Vaccine Objects for patient object
-                sql="INSERT INTO PATIENTS VALUES";
+                sql="INSERT INTO PERSONS VALUES ()";
                 Patient p = new Patient();
                 p.setFname(request.getParameter("fname"));
                 p.setLname(request.getParameter("lname"));

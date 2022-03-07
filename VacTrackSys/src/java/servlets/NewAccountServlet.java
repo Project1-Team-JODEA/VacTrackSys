@@ -39,7 +39,7 @@ public class NewAccountServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         String URL = "DoctorLogin/index1.jsp";
-        String msg = "", sql = "", testmsg = "", webloc="", ac_lvl; //ac_lvl = access level
+        String msg = "", sql = "", testmsg = "", webloc="", ac_lvl=""; //ac_lvl = access level
         // Check Location in web
             String x = String.valueOf(request.getRequestURL());
             if (x.contains("DoctorLogin")){
@@ -52,7 +52,8 @@ public class NewAccountServlet extends HttpServlet {
                 webloc = "/AdminConsole";
                 ac_lvl = "Administrator";
             }else if (x.contains("CDC")){
-                
+                webloc = "/CDC";
+                ac_lvl = "CDC";
             }
         try {//Connecting to database
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -71,7 +72,7 @@ public class NewAccountServlet extends HttpServlet {
             u.setPassword(request.getParameter("passwd2"));
             // need url check for u.setAccessLevel()
             // hardcoding for now
-                u.setAccesslevel("MedicalStaff");
+                u.setAccesslevel(x);
                
             /* check for empty strings in  input */
             if (false){
@@ -126,9 +127,10 @@ public class NewAccountServlet extends HttpServlet {
                     request.getSession().setAttribute("UserAccessLevel", u.getAccesslevel());
                 } else {
                     msg += "Warning: multiple records updated. <br>";
+                    
                 }
             }
-        
+        URL = webloc + "/index1.jsp";
         } catch (ClassNotFoundException ex) {
             msg = "Error: Class Not Found. <br>";
         } catch (SQLException ex) {

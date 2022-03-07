@@ -1,8 +1,8 @@
 <%--
     Project Title
-    File name  : Update
-    Date       : Mar 6, 2022, 2:11:34 PM
-    Author(s)  : Elena Miller
+    File name  : Home
+    Date       : Mar 6, 2022, 4:31:24 PM
+    Author(s)  : Elena Miller Jaccob
     Supporting File(s):
 --%>
 
@@ -11,9 +11,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Update</title>
+        <title>Patient Portal</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>To be Implemented!</h1>
+        
     </body>
 </html>

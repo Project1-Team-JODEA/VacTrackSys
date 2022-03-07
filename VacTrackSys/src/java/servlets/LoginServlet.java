@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String URL = "", msg = "", sql = "", username = "", webloc="";
+        String URL = "", msg = "", sql = "", username = "", webloc="", ac_lvl="";
         User u;
         String dbURL = "jdbc:ucanaccess://localhost:3306/MoVaxDB";
         String dbUSER = "root";
@@ -53,13 +53,15 @@ public class LoginServlet extends HttpServlet {
             System.out.println(request.getRequestURL());
             // Check Location in web
             String x = String.valueOf(request.getRequestURL());
-//            System.out.println(x);
             if (x.contains("DoctorLogin")){
-                webloc = "DoctorLogin";
+                webloc = "/DoctorLogin";
+                ac_lvl = "MedicalStaff";
             } else if (x.contains("PatientLogin")){
-                webloc = "PatientLogin";
+                webloc = "/PatientLogin";
+                ac_lvl = "Patient";
             }else if (x.contains("AdminConsole")){
-                webloc = "AdminConsole";
+                webloc = "/AdminConsole";
+                ac_lvl = "Administrator";
             }
             username = request.getParameter("userid").trim();
             String passattempt = request.getParameter("passwd").trim();
@@ -79,20 +81,21 @@ public class LoginServlet extends HttpServlet {
                 u.setUsername(username);
                 u.setPassword(r.getString("Password"));
                 u.setPassattempt(passattempt);
+                
                 if (u.isAuthenticated()) {
                     u.setAccesslevel("Access_Level");
                     u.setEmail("Email_Address");
                     u.setLocation("Location");
                     msg += "User " + username + " authenticated! <br>";
-                    URL = "DoctorLogin/VaccinationDB.jsp";
+                    URL = webloc + "/VaccinationDB.jsp";
                 } else {
                     msg += "User " + username + " on file but not authenticated. <br>";
-                    URL = "/DoctorLogin/index1.jsp";
+                    URL = webloc+"/index1.jsp";
                 }
                 request.getSession().setAttribute("u", u);
             } else {
 //                URL = "/DoctorLogin/index1.jsp";
-                URL = "/Doctor/index1.jsp";
+                URL = webloc+"/index1.jsp";
                 msg += "User " + username + " not found in db.<br>";
             }
             r.close();
@@ -100,13 +103,13 @@ public class LoginServlet extends HttpServlet {
             conn.close();
         } catch (ClassNotFoundException e) {
             msg += "JDBC Driver not found in project.<br>";
-            URL = "/DoctorLogin/index1.jsp";
+            URL = URL = webloc+"/index1.jsp";
         } catch (SQLException e) {
             msg += "Connection error: " + e.getMessage() + ".<br>";
-            URL = "/DoctorLogin/index1.jsp";
+          URL = webloc+"/index1.jsp";
         } catch (Exception e) {
             msg += "Servlet error: " + e.getMessage() + ".<br>";
-            URL = "/DoctorLogin/index1.jsp";
+            URL = webloc+"/index1.jsp";
         }
         URL = "/DoctorLogin/VaccinationDB.jsp";
         request.setAttribute("msg", msg);
