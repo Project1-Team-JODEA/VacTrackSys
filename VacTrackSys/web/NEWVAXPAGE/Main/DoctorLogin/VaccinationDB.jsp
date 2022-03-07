@@ -107,13 +107,15 @@
                 
             </tr>
         </table>
-
+        <selection id="filterid">
+            <option id=""></option>
+        </selection>
         
         
         
         
         <input type="button" name="btnClear" id="btnClear" value="Clear"onclick="clrscrn()">
-        <input type="submit" name="btnSubmit" id=""
+        <input type="submit" name="btnSubmit" id="">
         <input type="hidden" name="actiontype" id="actiontype" value="" > 
     </form>
     <!--        <form id="" action="Records">

@@ -27,10 +27,11 @@
             <tr>
                 <th>SSN</th>
                 <th>First Name</th>
-                <th>Middle Init:</th>
+                <th>Middle Init:</th>c
                 <th>Last Name:</th>
                 <th>Vaccines:</th>
             </tr>
+            <td></td>
         </table>
     </body>
 </html>
