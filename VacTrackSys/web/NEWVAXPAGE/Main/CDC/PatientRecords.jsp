@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="formstyle.css">
     </head>
     <body>
-
+       
         <div class="container">
             <span class="title">Patient Records</span>
             <div class="content">
@@ -40,7 +40,7 @@
                             <td>${p.fname}</td>
                             <td>${p.mname}</td>
                             <td>${p.lname}</td>
-                            <%--<td>${p.ptype}</td>--%>
+                            <td>${p.ptype}</td>
                             <td>${p.vac1.vid}</td>
                             <td>${p.vac2.vid}</td>
                             <td>${p.vac3.vid}</td>
@@ -48,16 +48,9 @@
                         </tr>
                     </c:forEach>
                 </table>
-                <div class="button">
-                    <input type="submit" name="edit" id="edit" value="Edit Patient" onclick="alert('WIP')">
-                    &#8287;  &#8287;  &#8287;  &#8287; 
-                    <input type="submit" name="add" id="add" value="Add Patient" onclick="alert('WIP')">
-                    &#8287;  &#8287;  &#8287;  &#8287; 
-                </div>
-                <input type="hidden" name="actiontype" id="actiontype" value="" > 
             </div>
         </div>
-
+        
         <%--<c:if test="${u.access_level}"--%>
 
     </body>

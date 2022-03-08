@@ -40,11 +40,15 @@ public class DBActionServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String URL = "";
         String msg = "", sql = "", sql_vac = "";
-        String action = "", webloc = "", fname = "", lname = "", mname = "", ptype = "";
+        String action = "", webloc = "",ssn="", fname = "", lname = "", mname = "", ptype = "";
         String[] vacs = {"", "", "", ""};
-
+        
         ArrayList<Patient> pa;
         try {
+            String m = (String) request.getAttribute("msg");
+            if (!m.equals("")){
+                
+            }
             String x = String.valueOf(request.getRequestURL());
             if (x.contains("DoctorLogin")) {
                 webloc = "DoctorLogin";
@@ -85,10 +89,10 @@ public class DBActionServlet extends HttpServlet {
 
             } else if (action.equalsIgnoreCase("create")) {
                 //TODO: Add Vaccine Objects for patient object
-                vacs[0] = String.valueOf(request.getParameter("vac1"));
-                vacs[1] = String.valueOf(request.getParameter("vac2"));
-                vacs[2] = String.valueOf(request.getParameter("vac3"));
-                vacs[3] = String.valueOf(request.getParameter("vac4"));
+                vacs[0] = String.valueOf(request.getParameter("v1id"));
+                vacs[1] = String.valueOf(request.getParameter("v2id"));
+                vacs[2] = String.valueOf(request.getParameter("v3id"));
+                vacs[3] = String.valueOf(request.getParameter("v4id"));
                 Vaccine vac = new Vaccine();
 
                 sql = "INSERT INTO PATIENTS(Social_Security, First_Name,Middle_Init, "
@@ -114,6 +118,7 @@ public class DBActionServlet extends HttpServlet {
                 fname = request.getParameter("fname");
                 lname = request.getParameter("lname");
                 mname = request.getParameter("mname");
+                ssn= request.getParameter("ssn");
                 for (String vac : vacs) {
                     if (vac.isEmpty() || vac.equals("")) {
                         // set to N/A
@@ -123,7 +128,7 @@ public class DBActionServlet extends HttpServlet {
                 sql = "SELECT p.Social_Security, p.First_Name,p.Middle_Init, p.Last_Name, "
                         + "p.Vaccine_ID, v.Manufacturer"
                         + " FROM PATIENTS p INNER JOIN VACCINES v ON (PAT.Vaccine_ID = VACCINES.Vaccine_ID)"
-                        + "WHERE v.Vaccine_ID = ? ";
+                        + "WHERE p.Social_Security = ? ";
 //                if (!fname.equals("")&& !fname.isEmpty()){
 //                    sql+="OR p.FirstName = ?";
 //                }if (!lname.equals("")&& !lname.isEmpty()){
@@ -145,18 +150,18 @@ public class DBActionServlet extends HttpServlet {
                 }
                 sql += "ORDER BY p.Social_Security;";
                 PreparedStatement ps = conn.prepareStatement(sql);
-//                ps.setString(1, );
+                ps.setString(1, ssn);
                 if (!vacs[0].equals("N/A")) {
-                    ps.setString(1, vacs[0]);
+                    ps.setString(2, vacs[0]);
                 }
                 if (!vacs[1].equals("N/A")) {
-                    ps.setString(2, vacs[1]);
+                    ps.setString(3, vacs[1]);
                 }
                 if (!vacs[2].equals("N/A")) {
-                    ps.setString(3, vacs[2]);
+                    ps.setString(4, vacs[2]);
                 }
                 if (!vacs[3].equals("N/A")) {
-                    ps.setString(4, vacs[3]);
+                    ps.setString(5, vacs[3]);
                 }
 
 //                ps.setString(2, request.getParameter("batnum"));
@@ -201,18 +206,18 @@ public class DBActionServlet extends HttpServlet {
                 u.setSearched(true);
                 request.getSession().setAttribute("u", u);
                 URL = webloc + "/PatientRecords.jsp";
-            }
+            } 
 
         } catch (ClassNotFoundException e) {
             msg = "Error: Class Not Found <br>";
         } catch (SQLException ex) {
             msg += "Error: " + ex + "<br>";
         } catch (Exception e){
-            msg += "Servlet Error" + e.getMessage()+"<br>";
+            msg += "Servlet Error: " + e.getMessage()+"<br>";
                     
         }
         if (webloc.equals("")){
-            
+            URL = "/DoctorLogin/VaccinationDB.jsp";
         }
         request.setAttribute("msg", msg);
         RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);

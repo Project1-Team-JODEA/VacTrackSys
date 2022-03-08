@@ -43,7 +43,7 @@
                 return document.getElementById(id);
             };
             function clrscrn() {
-                //$("Records").reset();
+                $("Records").reset();
 //                $("rid").focus();
             }
         </script>
@@ -86,7 +86,7 @@
                         <div class="input-box"><input type="text" name="v3id" id="v3id" value="" 
                                                       placeholder="Vaccine #3 ID"></div>
                         <div class="input-box"> <input type="text" name="midinit" id="midinit" value="" 
-                                                       placeholder="Middle Init" ></div>
+                                                       placeholder="Middle Name" ></div>
                         <div class="input-box"><input type="text" name="v4id" id="v4id" value="" 
                                                       placeholder="Vaccine #4 ID"></div>                        
                         <div class="input-box">
@@ -118,7 +118,7 @@
                                         </div>-->
 
                     <div class="button">
-                        <input type="submit" name="search" id="search" value="Search Patient">
+                        <input type="button" name="search" id="search" value="Search Patient" onclick="document.location='index1.jsp'">
                         &#8287;  &#8287;  &#8287;  &#8287; 
                         <!--<input type="button" name="btnClear" id="add" value="Add" onclick="document.location = 'VacRecordCreate.jsp';" >-->
                         <!--&#8287;  &#8287;  &#8287;  &#8287;--> 
@@ -128,12 +128,14 @@
 
                     <input type="hidden" name="actiontype" id="actiontype" value="" > 
                 </form>
-<!--                <form id="editSSN" action="DBAction" method="post">
+                <form id="editSSN" action="DBAction" method="post">
                     
-
-                </form>-->
-                 <input type="button" name="logout" id="logout" value="Logout" onclick="document.location = 'index1.jsp';">
-                
+                    
+                </form>
+                <input type="submit" name="logout" id="logout" value="Logout" onclick="document.location = 'index1.jsp';">
+                <form action="Logout">
+                    
+                </form>
                 ${msg}
             </div>
 

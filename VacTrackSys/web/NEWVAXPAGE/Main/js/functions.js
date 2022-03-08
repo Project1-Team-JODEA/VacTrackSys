@@ -13,6 +13,6 @@
  */
 
 
-//function sendMessage(msg){
-//    
-//};
+function sendMessage(msg){
+    alert(msg);
+};

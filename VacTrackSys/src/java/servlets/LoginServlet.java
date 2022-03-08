@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
         String dbPWD = "sesame";
         try {
             // get Username and Passattempt from form
-            System.out.println(request.getRequestURL());
+
             // Check Location in web
             String x = String.valueOf(request.getRequestURL());
             if (x.contains("DoctorLogin")){
@@ -62,7 +62,9 @@ public class LoginServlet extends HttpServlet {
             }else if (x.contains("AdminConsole")){
                 webloc = "/AdminConsole";
                 ac_lvl = "Administrator";
-            }
+            }else if (x.contains("AdminConsole")){
+                webloc = "/CDC";
+                ac_lvl = "CDC";}
             username = request.getParameter("userid").trim();
             String passattempt = request.getParameter("passwd").trim();
             // load and register JDBC driver for mySql
@@ -75,6 +77,7 @@ public class LoginServlet extends HttpServlet {
 //            String p = request
             Statement s = conn.createStatement();
             sql = "SELECT * FROM USERS WHERE Username = '" + username + "'";
+                   // + " AND Access_Level='"+ac_lvl+"'";
             ResultSet r = s.executeQuery(sql);
             if (r.next()) {
                 u = new User();
@@ -119,6 +122,7 @@ public class LoginServlet extends HttpServlet {
         request.setAttribute("msg", msg);
         RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);
         disp.forward(request, response);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
