@@ -24,6 +24,14 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>servlets.LogoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditPatientServlet</servlet-name>
+        <servlet-class>servlets.EditPatientServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdatePatientServlet</servlet-name>
+        <servlet-class>servlets.UpdatePatientServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewAccountServlet</servlet-name>
         <url-pattern>/CDC/NewAccount</url-pattern>
@@ -56,6 +64,16 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditPatientServlet</servlet-name>
+        <url-pattern>/CDC/EditPatient</url-pattern>
+        <url-pattern>/Member/EditPatient</url-pattern>
+        <url-pattern>/DoctorLogin/EditPatient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePatientServlet</servlet-name>
+        <url-pattern>/DoctorLogin/UpdatePatient</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -49,10 +49,6 @@
                     <td><input type="text" id="ptype" name="ptype"></input></td>
                 </tr>
                 <tr>
-                    <td>Vaccination_Site</td>
-                    <td><input type="text" id="ssn" name="ssn"></input></td>
-                </tr>
-                <tr>
                     <td>Vaccine 1 ID</td>
                     <td><input type="text" id="v1id" name="v1id"></input></td>
                 </tr>
