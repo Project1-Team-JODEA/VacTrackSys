@@ -1,0 +1,67 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 7, 2022, 2:23:15 PM
+    Author     : eVmPr
+*/
+#Records{
+    padding: 2.5%;
+
+}
+#person, #vaccines{
+    float: left;
+    /*width: 25%;*/
+}
+#result{
+    float: right;
+    height: 100%;
+    background-color: #C8D0D8;
+    width: 50%;
+
+}
+/*#vac_items tr td:nth-child*/
+#info{
+    float: left;
+    width: 40.5%;
+}
+#info fieldset{
+    padding: 5%;
+    
+}
+#info input[type="text"]{
+    width: 100%;
+    font-size: 1.1em;
+    margin: 1% 0 1% 0;
+}
+div#actions {
+    display: inline-block;
+    float: left;
+    /*left: 5%;*/
+    right: 45%;
+    bottom: 37.5%;
+    
+    /*margin: 1% 5% 1% 5%;*/
+    /*padding: 1% 5% 1% 5%;*/
+    position: fixed;
+    width: 50.5%;
+}
+input#logout{
+    bottom: 70%;
+}
+#actions input{
+    font-size: 1em;
+    padding: 5px;
+    bottom: auto;
+}
+#results{
+    /*overflow: scroll;*/
+    background-color: #C8D0D8;
+    border: 2px solid black;
+    float: right;
+    z-index: 1;
+    width: 50%;
+    height: 100%;
+}

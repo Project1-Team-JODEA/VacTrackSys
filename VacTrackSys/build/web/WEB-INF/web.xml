@@ -5,6 +5,10 @@
         <servlet-class>servlets.DBActionServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>servlets.SearchServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>NewAccountServlet</servlet-name>
         <servlet-class>servlets.NewAccountServlet</servlet-class>
     </servlet>
@@ -42,6 +46,12 @@
         <url-pattern>/CDC/DBAction</url-pattern>
         <url-pattern>/Member/DBAction</url-pattern>
         <url-pattern>/DoctorLogin/DBAction</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/CDC/Search</url-pattern>
+        <url-pattern>/Member/Search</url-pattern>
+        <url-pattern>/DoctorLogin/Search</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>

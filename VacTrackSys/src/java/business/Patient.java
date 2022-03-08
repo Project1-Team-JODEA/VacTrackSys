@@ -10,8 +10,16 @@ import business.Vaccine;
  */
 public class Patient {
 
+    public String getPtype() {
+        return ptype;
+    }
+
+    public void setPtype(String ptype) {
+        this.ptype = ptype;
+    }
+
     private int rid;
-    private String ssn, fname, mname, lname, dob;
+    private String ssn, fname, mname, lname, dob, ptype;
     private Vaccine vac1, vac2, vac3, vac4;
 
     //default constructor
@@ -26,10 +34,11 @@ public class Patient {
         this.vac2 = null;
         this.vac3 = null;
         this.vac4 = null;
+        this.ptype = "";
     }
 
     //normal constructor.  All fields should be validated BEFORE calling this method.
-    public Patient(int rid, String ssn, String fname, String mname, String lname, String dob, Vaccine vac1, Vaccine vac2, Vaccine vac3, Vaccine vac4) {
+    public Patient(int rid, String ssn, String fname, String mname, String lname, String dob, Vaccine vac1, Vaccine vac2, Vaccine vac3, Vaccine vac4, String ptype) {
         this.rid = rid;
         this.ssn = ssn;
         this.fname = fname;
@@ -40,6 +49,7 @@ public class Patient {
         this.vac2 = vac2;
         this.vac3 = vac3;
         this.vac4 = vac4;
+        this.ptype = ptype;
     }
 
     /**
