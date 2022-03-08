@@ -4,7 +4,9 @@ import business.Vaccine;
 
 /**
  *
- * @author alexs
+ * @author alexs (Alexander Bretenbach
+ * TODO:
+ * 
  */
 public class Patient {
 
@@ -173,4 +175,6 @@ public class Patient {
     public void setVac4(Vaccine vac4) {
         this.vac4 = vac4;
     }
+    
+   
 }

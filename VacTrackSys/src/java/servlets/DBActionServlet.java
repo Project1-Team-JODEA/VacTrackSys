@@ -1,10 +1,9 @@
-
 /**
  *
  * @author eVmPr
- * 
+ *
  * TODO: Add attributes to JSPs:
- * 
+ *
  */
 package servlets;
 
@@ -13,6 +12,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
@@ -38,58 +38,114 @@ public class DBActionServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String URL = "Member/VaccinationDB.jsp";
-        String msg = "", sql = ""; String action = "";
+        String URL = "";
+        String msg = "", sql = "";
+        String action = "", webloc = "";
+        String[] vacs = {"", "", "", ""};
+        ArrayList<Patient> pa;
         try {
+            String x = String.valueOf(request.getRequestURL());
+            if (x.contains("DoctorLogin")) {
+                webloc = "/DoctorLogin";
+
+            } else if (x.contains("PatientLogin")) {
+                webloc = "/PatientLogin";
+
+            } else if (x.contains("AdminConsole")) {
+                webloc = "/AdminConsole";
+
+            }
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             ServletContext context = getServletContext();
 //            String ur = context.getRealPath("/WEB-INF/MoVaxDB.accb");
             String ur = context.getRealPath("/Team_JODEA1.accdb");
-            
-            Connection conn = DriverManager.getConnection("jdbc:ucanaccess://"+ur);
-             action = request.getParameter("actiontype");// for DB Action
-            if  (action.equals("")){
+
+            Connection conn = DriverManager.getConnection("jdbc:ucanaccess://" + ur);
+            action = request.getParameter("actiontype");// for DB Action
+            if (action.equals("")) {
                 msg += "Error: Undable to Perform Action <br>";
-                URL = "Member/VaccinationDB.jsp";
-            } else if (action.equalsIgnoreCase("")){
+                URL = webloc + "/VaccinationDB.jsp";
+            } else if (action.equalsIgnoreCase("")) {
                 msg += "Error: Undable to Perform Action <br>";
-                URL = "Member/VaccinationDB.jsp";
-            } else if (action.equalsIgnoreCase("edit")){
+                URL = webloc + "/VaccinationDB.jsp";
+            } else if (action.equalsIgnoreCase("edit")) {
                 // code editing script
-                sql="";
-                
-            }else if (action.equalsIgnoreCase("create")){
+                sql = "UPDATE";
+
+            } else if (action.equalsIgnoreCase("create")) {
                 //TODO: Add Vaccine Objects for patient object
-                sql="INSERT INTO PERSONS VALUES ()";
+                Vaccine vac = new Vaccine();
+                sql = "INSERT INTO PATIENTS(Social_Security, First_Name,Middle_Init, "
+                        + "Last_Name, P_Type, Vaccine_ID,  "
+                        + " Last_Name, Vaccine_ID, P) VALUES (?,?,?,?)";
                 Patient p = new Patient();
-                p.setFname(request.getParameter("fname"));
-                p.setLname(request.getParameter("lname"));
-                p.setMname(request.getParameter("init"));
+                p.setFname(String.valueOf(request.getParameter("fname")));
+                p.setLname(String.valueOf(request.getParameter("lname")));
+//                p.setMname(request.getParameter("init"));
                 p.setRid(Integer.parseInt(request.getParameter("")));
                 p.setDob(request.getParameter("dob"));
-                
+
 //                p.setVac1();
-            }
-            else if (action.equalsIgnoreCase("view")){
-                sql = "SELECT * FROM PERSONS "
-                        + "WHERE Vaccine_ID = ?"
-                        + "AND Batch_Number = ?;";
-                ArrayList <Patient> p = new ArrayList<>();
+            } else if (action.equalsIgnoreCase("view")) {
+                //Vaccine objects
+                //Patient Objects
+                vacs[0] = String.valueOf(request.getParameter("vac1"));
+                vacs[1] = String.valueOf(request.getParameter("vac2"));
+                vacs[2] = String.valueOf(request.getParameter("vac3"));
+                vacs[3] = String.valueOf(request.getParameter("vac4"));
+                
+                sql = "SELECT p.First_Name,p.Middle_Init, p.Last_Name, "
+                        + "p.Vaccine_ID, v.Manufacturer"
+                        + " FROM PATIENTS p INNER JOIN VACCINES v ON (PAT.Vaccine_ID = VACCINES.Vaccine_ID)"
+                        + "WHERE v.Vaccine_ID = ?"
+                        + "OR p.Vaccine_1 = ? "
+                        + "OR p.Vaccine_2= ?"
+                        + "OR p.Vaccine_3 = ?"
+                        + "OR p.Vaccine_4 = ?"
+                        + "ORDER BY p.Social_Security;";
+
                 PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setString(1, request.getParameter("vid"));
-                ps.setString(2, request.getParameter("batnum"));
+                ps.setString(1, String.valueOf(request.getParameter("vac1")));
+                ps.setString(2, ur);
+                ps.setString(3, ur);
+                ps.setString(4, ur);
+                ps.setString(5, ur);
+//                ps.setString(2, request.getParameter("batnum"));
                 //
-                
-                
+                ResultSet rs = ps.executeQuery();
+                pa = new ArrayList<>();
+                while (rs.next()) {
+                    //add to patient objects
+                    Patient p = new Patient();
+                    p.setSsn(rs.getString("SSN"));
+                    p.setFname(rs.getString("First_Name"));
+                    p.setLname(rs.getString("Last_Name"));
+                    p.setMname(rs.getString("Middle_Init"));
+//                    p.setRid(rs.getInt("RID"));
+                    Vaccine vac1 = new Vaccine();
+                    vac1.setVid(rs.getString("Vaccine_ID"));
+                    p.setVac1(new Vaccine(rs.getString("Vaccine_ID"),
+                            String.valueOf(rs.getDate("Vaccine_Date")),
+                            rs.getString("Manufacturer"),
+                            String.valueOf(rs.getInt("BATCH_NUM"),
+                                    rs.getString("Vaccine_Location"),
+                                    rs.getString("Location_Type"),
+                                    
+                            ));
+//                    vac1.setLocation(rs.getString("Vaccine_Site"));
+                    vac1.setLocatype("N/A");
+                    vac1.setLocation("West Hospital");
+                    vac1.setLotnum("");
+                }
+                request.setAttribute("pats", pa);
             }
-        
+
         } catch (ClassNotFoundException e) {
-                msg = "Error: Class Not Found <br>";
+            msg = "Error: Class Not Found <br>";
         } catch (SQLException ex) {
-            msg+= "Error: " + ex + "<br>";
+            msg += "Error: " + ex + "<br>";
         }
 
-        
         request.setAttribute("msg", msg);
         RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);
         disp.forward(request, response);

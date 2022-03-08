@@ -43,11 +43,11 @@
                     <button type="submit" class="submit-btn">Login</button>
                 </form>
                 <form id="register" class="input-group" action="NewAccount" method="post">
-                    <input type="text" class="input-field" id="uid" placeholder="Employee ID" required>
+                    <input type="text"id="uid" name="uid" class="input-field"  placeholder="Employee ID" required>
                     <input type="email" id="email" class="input-field"  placeholder="Email ID" required>
-                    <input type="text" id="loc" class="input-field" placeholder="Location" required>
-                    <input type="password" class="input-field" id="upwd" placeholder="Enter Password" required>
-                    <input type="password" class="input-field" id="confpasswd" placeholder="Confirm Password" required>
+                    <!--<input type="text" id="loc" class="input-field" placeholder="Location" required>-->
+                    <input type="password" id="upwd" class="input-field"  placeholder="Enter Password" required>
+                    <input type="password" id="confpasswd" class="input-field"  placeholder="Confirm Password" required>
 
                     <input type="checkbox" class="check-box"><span>I agree to the terms & conditions</span>
                     <button type="submit" id="newacct" class="submit-btn">Register</button>

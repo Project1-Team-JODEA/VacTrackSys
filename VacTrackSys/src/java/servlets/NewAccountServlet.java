@@ -1,6 +1,6 @@
 /**
  *
- * @author Elena Miller
+ * @author Elena Miller, Alexander Breitenbach
  */
 package servlets;
 
@@ -38,13 +38,13 @@ public class NewAccountServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        String URL = "DoctorLogin/index1.jsp";
+        String URL = "";
         String msg = "", sql = "", testmsg = "", webloc="", ac_lvl=""; //ac_lvl = access level
         // Check Location in web
             String x = String.valueOf(request.getRequestURL());
             if (x.contains("DoctorLogin")){
                 webloc = "/DoctorLogin";
-                ac_lvl = "MedicalStaff";
+                ac_lvl = "Edit";
             } else if (x.contains("PatientLogin")){
                 webloc = "/PatientLogin";
                 ac_lvl = "Patient";
@@ -53,7 +53,7 @@ public class NewAccountServlet extends HttpServlet {
                 ac_lvl = "Administrator";
             }else if (x.contains("CDC")){
                 webloc = "/CDC";
-                ac_lvl = "CDC";
+                ac_lvl = "View";
             }
         try {//Connecting to database
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -61,18 +61,29 @@ public class NewAccountServlet extends HttpServlet {
             String ur = context.getRealPath("/Team_JODEA1.accdb");
             Connection conn = DriverManager.getConnection("jdbc:ucanaccess://"+ur);
             User u = new User();
-            u.setUsername(request.getParameter("userid2"));
+            String uid = String.valueOf(request.getParameter("uid"));
+            u.setUsername(String.valueOf(request.getParameter("uid")));
+            
             testmsg += u.getUsername();
-            u.setEmail(request.getParameter("email2"));
+            u.setEmail(String.valueOf(request.getParameter("email")));
             testmsg += u.getEmail();
             // need location field.  Hardcoding for now
-//            u.setLocation("First Hospital East");
-            u.setLocation(request.getParameter("loc"));
+            if (x.contains("AdminConsole") || x.contains("DoctorLogin")){
+                u.setLocation(request.getParameter("loc"));
+            } else if (x.contains("PatientLogin") || x.contains("CDC")){
+                u.setLocation("online");
+            }else{
+              u.setLocation("First Hospital East");  
+            }
+            System.out.println("Username = "+u.getUsername());
+//            u.setLocation(request.getParameter("loc"));
             //u.setLocation(request.getParameter("location"));
-            u.setPassword(request.getParameter("passwd2"));
+//            String pws = String.valueOf(request.getParameter("upwd"));
+            
+            u.setPassword(String.valueOf(request.getParameter("upwd")));
             // need url check for u.setAccessLevel()
             // hardcoding for now
-                u.setAccesslevel(x);
+                u.setAccesslevel(ac_lvl);
                
             /* check for empty strings in  input */
             if (false){
@@ -96,7 +107,7 @@ public class NewAccountServlet extends HttpServlet {
                 //if 
                 /*
                 if (u.getUsername().length() > 6){//
-                    msg = "";
+                    msg += "";
                 } if (u.getPassword().length() > 8){
                     msg = "";
                 } 
@@ -130,12 +141,12 @@ public class NewAccountServlet extends HttpServlet {
                     
                 }
             }
-        URL = webloc + "/index1.jsp";
+        
         } catch (ClassNotFoundException ex) {
             msg = "Error: Class Not Found. <br>";
         } catch (SQLException ex) {
             msg += "Connection Error: " + ex.getMessage() + "<br>";
-        }
+        }URL = webloc + "/index1.jsp";
         request.setAttribute("msg", msg);
         RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);
         disp.forward(request, response);

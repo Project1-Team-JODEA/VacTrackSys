@@ -55,7 +55,7 @@ public class addRecordServlet extends HttpServlet {
                 // needs: get patient info from form
                 Patient p = new Patient();
                 // needs: validate p
-                sql = "UPDATE patienttbl SET " +
+                sql = "UPDATE PATIENTS SET " +
                         "RecipientID = ?, " +
                         "SocSecNum = ?, " +
                         "FirstName = ?, " +
@@ -91,7 +91,7 @@ public class addRecordServlet extends HttpServlet {
                 // needs: get vaccine info from form
                 Vaccine v = new Vaccine();
                 // needs: validate v
-                sql = "UPDATE vaccinetbl SET " +
+                sql = "UPDATE VACCINES SET " +
                         "VaccineID = ?, " +
                         "Date = ?, " +
                         "Manufactuerer = ?, " +

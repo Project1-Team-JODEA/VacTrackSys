@@ -23,15 +23,29 @@
           
         </p>
         <%--<c:if test="${u.access_level}"--%>
-        <table>
+        <table border="1">
             <tr>
                 <th>SSN</th>
                 <th>First Name</th>
-                <th>Middle Init:</th>c
+                <th>Middle Init:</th>
                 <th>Last Name:</th>
-                <th>Vaccines:</th>
+                <th>Vaccine 1</th>
+                <th>Vaccine 2</th>  
+                <th>Vaccine 3</th>
+                <th>Vaccine 4</th>
             </tr>
-            <td></td>
+            <c:forEach var="pt" items="${pats}">
+            <tr>
+                <td>${pt.ssn}</td>
+                <td>${pt.fname}</td>
+                <td>${pt.mname}</td>
+                <td>${pt.lname}</td>
+                <td>${pt.vac1.vid}</td>
+                <td>${pt.vac2.vid}</td>
+                <td>${pt.vac3.vid}</td>
+                <td>${pt.vac4.vid}</td>
+            </tr>
+            </c:forEach>
         </table>
     </body>
 </html>

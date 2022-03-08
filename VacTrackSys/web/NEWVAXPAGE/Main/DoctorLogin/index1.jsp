@@ -1,9 +1,9 @@
 <%--
-    Project Title
-    File name  : index1
+    Project JODEA 
+    File name  : index1.jsp
     Date       : Mar 6, 2022, 1:05:54 PM
-    Author(s)  : Jaccob, Elena Miller
-    Supporting File(s):
+    Author(s)  : JaccobStanton, Elena Miller
+    
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -43,11 +43,11 @@
                     <button type="submit" class="submit-btn">Login</button>
                 </form>
                 <form id="register" class="input-group" action="NewAccount" method="post">
-                    <input type="text" class="input-field" id="uid" placeholder="Employee ID" required>
+                    <input type="text" class="input-field" name="uid" id="uid" placeholder="Employee ID" required>
                     <input type="email" id="email" class="input-field"  placeholder="Email ID" required>
                     <input type="text" id="loc" class="input-field" placeholder="Location" required>
-                    <input type="password" class="input-field" id="upwd" placeholder="Enter Password" required>
-                    <input type="password" class="input-field" id="confpasswd" placeholder="Confirm Password" required>
+                    <input type="password" name="upwd" class="input-field"  id="upwd" placeholder="Enter Password" required>
+                    <input type="password" name="confpasswd" class="input-field" id="confpasswd" placeholder="Confirm Password" required>
 
                     <input type="checkbox" class="check-box"><span>I agree to the terms & conditions</span>
                     <button type="submit" id="newacct" class="submit-btn">Register</button>

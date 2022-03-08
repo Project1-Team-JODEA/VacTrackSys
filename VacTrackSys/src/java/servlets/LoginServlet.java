@@ -112,6 +112,10 @@ public class LoginServlet extends HttpServlet {
             URL = webloc+"/index1.jsp";
         }
         URL = "/DoctorLogin/VaccinationDB.jsp";
+        Cookie uid = new Cookie("usid", username);
+        uid.setMaxAge(60);
+        uid.setPath("/");
+        response.addCookie(uid);
         request.setAttribute("msg", msg);
         RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);
         disp.forward(request, response);
