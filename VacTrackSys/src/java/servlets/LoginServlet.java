@@ -114,7 +114,7 @@ public class LoginServlet extends HttpServlet {
             msg += "Servlet error: " + e.getMessage() + ".<br>";
             URL = webloc+"/index1.jsp";
         }
-        URL = "/DoctorLogin/VaccinationDB.jsp";
+//        URL = "/DoctorLogin/VaccinationDB.jsp";
         Cookie uid = new Cookie("usid", username);
         uid.setMaxAge(60);
         uid.setPath("/");

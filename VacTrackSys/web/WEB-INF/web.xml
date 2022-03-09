@@ -24,6 +24,10 @@
         <servlet-name>SearchServlet</servlet-name>
         <servlet-class>servlets.SearchServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>newRecordServlet</servlet-name>
+        <servlet-class>servlets.newRecordServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewAccountServlet</servlet-name>
         <url-pattern>/CDC/NewAccount</url-pattern>
@@ -53,9 +57,14 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/CDC/Search</url-pattern>
         <url-pattern>/Search</url-pattern>
         <url-pattern>/AdminConsole/Search</url-pattern>
         <url-pattern>/DoctorLogin/Search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>newRecordServlet</servlet-name>
+        <url-pattern>/newRecord</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

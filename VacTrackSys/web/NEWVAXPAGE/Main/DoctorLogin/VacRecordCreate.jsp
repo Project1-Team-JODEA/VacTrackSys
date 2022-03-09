@@ -72,7 +72,15 @@
             <span class="details">Batch Number</span>
             <input type="text" placeholder="Enter batch # here" required>
           </div>
-            
+            <div class="input-box">
+                            <span class="details">Patient Type</span>
+                            <select id="pat_type">
+                                <option id="reg-patient" value="PAT">Regular</option>
+                                <option id="Inpatient" value="IN">Inpatient</option>
+                                <option name="outpatient" value="OUT">Outpatient</option>
+                                <option name="other" id="other" value="OTH">Other</option>
+                                <option name="unknown" id="unknown" value="N/A">Other</option>
+                            </select></div>
         </div>
         <div class="gender-details">
           <input type="radio" name="gender" id="dot-1">
@@ -95,7 +103,7 @@
           </div>
         </div>
         <div class="button">
-          <input type="submit" value="Create" onclick="pageAction('update')">
+          <input type="submit" value="Create" onclick="pageAction('addVac')">
           &#8287;  &#8287;  &#8287;  &#8287; 
           <input type="submit" value="Clear" onclick="clrscrn()">
           &#8287;  &#8287;  &#8287;  &#8287; 

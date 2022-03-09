@@ -20,9 +20,10 @@ public class Patient {
         this.ssn = "";
         this.fname = "";
         this.mname = "";
-        this.lname = "";
-        this.dob = "";
+        this.lname = ""; 
         this.ptype="";
+        this.dob = "";
+       
         this.vac1 = null;
         this.vac2 = null;
         this.vac3 = null;
@@ -36,8 +37,9 @@ public class Patient {
         this.fname = fname;
         this.mname = mname;
         this.lname = lname;
-        this.dob = dob;
         this.ptype = ptype;
+        this.dob = dob;
+        
         this.vac1 = vac1;
         this.vac2 = vac2;
         this.vac3 = vac3;

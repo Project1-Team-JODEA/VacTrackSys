@@ -35,7 +35,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title> Vaccination Database</title>
+        <title> Vaccination Database - New Patient</title>
         <link rel="stylesheet" href="formstyle.css" type="text/css"/>
 
         <script type="text/javascript">
@@ -43,7 +43,7 @@
                 return document.getElementById(id);
             };
             function clrscrn() {
-                $("Records").reset();
+                //$("Records").reset();
 //                $("rid").focus();
             }
         </script>
@@ -63,10 +63,10 @@
             <%--User: ${u.userid}, ${u.access_level} Level--%>
         </p>
         <div class="container">
-            <div class="title">Patient Database Records Selection</div>
+            <div class="title">Patient Database Records - New Entry</div>
             <div class="content">
 
-                <form name="RecordsSelection" id="RecordsSelection" action="Search" method="post">
+                <form name="NewRecord" id="NewRecord" action="addRecord" method="post">
                     <div class="user-details">
 
                         <div class="input-box">
@@ -86,7 +86,7 @@
                         <div class="input-box"><input type="text" name="v3id" id="v3id" value="" 
                                                       placeholder="Vaccine #3 ID"></div>
                         <div class="input-box"> <input type="text" name="midinit" id="midinit" value="" 
-                                                       placeholder="Middle Name" ></div>
+                                                       placeholder="Middle Init" ></div>
                         <div class="input-box"><input type="text" name="v4id" id="v4id" value="" 
                                                       placeholder="Vaccine #4 ID"></div>                        
                         <div class="input-box">
@@ -118,21 +118,21 @@
                                         </div>-->
 
                     <div class="button">
-                        <input type="button" name="search" id="search" value="Search Patient" >
+                        <input type="submit" name="add" id="add" value="Add">
                         &#8287;  &#8287;  &#8287;  &#8287; 
                         <!--<input type="button" name="btnClear" id="add" value="Add" onclick="document.location = 'VacRecordCreate.jsp';" >-->
                         <!--&#8287;  &#8287;  &#8287;  &#8287;--> 
                         <input type="reset" name="clear" id="btnClear" value="Clear">
                         &#8287;  &#8287;  &#8287;  &#8287; 
                     </div>
-                     
+
                     <input type="hidden" name="actiontype" id="actiontype" value="" > 
                 </form>
-                <form id="editSSN" action="DBAction" method="post">
+<!--                <form id="editSSN" action="DBAction" method="post">
                     
-                    
-                </form>
-                <input type="submit" name="logout" id="logout" value="Logout" onclick="document.location = 'index1.jsp';">
+
+                </form>-->
+                 <input type="button" name="logout" id="logout" value="Logout" onclick="document.location = 'index1.jsp';">
                 
                 ${msg}
             </div>

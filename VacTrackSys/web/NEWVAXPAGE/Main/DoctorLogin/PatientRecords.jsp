@@ -51,7 +51,9 @@
                 <div class="button">
                     <input type="submit" name="edit" id="edit" value="Edit Patient" onclick="alert('WIP')">
                     &#8287;  &#8287;  &#8287;  &#8287; 
-                    <input type="submit" name="add" id="add" value="Add Patient" onclick="alert('WIP')">
+                    <input type="submit" name="add" id="add" value="Add Patient" onclick="document.location='VacRecordCreate.jsp'">
+                    &#8287;  &#8287;  &#8287;  &#8287; 
+                    <input type="submit" name="report" id="report" value="Print Report" onclick="alert('To Be Implemented')">
                     &#8287;  &#8287;  &#8287;  &#8287; 
                 </div>
                 <input type="hidden" name="actiontype" id="actiontype" value="" > 

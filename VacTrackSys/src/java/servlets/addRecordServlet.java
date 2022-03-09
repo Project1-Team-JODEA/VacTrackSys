@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,7 +38,7 @@ public class addRecordServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String URL = "";
+        String URL = ""; String ssn, fname, minit, lname, ptype, vsite, v1id, v2id, v3id, v4id;
         String msg = "", sql = "";
         String dbURL = "jdbc:mysql://localhost:3306/MoVax";
         String dbUSER = "root";
@@ -48,27 +49,59 @@ public class addRecordServlet extends HttpServlet {
         
         // below are "methods" that can be used to update specific tables in the database.  If used as a servlet,
         // pass update booleans via the session object
-        
+         String x = String.valueOf(request.getRequestURL());
+        String webloc = "";
+        if (x.contains("DoctorLogin")) {
+            webloc = "/DoctorLogin";
+
+        } else if (x.contains("PatientLogin")) {
+            webloc = "/PatientLogin";
+
+        } else if (x.contains("AdminConsole")) {
+            webloc = "/AdminConsole";
+
+        }
         try{        
-            Connection conn = DriverManager.getConnection(dbURL, dbUSER, dbPWD);
+           Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            ServletContext context = getServletContext();
+            String ur = context.getRealPath("/Team_JODEA1.accdb");
+            Connection conn = DriverManager.getConnection("jdbc:ucanaccess://" + ur);
+             fname = String.valueOf(request.getParameter("fname"));
+            lname = String.valueOf(request.getParameter("lname"));
+            minit = String.valueOf(request.getParameter("midinit"));
+            ssn = String.valueOf(request.getParameter("ssn"));
+            
             if(updatePatient == true){
                 // needs: get patient info from form
                 Patient p = new Patient();
+//                 Vaccine vac1 = new Vaccine();
+//                vac1.setVid();
+//                p.setVac1(vac1);
+//                Vaccine vac2 = new Vaccine();
+//                vac2.setVid(r.getString("Vaccine_2"));
+//                p.setVac2(vac2);
+//                Vaccine vac3 = new Vaccine();
+//                vac3.setVid(r.getString("Vaccine_3"));
+//                p.setVac3(vac3);
+//                Vaccine vac4 = new Vaccine();
+//                vac4.setVid(r.getString("Vaccine_4"));
+//                p.setVac4(vac4);
+                
                 // needs: validate p
                 sql = "UPDATE PATIENTS SET " +
                         "RecipientID = ?, " +
-                        "SocSecNum = ?, " +
+                        "Social_Security = ?, " +
                         "FirstName = ?, " +
                         "MiddleName = ?, " +
                         "LastName = ?, " +
-                        "DateOfBirth = ?, " +
+                        //"DateOfBirth = ?, " +
                         "Vaccine1 = ?, " +
                         "Vaccine2 = ?, " +
                         "Vaccine3 = ?, " +
                         "Vaccine4 = ? ";
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setInt(1, p.getRid());
-                ps.setString(2, p.getSsn());
+                ps.setInt(2, Integer.parseInt(p.getSsn()));
                 ps.setString(3, p.getFname());
                 ps.setString(4, p.getMname());
                 ps.setString(5, p.getLname());
