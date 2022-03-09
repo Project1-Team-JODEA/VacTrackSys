@@ -8,7 +8,7 @@
  * File name: functions.js
  * Author(s): eVmPr
  * Supporting Files:
- * Note(s):
+ * Note(s): for checking validation
  *
  */
 
@@ -16,3 +16,7 @@
 function sendMessage(msg){
     alert(msg);
 };
+function check(){
+    document.querySelector();
+    
+}

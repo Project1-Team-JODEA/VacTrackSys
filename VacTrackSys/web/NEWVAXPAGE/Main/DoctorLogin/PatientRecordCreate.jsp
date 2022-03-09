@@ -20,10 +20,10 @@
         document.RecordsSelection.actiontype.value = action;
         $("actiontype").value = action;
         if (ajax && action === 'searchPatient') {
-            ajax.open('get', 'RecordsSelection?actiontype=searchPatient');
+            ajax.open('get', '?actiontype=searchPatient');
             ajax.send(null);
         } else if (ajax && action === 'Edit') {
-            ajax.open('get', 'RecordsSelection?actiontype=edit');
+            ajax.open('get', '?actiontype=AddPatient');
             ajax.send(null);
         } else {
             document.RecordsSelection.submit();
@@ -97,9 +97,12 @@
                                 <option name="outpatient" value="OUT">Outpatient</option>
                                 <option name="other" id="other" value="OTH">Other</option>
                                 <option name="unknown" id="unknown" value="N/A">Other</option>
-                            </select></div>
+                            </select>
+                        </div>
                         
                     </div>
+                    <div></div>
+                        
 
 
                     <!--                    <div class="button">
