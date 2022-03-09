@@ -73,14 +73,12 @@
             <input type="text" placeholder="Enter batch # here" required>
           </div>
             <div class="input-box">
-                            <span class="details">Patient Type</span>
+                            <span class="details">Vaccine Type</span>
                             <select id="pat_type">
-                                <option id="reg-patient" value="PAT">Regular</option>
-                                <option id="Inpatient" value="IN">Inpatient</option>
-                                <option name="outpatient" value="OUT">Outpatient</option>
-                                <option name="other" id="other" value="OTH">Other</option>
-                                <option name="unknown" id="unknown" value="N/A">Other</option>
-                            </select></div>
+                                <option id="reg-vac" value="REG">Regular</option>
+                                <option id="booster" value="BOS">Inpatient</option>
+                            </select>
+            </div>
         </div>
         <div class="gender-details">
           <input type="radio" name="gender" id="dot-1">
