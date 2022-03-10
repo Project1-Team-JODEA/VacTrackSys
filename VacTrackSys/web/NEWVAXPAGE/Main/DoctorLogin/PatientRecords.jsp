@@ -16,13 +16,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Records</title>
         <link rel="stylesheet" href="formstyle.css">
+        <link rel="icon" type="image/x-icon" href="../image/favicon_16x16.png"/>
     </head>
     <body>
-
-        <div class="container">
-            <span class="title">Patient Records</span>
-            <div class="content">
-                <table class="table-content" border="1">
+        <table class="table-content" border="1">
                     <tr>
                         <th>SSN</th>
                         <th>First Name</th>
@@ -40,7 +37,7 @@
                             <td>${p.fname}</td>
                             <td>${p.mname}</td>
                             <td>${p.lname}</td>
-                            <%--<td>${p.ptype}</td>--%>
+                            <td>${p.ptype}</td>
                             <td>${p.vac1.vid}</td>
                             <td>${p.vac2.vid}</td>
                             <td>${p.vac3.vid}</td>
@@ -48,6 +45,7 @@
                         </tr>
                     </c:forEach>
                 </table>
+        
                 <div class="button">
                     <input type="submit" name="edit" id="edit" value="Edit Patient" onclick="alert('WIP')">
                     &#8287;  &#8287;  &#8287;  &#8287; 
@@ -56,10 +54,7 @@
                     <input type="submit" name="report" id="report" value="Print Report" onclick="alert('To Be Implemented')">
                     &#8287;  &#8287;  &#8287;  &#8287; 
                 </div>
-                <input type="hidden" name="actiontype" id="actiontype" value="" > 
-            </div>
-        </div>
-
+        
         <%--<c:if test="${u.access_level}"--%>
 
     </body>

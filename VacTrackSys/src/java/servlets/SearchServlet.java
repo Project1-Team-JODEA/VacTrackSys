@@ -43,6 +43,7 @@ public class SearchServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String msg = "", sql = "", url = "", webloc = "";
         String ssn, fname, minit, lname, ptype, vsite, v1id, v2id, v3id, v4id;
+        String vac_date="", dob="";
         ArrayList<Patient> patientset = new ArrayList<>();
         String[] vacs = {"", "", "", ""};
         String x = String.valueOf(request.getRequestURL());
@@ -66,15 +67,20 @@ public class SearchServlet extends HttpServlet {
             Connection conn = DriverManager.getConnection("jdbc:ucanaccess://" + ur);
             // at the moment, I am putting off the ability to search with criteria
             // logic for searches will go here
-//            vacs[0] = String.valueOf(request.getParameter("v1id"));
-//            vacs[1] = String.valueOf(request.getParameter("v2id"));
-//            vacs[2] = String.valueOf(request.getParameter("v3id"));
-//            vacs[3] = String.valueOf(request.getParameter("v4id"));
-//            for (int i=0; i < vacs.length; i++){
-//                if (vacs[i].isEmpty() || vacs[i].equals("")){
-//                    vacs[i] = "N/A";
-//                }
-//            }
+            vacs[0] = String.valueOf(request.getParameter("v1id"));
+            vacs[1] = String.valueOf(request.getParameter("v2id"));
+            vacs[2] = String.valueOf(request.getParameter("v3id"));
+            vacs[3] = String.valueOf(request.getParameter("v4id"));
+            fname = String.valueOf(request.getParameter("fname"));
+            lname = String.valueOf(request.getParameter("lname"));
+            minit = String.valueOf(request.getParameter("midinit"));
+            ssn = String.valueOf(request.getParameter("ssn"));
+            
+            for (int i=0; i < vacs.length; i++){
+                if (vacs[i].isEmpty() || vacs[i].equals("")){
+                    vacs[i] = "N/A";
+                }
+            }
 //            for (String vac : vacs) {
 //                if (vac.isEmpty() || vac.equals("")) {
 //                    // set to N/A
@@ -82,13 +88,10 @@ public class SearchServlet extends HttpServlet {
 //                }
 //            }
             // in the meantime, searches will return the entire db
-            fname = String.valueOf(request.getParameter("fname"));
-            lname = String.valueOf(request.getParameter("lname"));
-            minit = String.valueOf(request.getParameter("midinit"));
-            ssn = String.valueOf(request.getParameter("ssn"));
-            sql = "SELECT * "
-                    + ""
-                    + "  FROM PATIENTS;";
+            // return 
+            
+            sql = "SELECT *  FROM PATIENTS"                    
+                    + " WHERE Social_Security";
 //                    + " WHERE Social_Security ='"+Integer.parseInt(ssn)+"'";
 //            sql = "SELECT * FROM PATIENTS";
 //            if (!vacs[0].equals("N/A")) {

@@ -12,7 +12,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="../js/ajax.js" type="text/javascript"></script>
 <script src="../js/searchPatient.js" type="text/javascript"></script>
-<script src="../js/functions.js"
+<script src="../js/functions.js"></script>
 <script type="text/javascript">
     var $ = function (id) {
         return document.getElementById(id);
@@ -24,7 +24,7 @@
             ajax.open('get', 'RecordsSelection?actiontype=searchPatient');
             ajax.send(null);
         } else if (ajax && action === 'Edit') {
-            ajax.open('get', 'RecordsSelection?actiontype=edit');
+            ajax.open('get', 'RecordsSelection?actiontype=editVac');
             ajax.send(null);
         } else {
             document.RecordsSelection.submit();
@@ -38,7 +38,8 @@
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <title> Vaccination Database</title>
             <link rel="stylesheet" href="formstyle.css" type="text/css"/>
-
+            <link rel="icon" type="image/x-icon" href="../image/favicon_16x16.png"/>
+            
             <script type="text/javascript">
                 var $ = function (id) {
                     return document.getElementById(id);
@@ -47,6 +48,12 @@
                     //$("Records").reset();
                     //                $("rid").focus();
                 }
+                var today = new Date();
+                var d = today.getDate();
+                var m = today.getMonth();
+                var y = today.getYear();
+                
+                
             </script>
         </head>
         <body>
@@ -72,48 +79,72 @@
                             <div class="user-details">
 
                                 <div class="input-box" id="pat-info">
+                                    <span class="details">Patient Info</span>
                                     <table>
                                         <tr>
-                                            <td><span class="details">Patient Info</span></td>
+                                            <td></td>
                                             <td></td>
                                         </tr>
                                         <tr>
                                             <td><span class="details">SSN</span></td>
-                                            <td><input type="text" name="ssn" id="ssn" 
-                                                       pattern="[0-9]{9,}" placeholder="SSN (000-00-0000)"></td>
+                                            <td><input type="number" name="ssn" id="ssn" 
+                                                       pattern="[0-9]{9,}" maxlength="9" placeholder="(000-00-0000)"></td>
+                                            <td>DOB</td>
+                                            <td><input type="date" name="dob" id="dob"
+                                                       max=""></td>
                                         </tr>            
                                         <tr>
                                             <td><span class="details">First Name:</span></td>
                                             <td><input type="text" name="fname" id="fname"  size=""
-                                                       pattern="[A-Za-z]" ></td>
-                                            <td></td>
-                                            <td></td>
+                                                       pattern="[A-Za-z]{100}"  ></td>
+                                            <td>Vaccination Date</td>
+                                            <td><input type="date" name="vac_date" id="vac_date"
+                                                       min="2021-11-30"  max="2022-3-10" ></td><!--onclick="setTodayMaxDate('vac_date')"-->
                                         </tr>
+                                        
                                         <tr>
                                             <td><span class="details">Middle Init:</span></td>
                                             <td><input type="text" name="midinit" id="midinit"  
-                                                       pattern="[A-Za-z]{2}" ></td>
+                                                       pattern="[A-Za-z].{2}" maxlength="1" width="5"></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                         <tr>
                                             <td><span class="details">Last Name:</span></td>
                                             <td><input type="text" name="lname" id="lname"  size=""
-                                                       placeholder="" ></td>
+                                                        ></td>
+                                            
                                         </tr>
                                         
                                         <tr>
                                             <td><span class="details">Patient Type</span></td>
                                             <td><select id="pat_type">
-                                                    <option name="unknown" id="unknown" value="N/A">Select</option>
-                                                    <option id="reg-patient" value="PAT">Regular</option>
-                                                    <option id="Inpatient" value="IN">Inpatient</option>
-                                                    <option name="outpatient" value="OUT">Outpatient</option>
-                                                    <option name="other" id="other" value="OTH">Other</option>
+                                                    <option value="">Select</option>
+                                                    <option svalue="PAT">Regular</option>
+                                                    <option value="INP">Inpatient</option>
+                                                    <option value="OUT">Outpatient</option>
+                                                    <option value="OTH">Other</option>
+                                                    <option value="N/A">N/A</option>
                                                 </select></td>
+                                                <td><span class="details">Sort by:</span></td>
+                                                <td>
+                                                    <input type="text" name="sort_vals" readonly>
+                                                    <div class="sort" id="sortlist">
+                                                        <input type="checkbox" name="sortval" id="" value="">
+                                                    </div>
+                                                </td>
+<!--                                            <td><select id="sort">
+                                                    <option value="N/A">Select</option>
+                                                    <option value="pat_type">Patient Type</option>
+                                                    <option value="ssn">ssn</option>
+                                                    <option value="OUT">Outpatient</option>
+                                                    <option value="OTH">Other</option>
+                                                </select></td>
+                                            -->
                                         </tr>
                                     </table>
-
-
                                 </div>
+                                
                                 <!--                                <div class="input-box">
                                                                     <span class="details">Vaccines</span>
                                                                     <input type="text" name="v1id" id="v1id" value="" 
@@ -130,11 +161,10 @@
                
 
                             </div>
-
                             <div class="vac-details">
 
-                                <div class="input-box">
-                                    <table style="width: 100%;">
+                                <div class="input-box" id="vac-info">
+                                    <table>
                                         <tr>
                                             <td><span class="details">Vaccine 1</span></td>
                                             <!--<td></td>-->
@@ -151,7 +181,7 @@
                                         <tr>
                                             <td><input type="text" name="v2id" id="v2id" 
                                                        pattern="[0-9]{8}" placeholder="00000000"></td>
-                                            <td style=""><input type="submit"  class="edit-btn" value="Edit Vaccine"></td>
+                                            <td style="width: 100px;"><input type="submit"  class="edit-btn" value="Edit Vaccine"></td>
                                         </tr>
                                         <tr>
                                             <td><span class="details">Vaccine 3</span></td>
@@ -224,6 +254,5 @@
                     <div id="results"></div>
                 </div>
             </div>
-
         </body>
     </html>

@@ -25,6 +25,7 @@ body{
 }
 .container{
     max-width: 700px;
+    margin-left: 5px; 
     width: 100%;
     background-color: #fff;
     padding: 25px 30px;
@@ -48,8 +49,14 @@ body{
 }
 .info {
     display: block;
-    overflow-y: auto;
+    overflow: auto;
     max-height: 300px;
+}
+div.sort {
+    display: none;
+}
+#pat-info, #vac-info {
+    width: 100%;
 }
 .content form .info {
     display: flex;
@@ -60,12 +67,13 @@ body{
 .content form .vac-details{
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .vac-details .input-box{
     
 }
-.content form .user-details{
+.content form .user-details {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -157,13 +165,15 @@ form .button input:hover{
       max-height: 300px;
       overflow-y: scroll;
     }*/
-
+#sortlist{
+    display: none;
+}
 #results{
     width: 100%;
     /*overflow-x: o*/
 }
-#pat-info {
-    width: 100%;
+#logout:before {
+    content: "e9ba";
 }
 
 

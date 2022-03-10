@@ -16,6 +16,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Records</title>
         <link rel="stylesheet" href="formstyle.css">
+        <link rel="icon" type="image/x-icon" href="../image/favicon_16x16.png"/>
     </head>
     <body>
        

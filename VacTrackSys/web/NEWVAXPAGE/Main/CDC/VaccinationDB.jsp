@@ -12,6 +12,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="../js/ajax.js" type="text/javascript"></script>
 <script src="../js/searchPatient.js" type="text/javascript"></script>
+<link rel="icon" type="image/x-icon" href="../image/favicon_16x16.png"/>
 <script type="text/javascript">
     var $ = function (id) {
         return document.getElementById(id);
