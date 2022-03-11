@@ -182,10 +182,10 @@
                                 <!--<label for="sort_type">Patient Type</label>-->
                                 
                                 <input type="checkbox" name="sortval" class="sortval" 
-                                       id="sort_ptype" value="Patient Type">
+                                       id="sort_ptype" value="P_Type"><span>Patient Name</span>
                                 <!--<span class="details"></span>-->
                                 <input type="checkbox" name="sortval" class="sortval" 
-                                       id="sort_fname" value="First Name" >
+                                       id="sort_fname" value="First Name" ><span>First Name</span>
                                 <input type="checkbox" name="sortval" class="sortval" 
                                        id="sort_lname" value="Last Name" >
                                 <input type="checkbox" name="sortval" class="sortval" 
@@ -210,8 +210,8 @@
                         <div class="input-box">
 
                         </div>
-                        <input type="checkbox" name="sortval" class="sortval" 
-                                       id="sort_ptype"  value="Patient Type">
+<!--                        <input type="checkbox" name="sortval" class="sortval" 
+                                       id="sort_ptype"  value="Patient Type">-->
                         <!--                            <table>
                           <tr>
                                                     <td><span class="details">Sort</span></td>

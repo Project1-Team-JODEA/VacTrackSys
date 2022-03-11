@@ -4,24 +4,18 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/Assets/Scripts/pageAction.js</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/js/functions.js</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/Assets/Scripts/dbaction.js</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/business/Vaccine.java</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/CDC/PatientRecords.jsp</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/DoctorLogin/VaccinationDB.jsp</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/business/ConnectionPool.java</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/business/Patient.java</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/servlets/DBActionServlet.java</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/servlets/SearchServlet.java</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/DoctorLogin/formstyle.css</file>
+            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/js/validate.js</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/Assets/Styles/index.css</file>
+            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/js/script.js</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/Member/NewAccount.jsp</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/business/Connect.java</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/Assets/Scripts/ajax.js</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/META-INF/context.xml</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/servlets/LoginServlet.java</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/Member/VaccinationDB.jsp</file>
+            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/DoctorLogin/index1.jsp</file>
         </group>
     </open-files>
 </project-private>
