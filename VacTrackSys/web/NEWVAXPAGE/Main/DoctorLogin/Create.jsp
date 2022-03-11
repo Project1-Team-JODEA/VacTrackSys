@@ -41,6 +41,9 @@
             <input type="text" placeholder="Enter batch # here" required>
           </div>
         </div>
+         
+          
+          
         <div class="gender-details">
           <input type="radio" name="gender" id="dot-1">
           <input type="radio" name="gender" id="dot-2">
