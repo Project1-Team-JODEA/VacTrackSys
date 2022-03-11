@@ -13,8 +13,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Doctor Login and Registration Form</title>
         <link rel="stylesheet" href="style.css">
-
-    
+        <link rel="icon" type="image/x-icon" href="../image/favicon_16x16.png"/>
+        
     </head>
     <body>
         <div class="hero">
@@ -37,23 +37,29 @@
                         </a>
                 </div>
                 <form id="login" class="input-group" action="Login" method="post">
-                    <input type="text" class="input-field" name="userid" placeholder="Employee ID" required>
-                    <input type="password" class="input-field" name="passwd" id="passwd" placeholder="Enter Password" required>
+                    <input type="text" class="input-field" name="userid"
+                           pattern="" placeholder="Employee ID" required>
+                    <input type="password" class="input-field" name="passwd" id="passwd"
+                           pattern="" placeholder="Enter Password" required>
                     <input type="checkbox" class="check-box"><span>Remember Password</span>
                     <button type="submit" class="submit-btn">Login</button>
                 </form>
                 <form id="register" class="input-group" action="NewAccount" method="post">
                     <input type="text" class="input-field" name="uid" id="uid" placeholder="Employee ID" required>
-                    <input type="email" id="email" class="input-field"  placeholder="Email ID" required>
+                    <input type="email" id="email" class="input-field"
+                           pattern="[a-z0-9.+]+@[a-z0-9]+\.[a-z]{2,}$" placeholder="characters@characters.domain" required>
                     <input type="text" id="loc" class="input-field" placeholder="Location" required>
-                    <input type="password" name="upwd" class="input-field"  id="upwd" placeholder="Enter Password" required>
+                    <input type="password" name="upwd" class="input-field"  id="upwd"
+                           pattern="(?=.*\d ).{6,}" title="At least 1 number, 1 Uppercase 1 lowercase letter" placeholder="Password" required>
                     <input type="password" name="confpasswd" class="input-field" id="confpasswd" placeholder="Confirm Password" required>
 
                     <input type="checkbox" class="check-box"><span>I agree to the terms & conditions</span>
-                    <button type="submit" id="newacct" class="submit-btn">Register</button>
+                    <button type="submit" id="newacct" class="submit-btn" onclick="">Register</button>
                 </form>
                 <span id="message">${msg}</span>
             </div>
+            <script src =" ../js/functions" type="text/javascript"></script>
+                
         </div>
 
         <script>
