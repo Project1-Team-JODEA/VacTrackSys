@@ -12,6 +12,18 @@
  *
  */
 
+
+// const Login = {
+//     function: 
+// }
+// const toggleValue(){
+
+// }
+/**
+ * 
+ * @param {String} id 
+ * @returns 
+ */
 var $ = function (id) {
     return document.getElementById(id);
 };
@@ -24,15 +36,13 @@ function check() {
     document.querySelector();
 
 }
-function pageAction(action) {
-    var actiontype = document.getElementById("actiontype");
-    actiontype.value = action;
+// function pageAction(action) {
+//     var actiontype = document.getElementById("actiontype");
+//     actiontype.value = action;
 
-}
-function validateSearch() {
+// }
 
-}
-function setTodayMaxDate(id) {
+function getTodayMaxDate() {
     var today = new Date();
     var d = today.getDate();
     var m = today.getMonth();
@@ -43,12 +53,11 @@ function setTodayMaxDate(id) {
     if (m < 10) {
         m = 0 + m;
     }
-    var input = document.getElementById(id);
+    // var input = document.getElementById(id);
     today = y + "-" + m + "-" + d;
-    input.setAttribute('max', today);
-    if (input.type === "date") {
-
-    }
+    // input.setAttribute('max', today);
+    
+    return today;
 }
 // toggle sort values for sorting 
 /**
@@ -59,7 +68,17 @@ function setTodayMaxDate(id) {
 var toggleSortVal = function (inputid) {
     var input = document.getElementById(inputid);
     //    var 
-    var ftxt = document.getElementById("")
+    var ftxt = document.getElementById("sort");
+    $("txtsort").value ;
+    var ref_val = $(inputid).value;
+    if ($("sort").value.contains(input.value)){
+
+    }else if ($("sort").value.contains(input.value)){
+        
+    }else if ($("sort").value===""){
+
+    }
+
     if (input.getAttribute("checked") === true) {
         //add value to input filter
 
@@ -68,14 +87,21 @@ var toggleSortVal = function (inputid) {
 
     }
 };
+/**
+ * 
+ * @param {String} id 
+ */
 const toggleList = function (id) {
     const sortList = document.getElementById(id);//document.querySelector("#sortlist");
     const items_cont = $_("#items");
+    // let styleSheet = document.styleSheets[];
     if (sortList.style.display === "none") {
         sortList.style.display = "block";
         } else if (sortList.style.display === "block") {
         sortList.style.display = "none";
+        
         }
+        // sortList.style.display
         
 
 };
@@ -99,4 +125,23 @@ const toggleList = function (id) {
 //
 //    }
 //}
+/**
+ * 
+ * @param {type} id
+ * @returns {undefined}
+ */
+function toggleV(id, btn_id){
 
+    if ($(id).getAttribute("type") === "password"){
+        $(id).type = "text";
+        $(id).setAttribute("type", "text");
+        if ($(btn_id).classList.contains("fa-eye")){
+            $(btn_id).classList.replace("fa-eye", "fa-eye-slash");
+        } 
+    } else if ($(id).getAttribute("type") === "text"){
+        $(id).setAttribute("type", "password");
+        if ($(btn_id).classList.contains("fa-eye-slash")){
+            $(btn_id).classList.replace( "fa-eye-slash", "fa-eye");
+        }
+    }
+}

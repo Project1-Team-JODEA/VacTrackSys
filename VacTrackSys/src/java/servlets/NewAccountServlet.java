@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -33,64 +34,73 @@ public class NewAccountServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        String URL = "";
-        String msg = "", sql = "", testmsg = "", webloc="", ac_lvl=""; //ac_lvl = access level
+
+        String URL = "", confpasswd="";
+        String msg = "", sql = "", testmsg = "", webloc = "", ac_lvl = ""; //ac_lvl = access level
         // Check Location in web
-            String x = String.valueOf(request.getRequestURL());
-            if (x.contains("DoctorLogin")){
-                webloc = "/DoctorLogin";
-                ac_lvl = "Edit";
-            } else if (x.contains("PatientLogin")){
-                webloc = "/PatientLogin";
-                ac_lvl = "Patient";
-            }else if (x.contains("AdminConsole")){
-                webloc = "/AdminConsole";
-                ac_lvl = "Administrator";
-            }else if (x.contains("CDC")){
-                webloc = "/CDC";
-                ac_lvl = "View";
-            }
+        String x = String.valueOf(request.getRequestURL());
+        if (x.contains("DoctorLogin")) {
+            webloc = "/DoctorLogin";
+            ac_lvl = "Edit";
+        } else if (x.contains("PatientLogin")) {
+            webloc = "/PatientLogin";
+            ac_lvl = "Patient";
+        } else if (x.contains("AdminConsole")) {
+            webloc = "/AdminConsole";
+            ac_lvl = "Administrator";
+        } else if (x.contains("CDC")) {
+            webloc = "/CDC";
+            ac_lvl = "View";
+        }
         try {//Connecting to database
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             ServletContext context = getServletContext();
             String ur = context.getRealPath("/Team_JODEA1.accdb");
-            Connection conn = DriverManager.getConnection("jdbc:ucanaccess://"+ur);
+            Connection conn = DriverManager.getConnection("jdbc:ucanaccess://" + ur);
             User u = new User();
             String uid = String.valueOf(request.getParameter("uid"));
             u.setUsername(String.valueOf(request.getParameter("uid")));
-            
+            // validate username and passwords
+
             testmsg += u.getUsername();
             u.setEmail(String.valueOf(request.getParameter("email")));
             testmsg += u.getEmail();
             // need location field.  Hardcoding for now
-            if (x.contains("AdminConsole") || x.contains("DoctorLogin")){
+            if (x.contains("AdminConsole") || x.contains("DoctorLogin")) {
                 u.setLocation(request.getParameter("loc"));
-            } else if (x.contains("PatientLogin") || x.contains("CDC")){
+            } else if (x.contains("PatientLogin") || x.contains("CDC")) {
                 u.setLocation("online");
-            }else{
-              u.setLocation("First Hospital East");  
+            } else {
+                u.setLocation("First Hospital East");
             }
-            System.out.println("Username = "+u.getUsername());
-//            u.setLocation(request.getParameter("loc"));
+//            System.out.println("Username = "+u.getUsername());
+//            if (webloc.equals("AdminConsole") || webloc.equals("DoctorLogin") ){
+//                 u.setLocation(request.getParameter("loc").trim());
+//            } else{
+//                
+//            }
+//           
             //u.setLocation(request.getParameter("location"));
-//            String pws = String.valueOf(request.getParameter("upwd"));
-            
+            String pws = String.valueOf(request.getParameter("upwd"));
+            confpasswd = String.valueOf(request.getParameter("confpasswd").trim());
+           Pattern passwd = Pattern.compile("");
+           
+            if (confpasswd.matches(pws)){
+                msg+="passwords do not match";
+            }
             u.setPassword(String.valueOf(request.getParameter("upwd")));
             // need url check for u.setAccessLevel()
             // hardcoding for now
-                u.setAccesslevel(ac_lvl);
-               
+            u.setAccesslevel(ac_lvl);
+
             /* check for empty strings in  input */
-            if (false){
-                
-            }
-            /*
-            if (u.getUsername().equals("")){
+            if (false) {
+
+            } /*
+            if (u.getUsername().equals("") or ){
                 msg += "Please enter username. <br>";
             } else if (u.getPassword().equals("")){
                 msg += "Please enter password. <br>";
@@ -101,8 +111,7 @@ public class NewAccountServlet extends HttpServlet {
             } else if (u.getLocation().equals("")){
                 msg += "Missing Location. <br>";
             }
-            */
-            else {
+             */ else {
                 //Check Username, Password and Confirmation Password, 
                 //if 
                 /*
@@ -114,39 +123,41 @@ public class NewAccountServlet extends HttpServlet {
                 if (u.getPassword().equalsIgnoreCase(u.getUsername())){
                     msg = "Password Cannot be the same as your username.";
                 }
-                */
+                 */
                 //if (!confpasswd.matches(passwd)){
-                  //  msg = "Password Invalid <br>";
+                //  msg = "Password Invalid <br>";
                 //}
                 //Create User Account
-                
+
                 // Add validation to look for duplicate usernames (Primary Key)
-                
+                sql = "SELECT Username FROM USERS WHERE Username='" + uid + "';";
+
                 sql = "INSERT INTO USERS (Username, Password, Access_Level, Email_Address, Location) VALUES (?, ?, ?, ?, ?)";
                 PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setString (1, u.getUsername());
-                ps.setString (2, u.getPassword());
-                ps.setString (3, u.getAccesslevel());
-                ps.setString (4, u.getEmail());
-                ps.setString (5, u.getLocation());
+                ps.setString(1, u.getUsername());
+                ps.setString(2, u.getPassword());
+                ps.setString(3, u.getAccesslevel());
+                ps.setString(4, u.getEmail());
+                ps.setString(5, u.getLocation());
                 int rc = ps.executeUpdate();
-                if (rc == 0){
+                if (rc == 0) {
                     msg += "User not added. <br>";
-                } else if (rc == 1){
+                } else if (rc == 1) {
                     msg += "User added. <br>";
                     request.getSession().setAttribute("UserLocation", u.getLocation());
                     request.getSession().setAttribute("UserAccessLevel", u.getAccesslevel());
                 } else {
                     msg += "Warning: multiple records updated. <br>";
-                    
+
                 }
             }
-        
+
         } catch (ClassNotFoundException ex) {
             msg = "Error: Class Not Found. <br>";
         } catch (SQLException ex) {
             msg += "Connection Error: " + ex.getMessage() + "<br>";
-        }URL = webloc + "/index1.jsp";
+        }
+        URL = webloc + "/index1.jsp";
         request.setAttribute("msg", msg);
         RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);
         disp.forward(request, response);

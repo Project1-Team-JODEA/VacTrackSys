@@ -75,6 +75,7 @@ public class SearchServlet extends HttpServlet {
             lname = String.valueOf(request.getParameter("lname"));
             minit = String.valueOf(request.getParameter("midinit"));
             ssn = String.valueOf(request.getParameter("ssn"));
+            dob = String.valueOf(request.getParameter("dob"));
             
             for (int i=0; i < vacs.length; i++){
                 if (vacs[i].isEmpty() || vacs[i].equals("")){

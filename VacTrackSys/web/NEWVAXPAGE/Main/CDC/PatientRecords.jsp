@@ -19,11 +19,7 @@
         <link rel="icon" type="image/x-icon" href="../image/favicon_16x16.png"/>
     </head>
     <body>
-       
-        <div class="container">
-            <span class="title">Patient Records</span>
-            <div class="content">
-                <table class="table-content" border="1">
+       <table class="table-content" border="1">
                     <tr>
                         <th>SSN</th>
                         <th>First Name</th>
@@ -52,14 +48,20 @@
                 <div class="button">
                     <!--<input type="submit" name="edit" id="edit" value="Edit Patient" onclick="alert('WIP')">-->
                     &#8287;  &#8287;  &#8287;  &#8287; 
-                    <!--<input type="submit" name="add" id="add" value="Add Patient" onclick="alert('WIP')">-->
+                    <input type="submit" name="add" id="add" value="Add Patient" onclick="addPatient">
+                    &#8287;  &#8287;  &#8287;  &#8287; 
+                    <input type="submit" name="add" id="add" value="Add Patient" onclick="addPatient">
                     &#8287;  &#8287;  &#8287;  &#8287; 
                     <input type="submit" name="report" id="report" value="Print Report" onclick="alert('WIP')">
                     &#8287;  &#8287;  &#8287;  &#8287; 
                 </div>
-                <input type="hidden" name="actiontype" id="actiontype" value="" > 
+                <input type="hidden" name="actiontype" id="actiontype" value=""> 
+<!--        <div class="container">
+            <span class="title">Patient Records</span>
+            <div class="content">
+                
             </div>
-        </div>
+        </div>-->
         
         <%--<c:if test="${u.access_level}"--%>
         

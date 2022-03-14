@@ -13,22 +13,9 @@
 <script src="../js/ajax.js" type="text/javascript"></script>
 <script src="../js/searchPatient.js" type="text/javascript"></script>
 <script src="../js/functions.js"></script>
+<script src ="../js/dbaction.js"></script>
 <script type="text/javascript">
-
-    function pageAction(action) {
-        document.RecordsSelection.actiontype.value = action;
-        $("actiontype").value = action;
-        if (ajax && action === 'searchPatient') {
-            ajax.open('get', 'RecordsSelection?actiontype=searchPatient');
-            ajax.send(null);
-        } else if (ajax && action === 'EditVaccine') {
-            ajax.open('post', 'RecordsSelection?actiontype=editVacccine');
-            ajax.send(null);
-        } else {
-            document.RecordsSelection.submit();
-        }
-    }
-
+   
 
 </script>
 <html lang="en">
@@ -38,36 +25,13 @@
         <link rel="stylesheet" href="formstyle.css" type="text/css"/>
         <link rel="icon" type="image/x-icon" href="../image/favicon_16x16.png"/>
         <script type="text/javascript">
-//            $("")
-//            const toggleList = () => {
-//           document.getElementById("sortlist").classList.toggle("show");
-
-
-
-//            $("list-btn").addEventListener();
-//            window.onload = function(){
-////            $("list-btn").onclick = toggleList;
+//            const toggleSortValue = () => {
+//                const sort_items = document.getElementsByClassName("sortval");
 //            };
-
-//            $_("#list-btn").addEventListener("click", toggleList);
-            const toggleSortValue = () => {
-                const sort_items = document.getElementsByClassName("sortval");
-            };
-            // add events to html
-//            document.addEventListener("DOMContentLoaded", () => {
-//                $_('#list-btn').addEventListener("click", toggleList);
-//            });
-
-//            window.onclick = function (event) {
-//            if (!event.target.matches('.sortbtn')) {
-//                const sortList = document.getElementById('sort');
-////            const sort_items = document.getElementsByClassName("sortval");
-//            if (sortList.style.display === 'block') {
-//            sortList.style.display = 'block';
-//            }
-//            $("sortlist").style.display = 'none';
-//            }
-//            }
+//            var input = document.getElementsByName("sortval");
+//            var i=0;
+//            
+//            $("sort_ptype").
         </script>
     </head>
     <body>
@@ -95,10 +59,10 @@
                             <div class="input-box" id="pat-info">
                                 <span class="details">Patient Info</span>
                                 <table>
-                                    <tr>
+<!--                                    <tr>
                                         <td></td>
                                         <td></td>
-                                    </tr>
+                                    </tr>-->
                                     <tr>
                                         <td><span class="details">SSN</span></td>
                                         <td><input type="number" name="ssn" id="ssn" 
@@ -178,40 +142,48 @@
                                value="Sort By" onclick="toggleList('sortlist')">
                         <div name="list" class="sort"  >
                             <div class="items" id="sortlist" style="display: none;" > 
-
                                 <!--<label for="sort_type">Patient Type</label>-->
-                                
-                                <input type="checkbox" name="sortval" class="sortval" 
-                                       id="sort_ptype" value="P_Type"><span>Patient Name</span>
                                 <!--<span class="details"></span>-->
-                                <input type="checkbox" name="sortval" class="sortval" 
-                                       id="sort_fname" value="First Name" ><span>First Name</span>
-                                <input type="checkbox" name="sortval" class="sortval" 
-                                       id="sort_lname" value="Last Name" >
-                                <input type="checkbox" name="sortval" class="sortval" 
-                                       id="sort_v1id" value="Vaccine 1" >
-                                <input type="checkbox" name="sortval" class="sortval" 
-                                       id="sort_v2id" value="Vaccine 2" >
-<!--                                <ul>
+
+                                <!--<span>Last Name</span>-->
+                                <!--<span>Vaccine 1</span>-->
+                                <!--<span>Vaccine 2</span>-->
+                                <ul>
                                     <li>
-                                        hi
+                                        <input type="checkbox" name="sortval" class="sortval" 
+                                               id="sort_ptype" value="P_Type" onclick="sort_ptype">Patient Type
+                                        <!--                                        <span class="details">Patient Name</span> -->
                                     </li>
-                                    <li>hi</li>
-                                    <li>hi</li>
-                                    <li>hi</li>
+
+                                    <li><input type="checkbox" name="sortval" class="sortval" 
+                                               id="sort_fname" value="First_Name" onclick="toggleSortVal('p_type')" >First Name
+                                        <!--<span class="details">First Name</span>-->
+                                    </li>
+                                    <li><input type="checkbox" name="sortval" class="sortval" 
+                                               id="sort_lname" value="Last_Name" >Last Name</li>
+                                    <li><input type="checkbox" name="sortval" class="sortval" 
+                                               id="sort_v1id" value="Vaccine_1" >Vaccine #1</li>
+                                    <li><input type="checkbox" name="sortval" class="sortval" 
+                                               id="sort_v2id" value="Vaccine_2" > Vaccine #2</li>
+                                    <li><input type="checkbox" name="sortval" class="sortval" 
+                                               id="sort_v3id" value="Vaccine_3" > Vaccine #3</li>
+                                    <li><input type="checkbox" name="sortval" class="sortval" 
+                                               id="sort_v4id" value="Vaccine_4" > Vaccine #4</li>
                                     <li></li>
-                                    
-                                </ul>-->
+                                    <li></li>
+                                    <li></li>
+                                </ul>
                             </div>
 
                         </div>
+
                         <input type="text" name="txtsort" id="sort" value="" 
                                readonly>
-                        <div class="input-box">
-
-                        </div>
-<!--                        <input type="checkbox" name="sortval" class="sortval" 
-                                       id="sort_ptype"  value="Patient Type">-->
+                        <!--                        <div class="input-box">
+                        
+                                                </div>-->
+                        <!--                        <input type="checkbox" name="sortval" class="sortval" 
+                                                               id="sort_ptype"  value="Patient Type">-->
                         <!--                            <table>
                           <tr>
                                                     <td><span class="details">Sort</span></td>
@@ -255,7 +227,7 @@
                                         <td><input type="text" name="v3id" id="v3id"  
                                                    pattern="[0-9]{8}" placeholder="00000000"></td>
                                         <td style=""><input type="submit"  class="edit-btn" name="edit_v3" 
-                                                            id="edit_v3" value="Edit Vaccine"></td>
+                                                            id="edit_v3" value="Edit Vaccine" onclick="pageAction('EditVaccine')"></td>
                                     </tr>
                                     <tr>
                                         <td><span class="details">Vaccine 4</span></td>                                        
@@ -274,50 +246,46 @@
                         </div>
                     </div>
 
-                    <!--                    <div class="button">
-                                            
-                                                                    <inp                                            ut type="submit" name="search" id="search"                                        value="Search Vaccine" onclick="pageActio                                    n('searchVaccine')">
-              &#8287;                            &#8287;  &#8287;  &#8287; 
-                                                                                        </div>-->
-                    <br>
                     <!--                    <div id="button">
-<input type="reset" class="actionBtn" name="btnClear"  id="btnClear" value="C                                                                            lear" onclick="clrscrn()">
-<input type="submit" class="actio                                                nBtn" name="view" id="view" onclick="pageAction('v                            iew')" value="Search">
-<input type="submit"                                                    class="actionBtn" name="create" id="create" onclick="pageAction('create')" value="create">
-<br>
-<input type="button" class="actionBtn" name="Form 2">
-<input type="su                                                    bmit" class="actionBtn" name="report" id="report" onclick="pageAction('report')" value="Create Report">
-</div>-->
+                    
+                                            <input type="submit" class="actionBtn" name="view" id="view" onclick="pageAction('view')" value="Search">
+                                            <input type="submit"class="actionBtn" name="create" id="create" onclick="pageAction('create')" value="create">
+                                            <br>
+                                            <input type="button" class="actionBtn" name="Form 2">
+                                            <input type="submit" class="actionBtn" name="report" id="report" onclick="pageAction('report')" value="Create Report">
+                                        </div>-->
 
                     <div class="button">
                         <input type="submit" name="search" id="search" value="Search Patient">
                         &#8287;  &#8287;  &#8287;  &#8287; 
-                        <!--<input type="button" name="btnClear" id="add" value="Add" onclick="document.location =                                                 'VacRecordCreate.jsp';" >-->
-                        <!--&#8287;  &#8287;  &#8287;  &#8287;-                                -> 
-                           <input type="reset" name="clear" id="btnClear" value="Clear">
-                                        &#8287;  &#8287;  &#8287;  &#8287; 
-                                        </div>
-   
-                       <input type="hidden" name="actiontype" id="actiontype" value="" > 
-   
-                   </form>
-                        <!--                <form id="editSSN" action="DBAction" met                                hod="post">
-                   
+                        <input type="button" name="btnClear" id="btnClear" value="Add" onclick="document.location = 'VacRecordCreate.jsp';" >
+                        &#8287;  &#8287;  &#8287;  &#8287; 
+                        <input type="reset" class="actionBtn" name="btnClear"  id="btnClear" value="Clear">
 
-                                   </form>-->
-                        <input type="button"                             name="logout" id="logout" va                            lue="Logout" onclick="document.location = 'index1.jsp';">
-
-                        ${msg}
                     </div>
+                    <!--&#8287;  &#8287;  &#8287;  &#8287;-                                -> 
+                       <input type="reset" name="clear" id="btnClear" value="Clear">
+                                    &#8287;  &#8287;  &#8287;  &#8287; 
+                                    </div>
+                    
+                   <input type="hidden" name="actiontype" id="actiontype" value="" > 
 
 
+                    <input type="button"name="logout" id="logout" value="Logout" 
+                           onclick="document.location = 'index1.jsp';">
+
+                    
+                </div>-->
+
+                    ${msg}
             </div>
-
-            <div class="container">
-                <div class="title">Results</div>
-                <div class="content">
-                    <div id="results"></div>
-                </div>
+        </div>
+        <div class="container">
+            <div class="title">Results</div>
+            <div class="content">
+                <div id="results"></div>
             </div>
+        </div>
+
     </body>
 </html>

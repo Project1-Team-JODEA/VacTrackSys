@@ -62,10 +62,15 @@ public class LoginServlet extends HttpServlet {
             }else if (x.contains("AdminConsole")){
                 webloc = "/AdminConsole";
                 ac_lvl = "Administrator";
-            }else if (x.contains("AdminConsole")){
+            }else if (x.contains("CDC")){
                 webloc = "/CDC";
                 ac_lvl = "CDC";}
-            username = request.getParameter("userid").trim();
+            username = String.valueOf(request.getParameter("userid").trim());
+            if (username.isEmpty()|| username.equals("")){
+                msg+="";
+            } if (username.length() < 10){
+                msg="use";
+            }
             String passattempt = request.getParameter("passwd").trim();
             // load and register JDBC driver for mySql
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
