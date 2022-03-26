@@ -1,0 +1,12 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}Team Name: J.O.D.E.A.
+${licensePrefix}Project:Vaccination Tracking System 
+${licensePrefix}School: STLCC
+${licensePrefix}Members: Elena Miller, Jaccob Stanton, Deshane Sims,
+${licensePrefix}Alexander Breitnebach, and Osama Aater
+<#if licenseLast??>
+${licenseLast}
+</#if>
+
