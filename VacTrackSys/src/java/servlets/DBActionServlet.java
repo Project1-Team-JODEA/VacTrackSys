@@ -37,7 +37,12 @@ public class DBActionServlet extends HttpServlet {
      *
      * Takes actiontype parameter from request and performs action depending on
      * the action. <br>
-     * Actions: 'SearchPatient','EditPatient', 'EditVaccine',etc
+     * Actions: 'SearchPatient' line - 
+     * ,'EditPatient':
+     * , 'EditVaccine':
+     * 'Logout'
+     * 
+     * ,etc
      *
      * @param request servlet request
      * @param response servlet response
