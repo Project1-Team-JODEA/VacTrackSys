@@ -14,9 +14,12 @@
         <title>Patient Portal</title>
     </head>
     <body>
-        <h1>To be Implemented!</h1>
+        <h1></h1>
+        <div tabindex="1"  >hi</div>
         <form >
-            
+            <table>
+                
+            </table>
         </form>
     </body>
 </html>

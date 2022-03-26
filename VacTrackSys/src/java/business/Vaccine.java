@@ -9,24 +9,25 @@ package business;
  * @author alexs
  */
 public class Vaccine {
-    private String vid, date, manufacturer, lotnum, location, state, locatype, nurse;
+    private String vid, date,vtype, manufacturer, lotnum, location, state, locatype, nurse;
     
     // default constructor
     public Vaccine(){
         this.vid = "";
         this.date = "";
+        this.vtype="";
         this.manufacturer = "";
         this.lotnum = "";
         this.location = "";
         this.state = "";
-        this.locatype = "";
         this.nurse = "";
     }
     
     // normal constructor.  All fields should be validated BEFORE calling this method
-    public Vaccine(String vid, String date, String manufacturer, String lotnum, String location, String state, String locatype, String nurse){
+    public Vaccine(String vid, String date,String vtype, String manufacturer, String lotnum, String location, String state, String locatype, String nurse){
         this.vid = vid;
         this.date = date;
+        this.vtype = vtype;
         this.manufacturer = manufacturer;
         this.lotnum = lotnum;
         this.location = location;
@@ -139,6 +140,14 @@ public class Vaccine {
  */
     public void setNurse(String nurse) {
         this.nurse = nurse;
+    }
+
+    public String getVtype() {
+        return vtype;
+    }
+
+    public void setVtype(String vtype) {
+        this.vtype = vtype;
     }
     
 }

@@ -42,21 +42,19 @@ function check() {
 
 // }
 
-function getTodayMaxDate() {
+function getTodayDate() {
     var today = new Date();
     var d = today.getDate();
     var m = today.getMonth();
-    var y = today.getYear();
+    var y = today.getFullYear();
+    // console.log(y.toString());
     if (d < 10) {
-        d = 0 + d;
+        d = "0" + d;
     }
     if (m < 10) {
-        m = 0 + m;
+        m = "0" + m;
     }
-    // var input = document.getElementById(id);
-    today = y + "-" + m + "-" + d;
-    // input.setAttribute('max', today);
-    
+   today = y + "-" + m + "-" + d;
     return today;
 }
 // toggle sort values for sorting 
@@ -71,6 +69,16 @@ var toggleSortVal = function (inputid) {
     var ftxt = document.getElementById("sort");
     $("txtsort").value ;
     var ref_val = $(inputid).value;
+    if ($(inputid).getAttribute("checked")===null){
+        //set atribute and value to textbox
+        $(inputid).setAttribute("checked", null);
+        // $(inputid).
+        
+    } else if ($(inputid).getAttribute("checked")!==null){
+        $(inputid).removeAttribute("checked");
+
+    }
+
     if ($("sort").value.contains(input.value)){
 
     }else if ($("sort").value.contains(input.value)){

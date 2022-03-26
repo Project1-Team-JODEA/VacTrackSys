@@ -10,113 +10,137 @@
 <!DOCTYPE html>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script src="../js/ajax.js"></script>
+<%@taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
+<script src="../js/ajax.js" type="text/javascript"></script>
 <script type="text/javascript">
     function pageAction(action) {
-        document.dbform.actiontype.value = action;
-        if (ajax && action === 'edit') {
-            ajax.open('get', 'PatientRecords?actiontype=searchPatient');
-            ajax.send(null);
-        } else {
-            document.dbform.submit();
-        }
+        document.vacrecord.actiontype.value = action;
+//        if (ajax && action === 'edit') {
+//            
+//        } else {
+//           
+//        }
+        document.vacrecord.submit();
     }
 
 
 </script>
-<html lang="en" dir="ltr">
+<html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title> Vaccine Record - Create</title>
-        <link rel="stylesheet" href="formstyle.css" type="text/css"/>
-        <script src="../js/functions.js"></script>
+        <link rel="stylesheet" href="../css/formstyle.css" type="text/css"/>
+        <link rel="stylesheet" href="../css/all.css" type="text/css"/>
+        <link rel="icon" type="image/x-icon" href="../image/favicon_16x16.png">
+        <script src="../js/functions.js" type="text/javascript"></script>
         <script type="text/javascript">
-            window.onload = function(){
-                $("vac_date").max = getTodayMaxDate();
-            };
+    window.onload = () => {
+        $("vac_date").max = getTodayMaxDate();
+    };
 //            var $ = function (id) {
 //                return document.getElementById(id);
 //            };
-            function clrscrn() {
-                $("Records").reset();
-                $("rid").focus();
-            }
+    document.getElementById("vacrecord").onsubmit = () => {
+        $("update").setAttribute("disabled", null);
+        $("add").setAttribute("disabled", null);
+        toggleList('loading-content');
+    };
         </script>
     </head>
     <body>
         <!-- Authentication -->
-      <%--  <c:if test="${!u.authenticated}">
-            <script type="text/javascript">
-                window.window.location = "/VacTrackSys/DoctorLogin/index1.jsp";
-            </script>
-        </c:if> --%>
-     <div class="container">
-    <div class="title">New Vaccine Entry</div>
-    <div class="content">
-      <form name="RecordCreate" id="newrecord" action="addRecord" method="post">
-        <div class="user-details">
-          <div class="input-box">
-            <span class="details">Vaccination ID</span>
-            <input type="text" id="vid"
-                   placeholder="Enter Vaccine ID here">
-          </div>
-          <div class="input-box">
-            <span class="details">Location</span>
-            <input type="text" id="loc" placeholder="Enter vaccination location here" required>
-          </div>
-          <div class="input-box">
-            <span class="details">Manufacturer</span>
-            <input type="text" id="man" placeholder="Enter vaccine manufacturer here" required>
-          </div>
-          <div class="input-box">
-            <span class="details">Date</span>
-            <input type="date" name="vac_date" id="vac_date"
-                  min="2021-11-30" max="">
-          </div>
-          <div class="input-box">
-            <span class="details">Batch Number</span>
-            <input type="text" id="batnumb" placeholder="Enter batch # here" required>
-          </div>
-            <div class="input-box">
+        <%--  <c:if test="${!u.authenticated}">
+              <script type="text/javascript">
+                  window.window.location = "/VacTrackSys/DoctorLogin/index1.jsp";
+              </script>
+          </c:if> --%>
+        <div class="toggle-box" id="loading-box">
+            <div class="toggle-content" id="loading-content" style="display: none;">
+                <i class="fas fa-spin fa-spinner"
+                   style="color: blue; font-size: 10em;
+                   text-align: center;"></i>
+
+            </div>
+        </div>
+        <div class="toggle-box" id="msg-box">
+            <div class="toggle-content" id="msg-content" style="display: none;">
+                <span style="font-weight: bold ;">Database Messages</span> <br>
+                <p>${msg}</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="title">New Vaccine Entry</div>
+            <div class="content">
+                <form name="vacrecord" id="vacrecord" action="EditVaccine" method="post"
+                      onsubmit="">
+                    <div class="user-details">
+                        <div class="input-box">
+                            <span class="details">Vaccination ID</span>
+                            <input type="number" id="vid" maxlength="8"
+                                   placeholder="Enter Vaccine ID here"
+                                   value="${vac.vid}" required>
+                        </div>
+                        <!--                        <div class="input-box">
+                                                    <span class="details">Location</span>
+                                                    <select></select> 
+                                                    <datalist id="loc">
+                                                        <data></data>
+                                                    </datalist>
+                                                  
+                                                </div>-->
+                        <div class="input-box">
+                            <span class="details">Location</span>
+                            <input type="text"name="loc" id="loc" placeholder="Location" 
+                                   value="${vac.location}"required>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="details">Manufacturer</span>
+                            <input type="text" name="man" id="man" 
+                                   placeholder="Enter vaccine manufacturer here"
+                                   value="${vac.manufacturer}" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Date</span>
+                            <input type="date" name="vac_date" id="vac_date"
+                                   min="2021-11-30" max="" value="${vac.date}"
+                                   required>
+                        </div>
+
+                        <div class="input-box">
+                            <span class="details">Batch Number</span>
+                            <input type="number" name="batnum" id="batnumb" 
+                                   placeholder="Enter batch # here" 
+                                   maxlength="10" value="${vac.lotnum}">
+                        </div>
+
+                        <div class="input-box">
                             <span class="details">Vaccine Type</span>
                             <select id="vac_type">
                                 <option value="REG">Regular</option>
                                 <option value="BOS">Booster</option>
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="button">
+                        <input type="submit" id="update" value="Update" onclick="pageAction('update')">
+                        &#8287;  &#8287;  &#8287;  &#8287; 
+                        <input type="submit" id="add" value="Add" onclick="pageAction('add')">
+                        &#8287;  &#8287;  &#8287;  &#8287; 
+                        <input type="reset" value="Clear">
+                        &#8287;  &#8287;  &#8287;  &#8287; 
+                    </div>
+                    <button type="submit" style="float: right;" onclick="document.location='DoctorLogin/VaccinationDB.jsp';">Go back<i class="fas fa-arrow-right"></i></button>
+                    <input type="hidden" name="actiontype" id="actiontype" value="">
+                </form>
+<!--                        <form action="DBAction">
+                            <button type="submit">Go back<i class="fas fa-arrow-right"></i></button>
+                        </form>-->
+                <i class="fa-1-5x fas fa-exclamation-triangle" onclick="" id="msg-btn">Messages</i>
             </div>
-            
         </div>
-<!--        <div class="gender-details">
-          <input type="radio" name="gender" id="dot-1">
-          <input type="radio" name="gender" id="dot-2">
-          <input type="radio" name="gender" id="dot-3">
-          <span class="gender-title">Vaccine Type</span>
-          <div class="category">
-            <label for="dot-1">
-            <span class="dot one"></span>
-            <span class="gender">Male</span>
-          </label>
-          <label for="dot-2">
-            <span class="dot two"></span>
-            <span class="gender">Female</span>
-          </label>
-          <label for="dot-3">
-            <span class="dot three"></span>
-            <span class="gender">Prefer not to say</span>
-            </label>
-          </div>
-        </div>-->
-        <div class="button">
-          <input type="submit" value="Create" onclick="pageAction('addVac')">
-          &#8287;  &#8287;  &#8287;  &#8287; 
-          <input type="reset" value="Clear">
-          &#8287;  &#8287;  &#8287;  &#8287; 
-          <input type="submit" value="Cancel" onclick="document.location='VaccinationDB.jsp';">
-        </div>
-      </form>
-    </div>
-  </div>
-     
-    <!--<div class="container"id="results"></div>-->
-</body>
+
+        <!--<div class="container"id="results"></div>-->
+    </body>
 </html>

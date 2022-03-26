@@ -9,12 +9,19 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
+<script src="../js/ajax.js" type="text/javascript"></script>
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Records</title>
+        
+        <title>Patient Records</title>
+        <link rel="stylesheet" href="../css/all.css" type="text/css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <!--<link rel="stylesheet" href="../.css" type="text/css"/>-->
+        <script src="https://kit.fontawesome.com/98e4c48f68.js" crossorigin="anonymous"></script>
+        <link rel="icon" type="image/x-icon" href="../image/favicon_16x16.png" />
         <link rel="stylesheet" href="formstyle.css">
         <link rel="icon" type="image/x-icon" href="../image/favicon_16x16.png"/>
     </head>
@@ -25,6 +32,7 @@
                         <th>First Name</th>
                         <th>Middle Init:</th>
                         <th>Last Name:</th>
+                        <th>DOB</th>
                         <th>P Type</th>
                         <th>Vaccine 1</th>
                         <th>Vaccine 2</th>  
@@ -37,6 +45,7 @@
                             <td>${p.fname}</td>
                             <td>${p.mname}</td>
                             <td>${p.lname}</td>
+                            <td>${p.dob}</td>
                             <td>${p.ptype}</td>
                             <td>${p.vac1.vid}</td>
                             <td>${p.vac2.vid}</td>

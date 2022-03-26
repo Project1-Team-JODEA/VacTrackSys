@@ -9,7 +9,6 @@ import business.Patient;
 import business.User;
 import business.Vaccine;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -38,7 +37,8 @@ public class addRecordServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String URL = ""; String ssn, fname, minit, lname, ptype, vsite, v1id, v2id, v3id, v4id;
+        String URL = "";
+        String ssn, fname, minit, lname, ptype, vsite, v1id, v2id, v3id, v4id;
         String msg = "", sql = "";
         String dbURL = "jdbc:mysql://localhost:3306/MoVax";
         String dbUSER = "root";
@@ -46,32 +46,29 @@ public class addRecordServlet extends HttpServlet {
         Boolean updatePatient = false;
         Boolean updateVaccine = false;
         Boolean updateUser = false;
-        
+
         // below are "methods" that can be used to update specific tables in the database.  If used as a servlet,
         // pass update booleans via the session object
-         String x = String.valueOf(request.getRequestURL());
+        String x = String.valueOf(request.getRequestURL());
         String webloc = "";
         if (x.contains("DoctorLogin")) {
             webloc = "/DoctorLogin";
-
-        } else if (x.contains("PatientLogin")) {
-            webloc = "/PatientLogin";
 
         } else if (x.contains("AdminConsole")) {
             webloc = "/AdminConsole";
 
         }
-        try{        
-           Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+        try {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             ServletContext context = getServletContext();
             String ur = context.getRealPath("/Team_JODEA1.accdb");
             Connection conn = DriverManager.getConnection("jdbc:ucanaccess://" + ur);
-             fname = String.valueOf(request.getParameter("fname"));
+            fname = String.valueOf(request.getParameter("fname"));
             lname = String.valueOf(request.getParameter("lname"));
             minit = String.valueOf(request.getParameter("midinit"));
             ssn = String.valueOf(request.getParameter("ssn"));
-            
-            if(updatePatient == true){
+
+            if (updatePatient == true) {
                 // needs: get patient info from form
                 Patient p = new Patient();
 //                 Vaccine vac1 = new Vaccine();
@@ -86,19 +83,19 @@ public class addRecordServlet extends HttpServlet {
 //                Vaccine vac4 = new Vaccine();
 //                vac4.setVid(r.getString("Vaccine_4"));
 //                p.setVac4(vac4);
-                
+
                 // needs: validate p
-                sql = "UPDATE PATIENTS SET " +
-                        "RecipientID = ?, " +
-                        "Social_Security = ?, " +
-                        "FirstName = ?, " +
-                        "MiddleName = ?, " +
-                        "LastName = ?, " +
-                        //"DateOfBirth = ?, " +
-                        "Vaccine1 = ?, " +
-                        "Vaccine2 = ?, " +
-                        "Vaccine3 = ?, " +
-                        "Vaccine4 = ? ";
+                sql = "UPDATE PATIENTS SET "
+                        + "RecipientID = ?, "
+                        + "Social_Security = ?, "
+                        + "FirstName = ?, "
+                        + "MiddleName = ?, "
+                        + "LastName = ?, "
+                        + //"DateOfBirth = ?, " +
+                        "Vaccine1 = ?, "
+                        + "Vaccine2 = ?, "
+                        + "Vaccine3 = ?, "
+                        + "Vaccine4 = ? ";
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setInt(1, p.getRid());
                 ps.setInt(2, Integer.parseInt(p.getSsn()));
@@ -111,27 +108,27 @@ public class addRecordServlet extends HttpServlet {
                 ps.setString(9, p.getVac3().getVid());
                 ps.setString(10, p.getVac4().getVid());
                 int rc = ps.executeUpdate();
-                if (rc == 0){
+                if (rc == 0) {
                     msg += "Patient not updated. <br>";
-                } else if (rc == 1){
+                } else if (rc == 1) {
                     msg += "Patient updated. <br>";
                 } else {
                     msg += "Warning: multiple records updated. <br>";
                 }
                 updatePatient = false;
             }
-            if (updateVaccine == true){
+            if (updateVaccine == true) {
                 // needs: get vaccine info from form
                 Vaccine v = new Vaccine();
                 // needs: validate v
-                sql = "UPDATE VACCINES SET " +
-                        "VaccineID = ?, " +
-                        "Date = ?, " +
-                        "Manufactuerer = ?, " +
-                        "LotNumber = ?, " +
-                        "Location = ?, " +
-                        "LocationType = ?, " +
-                        "Nurse = ?, ";
+                sql = "UPDATE VACCINES SET "
+                        + "VaccineID = ?, "
+                        + "Date = ?, "
+                        + "Manufactuerer = ?, "
+                        + "LotNumber = ?, "
+                        + "Location = ?, "
+                        + "LocationType = ?, "
+                        + "Nurse = ?, ";
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setString(1, v.getVid());
                 ps.setString(2, v.getDate());
@@ -141,25 +138,25 @@ public class addRecordServlet extends HttpServlet {
                 ps.setString(6, v.getLocatype());
                 ps.setString(7, v.getNurse());
                 int rc = ps.executeUpdate();
-                if (rc == 0){
+                if (rc == 0) {
                     msg += "Vaccine not updated. <br>";
-                } else if (rc == 1){
+                } else if (rc == 1) {
                     msg += "Vaccine updated. <br>";
                 } else {
                     msg += "Warning: multiple records updated. <br>";
                 }
                 updateVaccine = false;
             }
-            if (updateUser == true){
+            if (updateUser == true) {
                 // needs: get user info from form
                 User u = new User();
                 // needs: validate u
-                sql = "UPDATE usertbl SET " +
-                        "Username = ?, " +
-                        "Password = ?, " +
-                        "Access_Level = ?, " +
-                        "Email_Address = ?, " +
-                        "Location = ? ";
+                sql = "UPDATE usertbl SET "
+                        + "Username = ?, "
+                        + "Password = ?, "
+                        + "Access_Level = ?, "
+                        + "Email_Address = ?, "
+                        + "Location = ? ";
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setString(1, u.getUsername());
                 ps.setString(2, u.getPassword());
@@ -167,9 +164,9 @@ public class addRecordServlet extends HttpServlet {
                 ps.setString(4, u.getEmail());
                 ps.setString(5, u.getLocation());
                 int rc = ps.executeUpdate();
-                if (rc == 0){
+                if (rc == 0) {
                     msg += "User not updated. <br>";
-                } else if (rc == 1){
+                } else if (rc == 1) {
                     msg += "User updated. <br>";
                 } else {
                     msg += "Warning: multiple records updated. <br>";
@@ -177,7 +174,7 @@ public class addRecordServlet extends HttpServlet {
                 updateUser = false;
             }
             conn.close();
-        } catch (Exception e){
+        } catch (Exception e) {
             msg += e.getMessage();
         }
         request.setAttribute("msg", msg);

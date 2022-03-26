@@ -7,14 +7,11 @@ package servlets;
 
 import business.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashSet;
-import java.util.Set;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -43,7 +40,7 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String URL = "", msg = "", sql = "", username = "", webloc="", ac_lvl="";
+        String URL = "", msg = "", sql = "", username = "", webloc = "", ac_lvl = "";
         User u;
         String dbURL = "jdbc:ucanaccess://localhost:3306/MoVaxDB";
         String dbUSER = "root";
@@ -53,71 +50,92 @@ public class LoginServlet extends HttpServlet {
 
             // Check Location in web
             String x = String.valueOf(request.getRequestURL());
-            if (x.contains("DoctorLogin")){
+            if (x.contains("DoctorLogin")) {
                 webloc = "/DoctorLogin";
                 ac_lvl = "MedicalStaff";
-            } else if (x.contains("PatientLogin")){
+            } else if (x.contains("PatientLogin")) {
                 webloc = "/PatientLogin";
                 ac_lvl = "Patient";
-            }else if (x.contains("AdminConsole")){
+            } else if (x.contains("AdminConsole")) {
                 webloc = "/AdminConsole";
                 ac_lvl = "Administrator";
-            }else if (x.contains("CDC")){
+            } else if (x.contains("CDC")) {
                 webloc = "/CDC";
-                ac_lvl = "CDC";}
-            username = String.valueOf(request.getParameter("userid").trim());
-            if (username.isEmpty()|| username.equals("")){
-                msg+="";
-            } if (username.length() < 10){
-                msg="use";
+                ac_lvl = "CDC";
             }
-            String passattempt = request.getParameter("passwd").trim();
-            // load and register JDBC driver for mySql
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            ServletContext context = getServletContext();
+
+            username = String.valueOf(request.getParameter("userid").trim());
+            if (username.isEmpty() || username.equals("")) {
+                msg += "";
+            }
+            if (username.length() < 10) {
+                msg = "Invalid Password";
+            }
+            if (!msg.isEmpty() || !msg.equalsIgnoreCase("")) {
+                URL = webloc + "/index1.jsp";
+                
+            } else {
+                String passattempt = request.getParameter("passwd").trim();
+                // load and register JDBC driver for mySql
+                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+                ServletContext context = getServletContext();
 //            String p = request.getPathInfo();
 //           System.out.print("Path: " + p);
-            String ur = context.getRealPath("/Team_JODEA1.accdb");
-            Connection conn = DriverManager.getConnection("jdbc:ucanaccess://" + ur);
+                String ur = context.getRealPath("/Team_JODEA1.accdb");
+                Connection conn = DriverManager.getConnection("jdbc:ucanaccess://" + ur);
 //            String p = request
-            Statement s = conn.createStatement();
-            sql = "SELECT * FROM USERS WHERE Username = '" + username + "'";
-                   // + " AND Access_Level='"+ac_lvl+"'";
-            ResultSet r = s.executeQuery(sql);
-            if (r.next()) {
-                u = new User();
-                u.setUsername(username);
-                u.setPassword(r.getString("Password"));
-                u.setPassattempt(passattempt);
-                
-                if (u.isAuthenticated()) {
-                    u.setAccesslevel("Access_Level");
-                    u.setEmail("Email_Address");
-                    u.setLocation("Location");
-                    msg += "User " + username + " authenticated! <br>";
-                    URL = webloc + "/VaccinationDB.jsp";
+                Statement s = conn.createStatement();
+                sql = "SELECT * FROM USERS WHERE Username = '" + username + "'";
+                // + " AND Access_Level='"+ac_lvl+"'";
+                ResultSet r = s.executeQuery(sql);
+                if (r.next()) {
+                    u = new User();
+                    u.setUsername(username);
+                    u.setPassword(r.getString("Password"));
+                    u.setPassattempt(passattempt);
+
+                    if (u.isAuthenticated()) {
+                        u.setAccesslevel(r.getString("Access_Level"));
+                        //verify access level
+                        if (!u.getAccesslevel().equals(ac_lvl)){
+                            msg+="User"+username+"on file but not authenticated. <br>";
+                            URL = webloc + "/index1.jsp";
+                        }else{
+                         u.setEmail("Email_Address");
+                        u.setLocation("Location");
+                        msg += "User " + username + " authenticated! <br>";
+                       if (webloc.equals("Patient")){
+                           URL = webloc + "/";
+                       }else{
+                            URL = webloc + "/VaccinationDB.jsp";
+                       }
+                       
+                        }
+                       
+                    } else {
+                        msg += "User " + username + " on file but not authenticated. <br>";
+                        URL = webloc + "/index1.jsp";
+                    }
+                    request.getSession().setAttribute("u", u);
                 } else {
-                    msg += "User " + username + " on file but not authenticated. <br>";
-                    URL = webloc+"/index1.jsp";
-                }
-                request.getSession().setAttribute("u", u);
-            } else {
 //                URL = "/DoctorLogin/index1.jsp";
-                URL = webloc+"/index1.jsp";
-                msg += "User " + username + " not found in db.<br>";
+                    URL = webloc + "/index1.jsp";
+                    msg += "User " + username + " not found in db.<br>";
+                }
+                r.close();
+                s.close();
+                conn.close();
             }
-            r.close();
-            s.close();
-            conn.close();
+
         } catch (ClassNotFoundException e) {
             msg += "JDBC Driver not found in project.<br>";
-            URL = URL = webloc+"/index1.jsp";
+            URL = webloc + "/index1.jsp";
         } catch (SQLException e) {
             msg += "Connection error: " + e.getMessage() + ".<br>";
-          URL = webloc+"/index1.jsp";
+            URL = webloc + "/index1.jsp";
         } catch (Exception e) {
             msg += "Servlet error: " + e.getMessage() + ".<br>";
-            URL = webloc+"/index1.jsp";
+            URL = webloc + "/index1.jsp";
         }
 //        URL = "/DoctorLogin/VaccinationDB.jsp";
         Cookie uid = new Cookie("usid", username);
@@ -127,7 +145,7 @@ public class LoginServlet extends HttpServlet {
         request.setAttribute("msg", msg);
         RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);
         disp.forward(request, response);
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

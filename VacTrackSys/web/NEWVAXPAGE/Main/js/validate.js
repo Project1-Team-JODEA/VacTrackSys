@@ -31,7 +31,7 @@ var $ = function (id) {
  * @param {String} selector | 
  * @returns 
  */
-var $sel= function(selector){
+var $sel = function (selector) {
     return document.querySelector(selector);
 };
 
@@ -44,22 +44,22 @@ var $sel= function(selector){
  * @param {String} userType Type of user
  * 
  */
-function validateLogin(form_id , userType) {
+function validateLogin(form_id, userType) {
     // alert("Work In Progress");
     let regexUid = "(){}", regexPasswd = "";
-    var userid, passwd;var msg="";
+    var userid, passwd; var msg = "";
     var result = new Array(); var i = 0;
     if (userType === "MT") {
         userid = $("userid").value.trim();
         passwd = $("passwd").value.trim();
         //result = passwd.match("(?=.*\d)(?=.*[A-Z])(?=.*[a-z]).{8,}");
         //checks whitespace characters
-        
-         result = $("passwd").value.match(/([a-z])+([A-Z]?)\d+/g);
-        if ($("user_id").value.length < 8){
+
+        result = $("passwd").value.match(/([a-z])+([A-Z]?)\d+/g);
+        if ($("user_id").value.length < 8) {
             // alert();
-            msg+="Password is invalid.\n";
-            
+            msg += "Password is invalid.\n";
+
         } else {
             // for (i = 0; i < result.length; i++) {
             //     if (result[i] === '0' || result[i] === 0)
@@ -67,18 +67,18 @@ function validateLogin(form_id , userType) {
             //     return;
             // }
         }
-       if ($("passwd").value.length < 8){
-           msg+="Password"
-       }
+        if ($("passwd").value.length < 8) {
+            msg += "Password"
+        }
     }
-    if (msg !== ""){
+    if (msg !== "") {
         alert(msg);
         return;
-//        document.getElementById(form_id).
-    } else{
+        //        document.getElementById(form_id).
+    } else {
         document.getElementById(form_id).submit();
     }
-// window.XMLHttpRequest
+    // window.XMLHttpRequest
 }
 /**
  * 
@@ -87,13 +87,13 @@ function validateLogin(form_id , userType) {
  */
 function validateSearch(form_id) {
     var ssn, dob, vacdate, fname, lname, minit,
-    v1id, v2id, v3id, v4id;
-    ssn = $("").value; dob = $("").value;vacdate = $("").value;
-    fname = $("").value;lname = $("").value; minit = $("").value;
+        v1id, v2id, v3id, v4id;
+    ssn = $("").value; dob = $("").value; vacdate = $("").value;
+    fname = $("").value; lname = $("").value; minit = $("").value;
     v1id = $("").value; v2id = $("").value; v3id = $("").value;
     v4id = $("").value;
 
-    }
+}
 /**
  * 
  * @param {String} form_id | user Type
@@ -117,17 +117,17 @@ const validateUserReg = function (form_id, userType) {
         email = $("email").value.trim();
         terms = $("terms");
         // if ($("userid"))
-        if (userid.length <10){
+        if (userid.length < 10) {
             // alert("use");
-
+            
         }
         result = passwd.match(/\d+[A-Z]?/g);
 
         var spaces = passwd.match(/\s/g);
-        
-        console.log(result+"\n"+spaces);
-        if(passwd !== confpasswd ) {
-            msg+= "";
+
+        console.log(result + "\n" + spaces);
+        if (passwd !== confpasswd) {
+            msg += "";
         }
         // console.log("userid"+);
     } else if (userType === "CDC" || userType === "PAT") {
@@ -137,9 +137,9 @@ const validateUserReg = function (form_id, userType) {
 
         email = $("email").value;
         terms = $("terms");
-        if (userid < 10){
+        if (userid < 10) {
 
-        }if (passwd.length < 8){
+        } if (passwd.length < 8) {
             msg += "password must be at least 8 characters long. \n";
         }
     }
@@ -150,21 +150,75 @@ const validateUserReg = function (form_id, userType) {
  * @param {String} passwd_id password
  * @param {String} confpwd_id confim password
  */
-function validatePasswd(passwd_id, confpwd_id){
-// $(confpwd_id).value;
-if(!$(confpwd_id).matches($(passwd_id).value)){
-    if ($("validc").classList.contains('fa-check')){
-        $("validc").classList.replace('fa-check', 'fa-xmark');
-    
-    } 
-} else if ((confpwd_id).matches($(passwd_id),value)){
-    if ($("validc").classList.contains('fa-xmark')){
-         $("validc").classList.replace('fa-xmark', 'fa-check');
-    } else if (!$("validc").classList.contains('fa-xmark')){
+function validatePasswd(passwd_id, confpwd_id) {
+    // $(confpwd_id).value;
+    if (!$(confpwd_id).matches($(passwd_id).value)) {
+        if ($("validc").classList.contains('fa-check')) {
+            $("validc").classList.replace('fa-check', 'fa-xmark');
+            $("validc").setAttribute("style", "color: red;");
+        }
+    } else if ((confpwd_id).matches($(passwd_id), value)) {
+        if ($("validc").classList.contains('fa-xmark')) {
+            $("validc").classList.replace('fa-xmark', 'fa-check');
+            $("validc").setAttribute("style", "color: green;");
+        } else if (!$("validc").classList.contains('fa-xmark')) {
+
+        }
 
     }
-   
 }
+/**
+ * uses patterns to validate the inpt format.
+ * if format is not valid then user cannot 
+ * proceed with registration. sets icon element
+ * to corresponding 
+ * 
+ * @param {String} input_id input element
+ * @param {String} i_id Icon element
+ */
+function validatePattern(input_id, i_id) {
+    var valid = false; var s = ""; var pattern;
+    if ($(input_id).getAttribute("type") === "email") {
+        var email = $(input_id).value;
+        // pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+pattern =  /^\w+([\.-]?\w+)*@\w+([\.-]) /;
+        console.log(pattern.toString());
+
+        const p = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]*@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;///[a-zA-Z0-9]+@[a-zA-Z0-9].{3,}$ /g ;
+        valid = p.test(email);//returns true if matched false otherwise
+
+        console.log(valid);
+
+    }// end of validating email 
+    // validating password
+
+    if ($(input_id).getAttribute("id") === "upwd") {
+        pattern = /.{10,}/;
+    }
+    // set valid appearance
+    if (valid === false) {
+        // red xmark if pattern is 
+        if (!$(i_id).classList.contains("fa-check") && !$(i_id).classList.contains("fa-xmark")) {
+            $(i_id).classList.toggle("fa-xmark");
+            $(i_id).setAttribute("style", "color: red;");
+            // if classlist had checkmark but no xmark then replace checkmark
+        } else if ($(i_id).classList.contains("fa-check") && !$(i_id).classList.contains("fa-xmark")) {
+            $(i_id).classList.replace("fa-check", "fa-xmark");
+            $(i_id).setAttribute("style", "color: red;");
+        }
+    } else if (valid === true) {
+        //green checkmark
+        if (!$(i_id).classList.contains("fa-check") && !$(i_id).classList.contains("fa-xmark")) {
+            $(i_id).classList.toggle("fa-check");
+            $(i_id).setAttribute("style", "color: green;");
+            // if claslist has xmark but no checkmark then replace xmark
+        } else if (!$(i_id).classList.contains("fa-check") && $(i_id).classList.contains("fa-xmark")) {
+            $(i_id).classList.replace("fa-xmark", "fa-check");
+            $(i_id).setAttribute("style", "color: green;");
+        }
+
+    }
+    
 }
 /**
  * 
@@ -173,6 +227,6 @@ if(!$(confpwd_id).matches($(passwd_id).value)){
  * 
  */
 const submitForm = function (form_id) {
-    
+
     // document.querySelector(form_id).submit();
 };

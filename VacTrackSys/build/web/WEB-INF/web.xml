@@ -36,6 +36,18 @@
         <servlet-name>EditPatientServlet</servlet-name>
         <servlet-class>servlets.EditPatientServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ResetPasswordServlet</servlet-name>
+        <servlet-class>servlets.ResetPasswordServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditVaccineServlet</servlet-name>
+        <servlet-class>servlets.EditVaccineServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateAccountServlet</servlet-name>
+        <servlet-class>servlets.UpdateAccountServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewAccountServlet</servlet-name>
         <url-pattern>/CDC/NewAccount</url-pattern>
@@ -81,6 +93,20 @@
     <servlet-mapping>
         <servlet-name>EditPatientServlet</servlet-name>
         <url-pattern>/EditPatient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordServlet</servlet-name>
+        <url-pattern>/ResetPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditVaccineServlet</servlet-name>
+        <url-pattern>/EditVaccine</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateAccountServlet</servlet-name>
+        <url-pattern>/UpdateAccount</url-pattern>
+        <url-pattern>/DoctorLogin/UpdateAccount</url-pattern>
+        <url-pattern>/CDC/UpdateAccount</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

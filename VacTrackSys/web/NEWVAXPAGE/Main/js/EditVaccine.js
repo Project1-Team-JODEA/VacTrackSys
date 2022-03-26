@@ -16,7 +16,7 @@ function init() {
         // Function that handles the response:
         ajax.onreadystatechange = function() {
             handleResponse();
-        }
+        };
   }
 } // End of init() function.
 

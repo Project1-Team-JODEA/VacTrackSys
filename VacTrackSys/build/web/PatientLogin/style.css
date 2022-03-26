@@ -63,6 +63,8 @@
     position: absolute;
     width: 280px;
     transition: .5s;
+    max-height: 275px;
+    overflow-y: auto;
 }
 
 .input-field{

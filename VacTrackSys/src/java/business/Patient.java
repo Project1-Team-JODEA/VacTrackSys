@@ -1,6 +1,7 @@
 package business;
 
 import business.Vaccine;
+import java.util.ArrayList;
 
 /**
  *
@@ -183,6 +184,45 @@ public class Patient {
     public void setPtype(String ptype) {
         this.ptype = ptype;//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    public String getPtype() {
+        return ptype;
+    }
+    /**
+     * returns a message of the a patient's vaccine status
+     * @return stat int
+     */
+    public String getVacStat(){
+        
+    int stat=0;
+    String msg = "";
+        if (this.vac1.getVid().equals("N/A")){
+            stat++;
+        }if (this.vac2.getVid().equals("N/A")){
+            stat++;
+        }if (this.vac3.getVid().equals("N/A")){
+            stat++;
+        }if (this.vac4.getVid().equals("N/A")){
+            stat++;
+        }
+        if (stat == 4){
+            msg = "Fully Vaccinated (4/4)";
+        }else {
+            msg = String.valueOf(stat)+"/4";
+        }
+        return msg;
+    }
+    /**
+     * takes arraylist and creates a report from it
+     * @param p 
+     * @return 
+     */
+    public String getReport(ArrayList<Patient> p){
+        String report_stat = "";
+        String heading = "Vaccination Report \n";
+        
+        String info = "Location: ";
+        return report_stat;
+    }
    
 }
