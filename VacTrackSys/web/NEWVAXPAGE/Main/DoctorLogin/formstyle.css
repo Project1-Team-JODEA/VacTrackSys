@@ -18,6 +18,11 @@ and open the template in the editor.
     font-family: 'Poppins', sans-serif;
 }
 
+:root {
+    --blue: rgb(79, 77, 255);
+    --black: rgb(0, 0, 0);
+}
+
 html {
     /* height: 100%; */
     overflow: auto;
@@ -43,13 +48,17 @@ body {
 }
 
 #input-form {
-    width: 500px;
+    width: 550px;
     min-width: 450px;
     float: left;
     left: 25%;
-    justify-content: left;
-    /* height: 100%; */
+    /*justify-content: left;*/
+    margin: 1%, 5%;
+    height: auto;
+    /*height: 800px;*/
 }
+
+#input-form .button {}
 
 #rs-form {
     float: right;
@@ -272,7 +281,7 @@ form input[type="radio"] {
 
 form .button {
     height: 45px;
-    margin: 25px 0;
+    margin: 15px 0;
 }
 
 form .button input {
@@ -312,11 +321,11 @@ form .button input:hover {
 
 #logout:before {
     content: "e9ba";
+    cursor: pointer;
 }
 
-#loading-content .show {
-    display: block;
-    z-index: 1;
+.toggle-btn:hover {
+    color: var(--blue);
 }
 
 .toggle-content {
@@ -325,7 +334,7 @@ form .button input:hover {
     /* border-radius: 10%; */
     background-color: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-    z-index: 1;
+    z-index: 2;
     padding: 5px;
     margin: 5px;
     max-height: 250px;
@@ -346,13 +355,12 @@ form .button input:hover {
     position: fixed;
 }
 
-#help-btn:hover {
-    color: blue;
-}
-
 @media(max-width: 584px) {
     .container {
         max-width: 100%;
+    }
+    #input-form {
+        margin-left: 25px;
     }
     form .user-details .input-box {
         margin-bottom: 15px;

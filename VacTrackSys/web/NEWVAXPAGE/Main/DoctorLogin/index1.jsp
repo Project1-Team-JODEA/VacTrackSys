@@ -67,7 +67,7 @@
                             </td>
                         </tr>
                     </table>
-                    <input type="submit" class="submit-btn" onclick="">Login</button>
+                    <input type="submit" class="submit-btn" value="Login" onclick="">
                     <a href="Password_Reset.jsp">Forgot Password?</a>
                     <br>
                     <!--<button  class="submit-btn" onclick="document.location = 'ForgotPassword.jsp'"><i class="fas fa-angle-right"> Forgot Password?</i></button>-->

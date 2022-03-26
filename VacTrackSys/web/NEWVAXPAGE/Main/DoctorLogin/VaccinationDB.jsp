@@ -1,36 +1,54 @@
 <%-- Vaccination Tracking System File name : VaccinationDB Date : Feb 18, 2022, 3:49:10 PM Author(s) : Elena Miller,
     DeShane` Sims Supporting File(s): --%>
-
+<!DOCTYPE html>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script src="../js/ajax.js" type="text/javascript"></script>
-<script src="../js/SearchPatient.js" typ="text/javascript"></script>
-<script src="../js/EditVaccine.js" type="text/javascript"></script>
-<script type="text/javascript">
+<script src="../js/ajax.js" lang="javascript" type="text/javascript"></script>
+<script src="searchpatient.js"  lang="javascript" type="text/javascript"></script>
+
+<!--<script src="editvaccine.js"  lang="javascript" type="text/javascript"></script>-->
+<script language="javascript" type="text/javascript">
+//    var xhttp = new XMLHttpRequest();
+//    xhttp.onreadystatechange = function(){
+//        if (xhttp.readyState == 4 && xhttp.status == 200){
+//            $("results").innerHTML = this.responseText;
+//        }
+//    };
+//    window.onload = init;
+
+    function pageAction(action) {
+
+        if (ajax && action == 'SearchPatient') {
+            ajax.open('get', 'DBAction?actiontype=SearchPatient', true);
+            alert("readyState = "+ajax.readyState);
+            ajax.send();
+        } else {
+            document.dbaction.submit();
+        }
+    }
     function pageAction2(action, val_id) {
 //        var a = window
 //        console.log(val);
-        document.getElementById("actiontype").setAttribute("value", action);
-//        document.RecordsSelection.actiontype.value = action;
-        console.log(document.RecordsSelection.actiontype.value);
-        if (ajax && action === 'SearchPatient') {
-            ajax.open('get', 'RecordsSelection?actiontype=SearchPatient');
-            ajax.send(null);
-        } else if (action === 'EditVaccine') {
+//        document.getElementById("actiontype").setAttribute("value", action);
+        document.dbaction.actiontype.value = action;
+        console.log(document.dbaction.actiontype.value);
+        if (action === 'SearchPatient') {
+            pageAction(action);
+        } else if (action == 'EditVaccine') {
             var val = $(val_id).value;
-            document.RecordsSelection.vid.value = val;
-            document.RecordsSelection.submit();
+            document.dbaction.vid.value = val;
+            document.dbaction.submit();
         }
         // else if (ajax && action == 'AddPatient'){
         //     ajax.open('get', 'RecordsSelection?actiontype=SearchPatient');
         //     ajax.send(null);
         // }
         else {
-            document.RecordsSelection.submit();
+            document.dbaction.submit();
         }
     }
 </script>
-<!DOCTYPE html>
+
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -43,37 +61,19 @@
         <!--<script src="../js/searchPatient.js" type="text/javascript"></script>-->
         <script src="https://kit.fontawesome.com/98e4c48f68.js" crossorigin="anonymous"></script>
         <script src="../js/functions.js" type="text/javascript"></script>
-        <script type="text/javascript">
-    var today = getTodayDate();
-    window.onload = () => {
-        //                init('RecordsSelection');
-        $("vac_date").setAttribute("max", today);
-        $("dob").setAttribute("max", today);
-        $("msg-btn").setAttribute("onclick", "toggleList('msg-content')");
-        $("help-btn").setAttribute("onclick", "toggleList('help-content')");
-        $("help-btn").style.float = "right";
-//        $("input-form").onsubmit
-        if ($("search").getAttribute("disabled") === null) {
 
-        }
-
-        //Create hidden input                  
-    };
-        </script>
     </head>
-
+    <c:if test="${!u.authenticated}">
+        <script type="text/javascript">
+    window.window.location = "/VacTrackSys/DoctorLogin/index1.jsp";
+        </script>
+    </c:if>
     <body>
         <!-- Authentication -->
-        <c:if test="${!u.authenticated}">
-            <script type="text/javascript">
-                window.window.location = "/VacTrackSys/DoctorLogin/index1.jsp";
-            </script>
-        </c:if>
-
         <!-- 
 For Searching through database
         -->
-        <c:if test="u.authenticated">
+        <c:if test="${u.authenticated}">
             <div class="toggle-box" id="loading-box">
                 <div class="toggle-content" id="loading-content" style="display: none;">
                     <i class="fas fa-spin fa-spinner"
@@ -90,27 +90,35 @@ For Searching through database
                     <p>${msg}</p>
                 </div>
             </div>
+            
             <div class="toggle-box" id="help-box">
                 <div class="toggle-content" id="help-content" style="display: none;">
                     <span style="font-weight: bold ;">Help/Tips</span>
                     <ul>
-                        <li>Click on the Message icon on bottom left corner to any error messages then click on it again to close it.</li>
-                        <li> Try not to refresh the page too many times at once.</li>
-                        <li>your search input may not go through.</li>
+                        <li>Click on the Message icon on the database icon to
+                            view any error messages then click on it again to close it.</li>
+                        <li> Try not to refresh the page too many times at once.
+                            Otherwise, your search input may not go through.</li>
+                        <li></li>
                         <li></li>
                     </ul>
                     <!--<textarea readonly> </textarea>-->
                 </div>
             </div>
             <div class="container" id="input-form">
-                <i class="fas fa-user-circle fa-2x" class="vac-btn" id="prof-btn"
-                   title="User profile"></i><p>User: ${u.username} - ${u.accesslevel} </p>
-                <div class="title">Patient/Vaccine Database Records
-                    <i class="fas fa-1x fa-question-circle" id="help-btn" style="float: left;"></i>
+                <i class="fas fa-user-circle fa-1-5x toggle-btn" class="vac-btn" id="prof-btn"
+
+                   title="User profile">${u.username} - ${u.accesslevel}</i>
+
+                <div class="title">Patient/Vaccine Records
+                    <i class="fas fa-1-x fa-question-circle toggle-btn" id="help-btn"
+                       style="float: right;"></i>
+                    <i class="fa-1-x fas fa-database toggle-btn" onclick="" id="msg-btn" style="float: right;"></i>
                 </div><br>
+
                 <div class="content">
-                    <form name="RecordsSelection" 
-                          id="RecordsSelection" action="DBAction" method="post" onsubmit="toggleList('loading-content')">
+                    <form name="dbaction" 
+                          id="dbaction" action="DBAction" method="post" onsubmit="toggleList('loading-content')">
                         <div class="info">
                             <div class="user-details">
                                 <div class="input-box" id="pat-info">
@@ -118,7 +126,7 @@ For Searching through database
                                     <table>
                                         <tr>
                                             <td><span class="details">SSN</span></td>
-                                            <td><input type="text" name="ssn" id="ssn" pattern="[0-9]{9,}" maxlength="10" placeholder="(000-00-0000)"></td>
+                                            <td><input type="number" name="ssn" id="ssn" maxlength="10" placeholder="(000-00-0000)"></td>
                                                 <c:if test="${u.accesslevel=='MedicalStaff' || u.accesslevel=='Admin'}">
                                                 <td><i class="vac-btn fas fa-pen-square fa-2x" name="edit_v3" id="edit_v3" title="Edit Vaccine" value="Edit Patient"
                                                        onclick="pageAction2('EditPatient', '')"></i></td></c:if>
@@ -186,11 +194,11 @@ For Searching through database
                                         <ul>
                                             <li>
                                                 <input type="checkbox" name="sortval" class="sortval" id="sort_ptype" value="P_Type" onclick="sort_ptype">Patient Type
-                                                <!--                                        <span class="details">Patient Name</span> -->
+                                                <span class="details">Patient Name</span> 
                                             </li>
 
                                             <li><input type="checkbox" name="sortval" class="sortval" id="sort_fname" value="First_Name" onclick="toggleSortVal('p_type')">First Name
-                                                <!--<span class="details">First Name</span>-->
+                                                <span class="details">First Name</span>
                                             </li>
                                             <li><input type="checkbox" name="sortval" class="sortval" id="sort_lname" value="Last_Name">Last Name</li>
                                             <li><input type="checkbox" name="sortval" class="sortval" id="sort_v1id" value="Vaccine_1">Vaccine #1</li>
@@ -215,23 +223,28 @@ For Searching through database
                                             <tr>
                                                 <td><input type="number" name="v1id" id="v1id" pattern="[0-9]{8}" min="0" placeholder="000000000"></td>
                                                 <td style="width: 50px;">
+                                                <c:if test="${u.accesslevel=='MedicalStaff' || u.accesslevel=='Admin'}">
                                                     <i class="vac-btn fas fa-pen-square fa-2x" name="edit_v1" id="edit_v1" title="Edit Vaccine" value="Edit Vaccine" onclick="pageAction2('EditVaccine', 'v1id')"></i>
                                                     <!--<input type="submit"  class="edit-btn" name="edit_v1" id="edit_v1" value="Edit Vaccine">-->
                                                     <!--<td><input type="number" > </td>-->
-                                                </td>
-                                                <td>
+                                                </c:if>
+                                            </td>
+                                            <td>
+                                                <c:if test="${u.accesslevel=='MedicalStaff' || u.accesslevel=='Admin'}">
                                                     <i class="vac-btn fas fa-plus-square fa-2x" name="add" id="add_v1" title="Add Vaccine" value="Edit Vaccine" onclick="pageAction2('AddVaccine', 'v1id')"></i>
-                                                </td>
-                                                <!-- <td><i ></i></td> -->
-                                            </tr>
-                                            <tr>
-                                                <td><span class="details">Vaccine 2</span></td>
-                                                <!--<td style=""></td>-->
-                                            </tr>
-                                            <tr>
-                                                <td><input type="number" name="v2id" id="v2id" pattern="[0-9]{8}" max-length="8" min="0" placeholder="00000000"></td>
-                                                <td style="width: 50px;">
-                                                    <i class="vac-btn fas fa-pen-square fa-2x" name="edit_v2" id="edit_v2" title="Edit Vaccine" value="Edit Vaccine" onclick="pageAction2('EditVaccine', 'v2id')"></i>
+                                                </c:if>
+                                            </td>
+                                            <!-- <td><i ></i></td> -->
+                                        </tr>
+                                        <tr>
+                                            <td><span class="details">Vaccine 2</span></td>
+                                            <!--<td style=""></td>-->
+                                        </tr>
+                                        <tr>
+                                            <td><input type="number" name="v2id" id="v2id" pattern="[0-9]{8}" maxlength="8" min="0" placeholder="00000000"></td>
+                                            <td style="width: 50px;">
+                                                <c:if test="${u.accesslevel=='MedicalStaff' || u.accesslevel=='Admin'}">
+                                                    <i class="vac-btn fas fa-pen-square fa-2x" name="edit_v2" id="edit_v2" title="Edit Vaccine" value="Edit Vaccine" onclick="pageAction2('EditVaccine', 'v2id')"></i></c:if>
                                                 </td>
 
                                             </tr>
@@ -241,18 +254,21 @@ For Searching through database
                                             <tr>
                                                 <td><input type="number" name="v3id" id="v3id" pattern="[0-9]{8}" max-length="8" min="0" placeholder="00000000"></td>
                                                 <td>
-                                                    <i class="vac-btn fas fa-pen-square fa-2x" name="edit_v3" id="edit_v3" title="Edit Vaccine" value="Edit Vaccine" onclick="pageAction2('EditVaccine', 'v3id')"></i>
+                                                <c:if test="${u.accesslevel=='MedicalStaff' || u.accesslevel=='Admin'}">
+                                                    <i class="vac-btn fas fa-pen-square fa-2x" name="edit_v3" id="edit_v3" title="Edit Vaccine" value="Edit Vaccine" onclick="pageAction2('EditVaccine', 'v3id')"></i></c:if>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td><span class="details">Vaccine 4</span></td>
                                             </tr>
                                             <tr>
-                                                <td> <input type="number" name="v4id" id="v4id" pattern="[0-9]{8}" max-length="8" min="0" placeholder="00000000"></td>
+                                                <td> <c:if test="${u.accesslevel=='MedicalStaff' || u.accesslevel=='Admin'}">
+                                                    <input type="number" name="v4id" id="v4id" pattern="[0-9]{8}" max-length="8" min="0" placeholder="00000000"></td></c:if>
                                                 <td>
                                                     <!--                                            <input type="submit"  class="edit-btn" name="edit_v4" 
                                                                                     id="edit_v4" value="Edit Vaccine">-->
-                                                    <i class="vac-btn fas fa-pen-square fa-2x" name="edit_v4" id="edit_v4" title="Edit Vaccine" value="Edit Vaccine" onclick="pageAction2('EditVaccine', 'v4id')"></i>
+                                                <c:if test="${u.accesslevel=='MedicalStaff' || u.accesslevel=='Admin'}">
+                                                    <i class="vac-btn fas fa-pen-square fa-2x" name="edit_v4" id="edit_v4" title="Edit Vaccine" value="Edit Vaccine" onclick="pageAction2('EditVaccine', 'v4id')"></i></c:if>
                                                     <!--   -->
                                                 </td>
                                             </tr>
@@ -262,19 +278,21 @@ For Searching through database
                                 </div>
                             </div>
                             <div class="button">
-                                <input type="submit" id="search" value="Search" onclick="pageAction2('SearchPatient', 's');"> 
+                                <input type="submit" class="fas fa-magnifying-glass" id="search" value="Search" onclick="pageAction2('SearchPatient', 's');"> 
                                 &#8287; &#8287; &#8287; &#8287;
                                 <!--                        <input type="button" name="btnClear" id="btnClear" value="Add"
                                            onclick="document.location = 'VacRecordCreate.jsp';">-->
+
                                 <!-- &#8287; &#8287; &#8287; &#8287; -->
                                 <input type="reset" class="actionBtn" name="btnClear" id="btnClear" value="Clear"> &#8287; &#8287; &#8287; &#8287;
                                 <!--<input type="bu" class="actionBtn" name="btnClear" id="btnClear" value="Edit" onclick="pageAction2('')"> &#8287; &#8287; &#8287; &#8287;-->
                                 <!--<i class="fas fa-spin fa-spinner fa-1-5x" style="float: right;"></i>-->
+                                <i class="fas fa-2x fa-door-open toggle-btn" title="Logout" 
+                                   style=" cursor: pointer;" onclick="pageAction2('Logout', '')"></i>
                             </div>
                             <input type="hidden" name="actiontype" id="actiontype" value="">
                         </form>
-                        <i class="fas fa-1-5x fa-door-open" title="Logout" style="float: right;" onclick="pageAction2('Logout', '')"></i>
-                        <i class="fa-1-5x fas fa-exclamation-triangle" onclick="" id="msg-btn">Messages</i>
+
                     </div>
 
                 </div>
@@ -287,6 +305,14 @@ For Searching through database
                         <div id="results"></div>
                     </div>
                 </div>
+                <script type="text/javascript">
+                    var today = getTodayDate();
+                    $("vac_date").setAttribute("max", today);
+                    $("dob").setAttribute("max", today);
+                    $("msg-btn").setAttribute("onclick", "toggleList('msg-content')");
+                    $("help-btn").setAttribute("onclick", "toggleList('help-content')");
+//        $("help-btn").style.float = "right";
+                </script>
         </c:if>
 
 

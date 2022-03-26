@@ -75,6 +75,7 @@ public class DBActionServlet extends HttpServlet {
             } else if (x.contains("AdminConsole")) {
                 webloc = "/AdminConsole";
             }
+//            String h_request = reque
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             ServletContext context = getServletContext();
             String ur = context.getRealPath("/Team_JODEA1.accdb");
@@ -314,11 +315,15 @@ public class DBActionServlet extends HttpServlet {
                 URL = webloc + "/VacView.jsp";
             } else if (action.equalsIgnoreCase("SearchVaccinations")) {
 
-            } else if (action.equalsIgnoreCase("Logout")) {
+            } else if (action.equalsIgnoreCase("Cancel")){
+            URL = webloc + "Vaccination.jsp";
+            
+            }else if (action.equalsIgnoreCase("Logout")) {
                 // Get Patient using SSN
                 URL = webloc + "/index1.jsp";
                 //
-
+                request.getSession().removeAttribute("u");
+                
             }
         } catch (ClassNotFoundException e) {
             msg = "Error: Class Not Found <br>";
@@ -338,7 +343,8 @@ public class DBActionServlet extends HttpServlet {
 //            URL = "DoctorLogin/VaccinationDB.jsp";
 //        }
         request.setAttribute("msg", msg);
-
+//response.setHeader(lname, vsite);
+//request.getHeader(lname)
         RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);
         disp.forward(request, response);
 

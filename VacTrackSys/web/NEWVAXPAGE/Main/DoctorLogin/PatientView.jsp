@@ -10,15 +10,15 @@
 <!DOCTYPE html>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script src="../js/ajax.js" type="text/javascript"></script>
+<script src="../js/ajax.js" lang="javascript" type="text/javascript"></script>
 <!--<script src="../js/searchPatient.js" type="text/javascript"></script>-->
 <link rel="icon" type="image/x-icon" href="../image/favicon_16x16.png"/>
 <script type="text/javascript">
     var $ = function (id) {
         return document.getElementById(id);
     };
-    function pageAction2(action) {
-        document.RecordsSelection.actiontype.value = action;
+    function pageAction(action) {
+        document.NewRecord.actiontype.value = action;
         $("actiontype").value = action;
 //        if (ajax && action === 'add') {
 //            ajax.open('get', '?actiontype=searchPatient');
@@ -29,7 +29,7 @@
 //        } else {
 //            
 //        }
-        document.RecordsSelection.submit();
+        document.NewRecord.submit();
     }
 </script>
 <html lang="en">
@@ -43,22 +43,23 @@
         <link rel="icon" type="image/x-icon" href="../image/favicon_16x16.png">
         <script src="../js/functions.js" type="text/javascript"></script>
         <script type="text/javascript">
-            var $ = function (id) {
-                return document.getElementById(id);
-            };
-            function clrscrn() {
-                //$("Records").reset();
+    var $ = function (id) {
+        return document.getElementById(id);
+    };
+    function clrscrn() {
+        //$("Records").reset();
 //                $("rid").focus();
-            }
+    }
         </script>
     </head>
+    <c:if test="${!u.authenticated}">
+        <script type="text/javascript">
+            window.window.location = "/VacTrackSys/DoctorLogin/index1.jsp";
+        </script>
+    </c:if>
     <body>
         <!-- Authentication -->
-        <%-- <c:if test="${!u.authenticated}">
-             <script type="text/javascript">
-                 window.window.location = "/VacTrackSys/DoctorLogin/index1.jsp";
-             </script>
-         </c:if>--%>
+
 
         <!-- 
                 For Searching through database
@@ -80,7 +81,7 @@
             </div>
         </div>
         <div class="container">
-             <i class="fas fa-user-circle fa-2x" class="vac-btn" id="prof-btn"
+            <i class="fas fa-user-circle fa-2x" class="vac-btn" id="prof-btn"
                title="User profile"></i><p>User: ${u.username} - ${u.accesslevel} </p>
             <div class="title">Patient Database Records - New Entry</div>
             <div class="content">
@@ -122,16 +123,16 @@
                             <span class="details">DOB</span>
                             <input type="date" name="dob" id="dob" value="${selectedPatient.dob}">
                         </div>
-<!--                        <div class="input-box">
-                            <span class="details">Location</span>
-                            <input name="loc" id="loc" value="" >
-                            <select id="loc">
-                                
-                            </select>
-                        </div>-->
+                        <!--                        <div class="input-box">
+                                                    <span class="details">Location</span>
+                                                    <input name="loc" id="loc" value="" >
+                                                    <select id="loc">
+                                                        
+                                                    </select>
+                                                </div>-->
                     </div>
                     <div></div>
-                   <br>
+                    <br>
                     <!--                    <div id="button">
                                             <input type="reset" class="actionBtn" name="btnClear"  id="btnClear" value="Clear" onclick="clrscrn()">
                                             <input type="submit" class="actionBtn" name="view" id="view" onclick="pageAction('view')" value="Search">
@@ -144,11 +145,11 @@
                     <div class="button">
                         <input type="submit" name="add" id="add" value="Add" ><!--onclick="pageAction2('add')" -->
                         &#8287;  &#8287;  &#8287;  &#8287; 
-                        <input type="submit" name="backbtn" id="back" value="Go Back" onclick="document.location = '/VacTrackSys/DoctorLogin/VaccinationDB.jsp';" >
+                        <input type="submit" name="backbtn" id="back" value="Go Back" onclick="pageAction('cancel')" >
 
                     </div>
 
-                    <!--<input type="hidden" name="actiontype" id="actiontype" value="" >--> 
+                    <input type="hidden" name="actiontype" id="actiontype" value="" > 
                 </form>
                 <!--<i class="fas fa-1-5x fa-door-open" title="Logout" style="float: right;" onclick="pageAction2('Logout', '')"></i>-->
                 <i class="fa-1-5x fas fa-exclamation-triangle" onclick="toggleList('msg-content')" id="msg-btn">Messages</i>

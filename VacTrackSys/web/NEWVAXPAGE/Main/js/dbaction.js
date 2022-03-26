@@ -13,7 +13,8 @@
  */
 
 var ajax;
-
+window.onload = init;
+var form_x;
 /**
  * 
  */
@@ -56,12 +57,16 @@ function pageAction(action, form_id) {
         case 'SearchPatient':
             h_request = form_id + '?actiontype=' + action;
             ajax.open('get', h_request);
-            ajax.send(null);
+            ajax.send();
+            break;
+        case 'SearchUser':
+            ;
             break;
         default:
             $(form_id).submit();
             break;
     }
+    
     // if (ajax && action == 'EditPatient') {
     //   h_request = form_id + '?actiontype=' + action;
     //   ajax.open('get', h_request);
@@ -70,7 +75,10 @@ function pageAction(action, form_id) {
     //   $(form_id).submit();
     // }
 }
-
+/**
+ * 
+ * @returns {undefined}
+ */
 function init() {
 
     // Get an XMLHttpRequest object:
@@ -79,7 +87,10 @@ function init() {
     if (ajax) {
         // Function that handles the response:
         ajax.onreadystatechange = function () {
-            handleResponse();
+//            handleResponse();
+        if (ajax.readyState === 4 && ajax.status === 2000){
+            
+        }
         };
     }
 } // End of init() function.
@@ -95,7 +106,7 @@ function handleResponse() {
             var results = document.getElementById('results');
             results.innerHTML = ajax.responseText;
         } else { // Bad status code, submit the form normally
-            document.getElementById('RecordsSelection').submit();
+            document.getElementById('dbaction').submit();
         }
     } // End of readyState IF.
 }

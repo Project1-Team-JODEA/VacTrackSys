@@ -1,4 +1,4 @@
-/VacTrackSys/lib/
+
 /VacTrackSys/web/CDC/
 /VacTrackSys/web/Member/
 /VacTrackSys/web/folder/
@@ -14,3 +14,5 @@
 /VacTrackSys/build/web/image/
 /VacTrackSys/build/web/PatientLogin/
 /VacTrackSys/build/web/empty
+server/JODEA-Server/
+MovedFromMain/

@@ -1,5 +1,5 @@
 {
     "name": "eVmPr",
-    "actiontype": ""
-    
+    "actiontype": "",
+    "patient": {"ssn": "", "fname": "", "lname": "", "minit":"", "dob": "" }
 }
