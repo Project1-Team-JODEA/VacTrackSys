@@ -67,7 +67,7 @@
             <div class="title">Patient Database Records - New Entry</div>
             <div class="content">
 
-                <form name="NewRecord" id="NewRecord" action="addRecord" method="post">
+                <form name="NewRecord" id="NewRecord" action="addPatient" method="post">
                     <div class="user-details">
 
                         <div class="input-box">

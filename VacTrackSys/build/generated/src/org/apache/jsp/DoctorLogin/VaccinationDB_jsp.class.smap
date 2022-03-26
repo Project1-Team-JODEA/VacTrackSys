@@ -1,0 +1,15 @@
+SMAP
+VaccinationDB_jsp.java
+JSP
+*S JSP
+*F
++ 0 VaccinationDB.jsp
+DoctorLogin/VaccinationDB.jsp
+*L
+7,33:44
+43,6:77
+49:83,2
+50,230:85
+280:315,3
+281,12:318
+*E

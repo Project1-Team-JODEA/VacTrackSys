@@ -36,6 +36,10 @@
         <servlet-name>EditPatientServlet</servlet-name>
         <servlet-class>servlets.EditPatientServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addPatientServlet</servlet-name>
+        <servlet-class>servlets.addPatientServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewAccountServlet</servlet-name>
         <url-pattern>/CDC/NewAccount</url-pattern>
@@ -81,6 +85,13 @@
     <servlet-mapping>
         <servlet-name>EditPatientServlet</servlet-name>
         <url-pattern>/EditPatient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addPatientServlet</servlet-name>
+        <url-pattern>/CDC/addPatient</url-pattern>
+        <url-pattern>/AdminConsole/addPatient</url-pattern>
+        <url-pattern>/DoctorLogin/addPatient</url-pattern>
+        <url-pattern>/addPatient</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

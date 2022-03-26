@@ -1,0 +1,15 @@
+SMAP
+PatientRecordCreate_jsp.java
+JSP
+*S JSP
+*F
++ 0 PatientRecordCreate.jsp
+DoctorLogin/PatientRecordCreate.jsp
+*L
+7,48:44
+58,6:92
+64:98,2
+65,76:100
+141:176,3
+142,10:179
+*E

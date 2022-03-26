@@ -258,7 +258,7 @@
                     <div class="button">
                         <input type="submit" name="search" id="search" value="Search Patient">
                         &#8287;  &#8287;  &#8287;  &#8287; 
-                        <input type="button" name="btnClear" id="btnClear" value="Add" onclick="document.location = 'VacRecordCreate.jsp';" >
+                        <input type="button" name="btnClear" id="btnClear" value="Add" onclick="document.location = 'PatientRecordCreate.jsp';" >
                         &#8287;  &#8287;  &#8287;  &#8287; 
                         <input type="reset" class="actionBtn" name="btnClear"  id="btnClear" value="Clear">
 
