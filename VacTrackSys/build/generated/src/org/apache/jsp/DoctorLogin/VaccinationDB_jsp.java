@@ -293,7 +293,7 @@ public final class VaccinationDB_jsp extends org.apache.jasper.runtime.HttpJspBa
       out.write("                    <div class=\"button\">\n");
       out.write("                        <input type=\"submit\" name=\"search\" id=\"search\" value=\"Search Patient\">\n");
       out.write("                        &#8287;  &#8287;  &#8287;  &#8287; \n");
-      out.write("                        <input type=\"button\" name=\"btnClear\" id=\"btnClear\" value=\"Add\" onclick=\"document.location = 'VacRecordCreate.jsp';\" >\n");
+      out.write("                        <input type=\"button\" name=\"btnClear\" id=\"btnClear\" value=\"Add\" onclick=\"document.location = 'PatientRecordCreate.jsp';\" >\n");
       out.write("                        &#8287;  &#8287;  &#8287;  &#8287; \n");
       out.write("                        <input type=\"reset\" class=\"actionBtn\" name=\"btnClear\"  id=\"btnClear\" value=\"Clear\">\n");
       out.write("\n");

@@ -36,7 +36,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title> Vaccination Database - New Patient</title>
+        <title> Vaccination Database - Existing Patient</title>
         <link rel="stylesheet" href="formstyle.css" type="text/css"/>
 
         <script type="text/javascript">
@@ -64,10 +64,10 @@
             <%--User: ${u.userid}, ${u.access_level} Level--%>
         </p>
         <div class="container">
-            <div class="title">Patient Database Records - New Entry</div>
+            <div class="title">Patient Database Records - Update Entry</div>
             <div class="content">
 
-                <form name="NewRecord" id="NewRecord" action="addRecord" method="post">
+                <form name="NewRecord" id="NewRecord" action="EditPatient" method="post">
                     <div class="user-details">
 
                         <div class="input-box">
@@ -122,7 +122,7 @@
                                         </div>-->
 
                     <div class="button">
-                        <input type="submit" name="add" id="add" value="Add">
+                        <input type="submit" name="add" id="add" value="Update" action="EditPatient">
                         &#8287;  &#8287;  &#8287;  &#8287; 
                         <!--<input type="button" name="btnClear" id="add" value="Add" onclick="document.location = 'VacRecordCreate.jsp';" >-->
                         <!--&#8287;  &#8287;  &#8287;  &#8287;--> 

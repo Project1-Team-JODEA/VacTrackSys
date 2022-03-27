@@ -84,6 +84,9 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EditPatientServlet</servlet-name>
+        <url-pattern>/CDC/EditPatient</url-pattern>
+        <url-pattern>/AdminConsole/EditPatient</url-pattern>
+        <url-pattern>/DoctorLogin/EditPatient</url-pattern>
         <url-pattern>/EditPatient</url-pattern>
     </servlet-mapping>
     <servlet-mapping>

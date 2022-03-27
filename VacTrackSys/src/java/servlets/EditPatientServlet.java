@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author alexs
  */
-@WebServlet(name = "EditPatientServlet")
+@WebServlet(name = "EditPatientServlet", urlPatterns = {"/EditPatientServlet"})
 public class EditPatientServlet extends HttpServlet {
 
     /**
@@ -49,35 +49,36 @@ public class EditPatientServlet extends HttpServlet {
         Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
         ServletContext context = getServletContext();
         String ur = context.getRealPath("/Team_JODEA1.accdb");
-        Connection conn = DriverManager.getConnection("jdbc:ucanaccess://" + ur);
-        
-        String sql = "SELECT * FROM PATIENTS WHERE Social_Security = '" + request.getParameter("ssnedit").trim() + "'";
-        Statement s = conn.createStatement();
-        ResultSet r = s.executeQuery(sql);
-        // sql statement will break application if SSN field is empty
-        if (r.next()){
-            Patient p = new Patient();
-            request.getSession().setAttribute("selectedPatient", p);
+        Connection conn = DriverManager.getConnection("jdbc:ucanaccess://" + ur);   
+        if (
+                // This if checks if any fields are blank
+                String.valueOf(request.getParameter("ssn").trim()) == null ||
+                String.valueOf(request.getParameter("fname").trim()) == null ||
+                String.valueOf(request.getParameter("midinit").trim()) == null ||
+                String.valueOf(request.getParameter("lname").trim()) == null ||
+                String.valueOf(request.getParameter("v1id").trim()) == null ||
+                String.valueOf(request.getParameter("v2id").trim()) == null ||
+                String.valueOf(request.getParameter("v3id").trim()) == null ||
+                String.valueOf(request.getParameter("v4id").trim()) == null
+                ){
+            msg += "<br>" + "Field cannot be blank!" + "<br>";
         } else {
-            sql = "INSERT INTO PATIENTS (Social_Security, First_Name, Middle_Init, Last_Name, P_Type, Vaccine_1, Vaccine_2, Vaccine_3, Vaccine_4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            // This else updates the record
+            String sql = "UPDATE patients SET First_Name = ?, Middle_Init = ?, Last_Name = ?, P_Type = ?, Vaccine_1 = ?, Vaccine_2 = ?, Vaccine_3 = ?, Vaccine_4 = ? WHERE Social_Security = '" + request.getParameter("ssn").trim() + "'";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, request.getParameter("ssnedit").trim());
-            ps.setString(2, "");
-            ps.setString(3, "");
-            ps.setString(4, "");
-            ps.setString(5, "");
-            ps.setString(6, "");
-            ps.setString(7, "");
-            ps.setString(8, "");
-            ps.setString(9, "");
+            ps.setString(1, String.valueOf(request.getParameter("fname".trim())));
+            ps.setString(2, String.valueOf(request.getParameter("midinit".trim())));
+            ps.setString(3, String.valueOf(request.getParameter("lname".trim())));
+            ps.setString(4, String.valueOf(request.getParameter("pat_type".trim())));
+            ps.setString(5, String.valueOf(request.getParameter("v1id".trim())));
+            ps.setString(6, String.valueOf(request.getParameter("v2id".trim())));
+            ps.setString(7, String.valueOf(request.getParameter("v3id".trim())));
+            ps.setString(8, String.valueOf(request.getParameter("v4id".trim())));
             int rc = ps.executeUpdate();
-            Patient p = new Patient();
-            p.setSsn(request.getParameter("ssnedit").trim());
-            request.getSession().setAttribute("selectedPatient", p);
+            msg += "<br>" + Integer.toString(rc) + " records updated. <br>";
+            
         }
-        s.close();
-        r.close();
-        url = "/DoctorLogin/EditPatient.jsp";
+        url = "/DoctorLogin/VaccinationDB.jsp";
         RequestDispatcher disp = getServletContext().getRequestDispatcher(url);
         disp.forward(request, response);
     }

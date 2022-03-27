@@ -88,7 +88,7 @@ public class addPatientServlet extends HttpServlet {
         }
         s.close();
         r.close();
-        url = "/DoctorLogin/EditPatient.jsp";
+        url = "/DoctorLogin/PatientView.jsp";
         RequestDispatcher disp = getServletContext().getRequestDispatcher(url);
         disp.forward(request, response);
     }

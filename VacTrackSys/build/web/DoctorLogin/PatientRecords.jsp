@@ -47,7 +47,7 @@
                 </table>
         
                 <div class="button">
-                    <input type="submit" name="edit" id="edit" value="Edit Patient" onclick="alert('WIP')">
+                    <input type="submit" name="edit" id="edit" value="Edit Patient" onclick="document.location='PatientView.jsp'">
                     &#8287;  &#8287;  &#8287;  &#8287; 
                     <input type="submit" name="add" id="add" value="Add Patient" onclick="document.location='VacRecordCreate.jsp'">
                     &#8287;  &#8287;  &#8287;  &#8287; 

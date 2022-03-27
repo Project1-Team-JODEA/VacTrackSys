@@ -4,7 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 
-public final class PatientRecordCreate_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class PatientView_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -73,7 +73,7 @@ public final class PatientRecordCreate_jsp extends org.apache.jasper.runtime.Htt
       out.write("<html lang=\"en\">\n");
       out.write("    <head>\n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
-      out.write("        <title> Vaccination Database - New Patient</title>\n");
+      out.write("        <title> Vaccination Database - Existing Patient</title>\n");
       out.write("        <link rel=\"stylesheet\" href=\"formstyle.css\" type=\"text/css\"/>\n");
       out.write("\n");
       out.write("        <script type=\"text/javascript\">\n");
@@ -99,10 +99,10 @@ public final class PatientRecordCreate_jsp extends org.apache.jasper.runtime.Htt
       out.write("\n");
       out.write("        </p>\n");
       out.write("        <div class=\"container\">\n");
-      out.write("            <div class=\"title\">Patient Database Records - New Entry</div>\n");
+      out.write("            <div class=\"title\">Patient Database Records - Update Entry</div>\n");
       out.write("            <div class=\"content\">\n");
       out.write("\n");
-      out.write("                <form name=\"NewRecord\" id=\"NewRecord\" action=\"addPatient\" method=\"post\">\n");
+      out.write("                <form name=\"NewRecord\" id=\"NewRecord\" action=\"addRecord\" method=\"post\">\n");
       out.write("                    <div class=\"user-details\">\n");
       out.write("\n");
       out.write("                        <div class=\"input-box\">\n");
@@ -157,7 +157,7 @@ public final class PatientRecordCreate_jsp extends org.apache.jasper.runtime.Htt
       out.write("                                        </div>-->\n");
       out.write("\n");
       out.write("                    <div class=\"button\">\n");
-      out.write("                        <input type=\"submit\" name=\"add\" id=\"add\" value=\"Add\">\n");
+      out.write("                        <input type=\"submit\" name=\"add\" id=\"add\" value=\"Update\" onclick=\"pageAction('EditPatient')\">\n");
       out.write("                        &#8287;  &#8287;  &#8287;  &#8287; \n");
       out.write("                        <!--<input type=\"button\" name=\"btnClear\" id=\"add\" value=\"Add\" onclick=\"document.location = 'VacRecordCreate.jsp';\" >-->\n");
       out.write("                        <!--&#8287;  &#8287;  &#8287;  &#8287;--> \n");
