@@ -114,9 +114,9 @@
                             <select id="pat_type">
                                 <option id="reg-patient" value="PAT">Regular</option>
                                 <option id="Inpatient" value="IN">Inpatient</option>
-                                <option name="outpatient" value="OUT">Outpatient</option>
-                                <option name="other" id="other" value="OTH">Other</option>
-                                <option name="unknown" id="unknown" value="N/A">Other</option>
+                                <option value="OUT">Outpatient</option>
+                                <option  id="other" value="OTH">Other</option>
+                                <option  id="unknown" value="N/A">Other</option>
                             </select>
                         </div>
                         <div class="input-box">
@@ -145,7 +145,7 @@
                     <div class="button">
                         <input type="submit" name="add" id="add" value="Add" onclick="pageAction('add')" ><!--onclick="pageAction2('add')" -->
                         &#8287;  &#8287;  &#8287;  &#8287; 
-                        <input type="submit" name="edit" id="edit" value="Edit" onclick="pageAction('edit')" ><!--onclick="pageAction2('add')" -->
+                        <input type="submit" name="edit" id="edit" value="Update" onclick="pageAction('update')" ><!--onclick="pageAction2('add')" -->
                         &#8287;  &#8287;  &#8287;  &#8287; 
                         <input type="submit" name="backbtn" id="back" value="Cancel" onclick="pageAction('cancel')" >
 

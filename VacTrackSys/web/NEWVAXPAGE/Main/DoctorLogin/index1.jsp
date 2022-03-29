@@ -39,11 +39,11 @@
                         <img src="download.png">
                     </a>
                     <a href="https://physicians.wustl.edu/for-patients/mychart-patient-portal/">
-                        <img src="washu2.png">
+                        <img src="../image/washu2.png">
                     </a>
                     <a href="https://www.mymercy.net/login">
 
-                        <img src="mercy.jpg">
+                        <img src="../image/mercy.jpg">
                     </a>
                 </div>
 

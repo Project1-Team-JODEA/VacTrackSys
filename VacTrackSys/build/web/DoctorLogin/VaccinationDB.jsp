@@ -20,7 +20,7 @@
 
         if (ajax && action == 'SearchPatient') {
             ajax.open('get', 'DBAction?actiontype=SearchPatient', true);
-            alert("readyState = "+ajax.readyState);
+//            alert("readyState = "+ajax.readyState);
             ajax.send();
         } else {
             document.dbaction.submit();
@@ -61,11 +61,10 @@
         <!--<script src="../js/searchPatient.js" type="text/javascript"></script>-->
         <script src="https://kit.fontawesome.com/98e4c48f68.js" crossorigin="anonymous"></script>
         <script src="../js/functions.js" type="text/javascript"></script>
-
     </head>
     <c:if test="${!u.authenticated}">
         <script type="text/javascript">
-    window.window.location = "/VacTrackSys/DoctorLogin/index1.jsp";
+    window.window.location = "/VacTrackSys/Redirect_Home.jsp";
         </script>
     </c:if>
     <body>
@@ -189,7 +188,7 @@ For Searching through database
                                     </div>
                                 </div>
                                 <!--<span class="details">Sort By:</span>-->
-                                <div name="list" class="sort">
+<!--                                <div name="list" class="sort">
                                     <div class="items" id="sortlist" style="display: none;">
                                         <ul>
                                             <li>
@@ -211,7 +210,7 @@ For Searching through database
                                         </ul>
                                     </div>
 
-                                </div>
+                                </div>-->
                                 <div class="vac-details">
 
                                     <div class="input-box" id="vac-info">

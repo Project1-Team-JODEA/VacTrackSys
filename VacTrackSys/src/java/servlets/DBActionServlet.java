@@ -37,11 +37,8 @@ public class DBActionServlet extends HttpServlet {
      *
      * Takes actiontype parameter from request and performs action depending on
      * the action. <br>
-     * Actions: 'SearchPatient' line - 
-     * ,'EditPatient':
-     * , 'EditVaccine':
-     * 'Logout'
-     * 
+     * Actions: 'SearchPatient' line - ,'EditPatient': , 'EditVaccine': 'Logout'
+     *
      * ,etc
      *
      * @param request servlet request
@@ -145,7 +142,7 @@ public class DBActionServlet extends HttpServlet {
                             if (!rs[i].equalsIgnoreCase("N/A") && !rs[i].equalsIgnoreCase("null")
                                     && !rs[i].equalsIgnoreCase(null)) {
                                 val = rs[i];
-                                System.out.println("value = " + val);
+//                                System.out.println("value = " + val);
                                 if (val.contains("\'")) {
                                 }
                                 if (i < rs.length - 1 && !rs[i].equalsIgnoreCase("N/A")) {//&& !filters[i].equalsIgnoreCase("N/A")
@@ -291,7 +288,7 @@ public class DBActionServlet extends HttpServlet {
 
                     rs.close();
                     ps.close();
-                }else {
+                } else {
                     URL = webloc += "/VaccinationDB.jsp";
                 }
 
@@ -303,29 +300,32 @@ public class DBActionServlet extends HttpServlet {
                 Date today = new Date();
                 System.out.println(today);
 //                User u = (User) request.getSession().getAttribute("u");
-                 DateTimeFormatter d_format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                DateTimeFormatter d_format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 //                 d_format.parse(Lo)                
-String t = String.valueOf(today);
+                String t = String.valueOf(today);
 
                 v.setLocation(u.getLocation());
                 v.setManufacturer("Company X");
-                v.setDate(String.valueOf(d_format.format(LocalDate.parse(t))));
-                v.setLotnum("00000000");
-                v.setVtype("REG");
+               
+//                String v.date = String.format("yyyy-MM-dd", today);
                 
+//                v.setDate(d_format.format(LocalDate.parse(t)));
+//                v.setLotnum("00000000");
+                v.setVtype("REG");
+
                 request.getSession().setAttribute("vac", v);
                 URL = webloc + "/VacView.jsp";
             } else if (action.equalsIgnoreCase("SearchVaccinations")) {
 
-            } else if (action.equalsIgnoreCase("Cancel")){
-            URL = webloc + "Vaccination.jsp";
-            
-            }else if (action.equalsIgnoreCase("Logout")) {
+            } else if (action.equalsIgnoreCase("Cancel")) {
+                URL = webloc + "Vaccination.jsp";
+
+            } else if (action.equalsIgnoreCase("Logout")) {
                 // Get Patient using SSN
                 URL = webloc + "/index1.jsp";
                 //
                 request.getSession().removeAttribute("u");
-                
+
             }
         } catch (ClassNotFoundException e) {
             msg = "Error: Class Not Found <br>";

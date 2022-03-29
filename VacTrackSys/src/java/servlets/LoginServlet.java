@@ -139,7 +139,7 @@ public class LoginServlet extends HttpServlet {
         }
 //        URL = "/DoctorLogin/VaccinationDB.jsp";
         Cookie uid = new Cookie("usid", username);
-        uid.setMaxAge(60);
+        uid.setMaxAge(120);
         uid.setPath("/");
         uid.setSecure(true);
         response.addCookie(uid);

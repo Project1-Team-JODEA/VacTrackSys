@@ -32,7 +32,7 @@ function handleResponse() {
 
             // Put the received response in the DOM:
             var results = document.getElementById('results');
-            console.log(results);
+//            console.log(results);
             results.innerHTML = ajax.responseText;
         } else { // Bad status code, submit the form normally
             document.getElementById('dbaction').submit();

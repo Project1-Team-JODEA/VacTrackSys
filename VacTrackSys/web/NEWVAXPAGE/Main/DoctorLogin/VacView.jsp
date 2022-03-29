@@ -76,7 +76,7 @@
                     <div class="user-details">
                         <div class="input-box">
                             <span class="details">Vaccination ID</span>
-                            <input type="number" id="vid" maxlength="8"
+                            <input type="number" name="vid" id="vid" maxlength="8"
                                    placeholder="Enter Vaccine ID here"
                                    value="${vac.vid}" required>
                         </div>
@@ -90,7 +90,7 @@
                                                 </div>-->
                         <div class="input-box">
                             <span class="details">Location</span>
-                            <input type="text"name="loc" id="loc" placeholder="Location" 
+                            <input type="text" name="loc" id="loc" placeholder="Location" 
                                    value="${vac.location}"required>
                         </div>
 
@@ -98,7 +98,7 @@
                             <span class="details">Manufacturer</span>
                             <input type="text" name="man" id="man" 
                                    placeholder="Enter vaccine manufacturer here"
-                                   value="${vac.manufacturer}" required>
+                                   value="${vac.manufacturer}"  required>
                         </div>
                         <div class="input-box">
                             <span class="details">Date</span>
@@ -109,14 +109,14 @@
 
                         <div class="input-box">
                             <span class="details">Batch Number</span>
-                            <input type="number" name="batnum" id="batnumb" 
+                            <input type="number" name="batnum" id="batnum" 
                                    placeholder="Enter batch # here" 
                                    maxlength="10" value="${vac.lotnum}">
                         </div>
 
                         <div class="input-box">
                             <span class="details">Vaccine Type</span>
-                            <select id="vac_type">
+                            <select name="vac_type" id="vac_type">
                                 <option value="REG">Regular</option>
                                 <option value="BOS">Booster</option>
                             </select>
@@ -137,7 +137,7 @@
 <!--                        <form action="DBAction">
                             <button type="submit">Go back<i class="fas fa-arrow-right"></i></button>
                         </form>-->
-                <i class="fa-1-5x fas fa-exclamation-triangle" onclick="" id="msg-btn">Messages</i>
+                <i class="fa-1-5x fas fa-exclamation-triangle" onclick="toggleList('msg-content')" id="msg-btn">Messages</i>
             </div>
         </div>
 

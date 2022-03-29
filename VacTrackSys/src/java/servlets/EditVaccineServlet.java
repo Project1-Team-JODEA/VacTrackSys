@@ -22,8 +22,7 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -65,12 +64,12 @@ public class EditVaccineServlet extends HttpServlet {
             ServletContext context = getServletContext();
             String ur = context.getRealPath("/Team_JODEA1.accdb");
             Connection conn = DriverManager.getConnection("jdbc:ucanaccess://" + ur);
-            v.setVid(request.getParameter("vid"));
-            v.setManufacturer(request.getParameter("man"));
-            v.setVtype(request.getParameter("vac_type"));
-            v.setDate(request.getParameter("vac_date"));
-            v.setLocation(request.getParameter("loc"));
-            v.setLotnum(request.getParameter("batnum"));
+            v.setVid(request.getParameter("vid").trim());
+            v.setManufacturer(request.getParameter("man").trim());
+            v.setVtype(request.getParameter("vac_type").trim());
+            v.setDate(request.getParameter("vac_date").trim());
+            v.setLocation(request.getParameter("loc").trim());
+            v.setLotnum(request.getParameter("batnum").trim());
             action = request.getParameter("actiontype");
             u = (User) request.getSession().getAttribute("u");
             if (action.isEmpty() || action.equals("")) {
@@ -79,6 +78,8 @@ public class EditVaccineServlet extends HttpServlet {
             } else {
                 if (v.getVid().isEmpty() || v.getVid().equals("")) {
                     msg += "Missing Vaccine ID<br>";
+                }else if (v.getVid().length() > 8){
+                    msg+="Vaccination ID is 8 characters maximum. <br>";
                 }
                 if (v.getVtype().isEmpty() || v.getVtype().equals("")) {
                     msg += "Missing Vaccination type.<br>";
@@ -90,13 +91,15 @@ public class EditVaccineServlet extends HttpServlet {
                     msg += "Missing Date<br>";
                 } else {
                     DateTimeFormatter dob_format = DateTimeFormatter.ofPattern("dd-MMM-yy");
-                    f_vacdate = dob_format.format(LocalDate.parse(v.getDate()));
-                    v.setDate(String.valueOf(f_vacdate));
+//                    f_vacdate = dob_format.format(LocalDate.parse(v.getDate()));
+//                    v.setDate(String.valueOf(f_vacdate));
                 }
                 if (v.getLotnum().isEmpty() || v.getLotnum().equals("")) {
 //                msg+="Missing Location Name<br>";
+                }else if (v.getLotnum().length() > 8){
+                  msg+="Batch Number is 8 characters maximum. <br>";   
                 }
-                if (v.getManufacturer().isEmpty() || v.getLotnum().equals("")) {
+                if (v.getManufacturer().isEmpty() || v.getManufacturer().equals("")) {
                     msg += "Missing Manufacturer Name<br>";
                 }
 
@@ -105,13 +108,15 @@ public class EditVaccineServlet extends HttpServlet {
             // Check for Date validation
             Date today = new Date();
             DateFormat df = DateFormat.getDateInstance();
-            Date vac_date = df.parse(v.getDate());
+//            Date vac_date = v.getDate();
             String vdate = "2021-11-30";
             // checks if date is before vdat of after today's date
-            if (df.parse(v.getDate()).before(df.parse("2021-11-30"))
-                    || df.parse(v.getDate()).after(today)) {
-                msg += "Invalid Date <br>";
-            }
+//            Date v_date = df.parse(v.getDate());
+//            
+//            if (df.parse(v.getDate()).before(df.parse("2021-11-30"))
+//                    || df.parse(v.getDate()).after(today)) {
+//                msg += "Invalid Date <br>";
+//            }
             // check if item exists
             PreparedStatement ps;
             ResultSet r;
@@ -142,7 +147,7 @@ public class EditVaccineServlet extends HttpServlet {
                         ps.setString(1, v.getVid());
                         ps.setString(2, v.getVtype());
                         ps.setString(3, u.getLocation());
-                        ps.setDate(4, (java.sql.Date) vac_date);
+                        ps.setDate(4, java.sql.Date.valueOf(request.getParameter("vac_date")));
                         ps.setString(5, v.getManufacturer());
                         ps.setString(6, v.getVid());
                         int rc = ps.executeUpdate();
@@ -172,6 +177,9 @@ public class EditVaccineServlet extends HttpServlet {
                                         url = webloc + "/VaccinationDB.jsp";
                                     }
                                 }
+                            }else{
+                                msg+="Vaccine Added <br>";
+                                 url = webloc + "/VaccinationDB.jsp";
                             }
                         }
                     }
@@ -201,7 +209,8 @@ public class EditVaccineServlet extends HttpServlet {
                         ps.setString(1, v.getVid());
                         ps.setString(2, v.getVtype());
                         ps.setString(3, v.getLocation());
-                        ps.setDate(4, (java.sql.Date) vac_date);
+                        
+                        ps.setDate(4,  java.sql.Date.valueOf(v.getDate()));
                         ps.setString(5, v.getManufacturer());
                         int rc = ps.executeUpdate();
                         if (rc == 0) {
@@ -230,28 +239,45 @@ public class EditVaccineServlet extends HttpServlet {
                                         url = webloc + "/VaccinationDB.jsp";
                                     }
                                 }
+                            } else{
+                                msg+="Vaccine Added <br>";
+                                 url = webloc + "/VaccinationDB.jsp";
                             }
                         }
                     }
                 } else {
                     url = webloc + "/VacView.jsp";
                 }
+            }else if (action.equalsIgnoreCase("cancel")){
+                url = webloc + "/VaccinationDB.jsp";
             } else {
                 msg += "Unknown action. <br>";
                 url = webloc + "/VacView.jsp";
             }
 
         } catch (SQLException e) {
-            msg += "SQL Error: " + e.getMessage() + "<br>";
+            msg += "SQL Error: " + e.getMessage() + " <br> StackTrace: ";
+            for (StackTraceElement stackTrace : e.getStackTrace()) {
+                msg += stackTrace + "<br>";
+            }
             url = webloc + "/VacView.jsp";
         } catch (ClassNotFoundException e) {
-            msg += "Class Error: " + e.getMessage() + "<br>";
+            msg += "Class Error: " + e.getMessage() + " <br> StackTrace: ";
+            for (StackTraceElement stackTrace : e.getStackTrace()) {
+                msg += stackTrace + "<br>";
+            }
             url = webloc + "/VacView.jsp";
         } catch (ParseException e) {
-            msg += "Parse Error: " + e.getMessage() + "<br>";
+            msg += "Parse Error: " + e.getMessage() + " <br> StackTrace: ";
+            for (StackTraceElement stackTrace : e.getStackTrace()) {
+                msg += stackTrace + "<br>";
+            }
             url = webloc + "/VacView.jsp";
         } catch (Exception e) {
-            msg += "Servlet Error: " + e.getMessage() + "<br>";
+            msg += "Servlet Error: " + e.getMessage() + " <br> StackTrace: ";
+            for (StackTraceElement stackTrace : e.getStackTrace()) {
+                msg += stackTrace + "<br>";
+            }
             url = webloc + "/VacView.jsp";
 //            Logger.getLogger(EditVaccineServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -131,68 +131,7 @@
                 </form>
 
 
-                <!--                    <form id="update" class="input-group" style="overflow-y: auto; max-height: 275px;"
-                                        action="UpdateAccount" method="post">
-                                        <i class="fas fa-1-5x fa-circle-info" id="req-btn" style="color: blue;"
-                                            title="Click for Requirements"></i>
-                                        <div class="help" style="display: none;">
-                                            Password: At Lease 15 Characters <br>
-                                        </div>
-                                        <table>
-                                            <tr>
-                                                <td style="width: 240px;"><input type="text" class="input-field" name="uid" id="uid"
-                                                        placeholder="Employee ID" required></td>
-                                                <td style="width: 40px;"> <i id="validid" class="fas " style="color: green;"></i></td>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 240px;"><input type="email" name="email" id="email"
-                                                        class="input-field" placeholder="characters@characters.domain"
-                                                        required></td>
-                                                <td style="width: 40px;"> <i id="valide" class="fas " style="color: green;"></i></td>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 240px;"><input type="text" id="loc" class="input-field"
-                                                        placeholder="Location" required></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 240px;"><input type="password" name="upwd" class="input-field"
-                                                        id="upwd" placeholder="Password" required>
-                                                </td>
-                                                <td style="width: 40px;">
-                                                    <i class="fas fa-1-5x fa-eye" id="v-btn-p"></i>
-                                                    <i id="validp" class="fas fa-check" style="color: green;"></i>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td id="msg"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 240px;">
-                                                    <input type="password" name="confpasswd" class="input-field" name="confpasswd"
-                                                        id="confpasswd" placeholder="Confirm Password" required>
-                                                </td>
-                                                <td style="width: 40px;"><i class="fas fa-1-5x fa-eye" id="v-btn-c"></i>
-                                                    <i id="validc" class="fas fa-check" style="color: green;"></i>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="text" class="input-field" name="hint" id="hint"
-                                                        title="hint for password" placeholder="Hint" required></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="font-size: 12px;"><input type="checkbox" class="check-box" id="terms">
-                                                    I agree to the terms & conditions</td>
-                                            </tr>
-                                        </table>
-                                        <button type="submit" id="newacct" class="submit-btn" disabled>Register</button>
-                                        <input type="hidden" id="isValid" value="">
-                                    </form>
-                
-                                </div>-->
-                <!--<script src =" ../js/functions" type="text/javascript"></script>-->
-
+              
             </div>
 
             <script>

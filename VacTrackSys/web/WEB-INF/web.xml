@@ -111,7 +111,6 @@
     <servlet-mapping>
         <servlet-name>EditPatientServlet</servlet-name>
         <url-pattern>/DoctorLogin/EditPatient</url-pattern>
-        <url-pattern>/EditPatient</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

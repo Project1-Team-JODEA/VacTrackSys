@@ -19,6 +19,7 @@
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/servlets/addRecordServlet.java</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/DoctorLogin/searchpatient.js</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/servlets/DBActionServlet.java</file>
+            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/DoctorLogin/style.css</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/META-INF/context.xml</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/servlets/LogoutServlet.java</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/DoctorLogin/formstyle.css</file>
@@ -30,12 +31,13 @@
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/business/Location.java</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/DoctorLogin/Password_Reset.jsp</file>
+            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/css/redirectstyle.css</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/js/pat.json</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/DoctorLogin/VacView.jsp</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/PatientLogin/Home.jsp</file>
+            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/Redirect_Home.jsp</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/CDC/index1.jsp</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/DoctorLogin/index1.jsp</file>
-            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/servlets/ResetPasswordServlet.java</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/js/functions.js</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/servlets/EditVaccineServlet.java</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/business/Vaccine.java</file>
@@ -47,6 +49,7 @@
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/CDC/VaccinationDB.jsp</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/servlets/SearchServlet.java</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/servlets/NewAccountServlet.java</file>
+            <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/css/style.css</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/src/java/servlets/LoginServlet.java</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/DoctorLogin/ajax.js</file>
             <file>file:/C:/Users/eVmPr/Documents/IS240/JODEA_Project/VacTrackSys/web/NEWVAXPAGE/Main/DoctorLogin/View.jsp</file>

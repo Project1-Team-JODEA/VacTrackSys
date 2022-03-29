@@ -10,12 +10,12 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="ajax.js" lang="javascript" type="text/javascript"></script>
-<!--<script lang="javascript" type="text/javascript">
+<script lang="javascript" type="text/javascript">
     function pageAction(){
         document.rec.actiontype.value = action;
         document.rec.submit();
     }
-</script>-->
+</script>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -31,6 +31,12 @@
         <link rel="icon" type="image/x-icon" href="../image/favicon_16x16.png"/>
     </head>
     <body>
+        <table>
+            <tr>
+                <td><input type="number" name="ssn" id="ssn" maxlength="10" placeholder="(000-00-0000)"></td>
+                <td><</td>
+            </tr>
+        </table>
         <table class="table-content" border="1">
             <tr>
                 <th>SSN</th>
