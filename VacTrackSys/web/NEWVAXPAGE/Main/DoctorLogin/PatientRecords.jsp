@@ -44,7 +44,7 @@
                 <th>Vaccine 3</th>
                 <th>Vaccine 4</th>
             </tr>
-            <c:forEach var="p" items="${pats}">
+            <c:forEach var="p" items="${patientset}">
                 <tr>
                     <td>${p.ssn}</td>
                     <td>${p.fname}</td>
@@ -72,7 +72,9 @@
 <!--        <form id="rec" action="DBAction">
             <input type="hidden" name="actiontype" id="actiontype" value="">
         </form>-->
-        <%--<c:if test="${u.access_level}"--%>
-
+        <%--<c:if test="${u.access_level == 'Admin' || u.access_level == 'MedicalStaff'}>"--%>
+        <form action="DBAction">
+            
+        </form>
     </body>
 </html>

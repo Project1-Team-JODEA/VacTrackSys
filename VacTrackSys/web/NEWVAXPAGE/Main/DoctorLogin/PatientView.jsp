@@ -143,9 +143,11 @@
                                         </div>-->
 
                     <div class="button">
-                        <input type="submit" name="add" id="add" value="Add" ><!--onclick="pageAction2('add')" -->
+                        <input type="submit" name="add" id="add" value="Add" onclick="pageAction('add')" ><!--onclick="pageAction2('add')" -->
                         &#8287;  &#8287;  &#8287;  &#8287; 
-                        <input type="submit" name="backbtn" id="back" value="Go Back" onclick="pageAction('cancel')" >
+                        <input type="submit" name="edit" id="edit" value="Edit" onclick="pageAction('edit')" ><!--onclick="pageAction2('add')" -->
+                        &#8287;  &#8287;  &#8287;  &#8287; 
+                        <input type="submit" name="backbtn" id="back" value="Cancel" onclick="pageAction('cancel')" >
 
                     </div>
 
@@ -153,6 +155,7 @@
                 </form>
                 <!--<i class="fas fa-1-5x fa-door-open" title="Logout" style="float: right;" onclick="pageAction2('Logout', '')"></i>-->
                 <i class="fa-1-5x fas fa-exclamation-triangle" onclick="toggleList('msg-content')" id="msg-btn">Messages</i>
+                <!--<form action="DBAction"></form>-->
             </div>
 
 

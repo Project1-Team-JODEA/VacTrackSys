@@ -186,7 +186,7 @@ public class DBActionServlet extends HttpServlet {
                     }
                     r.close();
                     s.close();
-                    request.getSession().setAttribute("pats", patientset);
+                    request.getSession().setAttribute("patientset", patientset);
 //                    User u = (User) request.getSession().getAttribute("u");
                     u.setSearched(true);
                     request.getSession().setAttribute("u", u);
@@ -305,9 +305,11 @@ public class DBActionServlet extends HttpServlet {
 //                User u = (User) request.getSession().getAttribute("u");
                  DateTimeFormatter d_format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 //                 d_format.parse(Lo)                
+String t = String.valueOf(today);
+
                 v.setLocation(u.getLocation());
                 v.setManufacturer("Company X");
-                v.setDate(String.valueOf(d_format.format((TemporalAccessor) today)));
+                v.setDate(String.valueOf(d_format.format(LocalDate.parse(t))));
                 v.setLotnum("00000000");
                 v.setVtype("REG");
                 

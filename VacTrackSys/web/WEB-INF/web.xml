@@ -91,22 +91,27 @@
         <url-pattern>/UpdatePatient</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>EditPatientServlet</servlet-name>
-        <url-pattern>/EditPatient</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ResetPasswordServlet</servlet-name>
-        <url-pattern>/ResetPassword</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>EditVaccineServlet</servlet-name>
-        <url-pattern>/EditVaccine</url-pattern>
+        <url-pattern>/DoctorLogin/EditVaccine</url-pattern>
+        <url-pattern>/AdminConsole/EditVaccine</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UpdateAccountServlet</servlet-name>
         <url-pattern>/UpdateAccount</url-pattern>
         <url-pattern>/DoctorLogin/UpdateAccount</url-pattern>
         <url-pattern>/CDC/UpdateAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordServlet</servlet-name>
+        <url-pattern>/CDC/ResetPassword</url-pattern>
+        <url-pattern>/ResetPassword</url-pattern>
+        <url-pattern>/DoctorLogin/ResetPassword</url-pattern>
+        <url-pattern>/PatientLogin/ResetPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditPatientServlet</servlet-name>
+        <url-pattern>/DoctorLogin/EditPatient</url-pattern>
+        <url-pattern>/EditPatient</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -73,14 +73,15 @@
                     <!--<button  class="submit-btn" onclick="document.location = 'ForgotPassword.jsp'"><i class="fas fa-angle-right"> Forgot Password?</i></button>-->
                     <div id="message" style="padding: 
                          5px; background: white;">${msg}</div>
+
                 </form>
                 <form id="register" class="input-group" style="overflow-y: auto; max-height: 275px;"
                       action="NewAccount" method="post">
                     <i class="fas fa-1-5x fa-circle-info" id="req-btn" style="color: blue;"
                        title="Click for Requirements"></i>
-                    <div class="help" style="display: none;">
-                        Password: At Lease 15 Characters <br>
-                    </div>
+<!--                    <div class="help" style="display: none;">
+                        Password: At Least 15 Characters <br>
+                    </div>-->
                     <table>
                         <tr>
                             <td style="width: 240px;"><input type="text" class="input-field" name="uid" id="uid"
@@ -131,6 +132,7 @@
                     </table>
                     <button type="submit" id="newacct" class="submit-btn" disabled>Register</button>
                     <!--<input type="hidden" id="isValid" value="">-->
+                    
                 </form>
 
             </div>

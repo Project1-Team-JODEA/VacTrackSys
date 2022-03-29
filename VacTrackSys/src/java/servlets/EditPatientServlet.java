@@ -19,6 +19,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -47,7 +49,7 @@ public class EditPatientServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String msg = "", url = "", webloc = "", action;
+        String msg = "", url = "", webloc = "", action = "", sql = "";
         response.setContentType("text/html;charset=UTF-8");
         try {
             String x = String.valueOf(request.getRequestURL());// URL Access Level
@@ -56,50 +58,34 @@ public class EditPatientServlet extends HttpServlet {
             } else if (x.contains("AdminConsole")) {
                 webloc = "/AdminConsole";
             }
+             User u = (User) request.getSession().getAttribute("u");
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             ServletContext context = getServletContext();
             String ur = context.getRealPath("/Team_JODEA1.accdb");
             Connection conn = DriverManager.getConnection("jdbc:ucanaccess://" + ur);
             action = request.getParameter("actiontype");
-            
             Patient p = new Patient();
-            String sql = "SELECT * FROM PATIENTS WHERE Social_Security = '" + request.getParameter("ssnedit").trim() + "'";
-            
-            Statement s = conn.createStatement();
-            ResultSet r = s.executeQuery(sql);
-            User u = (User) request.getSession().getAttribute("u");
-            // sql statement may update a 
-            p.setSsn(request.getParameter("ssn"));
-            p.setFname(request.getParameter("fname"));
-            p.setMname(request.getParameter("fname"));
-            p.setLname(request.getParameter("lname"));
-            p.setPtype(request.getParameter("pat_type"));
-           
-            if (r.next()) {
-//                Patient p = new Patient();
+            if ( // This if checks if any fields are blank
+                    String.valueOf(request.getParameter("ssn").trim()) == null
+                    || String.valueOf(request.getParameter("fname").trim()) == null
+                    //                    || String.valueOf(request.getParameter("midinit").trim()) == null
+                    || String.valueOf(request.getParameter("lname").trim()) == null
+                    || String.valueOf(request.getParameter("dob").trim()) == null
+                    || String.valueOf(request.getParameter("v1id").trim()) == null
+                    || String.valueOf(request.getParameter("v2id").trim()) == null
+                    || String.valueOf(request.getParameter("v3id").trim()) == null
+                    || String.valueOf(request.getParameter("v4id").trim()) == null) {
+                msg += "<br>" + "Field cannot be blank!" + "<br>";
+            } else {
 
-                request.getSession().setAttribute("selectedPatient", p);
-                sql = "UPDATE PATIENTS SET "
-                        //                        + "RecipientID = ?, "
-                        + "Social_Security = ?, "
-                        + "First_Name = ?, "
-                        + "Middle_Init = ?, "
-                        + "Last_Name = ?, "
-                        + "DOB = ?, "
-                        + "P_Type = ?, "
-                        + "Vaccine_ID = ?, "
-                        + "Vaccination_Sit e= ?, "
-                        + "Vaccine_1 = ?, "
-                        + "Vaccine_2 = ?, "
-                        + "Vaccine_3 = ?, "
-                        + "Vaccine_4 = ? "
-                        + "WHERE Social_Security = ?";
                 p.setSsn(request.getParameter("ssn"));
                 p.setFname(request.getParameter("fname"));
+                p.setMname(request.getParameter("fname"));
                 p.setLname(request.getParameter("lname"));
-                p.setMname(request.getParameter("minit"));
-                p.setDob(String.valueOf(request.getParameter("dob")));
-                p.setPtype(String.valueOf(request.getParameter("pat_type")));
+                p.setPtype(request.getParameter("pat_type"));
+                DateTimeFormatter dob_format = DateTimeFormatter.ofPattern("dd-MMM-yy");
+                String f_dob = dob_format.format(LocalDate.parse(request.getParameter("dob")));
+                p.setDob(f_dob);
                 Vaccine vac1 = new Vaccine();
                 vac1.setVid(request.getParameter("v1id"));
                 p.setVac1(vac1);
@@ -111,62 +97,76 @@ public class EditPatientServlet extends HttpServlet {
                 p.setVac3(vac3);
                 Vaccine vac4 = new Vaccine();
                 vac4.setVid(request.getParameter("v4id"));
-                p.setVac4(vac4);
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setString(1, p.getSsn());
-                ps.setString(2, p.getFname());
-                ps.setString(3, p.getMname());
-                ps.setString(4, p.getLname());
-                ps.setDate(5, Date.valueOf(p.getDob()));
-                ps.setString(6, p.getPtype());
-                ps.setString(7, String.valueOf(request.getParameter("v1id")));
-                ps.setString(8, u.getLocation());//request.getParameter("loc"));//.getSession().getAttribute("u")
-                ps.setString(9, String.valueOf(request.getParameter("v1id")));
-                ps.setString(10, String.valueOf(request.getParameter("v2id")));
-                ps.setString(11, String.valueOf(request.getParameter("v3id")));
-                ps.setString(12, String.valueOf(request.getParameter("v4id")));
-                
-                int rc = ps.executeUpdate();
-                if (rc == 0) {
-                    msg += "Record cannot update. <br>";
-                    url = webloc + "/PatientView.jsp";
+            }
+
+//            if (p.getDob().isEmpty()|| p.get)
+            if (action.isEmpty() || action.contains("")) {
+                msg += "Unable to Perform Action <br";
+            } else if (action.equalsIgnoreCase("UpdatePatient")) {
+//                    p = new Patient();
+//           p.setFname(request.getParameter());
+                sql = "SELECT * FROM PATIENTS WHERE Social_Security = '" + request.getParameter("ssn").trim() + "'";
+
+                Statement s = conn.createStatement();
+                ResultSet r = s.executeQuery(sql);
+               
+                // sql statement may update a 
+
+                if (r.next()) {
+//                Patient p = new Patient();
+                    // request.getSession().setAttribute("selectedPatient", p);
+
+                    sql = "UPDATE PATIENTS SET "
+                            //                        + "RecipientID = ?, "
+                            + "Social_Security = ?, "
+                            + "First_Name = ?, "
+                            + "Middle_Init = ?, "
+                            + "Last_Name = ?, "
+                            + "DOB = ?, "
+                            + "P_Type = ?, "
+                            + "Vaccine_ID = ?, "
+                            + "Vaccination_Site= ?, "
+                            + "Vaccine_1 = ?, "
+                            + "Vaccine_2 = ?, "
+                            + "Vaccine_3 = ?, "
+                            + "Vaccine_4 = ? "
+                            + "WHERE Social_Security = ?";
+
+                    PreparedStatement ps = conn.prepareStatement(sql);
+                    ps.setString(1, p.getSsn());
+                    ps.setString(2, p.getFname());
+                    ps.setString(3, p.getMname());
+                    ps.setString(4, p.getLname());
+                    ps.setDate(5, Date.valueOf(p.getDob()));
+                    ps.setString(6, p.getPtype());
+                    ps.setString(7, String.valueOf(request.getParameter("v1id")));
+                    ps.setString(8, u.getLocation());//request.getParameter("loc"));//.getSession().getAttribute("u")
+                    ps.setString(9, String.valueOf(request.getParameter("v1id")));
+                    ps.setString(10, String.valueOf(request.getParameter("v2id")));
+                    ps.setString(11, String.valueOf(request.getParameter("v3id")));
+                    ps.setString(12, String.valueOf(request.getParameter("v4id")));
+
+                    int rc = ps.executeUpdate();
+                    if (rc == 0) {
+                        msg += "Record cannot update. <br>";
+                        url = webloc + "/PatientView.jsp";
+                    } else {
+                        msg += "Recorded Updated. <br>";
+                        url = webloc + "/VaccinationDB.jsp";
+                    }
                 } else {
-                    msg += "Recorded Updated. <br>";
-                    url = webloc + "/VaccinationDB.jsp";
+                    msg += "Patient";
+                    url = webloc + "/PatientView.jsp";
                 }
-            } else {
+                s.close();
+                r.close();
+            } else if (action.equalsIgnoreCase("UpdatePatient")) {
                 sql = "INSERT INTO PATIENTS (Social_Security, First_Name, Middle_Init, "
                         + "Last_Name,DOB, P_Type,Vaccine_ID,Vaccination_Site,"
                         + " Vaccine_1, Vaccine_2, Vaccine_3, Vaccine_4) "
                         + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)";
                 PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setString(1, request.getParameter("ssnedit").trim());
-////                ps.setString(2, );
-//                ps.setString(3, "");
-//                ps.setString(4, "");
-//                ps.setString(5, "");
-//                ps.setString(6, "");
-//                ps.setString(7, "");
-//                ps.setString(8, "");
-//                ps.setString(9, "");
-                p.setSsn(request.getParameter("ssn"));
-                p.setFname(request.getParameter("fname"));
-                p.setLname(request.getParameter("lname"));
-                p.setMname(request.getParameter("minit"));
-                p.setDob(String.valueOf(request.getParameter("dob")));
-                p.setPtype(String.valueOf(request.getParameter("pat_type")));
-                Vaccine vac1 = new Vaccine();
-                vac1.setVid(request.getParameter("v1id"));
-                p.setVac1(vac1);
-                Vaccine vac2 = new Vaccine();
-                vac2.setVid(request.getParameter("v2id"));
-                p.setVac2(vac2);
-                Vaccine vac3 = new Vaccine();
-                vac3.setVid(request.getParameter("v3id"));
-                p.setVac3(vac3);
-                Vaccine vac4 = new Vaccine();
-                vac4.setVid(request.getParameter("v4id"));
-                p.setVac4(vac4);
+
 //                PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setString(1, p.getSsn());
                 ps.setString(2, p.getFname());
@@ -180,7 +180,7 @@ public class EditPatientServlet extends HttpServlet {
                 ps.setString(10, String.valueOf(request.getParameter("v2id")));
                 ps.setString(11, String.valueOf(request.getParameter("v3id")));
                 ps.setString(12, String.valueOf(request.getParameter("v4id")));
-                
+
                 int rc = ps.executeUpdate();
                 if (rc == 0) {
                     msg += "Record cannot update. <br>";
@@ -189,20 +189,25 @@ public class EditPatientServlet extends HttpServlet {
                     msg += "Recorded Updated. <br>";
                     url = webloc + "/VaccinationDB.jsp";
                 }
-//                int rc = ps.executeUpdate();
+            } else if (action.equals("cancel")) {
+                url = webloc + "/VaccinationDB.jsp";
+            }
+//            else {
+//                User u = (User) request.getSession().getAttribute("u");
+//                    Patient p = new Patient();
                 
+//                int rc = ps.executeUpdate();
+
 //                p.setSsn(request.getParameter("ssnedit").trim());
 //                request.getSession().setAttribute("selectedPatient", p);
-            }
-            s.close();
-            r.close();
-//            url = "/DoctorLogin/EditPatient.jsp";
+//            }
 
+//            url = "/DoctorLogin/EditPatient.jsp";
         } catch (ClassNotFoundException e) {
             msg += "Class Error: " + e.getMessage() + "<br>";
-             url = webloc + "/PatientView.jsp";
+            url = webloc + "/PatientView.jsp";
         } catch (SQLException e) {
-            msg += "SQL Error:" + e.getMessage() + " <br>"; 
+            msg += "SQL Error:" + e.getMessage() + " <br>";
             url = webloc + "/PatientView.jsp";
         }
         RequestDispatcher disp = getServletContext().getRequestDispatcher(url);
