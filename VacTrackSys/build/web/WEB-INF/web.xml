@@ -40,6 +40,10 @@
         <servlet-name>addPatientServlet</servlet-name>
         <servlet-class>servlets.addPatientServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditVaccineServlet</servlet-name>
+        <servlet-class>servlets.EditVaccineServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewAccountServlet</servlet-name>
         <url-pattern>/CDC/NewAccount</url-pattern>
@@ -95,6 +99,20 @@
         <url-pattern>/AdminConsole/addPatient</url-pattern>
         <url-pattern>/DoctorLogin/addPatient</url-pattern>
         <url-pattern>/addPatient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditVaccineServlet</servlet-name>
+        <url-pattern>/EditVaccine</url-pattern>
+        <url-pattern>/CDC/EditVaccine</url-pattern>
+        <url-pattern>/AdminConsole/EditVaccine</url-pattern>
+        <url-pattern>/DoctorLogin/EditVaccine</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateVaccineServlet</servlet-name>
+        <url-pattern>/UpdateVaccine</url-pattern>
+        <url-pattern>/CDC/UpdateVaccine</url-pattern>
+        <url-pattern>/AdminConsole/UpdateVaccine</url-pattern>
+        <url-pattern>/DoctorLogin/UpdateVaccine</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

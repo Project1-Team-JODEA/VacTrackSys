@@ -67,7 +67,7 @@
             <div class="title">Patient Database Records - Update Entry</div>
             <div class="content">
 
-                <form name="NewRecord" id="NewRecord" action="EditPatient" method="post">
+                <form name="NewRecord" id="NewRecord" action="EditVaccine" method="post">
                     <div class="user-details">
 
                         <div class="input-box">
@@ -78,18 +78,26 @@
                             <span class="details">Vaccines</span>
                             <input type="text" name="v1id" id="v1id" value="" 
                                    placeholder="Vaccine #1 ID"></div>
+                        <input type="submit" name="vaccine1" id="vaccine1" value="Edit Vaccine">
+                        
                         <div class="input-box"><input type="text" name="fname" id="fname" value="" size=""
                                                       placeholder="First Name"></div>
                         <div class="input-box"><input type="text" name="v2id" id="v2id" value="" 
                                                       placeholder="Vaccine #2 ID"></div>
+                        <input type="submit" name="vaccine1" id="vaccine1" value="Edit Vaccine">
+                        
                         <div class="input-box"><input type="text" name="lname" id="lname" value="" size=""
                                                       placeholder="Last Name" > </div>
                         <div class="input-box"><input type="text" name="v3id" id="v3id" value="" 
                                                       placeholder="Vaccine #3 ID"></div>
+                        <input type="submit" name="vaccine1" id="vaccine1" value="Edit Vaccine">
+                        
                         <div class="input-box"> <input type="text" name="midinit" id="midinit" value="" 
                                                        placeholder="Middle Init" ></div>
                         <div class="input-box"><input type="text" name="v4id" id="v4id" value="" 
-                                                      placeholder="Vaccine #4 ID"></div>                        
+                                                      placeholder="Vaccine #4 ID"></div>
+                        <input type="submit" name="vaccine1" id="vaccine1" value="Edit Vaccine">
+                        
                         <div class="input-box">
                             <span class="details">Patient Type</span>
                             <select id="pat_type">
@@ -122,7 +130,7 @@
                                         </div>-->
 
                     <div class="button">
-                        <input type="submit" name="add" id="add" value="Update" action="EditPatient">
+                        <input type="submit" name="add" id="add" value="Update" action="EditVaccine">
                         &#8287;  &#8287;  &#8287;  &#8287; 
                         <!--<input type="button" name="btnClear" id="add" value="Add" onclick="document.location = 'VacRecordCreate.jsp';" >-->
                         <!--&#8287;  &#8287;  &#8287;  &#8287;--> 

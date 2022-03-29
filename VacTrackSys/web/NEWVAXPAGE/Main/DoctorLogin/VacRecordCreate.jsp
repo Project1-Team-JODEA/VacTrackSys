@@ -53,20 +53,20 @@
      <div class="container">
     <div class="title">New Vaccine Entry</div>
     <div class="content">
-      <form name="RecordCreate" id="newrecord" action="addRecord" method="post">
+      <form name="RecordCreate" id="newrecord" action="UpdateVaccine" method="post">
         <div class="user-details">
           <div class="input-box">
             <span class="details">Vaccination ID</span>
-            <input type="text" id="vid"
+            <input type="text" id="vid" name="vid"
                    placeholder="Enter Vaccine ID here">
           </div>
           <div class="input-box">
             <span class="details">Location</span>
-            <input type="text" id="loc" placeholder="Enter vaccination location here" required>
+            <input type="text" id="loc" name="loc" placeholder="Enter vaccination location here" required>
           </div>
           <div class="input-box">
             <span class="details">Manufacturer</span>
-            <input type="text" id="man" placeholder="Enter vaccine manufacturer here" required>
+            <input type="text" id="man" name="man" placeholder="Enter vaccine manufacturer here" required>
           </div>
           <div class="input-box">
             <span class="details">Date</span>
@@ -75,11 +75,11 @@
           </div>
           <div class="input-box">
             <span class="details">Batch Number</span>
-            <input type="text" id="batnumb" placeholder="Enter batch # here" required>
+            <input type="text" id="batnumb" name="batnumb" placeholder="Enter batch # here" required>
           </div>
             <div class="input-box">
                             <span class="details">Vaccine Type</span>
-                            <select id="vac_type">
+                            <select id="vac_type" name="vac_type">
                                 <option value="REG">Regular</option>
                                 <option value="BOS">Booster</option>
                             </select>
@@ -107,7 +107,7 @@
           </div>
         </div>-->
         <div class="button">
-          <input type="submit" value="Create" onclick="pageAction('addVac')">
+          <input type="submit" value="Create" onclick="pageAction('UpdateVaccine')">
           &#8287;  &#8287;  &#8287;  &#8287; 
           <input type="reset" value="Clear">
           &#8287;  &#8287;  &#8287;  &#8287; 
