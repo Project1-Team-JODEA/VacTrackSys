@@ -21,7 +21,7 @@
                 $("v-btn-c").setAttribute("onclick", "toggleV('confpasswd', 'v-btn-c')");
                 $("terms").setAttribute("onclick", "t()");
                 $("validc").setAttribute("onchange", "validatePasswd('upwd', 'confpasswd')");
-                $("email").setAttribute("onchange", "validatePattern('email','valide')");
+//                $("email").setAttribute("onchange", "validatePattern('email','valide')");
             };
         </script>
     </head>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="social-icons">
                     <a href="https://www.mypatientchart.org/MyChart/Authentication/Login?">
-                        <img src="download.png">
+                        <img src="../image/download.png">
                     </a>
                     <a href="https://physicians.wustl.edu/for-patients/mychart-patient-portal/">
                         <img src="../image/washu2.png">
@@ -52,7 +52,8 @@
                         <tr>
                             <td style="width: 280px; ">
                                 <input type="text" class="input-field" name="userid" id="userid"
-                                       placeholder="Employee ID" required>
+                                       placeholder="Employee ID" oni required>
+
                             </td>
                         </tr>
                         <tr>
@@ -79,30 +80,36 @@
                       action="NewAccount" method="post">
                     <i class="fas fa-1-5x fa-circle-info" id="req-btn" style="color: blue;"
                        title="Click for Requirements"></i>
-<!--                    <div class="help" style="display: none;">
-                        Password: At Least 15 Characters <br>
-                    </div>-->
+                    <!--                    <div class="help" style="display: none;">
+                                            Password: At Least 15 Characters <br>
+                                        </div>-->
                     <table>
                         <tr>
                             <td style="width: 240px;"><input type="text" class="input-field" name="uid" id="uid"
-                                                             placeholder="Employee ID" required></td>
+                                                             placeholder="Employee ID"
+                                                             pattern="\d[0-9]" required></td>
                             <td style="width: 40px;"> <i id="validid" class="fas " style="color: green;"></i></td>
-                            </td>
+                            
+                            
                         </tr>
                         <tr>
                             <td style="width: 240px;"><input type="email" name="email" id="email"
                                                              class="input-field" placeholder="characters@characters.domain"
-                                                             required></td>
-                            <td style="width: 40px;"> <i id="valide" class="fas " style="color: green;"></i></td>
+                                                             onchange="validatePattern('email','valide')" oninvalid="this.setCustomValidity('Not Valid')" required></td>
+                                    <td style="width: 40px;"> <i id="valide" class="fas " style="color: green;">
+                                
+                                </i></td>
                             </td>
                         </tr>
                         <tr>
                             <td style="width: 240px;"><input type="text" name="loc" id="loc" class="input-field"
                                                              placeholder="Location" required></td>
+
                         </tr>
                         <tr>
                             <td style="width: 240px;"><input type="password" name="upwd" class="input-field"
-                                                             id="upwd" placeholder="Password" required>
+                                                             id="upwd" placeholder="Password"
+                                                             onchange="validatePattern('upwd', 'validp')" required>
                             </td>
                             <td style="width: 40px;">
                                 <i class="fas fa-1-5x fa-eye" id="v-btn-p"></i>
@@ -115,7 +122,8 @@
                         <tr>
                             <td style="width: 240px;">
                                 <input type="password" name="confpasswd" class="input-field" name="confpasswd"
-                                       id="confpasswd" placeholder="Confirm Password" required>
+                                       id="confpasswd" placeholder="Confirm Password" pattern="{15)"
+                                       onchange="validatePattern('confpasswd', 'validc')" oninput="this.setCustomValidity('Must Match Password')" required>
                             </td>
                             <td style="width: 40px;"><i class="fas fa-1-5x fa-eye" id="v-btn-c"></i>
                                 <i id="validc" class="fas fa-check" style="color: green;"></i>
@@ -126,13 +134,25 @@
                                        title="hint for password" placeholder="Hint" required></td>
                         </tr>
                         <tr>
+                            <td>
+                                <select name="quest" title="security question" id="quest">
+                                    <option id="" value="">Select</option>
+                                    <option id="" value="">Select</option>
+                                    <option id="" value="">Select</option>
+                                </select>
+                            </td>
+                            
+                        </tr>
+                        <tr>
                             <td style="font-size: 12px;"><input type="checkbox" class="check-box" id="terms">
                                 I agree to the terms & conditions</td>
                         </tr>
+                        
                     </table>
+                    <button type="button" id="check" class="submit-btn" onclick="validateUserReg('newacct')">Check</button>
                     <button type="submit" id="newacct" class="submit-btn" disabled>Register</button>
                     <!--<input type="hidden" id="isValid" value="">-->
-                    
+
                 </form>
 
             </div>
@@ -148,12 +168,14 @@
                 x.style.left = "-400px";
                 y.style.left = "50px";
                 z.style.left = "110px";
+
             }
 
             function login() {
                 x.style.left = "50px";
                 y.style.left = "450px";
                 z.style.left = "0px";
+//                document.getElementById("").setAttribute("focus")
             }
 
             function t() {
@@ -161,14 +183,15 @@
                 //            console.log(c);
                 if (c === null) {
                     $("terms").setAttribute("checked", null);
-                    $("newacct").removeAttribute("disabled");
+                    $("check").removeAttribute("disabled");
                 } else {
                     $("terms").removeAttribute("checked");
-                    $("newacct").setAttribute("disabled", null);
+                    $("check").setAttribute("disabled", null);
                 }
                 //       if ($("terms").checked){
                 //            
                 //        } 
+
             }
 
         </script>

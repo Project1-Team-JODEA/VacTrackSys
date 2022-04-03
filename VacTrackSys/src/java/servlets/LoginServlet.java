@@ -142,6 +142,7 @@ public class LoginServlet extends HttpServlet {
         uid.setMaxAge(120);
         uid.setPath("/");
         uid.setSecure(true);
+        
         response.addCookie(uid);
         request.setAttribute("msg", msg);
         RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);

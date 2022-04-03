@@ -50,7 +50,7 @@ public class ResetPasswordServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         //
         String URL = "", msg = "", userid = "", email = "", code = "", webloc = "";
-        String sql = "", hint = "", host = "";
+        String sql = "", hint = "", host = "", dir = "";
         int step = 0;
         User u = new User();
         try {
@@ -58,15 +58,20 @@ public class ResetPasswordServlet extends HttpServlet {
             if (x.contains("DoctorLogin")) {
                 webloc = "/DoctorLogin";
                 // ac_lvl = "MedicalStaff";
+                dir = "DoctorLogin";
             } else if (x.contains("PatientLogin")) {
                 webloc = "/PatientLogin";
                 // ac_lvl = "Patient";
+                dir = "PatientLogin";
             } else if (x.contains("AdminConsole")) {
                 webloc = "/AdminConsole";
                 // ac_lvl = "Administrator";
+                dir = "PatientLogin";
             } else if (x.contains("CDC")) {
                 webloc = "/CDC";
                 // ac_lvl = "CDC";
+                dir = "PatientLogin";
+                webloc = "";
             }
 
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -96,21 +101,27 @@ public class ResetPasswordServlet extends HttpServlet {
                         u.setLocation(r.getString("Location"));
 
                     }
-                    if (hint.equals(request.getParameter("hint"))) {
-                        boolean reset = true;
-                        request.setAttribute("reset", reset);
-//                request.getParameter("ver").
-                        request.setAttribute("ver", "y-d");
-                        msg += "Password Reset <br>";
+                    if (!u.getLocation().equals(dir)) {// return message if account access level does not match location
+                        msg += "Cannot Reset Account";
                         URL = webloc + "/Password_Reset.jsp";
-//                    Cookie res = new Cookie("ver", );
                     } else {
-                        boolean reset = false;
-                        request.setAttribute("reset", reset);
-                        msg += "Hint Does Not Match <br>";
-                        request.setAttribute("ver", "x-v");
+                        if (hint.equals(request.getParameter("hint"))) {
+                            boolean reset = true;
+                            request.setAttribute("reset", reset);
+//                request.getParameter("ver").
+                            request.setAttribute("ver", "y-d");
+                            msg += "Password Reset <br>";
+                            URL = webloc + "/Password_Reset.jsp";
+//                    Cookie res = new Cookie("ver", );
+                        } else {
+                            boolean reset = false;
+                            request.setAttribute("reset", reset);
+                            msg += "Hint Does Not Match <br>";
+                            request.setAttribute("ver", "x-v");
 //                    request.setAttribute("resetu", u);
+                        }
                     }
+
                     r.close();
                     s.close();
                 }
@@ -124,7 +135,7 @@ public class ResetPasswordServlet extends HttpServlet {
                     msg += "Password must be at least 10 characters <br>";
                 }
                 if (confpasswd.isEmpty() || confpasswd.equalsIgnoreCase("")) {
-                    msg += "Missing new Password <br>";
+                    msg += "Missing confirming Password <br>";
                 } else if (!confpasswd.equalsIgnoreCase(newpasswd)) {
                     msg += "confirming password does not match <br>";
                 }
@@ -146,11 +157,11 @@ public class ResetPasswordServlet extends HttpServlet {
                         u.setLocation(r.getString("Location"));
                         if (u.getPassword().equals(request.getParameter("newpasswd"))) {
                             msg += "Old Password cannot be reused.<br>";
-                              URL = webloc + "/Password_Reset.jsp";
+                            URL = webloc + "/Password_Reset.jsp";
                         } else {
                             if (newhint.equalsIgnoreCase(r.getString("Hint"))) {
                                 msg += "Old Hint cannot be reused.<br>";
-                                  URL = webloc + "/Password_Reset.jsp";
+                                URL = webloc + "/Password_Reset.jsp";
                             } else {
                                 sql = "UPDATE USERS "
                                         + "SET Password = ?,"
@@ -173,19 +184,18 @@ public class ResetPasswordServlet extends HttpServlet {
                                 ps.close();
                             }
                         }
-                        
 
                     } else {
                         msg += "Username not found in db. <br>";
                     }
                     r.close();
                     s.close();
-                   
+
                 }
 
             } else if (stp.equalsIgnoreCase("cancel")) {
                 String ver_1 = (String) request.getAttribute("ver");
-                if (!ver_1.isEmpty()|| !ver_1.equalsIgnoreCase("")){
+                if (!ver_1.isEmpty() || !ver_1.equalsIgnoreCase("")) {
                     request.removeAttribute("ver");
                 }
                 URL = webloc + "/index1.jsp";

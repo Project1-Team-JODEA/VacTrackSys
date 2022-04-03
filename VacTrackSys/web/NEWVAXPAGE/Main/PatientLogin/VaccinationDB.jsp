@@ -52,7 +52,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title> Vaccination Database</title>
+        <title> Patient Portal</title>
         <link rel="stylesheet" href="formstyle.css" type="text/css">
         <link rel="stylesheet" href="../css/all.css" type="text/css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">

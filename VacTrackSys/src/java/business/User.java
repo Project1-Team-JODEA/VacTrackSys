@@ -3,7 +3,7 @@
  * @author Alex Breitenbach
  */
 package business;
-
+//import AppSecurity;
 
 public class User {
     public boolean isSearchedPatients() {
@@ -102,6 +102,9 @@ public class User {
             return true;
         }
         return false;
+    }
+    public void secureInfo(){
+        
     }
  
 

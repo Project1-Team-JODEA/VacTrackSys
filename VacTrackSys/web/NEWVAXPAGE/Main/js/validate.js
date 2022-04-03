@@ -122,12 +122,17 @@ const validateUserReg = function (form_id, userType) {
             
         }
         result = passwd.match(/\d+[A-Z]?/g);
+        if (passwd.length < 15){
+            msg = "Password Must be at least 15 character";
+            
+        }
+//        var spaces = passwd.match(/\s/g);
 
-        var spaces = passwd.match(/\s/g);
-
-        console.log(result + "\n" + spaces);
-        if (passwd !== confpasswd) {
-            msg += "";
+//        console.log(result + "\n" + spaces);
+        if (passwd.match(confpasswd)) {
+            msg += "\n Confirming Password Must Match.";
+            $("confpasswd").oninvalid = msg;
+            $("confpasswd").setCustomValidity('Password does not match');
         }
         // console.log("userid"+);
     } else if (userType === "CDC" || userType === "PAT") {
@@ -139,8 +144,8 @@ const validateUserReg = function (form_id, userType) {
         terms = $("terms");
         if (userid < 10) {
 
-        } if (passwd.length < 8) {
-            msg += "password must be at least 8 characters long. \n";
+        } if (passwd.length < 10) {
+            msg += "password must be at least 8 characters long.";
         }
     }
 
@@ -177,27 +182,44 @@ function validatePasswd(passwd_id, confpwd_id) {
  * @param {String} i_id Icon element
  */
 function validatePattern(input_id, i_id) {
-    var valid = false; var s = ""; var pattern;
+    var valid = false; var s = ""; var pattern, msg;
     if ($(input_id).getAttribute("type") === "email") {
         var email = $(input_id).value;
         // pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 pattern =  /^\w+([\.-]?\w+)*@\w+([\.-]) /;
         console.log(pattern.toString());
-
+        
         const p = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]*@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;///[a-zA-Z0-9]+@[a-zA-Z0-9].{3,}$ /g ;
         valid = p.test(email);//returns true if matched false otherwise
 
         console.log(valid);
-
+        if (valid === false){
+            msg="Invalid Email";
+        }
     }// end of validating email 
     // validating password
-
-    if ($(input_id).getAttribute("id") === "upwd") {
-        pattern = /.{10,}/;
+    
+   else if ($(input_id).getAttribute("id") === "upwd") {
+        pattern = /.{10,}/g;
+        if ($(input_id).value.length < 15){
+            valid = false;
+            msg = "Password must be at least 15 characters in length.";
+        }
+//        valid = pattern.test($(input_id).value);
+        
+    }else if ($(input_id).getAttribute("id")==="confpasswd"){
+        if ($("confpasswd").value===$("upwd").value){
+            valid = true;
+            
+        }else {
+            valid = false;
+            msg = "Passwords Do not Match";
+        }
     }
     // set valid appearance
     if (valid === false) {
         // red xmark if pattern is 
+        $(input_id).setAttribute("title", msg);
         if (!$(i_id).classList.contains("fa-check") && !$(i_id).classList.contains("fa-xmark")) {
             $(i_id).classList.toggle("fa-xmark");
             $(i_id).setAttribute("style", "color: red;");

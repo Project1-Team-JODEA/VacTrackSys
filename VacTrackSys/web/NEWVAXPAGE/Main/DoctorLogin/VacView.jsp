@@ -99,6 +99,12 @@
                             <input type="text" name="man" id="man" 
                                    placeholder="Enter vaccine manufacturer here"
                                    value="${vac.manufacturer}"  required>
+                            <select name="man" id="man">
+                                <option value="">Select</option>
+                                <option value="Pfizer">Pfizer</option>
+                                <option value="Johnson & Johnson">Johnson & Johnson</option>
+                                <option value="Mederma">Mederma</option>
+                            </select>
                         </div>
                         <div class="input-box">
                             <span class="details">Date</span>
@@ -106,7 +112,6 @@
                                    min="2021-11-30" max="" value="${vac.date}"
                                    required>
                         </div>
-
                         <div class="input-box">
                             <span class="details">Batch Number</span>
                             <input type="number" name="batnum" id="batnum" 
@@ -131,12 +136,12 @@
                         <input type="reset" value="Clear">
                         &#8287;  &#8287;  &#8287;  &#8287; 
                     </div>
-                    <button type="submit" style="float: right;" onclick="document.location='DoctorLogin/VaccinationDB.jsp';">Go back<i class="fas fa-arrow-right"></i></button>
+                    <button type="submit" style="float: right;" onclick="document.location = 'DoctorLogin/VaccinationDB.jsp';">Go back<i class="fas fa-arrow-right"></i></button>
                     <input type="hidden" name="actiontype" id="actiontype" value="">
                 </form>
-<!--                        <form action="DBAction">
-                            <button type="submit">Go back<i class="fas fa-arrow-right"></i></button>
-                        </form>-->
+                <!--                        <form action="DBAction">
+                                            <button type="submit">Go back<i class="fas fa-arrow-right"></i></button>
+                                        </form>-->
                 <i class="fa-1-5x fas fa-exclamation-triangle" onclick="toggleList('msg-content')" id="msg-btn">Messages</i>
             </div>
         </div>

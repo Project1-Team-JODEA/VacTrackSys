@@ -6,15 +6,22 @@ package servlets;
 
 import business.User;
 import java.io.IOException;
+import static java.lang.Math.random;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.security.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.servlet.RequestDispatcher;
+import javax.crypto.*;
+import javax.servlet.*;
+import java.util.Random;
+import javax.crypto.spec.PBEKeySpec;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,13 +39,14 @@ public class NewAccountServlet extends HttpServlet {
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOExcepti'on if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String URL = "", confpasswd = "";
+        String URL = "", confpasswd = "", en_passwd = "",
+                chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         Matcher m;
         String msg = "", sql = "", testmsg = "", webloc = "", ac_lvl = ""; //ac_lvl = access level
         // Check Location in web
@@ -68,19 +76,21 @@ public class NewAccountServlet extends HttpServlet {
             // set user object
             String uid = String.valueOf(request.getParameter("uid"));
             u.setUsername(String.valueOf(request.getParameter("uid")));
-           String em = String.valueOf(request.getParameter("email"));
+            String em = String.valueOf(request.getParameter("email"));
             u.setEmail(em);
             testmsg += u.getUsername();
-            
+
             testmsg += u.getEmail();
             confpasswd = String.valueOf(request.getParameter("confpasswd").trim());
             hint = String.valueOf(request.getParameter("hint"));
             u.setPassword(String.valueOf(request.getParameter("upwd").trim()));
             if (x.contains("AdminConsole") || x.contains("DoctorLogin")) {
-                if (request.getParameter("loc").equals("")|| request.getParameter("loc").isEmpty()){
+                if (request.getParameter("loc").equals("") || request.getParameter("loc").isEmpty()) {
                     msg += "Location Missing. <br>";
-                }else{u.setLocation(request.getParameter("loc"));}
-                
+                } else {
+                    u.setLocation(request.getParameter("loc"));
+                }
+
             } else if (x.contains("PatientLogin") || x.contains("CDC")) {
                 u.setLocation("online");
             } else {
@@ -99,12 +109,15 @@ public class NewAccountServlet extends HttpServlet {
              * allowed dots(.) and underscores (-) and (-) allowed email must
              * have at least one period in domain
              */
-            String regex_email = "^[A-Za-z0-9+_.-]+@(.+)*$";/**"^[A-Za-z0-9+_!#$%&'*+/=?`{|}~^-]+"
-                    + "(?:\\.[A-Za-z0-9+_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z-0-9]+"
-                    + "(?:\\.[a-zA-Z0-9-]+){2,}";*/
+            String regex_email = "^[A-Za-z0-9+_.-]+@(.+)*$";
+            /**
+             * "^[A-Za-z0-9+_!#$%&'*+/=?`{|}~^-]+" +
+             * "(?:\\.[A-Za-z0-9+_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z-0-9]+" +
+             * "(?:\\.[a-zA-Z0-9-]+){2,}";
+             */
             pattern = Pattern.compile(regex_email);
 //            String[] email_x = u.getEmail().split("@");
-            
+//            Signature sign = Signature.getInstance("SHA256withDSA");
             m = pattern.matcher(u.getEmail());
             boolean ma = m.matches();
             boolean mf = m.find();
@@ -148,17 +161,19 @@ public class NewAccountServlet extends HttpServlet {
                 if (u.getLocation().equals("")) {
                     msg += "Missing Location. <br>";
                 }
-                if (u.getUsername().length() < 15) {
-                    msg += "Employee ID must be 15 characters long.<br>";
+                if (u.getPassword().length() < 15) {
+                    msg += "Password must be 15 characters long.<br>";
+                } else {
+                    Signature sign = Signature.getInstance("");
                 }
 
                 char c;
                 // first 2 characters must be first and last initials
                 for (int i = 0; i < u.getUsername().length(); i++) {
                     c = u.getUsername().charAt(i);
-                    if (Character.isDigit(c)) {
+                    if (c < 2 && Character.isDigit(c)) {
                         isDigit++;
-                    }
+                    }//else if ()
                     if (isDigit < 10) {
                         msg += "Employee ID must be all digits. <br>";
                     }
@@ -195,6 +210,9 @@ public class NewAccountServlet extends HttpServlet {
 //            }
             if (!confpasswd.matches(u.getPassword())) {
                 msg += "passwords do not match. <br>";
+            } else {
+                // 
+                Signature sign = Signature.getInstance("");
             }
             /* validate Email */
 //            pattern = Pattern.compile("[a-zA-Z0-9]+?+@[a-zA-Z]\\p{\\}");
@@ -259,12 +277,35 @@ public class NewAccountServlet extends HttpServlet {
             msg = "Error: Class Not Found. <br>";
         } catch (SQLException ex) {
             msg += "Connection Error: " + ex.getMessage() + "<br>";
+        } catch (Exception e) {
+            //Logger.getLogger(NewAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+            msg += "Servlet Error: " + e.getMessage() + "<br>";
         }
         URL = webloc + "/index1.jsp";
         request.setAttribute("msg", msg);
         RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);
         disp.forward(request, response);
 
+    }
+
+    /**
+     * Takes Password, Encrypts it and returns encrypted password
+     *
+     * @param password
+     * @return
+     */
+    private String getEncryptPasswd(String password) throws NoSuchAlgorithmException {
+        String en_passwd = "", sha = "SHA";
+        // create key pair
+        //Creating KeyPair generator object
+        KeyPairGenerator kpg = KeyPairGenerator.getInstance("DSA");
+        // initialize keypairgeneraotr
+        kpg.initialize(2048);
+        KeyPair pair = kpg.generateKeyPair();
+        PrivateKey pk = pair.getPrivate();
+        PublicKey pubk = pair.getPublic();
+        Signature sign = Signature.getInstance("");
+        return en_passwd;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
