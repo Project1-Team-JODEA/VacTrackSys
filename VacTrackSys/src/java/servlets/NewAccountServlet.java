@@ -5,6 +5,7 @@
 package servlets;
 
 import business.User;
+import business.AppSecurity;
 import java.io.IOException;
 import static java.lang.Math.random;
 import java.sql.Connection;
@@ -97,6 +98,7 @@ public class NewAccountServlet extends HttpServlet {
                 u.setLocation("First Hospital East");
             }
             u.setAccesslevel(ac_lvl);
+            
 //            System.out.println("Username = "+u.getUsername());
 //            if (webloc.equals("AdminConsole") || webloc.equals("DoctorLogin") ){
 //                 u.setLocation(request.getParameter("loc").trim());
@@ -115,6 +117,7 @@ public class NewAccountServlet extends HttpServlet {
              * "(?:\\.[A-Za-z0-9+_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z-0-9]+" +
              * "(?:\\.[a-zA-Z0-9-]+){2,}";
              */
+            
             pattern = Pattern.compile(regex_email);
 //            String[] email_x = u.getEmail().split("@");
 //            Signature sign = Signature.getInstance("SHA256withDSA");
@@ -181,6 +184,7 @@ public class NewAccountServlet extends HttpServlet {
                 }
                 //  10 characters must be numbers
             }
+            String encryptedPasswd = AppSecurity.encrypt(u.getPassword());
             /* check for password characters. */
 //            String pws = String.valueOf(request.getParameter("upwd"));
 
