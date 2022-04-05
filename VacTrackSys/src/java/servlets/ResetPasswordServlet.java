@@ -74,18 +74,23 @@ public class ResetPasswordServlet extends HttpServlet {
             String ur = context.getRealPath("/Team_JODEA1.accdb");
             Connection conn = DriverManager.getConnection("jdbc:ucanaccess://" + ur);
             userid = String.valueOf(request.getParameter("userid"));
+           email = String.valueOf(request.getParameter("email"));
             if (userid.isEmpty() || userid.equals("")) {
                 msg += "Missing Username <br>";
+            }
+            if (email.isEmpty()|| email.equals("")){
+                msg+="Missing Email";
             }
             String stp = request.getParameter("step");
             if (stp.isEmpty() || stp.equalsIgnoreCase("")) {
                 msg += "Error: unknown Aciton <br>";
+                
             } else if (stp.equalsIgnoreCase("ResetPasswd")) {
                 if (msg.isEmpty() || msg.equals("")) {
                     sql = "SELECT * FROM USERS WHERE Username='" + String.valueOf(request.getParameter("userid")) + "'";
                     Statement s = conn.createStatement();
                     ResultSet r = s.executeQuery(sql);
-
+                    
                     if (r.next()) {
 
                         u.setUsername(userid);
@@ -99,18 +104,22 @@ public class ResetPasswordServlet extends HttpServlet {
                     if (!u.getLocation().equals(dir)) {// return message if account access level does not match location
                         msg += "Cannot Reset Account <br>";
                         URL = webloc + "/Password_Reset.jsp";
+                        
                     } else {
                         if (hint.equals(request.getParameter("hint"))) {
                             boolean reset = true;
+                            
 //                            AppSecurity.sendEmail(u.getEmail(), "Password Reset", "");
-                            request.setAttribute("reset", reset);
+                            request.setAttribute("found", true);
                             request.setAttribute("ver", "y-d");
                             msg += "Password Reset <br>";
+                            
                             URL = webloc + "/Password_Reset.jsp";
 //                    Cookie res = new Cookie("ver", );
+                    
                         } else {
                             boolean reset = false;
-                            request.setAttribute("reset", reset);
+                            request.setAttribute("found", false);
                             msg += "Hint Does Not Match <br>";
                             request.setAttribute("ver", "x-v");
 //                    request.setAttribute("resetu", u);
@@ -190,8 +199,10 @@ public class ResetPasswordServlet extends HttpServlet {
 
             } else if (stp.equalsIgnoreCase("cancel")) {
                 String ver_1 = (String) request.getAttribute("ver");
+               String v_2 = (String) request.getAttribute("found");
                 if (!ver_1.isEmpty() || !ver_1.equalsIgnoreCase("")) {
                     request.removeAttribute("ver");
+                    
                 }
                 URL = webloc + "/index1.jsp";
             }

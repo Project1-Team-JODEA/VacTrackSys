@@ -33,9 +33,20 @@
     };
     function pageAction(action) {
         document.getElementById("step").value = action;
+        if (action === 'cancel') {
+            var c = confirm("Are you sure you want to cancel? Your input data may be lost.");
+        }
         document.passwdreset.submit();
     }
+    var cancel = function (form_id) {
+//    var p = prompt();
 
+        if (c === true) {
+            $("step").value = "";
+            $(form_id).submit();
+        }
+
+    }
 //            if ($("email"))
 
         </script>
@@ -44,11 +55,6 @@
     <body>
         <div class="hero">
             <div class="form-box">
-                <!--                    <div class="button-box">
-                                        <div id="btn"></div>
-                                        <button type="button" class="toggle-btn" onclick="login()">Log In</button>
-                                        <button type="button" class="toggle-btn" onclick="register()">Register</button>
-                                    </div>-->
                 <div class="social-icons">
                     <a href="https://www.mypatientchart.org/MyChart/Authentication/Login?">
                         <img src="download.png">
@@ -57,7 +63,6 @@
                         <img src="washu2.png">
                     </a>
                     <a href="https://www.mymercy.net/login">
-
                         <img src="mercy.jpg">
                     </a>
                 </div>
@@ -71,14 +76,31 @@
                                        placeholder="UserID" required>
                             </td>
                         </tr>
-                           <c:if test="${ver != 'y-d'}">
                         <tr>
-                            <td style="width: 280px; ">
-                                <input type="text" class="input-field" name="hint" id="hint"
-                                       placeholder="Hint" required>
+                            <td>
+                                <input type="text" class="input-field" name="email" id="email"
+                                       placeholder="UserID" required>
                             </td>
                         </tr>
-                           </c:if>
+                        <c:if test="${found==true}">
+                            <tr>
+                                <td>Select</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                        </c:if>
+                        <c:if test="${ver != 'y-d'}">
+                            <tr>
+                                <td style="width: 280px; ">
+                                    <input type="text" class="input-field" name="hint" id="hint"
+                                           placeholder="Hint" required>
+                                </td>
+                            </tr>
+                        </c:if>
                         <%--<c:if test="}">--%>
                         <c:if test="${ver== 'y-d'}">
                             <tr>
@@ -123,15 +145,16 @@
                     <!--<button  class="submit-btn" onclick="document.location = 'ForgotPassword.jsp'"><i class="fas fa-angle-right"> Forgot Password?</i></button>-->
 
 
-                    <div id="message" style="padding: 
-                         5px; background: white;">${msg}</div>
+
                     <input type="hidden" name="step" id="step" value="" hidden="">
                     <!--<input type="hidden" name="ver" id="ver" value="${ver}">-->
-                    <button onclick="pageAction()">Cancel</button>
+                    <input type="button" value="Cancel" onclick="pageAction('cancel')">
+                    <div id="message" style="padding: 
+                         5px; background: white;">${msg}</div>
                 </form>
 
 
-              
+
             </div>
 
             <script>

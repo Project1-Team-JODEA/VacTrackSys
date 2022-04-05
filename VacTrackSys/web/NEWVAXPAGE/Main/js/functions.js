@@ -127,12 +127,6 @@ const toggleList = function (id) {
 //    }
 //}
 
-// Close the dropdown menu if the user clicks outside of list
-//window.onclick = function (event, btn_class) {
-//    if (!event.target.match()) {
-//
-//    }
-//}
 /**
  * 
  * @param {type} id
