@@ -8,9 +8,7 @@
  */
 package servlets;
 
-import business.User;
-import java.util.*;
-import javax.mail.*;
+import business.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,12 +16,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.mail.internet.*;
-import javax.activation.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -102,13 +97,13 @@ public class ResetPasswordServlet extends HttpServlet {
 
                     }
                     if (!u.getLocation().equals(dir)) {// return message if account access level does not match location
-                        msg += "Cannot Reset Account";
+                        msg += "Cannot Reset Account <br>";
                         URL = webloc + "/Password_Reset.jsp";
                     } else {
                         if (hint.equals(request.getParameter("hint"))) {
                             boolean reset = true;
+//                            AppSecurity.sendEmail(u.getEmail(), "Password Reset", "");
                             request.setAttribute("reset", reset);
-//                request.getParameter("ver").
                             request.setAttribute("ver", "y-d");
                             msg += "Password Reset <br>";
                             URL = webloc + "/Password_Reset.jsp";
