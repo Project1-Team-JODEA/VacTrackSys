@@ -137,11 +137,19 @@
                             <td>
                                 <select name="quest" title="security question" id="quest">
                                     <option id="" value="">Select</option>
+                                    <option id="" value="">Mothers Maiden Name</option>
+                                    <option id="" value="">What's your favorite College </option>
                                     <option id="" value="">Select</option>
                                     <option id="" value="">Select</option>
                                 </select>
                             </td>
                             
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" class="input-field" name="answer" id="answer"
+                                       placeholder="Answer">
+                            </td>
                         </tr>
                         <tr>
                             <td style="font-size: 12px;"><input type="checkbox" class="check-box" id="terms">
