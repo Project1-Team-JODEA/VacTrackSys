@@ -8,6 +8,8 @@
 package servlets;
 
 import business.Patient;
+import business.SecLog;
+import business.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -78,6 +80,11 @@ public class EditPatientServlet extends HttpServlet {
             msg += "<br>" + Integer.toString(rc) + " records updated. <br>";
             
         }
+        User u = (User) request.getSession().getAttribute("u");
+        String fullname = request.getParameter("fname").trim() + " " + request.getParameter("minit") + " " + request.getParameter("lname");
+        Patient p = new Patient();
+        p.setSsn(request.getParameter("ssn").trim());
+        SecLog.write(u, p, ur, "User updated patient record ");
         url = "/DoctorLogin/VaccinationDB.jsp";
         RequestDispatcher disp = getServletContext().getRequestDispatcher(url);
         disp.forward(request, response);

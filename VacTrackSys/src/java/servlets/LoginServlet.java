@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import business.SecLog;
 import business.User;
 import java.io.IOException;
 import java.io.PrintWriter;
