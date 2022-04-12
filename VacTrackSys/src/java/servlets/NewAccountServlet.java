@@ -4,8 +4,8 @@
  */
 package servlets;
 
-import business.User;
-import business.AppSecurity;
+import business.*;
+//import business.AppSecurity;
 import java.io.IOException;
 import static java.lang.Math.random;
 import java.sql.Connection;
@@ -17,6 +17,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.security.*;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.crypto.*;
@@ -46,9 +47,11 @@ public class NewAccountServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        String URL = "", confpasswd = "", en_passwd = "",
+        String URL = "", confpasswd = "", //en_passwd = "",
                 chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         Matcher m;
+        Boolean pver = false;
+        Optional<String> salt = Optional.empty(), saen_passwdlt = Optional.empty();
         String msg = "", sql = "", testmsg = "", webloc = "", ac_lvl = ""; //ac_lvl = access level
         // Check Location in web
         Pattern pattern;
@@ -79,8 +82,9 @@ public class NewAccountServlet extends HttpServlet {
             u.setUsername(String.valueOf(request.getParameter("uid")));
             String em = String.valueOf(request.getParameter("email"));
             u.setEmail(em);
+            u.setQuestion(String.valueOf(request.getParameter("quest")));
+            u.setAnswer(String.valueOf(request.getParameter("answer")));
             testmsg += u.getUsername();
-
             testmsg += u.getEmail();
             confpasswd = String.valueOf(request.getParameter("confpasswd").trim());
             hint = String.valueOf(request.getParameter("hint"));
@@ -91,7 +95,6 @@ public class NewAccountServlet extends HttpServlet {
                 } else {
                     u.setLocation(request.getParameter("loc"));
                 }
-
             } else if (x.contains("PatientLogin") || x.contains("CDC")) {
                 u.setLocation("online");
             } else {
@@ -99,96 +102,50 @@ public class NewAccountServlet extends HttpServlet {
             }
             u.setAccesslevel(ac_lvl);
             
-//            System.out.println("Username = "+u.getUsername());
-//            if (webloc.equals("AdminConsole") || webloc.equals("DoctorLogin") ){
-//                 u.setLocation(request.getParameter("loc").trim());
-//            } else{
-//                
-//            }
-//           
-            /**
-             * Email requirements: numbers and letters(uppercase and lowercase)
-             * allowed dots(.) and underscores (-) and (-) allowed email must
-             * have at least one period in domain
-             */
-            String regex_email = "^[A-Za-z0-9+_.-]+@(.+)*$";
-            /**
-             * "^[A-Za-z0-9+_!#$%&'*+/=?`{|}~^-]+" +
-             * "(?:\\.[A-Za-z0-9+_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z-0-9]+" +
-             * "(?:\\.[a-zA-Z0-9-]+){2,}";
-             */
-            
-            pattern = Pattern.compile(regex_email);
-//            String[] email_x = u.getEmail().split("@");
 //            Signature sign = Signature.getInstance("SHA256withDSA");
-            m = pattern.matcher(u.getEmail());
-            boolean ma = m.matches();
-            boolean mf = m.find();
-            if (!m.matches()) {
-                msg += "invalid email. <br>";
-            }
             if (u.getUsername().equals("")) {
                 msg += "Please enter username. <br>";
+            } else {
+                if (u.getUsername().length() < 8) {
+                    msg += "Username Must be at least 8 characters. <br>";
+                }
             }
             if (u.getPassword().equals("")) {
                 msg += "Please enter password. <br>";
+            } else {//encrypt password by hashing
+                if (u.getPassword().length() < 15) {
+                    msg += "Password must be 15 characters long.<br>";
+                } else {
+                }
             }
             if (confpasswd.equals("")) {
                 msg += "Password Invalid. Please Confirm Password <br>";
             }
             if (u.getEmail().equals("")) {
                 msg += "Missing Email Address. <br>";
+            } else {
+                String regex_email = "^[A-Za-z0-9+_.-]+@(.+)*$";
+                String reg_email = "(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\.[A-Za-z0-9-]+)*(\\\\.[A-Za-z]{2,})$";
+                pattern = Pattern.compile(regex_email);
+                m = pattern.matcher(u.getEmail());
+                boolean ma = m.matches();
+                boolean mf = m.find();
+                if (!m.matches()) {
+                    msg += "invalid email. <br>";
+                }
             }
             if (hint.equals("") || hint.isEmpty()) {
                 msg += "Missing Hint";
             }
-            if (!webloc.equals("PatientLogin")) {
-                // check
+            if (u.getQuestion().equals("")) {
+                msg += "Missing Security Question. <br>";
 
             }
-            if (webloc.equals("DoctorLogin")) {
-//                Pattern us  = Pattern.compile("");
-                // must be 12 chatacters
-                if (u.getUsername().equals("")) {
-                    msg += "Please enter username. <br>";
-                }
-                if (u.getPassword().equals("")) {
-                    msg += "Please enter password. <br>";
-                }
-                if (confpasswd.equals("")) {
-                    msg += "Password Invalid. Please Confirm Password <br>";
-                }
-                if (u.getEmail().equals("")) {
-                    msg += "Missing Email Address. <br>";
-                }
-                if (u.getLocation().equals("")) {
-                    msg += "Missing Location. <br>";
-                }
-                if (u.getPassword().length() < 15) {
-                    msg += "Password must be 15 characters long.<br>";
-                } else {
-                    Signature sign = Signature.getInstance("");
-                }
-
-                char c;
-                // first 2 characters must be first and last initials
-                for (int i = 0; i < u.getUsername().length(); i++) {
-                    c = u.getUsername().charAt(i);
-                    if (c < 2 && Character.isDigit(c)) {
-                        isDigit++;
-                    }//else if ()
-                    if (isDigit < 10) {
-                        msg += "Employee ID must be all digits. <br>";
-                    }
-
-                }
-                //  10 characters must be numbers
+            if (u.getAnswer().equals("")) {
+                msg += "Missing Security Question Answer. <br>";
             }
-            String encryptedPasswd = AppSecurity.encrypt(u.getPassword());
             /* check for password characters. */
-//            String pws = String.valueOf(request.getParameter("upwd"));
-
-//            Pattern passwd = Pattern.compile("");
+//            
             if (webloc == "CDC" || webloc == "PatienLogin") {
                 if (u.getPassword().length() < 10) {
                     msg += "Password must be at least 10 characters. <br>";
@@ -199,51 +156,73 @@ public class NewAccountServlet extends HttpServlet {
                 }
 
             }
+            if (!webloc.equals("PatientLogin")) {
+                // check
 
-//            if (u.getPassword().length() < 10) {
-//                msg += "Password must be at least 10 characters. <br>";
-//            } else {
-////                pattern = Pattern.compile("[a-zA-Z0-9][\\!-\\*-\\+\\-\\.\\:\\;\\<\\=\\>\\?\\@\\^\\_\\`\\#\\$\\%\\&]");
-////                 m = pattern.matcher(u.getPassword());
-////                if (!m.matches()) {
-////                    msg += "password must have at least: <br>"
-////                            + " 1 uppercase & 1 lower case, <br>"
-////                            + "1 number, and 1 special character. <br>";
-////                }
-//
-//            }
-            if (!confpasswd.matches(u.getPassword())) {
-                msg += "passwords do not match. <br>";
-            } else {
-                // 
-                Signature sign = Signature.getInstance("");
             }
+            if (webloc.equals("DoctorLogin")) {
+                // must be 12 chatacters
+                if (u.getUsername().equals("")) {
+                    msg += "Please enter username. <br>";
+                }
+                if (u.getPassword().equals("")) {
+                    msg += "Please enter password. <br>";
+                } else {
+                    if (u.getPassword().length() < 15) {
+                        msg += "Password must be 15 characters long.<br>";
+                    } else {
+
+                    }
+                }
+                if (confpasswd.equals("") || !confpasswd.matches(u.getPassword())) {
+                    msg += "Password Invalid. Please Confirm Password <br>";
+                } else {
+                    if (confpasswd.equalsIgnoreCase(u.getPassword())) {
+                        //encrypt passwd
+
+//                        Optional<String> en_conf = AppSecurity.hashValue(u.getPassword(), salt.get());
+                    }
+                }
+                if (u.getEmail().equals("")) {
+                    msg += "Missing Email Address. <br>";
+                } else {
+                    // validate email
+                }
+                if (u.getLocation().equals("")) {
+                    msg += "Missing Location. <br>";
+                }
+
+                char c;
+                //  10 characters must be numbers
+                for (int i = 0; i < u.getUsername().length(); i++) {
+                    c = u.getUsername().charAt(i);
+                    if (c < 2 && Character.isDigit(c)) {
+                        isDigit++;
+                    }//else if ()
+                    if (isDigit < 10) {
+                        msg += "Employee ID must be all digits. <br>";
+                    }
+                }
+                //send security code
+
+            }
+//            String encryptedPasswd = AppSecurity.encrypt(u.getPassword());
             /* validate Email */
 //            pattern = Pattern.compile("[a-zA-Z0-9]+?+@[a-zA-Z]\\p{\\}");
 //            
             //pattern = Pattern.compile("(?:(?:\\r\\n)?[ \\t])*(?:(?:(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*))*@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*|(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)*\\<(?:(?:\\r\\n)?[ \\t])*(?:@(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*(?:,@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*)*:(?:(?:\\r\\n)?[ \\t])*)?(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*))*@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*\\>(?:(?:\\r\\n)?[ \\t])*)|(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)*:(?:(?:\\r\\n)?[ \\t])*(?:(?:(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*))*@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*|(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)*\\<(?:(?:\\r\\n)?[ \\t])*(?:@(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*(?:,@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*)*:(?:(?:\\r\\n)?[ \\t])*)?(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*))*@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*\\>(?:(?:\\r\\n)?[ \\t])*)(?:,\\s*(?:(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*))*@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*|(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)*\\<(?:(?:\\r\\n)?[ \\t])*(?:@(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*(?:,@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*)*:(?:(?:\\r\\n)?[ \\t])*)?(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\"(?:[^\\\"\\r\\\\]|\\\\.|(?:(?:\\r\\n)?[ \\t]))*\"(?:(?:\\r\\n)?[ \\t])*))*@(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*)(?:\\.(?:(?:\\r\\n)?[ \\t])*(?:[^()<>@,;:\\\\\".\\[\\] \\000-\\031]+(?:(?:(?:\\r\\n)?[ \\t])+|\\Z|(?=[\\[\"()<>@,;:\\\\\".\\[\\]]))|\\[([^\\[\\]\\r\\\\]|\\\\.)*\\](?:(?:\\r\\n)?[ \\t])*))*\\>(?:(?:\\r\\n)?[ \\t])*))*)?;\\s*)");
-            /*
-            * 
+            if (msg.isEmpty() || msg.equals("")) {
+                //encrypt values
+                salt = AppSecurity.generateSalt();
+                Optional<String> en_p = AppSecurity.hashValue(u.getPassword(), salt.get());
 
-             */
-
- /* check for empty strings in  input */
- /*
-            if (u.getUsername().equals("") or ){
-                msg += "Please enter username. <br>";
-            } else if (u.getPassword().equals("")){
-                msg += "Please enter password. <br>";
-            } else if (confpasswd.equals("")){
-                msg += "Password Invalid. Please Confirm Password <br>";
-            }else if (u.getEmail().equals("")){
-                msg += "Missing Email Address. <br>";
-            } else if (u.getLocation().equals("")){
-                msg += "Missing Location. <br>";
-            }
-             */ if (msg.isEmpty() || msg.equals("")) {
-                //Check Username, Password and Confirmation Password, 
-
-                // Add validation to look for duplicate usernames (Primary Key)
+                u.setPassword(en_p.get());
+                Optional<String> salt2 = AppSecurity.generateSalt();//, salt3 =AppSecurity.generateSalt() ;
+                Optional<String> ans = AppSecurity.hashValue(u.getAnswer(), salt2.get());
+//                Optional<String> ques = AppSecurity.hashValue(u.getQuestion(), salt2.get());
+//                u.setQuestion(ques.get());
+                u.setAnswer(ans.get());
+// Add validation to look for duplicate usernames (Primary Key)
                 String sqlcheck = "SELECT Username FROM USERS WHERE Username='" + u.getUsername() + "';";
                 Statement s = conn.createStatement();
                 ResultSet rs = s.executeQuery(sqlcheck);
@@ -252,7 +231,10 @@ public class NewAccountServlet extends HttpServlet {
                     rs.close();
                     s.close();
                 } else {
-                    sql = "INSERT INTO USERS (Username, Password, Access_Level, Email_Address, Location, Hint) VALUES (?, ?, ?, ?, ?, ?)";
+                    sql = "INSERT INTO USERS (Username, Password, "
+                            + "Access_Level, Email_Address, Location, Hint,"
+                            + " Question, Answer, SAV, SAV2)"
+                            + " VALUES (?, ?, ?, ?, ?, ?,?,?, ?, ?)";
                     PreparedStatement ps = conn.prepareStatement(sql);
 
                     ps.setString(1, u.getUsername());
@@ -261,16 +243,21 @@ public class NewAccountServlet extends HttpServlet {
                     ps.setString(4, u.getEmail());
                     ps.setString(5, u.getLocation());
                     ps.setString(6, hint);
+                    ps.setString(7, u.getQuestion());
+                    ps.setString(8, u.getAnswer());
+                    ps.setString(9, salt.get());
+                    ps.setString(10, salt2.get());
                     int rc = ps.executeUpdate();
                     if (rc == 0) {
                         msg += "User not added. <br>";
                     } else if (rc == 1) {
                         msg += "User added. <br>";
+                        
                         request.getSession().setAttribute("UserLocation", u.getLocation());
                         request.getSession().setAttribute("UserAccessLevel", u.getAccesslevel());
+                        
                     } else {
                         msg += "Warning: multiple records updated. <br>";
-
                     }
                     ps.close();
                 }

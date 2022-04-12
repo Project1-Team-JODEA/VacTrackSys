@@ -5,13 +5,14 @@
  */
 package servlets;
 
-import business.User;
+import business.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Optional;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -40,8 +41,10 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String URL = "", msg = "", sql = "", username = "", webloc = "", ac_lvl = "";
+        String URL = "", msg = "", sql = "", salt = "", username = "", pw = "", webloc = "", ac_lvl = "";
         User u;
+//        Stringsalt = Optional.empty();
+
         String dbURL = "jdbc:ucanaccess://localhost:3306/MoVaxDB";
         String dbUSER = "root";
         String dbPWD = "sesame";
@@ -65,15 +68,20 @@ public class LoginServlet extends HttpServlet {
             }
 
             username = String.valueOf(request.getParameter("userid").trim());
+            pw = String.valueOf(request.getParameter("passwd"));
             if (username.isEmpty() || username.equals("")) {
                 msg += "";
             }
-            if (username.length() < 10) {
-                msg = "Invalid Password";
+            if (username.length() < 8) {
+                msg += "Invalid Username <br>";
             }
+            if (pw.equals("")) {
+                msg += "Missing Password <br>";
+            }
+
             if (!msg.isEmpty() || !msg.equalsIgnoreCase("")) {
                 URL = webloc + "/index1.jsp";
-                
+
             } else {
                 String passattempt = request.getParameter("passwd").trim();
                 // load and register JDBC driver for mySql
@@ -83,7 +91,7 @@ public class LoginServlet extends HttpServlet {
 //           System.out.print("Path: " + p);
                 String ur = context.getRealPath("/Team_JODEA1.accdb");
                 Connection conn = DriverManager.getConnection("jdbc:ucanaccess://" + ur);
-//            String p = request
+//           
                 Statement s = conn.createStatement();
                 sql = "SELECT * FROM USERS WHERE Username = '" + username + "'";
                 // + " AND Access_Level='"+ac_lvl+"'";
@@ -92,26 +100,32 @@ public class LoginServlet extends HttpServlet {
                     u = new User();
                     u.setUsername(username);
                     u.setPassword(r.getString("Password"));
-                    u.setPassattempt(passattempt);
+                    salt = r.getString("SAV");
+                    Optional<String> ps = AppSecurity.hashValue(passattempt, salt);
+                    u.setPassattempt(ps.get());
 
                     if (u.isAuthenticated()) {
+
                         u.setAccesslevel(r.getString("Access_Level"));
                         //verify access level
-                        if (!u.getAccesslevel().equals(ac_lvl)){
-                            msg+="User"+username+"on file but not authenticated. <br>";
-                            URL = webloc + "/index1.jsp";
-                        }else{
-                         u.setEmail("Email_Address");
-                        u.setLocation("Location");
-                        msg += "User " + username + " authenticated! <br>";
-                       if (webloc.equals("Patient")){
-                           URL = webloc + "/";
-                       }else{
-                            URL = webloc + "/VaccinationDB.jsp";
-                       }
-                       
+                        if (!AppSecurity.verify(ps.get(), u.getPassword(), salt)) {
+                            msg += "";
                         }
-                       
+                        if (!u.getAccesslevel().equals(ac_lvl)) {
+                            msg += "User" + username + "on file but not authenticated. <br>";
+                            URL = webloc + "/index1.jsp";
+                        } else {
+                            u.setEmail("Email_Address");
+                            u.setLocation("Location");
+                            msg += "User " + username + " authenticated! <br>";
+                            if (webloc.equals("Patient")) {
+                                URL = webloc + "/";
+                            } else {
+                                URL = webloc + "/VaccinationDB.jsp";
+                            }
+
+                        }
+
                     } else {
                         msg += "User " + username + " on file but not authenticated. <br>";
                         URL = webloc + "/index1.jsp";
@@ -142,7 +156,7 @@ public class LoginServlet extends HttpServlet {
         uid.setMaxAge(120);
         uid.setPath("/");
         uid.setSecure(true);
-        
+
         response.addCookie(uid);
         request.setAttribute("msg", msg);
         RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);

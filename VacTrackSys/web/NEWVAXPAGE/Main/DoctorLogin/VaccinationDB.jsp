@@ -73,6 +73,7 @@
 For Searching through database
         -->
         <c:if test="${u.authenticated}">
+            
             <div class="toggle-box" id="loading-box">
                 <div class="toggle-content" id="loading-content" style="display: none;">
                     <i class="fas fa-spin fa-spinner"
@@ -113,6 +114,12 @@ For Searching through database
                     <i class="fas fa-1-x fa-question-circle toggle-btn" id="help-btn"
                        style="float: right;"></i>
                     <i class="fa-1-x fas fa-database toggle-btn" onclick="" id="msg-btn" style="float: right;"></i>
+                    <div class="toggle-box" id="pro-box">
+                <div class="toggle-content" id="msg-content" style="display: none;">
+                    <span style="font-weight: bold ;">${u.username}</span> <br>
+                    <p></p>
+                </div>
+            </div>
                 </div><br>
 
                 <div class="content">
@@ -301,6 +308,7 @@ For Searching through database
                 <div class="container" id="rs-form">
                     <div class="title">Results</div>
                     <div class="content" id="rs-content">
+                        <hr>
                         <div id="results"></div>
                     </div>
                 </div>
@@ -313,7 +321,7 @@ For Searching through database
 //        $("help-btn").style.float = "right";
                 </script>
         </c:if>
-
+                
 
     </body>
 

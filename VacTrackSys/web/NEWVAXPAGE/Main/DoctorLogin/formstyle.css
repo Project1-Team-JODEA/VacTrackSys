@@ -36,7 +36,9 @@ body {
     padding: 10px;
     background: linear-gradient(135deg, #ff105f, #ffad06);
 }
-
+hr{
+    color: rgba(0,0,0,0);
+}
 .container {
     max-width: 750px;
     margin-left: 5px;

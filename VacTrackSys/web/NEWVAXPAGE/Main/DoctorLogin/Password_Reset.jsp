@@ -20,24 +20,67 @@
         <script src="https://kit.fontawesome.com/98e4c48f68.js" crossorigin="anonymous"></script>
         <script>
     // Add attribute events
-    window.onload = () => {
-        $("v-btn-p").setAttribute("onclick", "toggleV('upwd', 'v-btn-p')");
-        $("v-btn-c").setAttribute("onclick", "toggleV('confpasswd', 'v-btn-c')");
-        $("terms").setAttribute("onclick", "t()");
-        $("validc").setAttribute("onchange", "validatePasswd('upwd', 'confpasswd')");
-        $("email").setAttribute("onchange", "validatePattern('email','valide')");
-        //                   $("uid").setAttribute("onchange", "validatePattern('uid','validid')");  
-        //                       $("validp").setAttribute("onchange","validatePasswd('upwd', 'confpasswd')"); 
-        //                $sel("")
-
+//    var es = document.getElementsByClassName("rsmethod");
+    function toggle() {// toggle methods
+        var element = this;
+        var val = this.value;
+        if (value === 'hint'){
+            var es = document.getElementsByClassName("Hint");
+            for (var i=0; i < es.length; i++){
+                if (es[i].style.display === 'none'){
+                    es[i].style.display = 'block';
+                }else if (es[i].style.display === 'block'){
+                    es[i].style.display = 'none';
+                }
+            }
+        }
+        else{
+            var es = document.getElementsByClassName(val);
+            for (var i=0; i < es.length; i++){
+                 if (es[i].style.display === 'none'){
+                    es[i].style.display = 'block';
+                }else if (es[i].style.display === 'block'){
+                    es[i].style.display = 'none';
+                }
+            }
+        }
+    }
+    var $ = function (id) {
+        return document.getElementById(id);
     };
     function pageAction(action) {
         document.getElementById("step").value = action;
         if (action === 'cancel') {
             var c = confirm("Are you sure you want to cancel? Your input data may be lost.");
+            if (c === true) {
+                document.passwdreset.submit();
+            } else if (c === false) {
+
+            }
+        } else if (action === 'method') {
+            document.getElementById("step").value = $("rsmethod").value;
+            document.passwdreset.submit();
+        } else {
+            document.passwdreset.submit();
         }
-        document.passwdreset.submit();
+
     }
+    window.onload = () => {
+//       
+//        $("terms").setAttribute("onclick", "t()");
+//        $("validc").setAttribute("onchange", "");
+//        $("email").setAttribute("onchange", "validatePattern('email','valide')");
+        //                   $("uid").setAttribute("onchange", "validatePattern('uid','validid')");  
+        //                       $("validp").setAttribute("onchange","validatePasswd('upwd', 'confpasswd')"); 
+        //                $sel("")
+//        $("rsmethod").onchange = () => {//toggle methods
+//            var id = $("rsmethod").id;
+//            var val = $("rsmethod").value;
+//            console.log(val);
+//        };
+    };
+
+
     var cancel = function (form_id) {
 //    var p = prompt();
 
@@ -73,42 +116,67 @@
                         <tr>
                             <td style="width: 280px; ">
                                 <input type="text" class="input-field" name="userid" id="userid"
-                                       placeholder="UserID" required>
+                                       placeholder="UserID" value="${u.username}" required>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" class="input-field" name="email" id="email"
-                                       placeholder="UserID" required>
+                                <input type="email" class="input-field" name="email" id="email" value="${u.email}"
+                                       placeholder="email (character@character.domain)" required>
                             </td>
                         </tr>
-                        <c:if test="${found==true}">
+                        <c:if test="${searched && searched == 'true'&& ver != 'y-d'}">
                             <tr>
-                                <td>Select</td>
+                                <td>Select Reset Method</td>
                             </tr>
                             <tr>
+                                <td><select name="rsmethod" id="methodtype" onchange="toggle()">
+                                        <option value="">Select</option>
+                                        <option value="sendCode">Reset Code via Email</option>
+                                        <option value="Challenge Question">Challenge Question</option>
+                                        <!--<option value="Hint"></option>-->
+
+                                    </select></td>
+                                <!--<td><button type="submit" onclick="pageAction('method')">Submit</button></td>-->
+                            </tr>
+                            <tr name="methodtype" class="Hint" id="out" style="display: none;">
                                 <td></td>
                             </tr>
-                            <tr>
+                            <tr name="methodtype" class="Hint" id="passwd_1" style="display: none;">
                                 <td></td>
                             </tr>
-                        </c:if>
-                        <c:if test="${ver != 'y-d'}">
-                            <tr>
-                                <td style="width: 280px; ">
-                                    <input type="text" class="input-field" name="hint" id="hint"
-                                           placeholder="Hint" required>
-                                </td>
+                            <!--                            <tr><button type="button" class="rsmethod">Challenge</button> <br>
+                                                        <input type="text" class="in" name="ques" id="" value="${u.question}"></tr>
+                                                        <tr>-->
+                            <td></td>
                             </tr>
                         </c:if>
+
+                        <!--                            <tr>
+                                                        <td>Select a Method to reset your password:</td>
+                                                    </tr>
+                                                    <tr id="reset-m">
+                                                        <td><button type="button" class="rsmethod">Code</button>
+                                                            <input type="button"   value="">
+                                                            <input type="text" class="in" name="rcode" id="rcode"value="">
+                                                        </td>
+                                                                                        <td><input type="text" class="in" name="" id="" value=""></td>
+                                                    </tr>
+                        
+                                                    <tr>
+                                                        <td></td>
+                                                    </tr>
+                                                    <var>c</var>-->
+
+
                         <%--<c:if test="}">--%>
-                        <c:if test="${ver== 'y-d'}">
+                        <c:if test="${searched =='true' && ver== 'y-d'}">
                             <tr>
                                 <td style="width: 240px;"><input type="password" name="upwd" class="input-field"
                                                                  id="upwd" value="" placeholder="Password" required>
                                 </td>
                                 <td style="width: 40px;">
-                                    <i class="fas fa-1-5x fa-eye" id="v-btn-p"></i>
+                                    <i class="fas fa-1-5x fa-eye" id="v-btn-p" onclick="toggleV('upwd', 'v-btn-p')"></i>
                                     <i id="validp" class="fas fa-check" style="color: green;"></i>
                                 </td>
                             </tr>
@@ -117,8 +185,9 @@
                                     <input type="password" name="confpasswd" class="input-field" name="confpasswd"
                                            id="confpasswd" placeholder="Confirm Password" required>
                                 </td>
-                                <td style="width: 40px;"><i class="fas fa-1-5x fa-eye" id="v-btn-c"></i>
-                                    <i id="validc" class="fas fa-check" style="color: green;"></i>
+                                <td style="width: 40px;"><i class="fas fa-1-5x fa-eye" id="v-btn-c" onclick="toggleV('upwd', 'v-btn-c')"></i>
+                                    <i id="validc" class="fas fa-check" style="color: green;"
+                                       onchange="validatePasswd('upwd', 'confpasswd')"></i>
                                 </td>
                             </tr>
                             <tr>
@@ -133,7 +202,7 @@
                     <!--<input type="submit"  onclick="">Login</button>-->
 
                     <c:if test="${ver != 'y-d'}">
-                        <button type="submit" class="submit-btn" onclick="pageAction('ResetPasswd')"> Reset </button>
+                        <button type="submit" class="submit-btn" onclick="pageAction('search')"> Continue </button>
                     </c:if>
 
                     <!--<input type="submit" name="" value="Reset">-->
@@ -144,7 +213,11 @@
                     </c:if>
                     <!--<button  class="submit-btn" onclick="document.location = 'ForgotPassword.jsp'"><i class="fas fa-angle-right"> Forgot Password?</i></button>-->
 
-
+                    <!--                    <div class="toggle-box">
+                                            <div id="Qustions" class="toggle-content">
+                                                
+                                            </div>
+                                        </div>-->
 
                     <input type="hidden" name="step" id="step" value="" hidden="">
                     <!--<input type="hidden" name="ver" id="ver" value="${ver}">-->

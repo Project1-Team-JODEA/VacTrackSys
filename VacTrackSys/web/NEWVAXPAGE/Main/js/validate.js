@@ -129,7 +129,7 @@ const validateUserReg = function (form_id, userType) {
 //        var spaces = passwd.match(/\s/g);
 
 //        console.log(result + "\n" + spaces);
-        if (passwd.match(confpasswd)) {
+        if (!passwd.match(confpasswd)) {
             msg += "\n Confirming Password Must Match.";
             $("confpasswd").oninvalid = msg;
             $("confpasswd").setCustomValidity('Password does not match');
@@ -157,12 +157,12 @@ const validateUserReg = function (form_id, userType) {
  */
 function validatePasswd(passwd_id, confpwd_id) {
     // $(confpwd_id).value;
-    if (!$(confpwd_id).matches($(passwd_id).value)) {
+    if (!$(confpwd_id).value.matches($(passwd_id).value)) {
         if ($("validc").classList.contains('fa-check')) {
             $("validc").classList.replace('fa-check', 'fa-xmark');
             $("validc").setAttribute("style", "color: red;");
         }
-    } else if ((confpwd_id).matches($(passwd_id), value)) {
+    } else if ((confpwd_id).value.matches($(passwd_id)).value) {
         if ($("validc").classList.contains('fa-xmark')) {
             $("validc").classList.replace('fa-xmark', 'fa-check');
             $("validc").setAttribute("style", "color: green;");
@@ -190,14 +190,32 @@ pattern =  /^\w+([\.-]?\w+)*@\w+([\.-]) /;
         console.log(pattern.toString());
         
         const p = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]*@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;///[a-zA-Z0-9]+@[a-zA-Z0-9].{3,}$ /g ;
-        valid = p.test(email);//returns true if matched false otherwise
+       const pa = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        valid = pa.test(email);//returns true if matched false otherwise
 
         console.log(valid);
         if (valid === false){
             msg="Invalid Email";
+        }else{
+            msg="Valid Email";
         }
-    }// end of validating email 
-    // validating password
+    } 
+    // end of validating email 
+    else if ($(input_id).getAttribute("type") ==="text"){
+        if ($(input_id).id==="uid" || $(input_id).id==="userid"){
+            let val = $(input_id).value;
+            if (val.length < 10){
+                valid = false;
+                msg="";
+            }
+        }
+    } else if ($(input_id).getAttribute("type")=== "password"){
+        if ($(input_id).value.length <15){
+            valid = false;
+        }
+    }
+    
+// validating password
     
    else if ($(input_id).getAttribute("id") === "upwd") {
         pattern = /.{10,}/g;

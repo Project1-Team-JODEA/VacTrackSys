@@ -6,13 +6,15 @@ package business;
 //import AppSecurity;
 
 public class User {
+
     public boolean isSearchedPatients() {
-        if (searched == true){
+        if (searched == true) {
             return true;
         } else {
             return false;
         }
     }
+
     public boolean getSearched() {
         return searched;
     }
@@ -20,6 +22,7 @@ public class User {
     public void setSearched(Boolean searched) {
         this.searched = searched;
     }
+
     public String getUsername() {
         return username;
     }
@@ -68,11 +71,13 @@ public class User {
         this.passattempt = passattempt;
     }
 
-    private String username, password, accesslevel, email, location, passattempt;
+    private String username, password, accesslevel, email,
+            location, passattempt, question, answer;
+    
     private Boolean searched = false;
     // default constructor
-    
-    public User(){
+
+    public User() {
         this.username = "";
         this.password = "";
         this.accesslevel = "";
@@ -80,10 +85,12 @@ public class User {
         this.location = "";
         this.passattempt = "";
         this.searched = false;
+        this.question = "";
+        this.answer = "";
     }
-    
-        //normal constructor.  All fields should be validated BEFORE calling this method.  Add functionality for limiting scope / permissions???
-    public User(String username, String password, String accesslevel, String email, String location, String passattempt){
+
+    //normal constructor.  All fields should be validated BEFORE calling this method.  Add functionality for limiting scope / permissions???
+    public User(String username, String password, String accesslevel, String email, String location, String passattempt) {
         this.username = username;
         this.password = password;
         this.accesslevel = accesslevel;
@@ -92,20 +99,50 @@ public class User {
         this.passattempt = passattempt;
         this.searched = false;
     }
+
     /**
      * Returns true if User password mataches
+     *
      * @return boolean
-     * 
+     *
      */
-    public boolean isAuthenticated(){
-        if (this.getPassword().equals(this.getPassattempt())){
+    public boolean isAuthenticated() {
+        if (this.getPassword().equals(this.getPassattempt())) {
             return true;
         }
         return false;
     }
-    public void secureInfo(){
-        
+
+    public void secureInfo() {
+
     }
- 
+
+    /**
+     * @return the question
+     */
+    public String getQuestion() {
+        return question;
+    }
+
+    /**
+     * @return the answer
+     */
+    public String getAnswer() {
+        return answer;
+    }
+
+    /**
+     * @param question the question to set
+     */
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    /**
+     * @param answer the answer to set
+     */
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
 
 }

@@ -19,10 +19,27 @@
             window.onload = () => {
                 $("v-btn-p").setAttribute("onclick", "toggleV('upwd', 'v-btn-p')");
                 $("v-btn-c").setAttribute("onclick", "toggleV('confpasswd', 'v-btn-c')");
-                $("terms").setAttribute("onclick", "t()");
+//                $("terms").setAttribute("onclick", "t()");
                 $("validc").setAttribute("onchange", "validatePasswd('upwd', 'confpasswd')");
 //                $("email").setAttribute("onchange", "validatePattern('email','valide')");
+
+//                $("terms").setAttribute("onclick", "t()");
+                $("terms").onclick = () => {
+                    var c = document.getElementById("terms");
+                    var a = c.checked;
+                    //            console.log(c);
+                    if (a === null) {
+                        c.setAttribute("checked", null);
+//                    $("terms").removeAttribute("disabled");
+                    } else {
+                        c.removeAttribute("checked");
+//                    $("check").setAttribute("disabled", null);
+    
+                    }                    
+                };
+                $("register").onsubmit = ()=> {$("newacct").disabled = true;};
             };
+
         </script>
     </head>
 
@@ -64,7 +81,7 @@
                         </tr>
                         <tr>
                             <td style="width: 280px; ">
-                                <input type="checkbox" class="check-box">Remember Password
+                                <input type="checkbox" class="check-box" onclick="t()">Remember Password
                             </td>
                         </tr>
                     </table>
@@ -87,17 +104,17 @@
                         <tr>
                             <td style="width: 240px;"><input type="text" class="input-field" name="uid" id="uid"
                                                              placeholder="Employee ID"
-                                                             pattern="\d[0-9]" required></td>
+                                                             required></td>
                             <td style="width: 40px;"> <i id="validid" class="fas " style="color: green;"></i></td>
-                            
-                            
+
+
                         </tr>
                         <tr>
                             <td style="width: 240px;"><input type="email" name="email" id="email"
                                                              class="input-field" placeholder="characters@characters.domain"
-                                                             onchange="validatePattern('email','valide')" oninvalid="this.setCustomValidity('Not Valid')" required></td>
-                                    <td style="width: 40px;"> <i id="valide" class="fas " style="color: green;">
-                                
+                                                             onchange="validatePattern('email', 'valide')" oninvalid="this.setCustomValidity('Not Valid')" required></td>
+                            <td style="width: 40px;"> <i id="valide" class="fas " style="color: green;">
+
                                 </i></td>
                             </td>
                         </tr>
@@ -122,8 +139,8 @@
                         <tr>
                             <td style="width: 240px;">
                                 <input type="password" name="confpasswd" class="input-field" name="confpasswd"
-                                       id="confpasswd" placeholder="Confirm Password" pattern="{15)"
-                                       onchange="validatePattern('confpasswd', 'validc')" oninput="this.setCustomValidity('Must Match Password')" required>
+                                       id="confpasswd" placeholder="Confirm Password" 
+                                       onchange="validatePattern('confpasswd', 'validc')" required>
                             </td>
                             <td style="width: 40px;"><i class="fas fa-1-5x fa-eye" id="v-btn-c"></i>
                                 <i id="validc" class="fas fa-check" style="color: green;"></i>
@@ -135,15 +152,18 @@
                         </tr>
                         <tr>
                             <td>
-                                <select name="quest" title="security question" id="quest">
-                                    <option id="" value="">Select</option>
-                                    <option id="" value="">Mothers Maiden Name</option>
-                                    <option id="" value="">What's your favorite College </option>
-                                    <option id="" value="">Select</option>
-                                    <option id="" value="">Select</option>
+                                <select name="quest" class="input-field" id="quest" title="security question" id="quest">
+                                    <option value="">Select</option>
+                                    <option value="What is your Mother's Maiden Name?">What is your Mother's Maiden Name</option>
+                                    <option value="Whats your favorite College?">Whats your favorite College? </option>
+                                    <option value="What City were you born in?">What City were you born in?</option>
+                                    <option value="What is your childhood nickname?">What is your childhood nickname?</option>
+                                    <option value="What street did you live on in 3rd grade?">What street did you live on in 3rd grade?</option>
+                                    <option value="In what city did you meet your spouse/significant other?">In what city did you meet your spouse/significant other?</option>
+                                    <!--                                    <option id="" value="">Select</option>-->
                                 </select>
                             </td>
-                            
+
                         </tr>
                         <tr>
                             <td>
@@ -152,55 +172,56 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="font-size: 12px;"><input type="checkbox" class="check-box" id="terms">
+                            <td style="font-size: 12px;"><input type="checkbox" class="check-box" id="terms"
+                                                                onclick="">
                                 I agree to the terms & conditions</td>
                         </tr>
-                        
+
                     </table>
-                    <button type="button" id="check" class="submit-btn" onclick="validateUserReg('newacct')">Check</button>
-                    <button type="submit" id="newacct" class="submit-btn" disabled>Register</button>
+                    <!--<button type="button" id="check" class="submit-btn" onclick="validateUserReg('newacct')">Check</button>-->
+                    <button type="submit" id="newacct" class="submit-btn">Register</button>
                     <!--<input type="hidden" id="isValid" value="">-->
 
                 </form>
-
+                <!--                <form id="register-p" class="input-group" style="overflow-y: auto; max-height: 275px;"
+                                      action="NewAccount" method="post">
+                                    <table>
+                                        <tr><td><input type="text" name="" id="" value="" ></td>
+                                        </tr>
+                                    </table>
+                                </form>-->
             </div>
             <!--<script src =" ../js/functions" type="text/javascript"></script>-->
 
         </div>
-
+        <input type="hidden" name="step" id="step" value="" onchange="">
         <script>
             var x = document.getElementById("login");
             var y = document.getElementById("register");
+            var y2 = document.getElementById("register-p");
             var z = document.getElementById("btn");
             function register() {
                 x.style.left = "-400px";
                 y.style.left = "50px";
+//                y2.style.left = "-690px";
                 z.style.left = "110px";
 
             }
-
+//            function newInfo() {
+////                x.style.left = "";
+//                x.style.left = "-800px";
+//                y.style.left = "50px";
+//                y2.style.left = "-690px";
+//                z.style.left = "110px";
+//            }
             function login() {
                 x.style.left = "50px";
                 y.style.left = "450px";
+//                y2.style.left = "-690px";
                 z.style.left = "0px";
 //                document.getElementById("").setAttribute("focus")
             }
 
-            function t() {
-                var c = $("terms").getAttribute("checked");
-                //            console.log(c);
-                if (c === null) {
-                    $("terms").setAttribute("checked", null);
-                    $("check").removeAttribute("disabled");
-                } else {
-                    $("terms").removeAttribute("checked");
-                    $("check").setAttribute("disabled", null);
-                }
-                //       if ($("terms").checked){
-                //            
-                //        } 
-
-            }
 
         </script>
 

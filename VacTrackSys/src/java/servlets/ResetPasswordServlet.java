@@ -19,6 +19,7 @@ import java.sql.Statement;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,8 +33,19 @@ public class ResetPasswordServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods. Servlet will use Hint to reset user password - may come from
-     * email.
+     * methods. <br>
+     * Servlet will perform actions/steps to reset password. when step value
+     * from jsp if set to "search" then Servlet will search Users table using
+     * the provided username and password. If user is found in database, the
+     * servlet sets a temporary attribute called <code>found </code> which is
+     * set to a boolean value. if user is not found in database, then
+     * <code>found = false</code>. on the jsp page if the <code>found </code>
+     * attribute if not true then user cannot proceed. otherwise, the user will
+     * proceed with verifying their identity.
+     *
+     * when step value = "verify" the servlet will take the verification
+     * information and
+     *
      *
      * @param request servlet request
      * @param response servlet response
@@ -45,7 +57,7 @@ public class ResetPasswordServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         //
         String URL = "", msg = "", userid = "", email = "", code = "", webloc = "";
-        String sql = "", hint = "", host = "", dir = "";
+        String sql = "", hint = "", dir = "", salt = "";
         int step = 0;
         User u = new User();
         try {
@@ -65,32 +77,79 @@ public class ResetPasswordServlet extends HttpServlet {
             } else if (x.contains("CDC")) {
                 webloc = "/CDC";
                 // ac_lvl = "CDC";
-                dir = "PatientLogin";
-                webloc = "";
+                dir = "CDC";
+                webloc = "/CDC";
             }
+            URL = webloc + "/Password_Reset.jsp";
 
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             ServletContext context = getServletContext();
             String ur = context.getRealPath("/Team_JODEA1.accdb");
             Connection conn = DriverManager.getConnection("jdbc:ucanaccess://" + ur);
             userid = String.valueOf(request.getParameter("userid"));
-           email = String.valueOf(request.getParameter("email"));
+            email = String.valueOf(request.getParameter("email"));
             if (userid.isEmpty() || userid.equals("")) {
                 msg += "Missing Username <br>";
             }
-            if (email.isEmpty()|| email.equals("")){
-                msg+="Missing Email";
+            if (email.isEmpty() || email.equals("")) {
+                msg += "Missing Email";
             }
             String stp = request.getParameter("step");
             if (stp.isEmpty() || stp.equalsIgnoreCase("")) {
                 msg += "Error: unknown Aciton <br>";
-                
+
+            } else if (stp.equals("search")) {//
+
+                if (msg.isEmpty() || msg.equals("")) {
+                    sql = "SELECT * FROM USERS WHERE Username='" + String.valueOf(request.getParameter("userid")) + "'"
+                            + "AND Email_Address='" + String.valueOf(request.getParameter("email")) + "'";
+
+                    Statement s = conn.createStatement();
+                    ResultSet r = s.executeQuery(sql);
+                    u = new User();
+                    if (r.next()) {
+//                        request.
+                        u.setUsername(r.getString("Username"));
+                        u.setEmail(r.getString("Email_Address"));
+//                      u.setPassword(r.getString);
+                        u.setSearched(true);
+                        u.setLocation(r.getString("Location"));
+                        u.setQuestion(r.getString("Question"));
+//                        Cookie res = new Cookie("re", u.getUsername());
+//                        res.setHttpOnly(true);
+//                        res.setPath(ur);
+
+                        request.getSession().setAttribute("searched", "true");
+                      request.getSession().setAttribute("u", u);
+                    } else {
+                        msg += "username not found in database <br>";
+                    }
+                } else {
+
+                }
+            } else if (stp.equalsIgnoreCase("sendCode")) {
+                //send code to user using email
+                if (msg.isEmpty() || msg.equals("")) {
+                    sql = "SELECT * FROM USERS WHERE Username='" + String.valueOf(request.getParameter("userid")) + "'";
+                    Statement s = conn.createStatement();
+                    ResultSet r = s.executeQuery(sql);
+                    u = new User();
+                    if (r.next()) {
+//                        request.
+//                       u.getEmail();
+//                        u.setEmail(r.getString("Email_Address"));
+//                        u.setUsername(r.getString("Username"));
+//                       u.set
+                    }
+                } else {
+
+                }
             } else if (stp.equalsIgnoreCase("ResetPasswd")) {
                 if (msg.isEmpty() || msg.equals("")) {
                     sql = "SELECT * FROM USERS WHERE Username='" + String.valueOf(request.getParameter("userid")) + "'";
                     Statement s = conn.createStatement();
                     ResultSet r = s.executeQuery(sql);
-                    
+
                     if (r.next()) {
 
                         u.setUsername(userid);
@@ -104,24 +163,24 @@ public class ResetPasswordServlet extends HttpServlet {
                     if (!u.getLocation().equals(dir)) {// return message if account access level does not match location
                         msg += "Cannot Reset Account <br>";
                         URL = webloc + "/Password_Reset.jsp";
-                        
+
                     } else {
                         if (hint.equals(request.getParameter("hint"))) {
                             boolean reset = true;
-                            
+
 //                            AppSecurity.sendEmail(u.getEmail(), "Password Reset", "");
-                            request.setAttribute("found", true);
-                            request.setAttribute("ver", "y-d");
+                            request.getSession().setAttribute("found", true);
+                            request.getSession().setAttribute("ver", "y-d");
                             msg += "Password Reset <br>";
-                            
+
                             URL = webloc + "/Password_Reset.jsp";
 //                    Cookie res = new Cookie("ver", );
-                    
+
                         } else {
                             boolean reset = false;
                             request.setAttribute("found", false);
                             msg += "Hint Does Not Match <br>";
-                            request.setAttribute("ver", "x-v");
+                            request.getSession().setAttribute("ver", "x-v");
 //                    request.setAttribute("resetu", u);
                         }
                     }
@@ -199,10 +258,10 @@ public class ResetPasswordServlet extends HttpServlet {
 
             } else if (stp.equalsIgnoreCase("cancel")) {
                 String ver_1 = (String) request.getAttribute("ver");
-               String v_2 = (String) request.getAttribute("found");
+                String v_2 = (String) request.getAttribute("found");
                 if (!ver_1.isEmpty() || !ver_1.equalsIgnoreCase("")) {
                     request.removeAttribute("ver");
-                    
+
                 }
                 URL = webloc + "/index1.jsp";
             }
