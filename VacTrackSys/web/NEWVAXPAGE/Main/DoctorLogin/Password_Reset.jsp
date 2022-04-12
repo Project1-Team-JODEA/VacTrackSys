@@ -2,6 +2,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page import="business.User" %>
 <!DOCTYPE html>
 <html><script type="text/javascript">
 
@@ -21,30 +22,7 @@
         <script>
     // Add attribute events
 //    var es = document.getElementsByClassName("rsmethod");
-    function toggle() {// toggle methods
-        var element = this;
-        var val = this.value;
-        if (value === 'hint'){
-            var es = document.getElementsByClassName("Hint");
-            for (var i=0; i < es.length; i++){
-                if (es[i].style.display === 'none'){
-                    es[i].style.display = 'block';
-                }else if (es[i].style.display === 'block'){
-                    es[i].style.display = 'none';
-                }
-            }
-        }
-        else{
-            var es = document.getElementsByClassName(val);
-            for (var i=0; i < es.length; i++){
-                 if (es[i].style.display === 'none'){
-                    es[i].style.display = 'block';
-                }else if (es[i].style.display === 'block'){
-                    es[i].style.display = 'none';
-                }
-            }
-        }
-    }
+
     var $ = function (id) {
         return document.getElementById(id);
     };
@@ -65,33 +43,6 @@
         }
 
     }
-    window.onload = () => {
-//       
-//        $("terms").setAttribute("onclick", "t()");
-//        $("validc").setAttribute("onchange", "");
-//        $("email").setAttribute("onchange", "validatePattern('email','valide')");
-        //                   $("uid").setAttribute("onchange", "validatePattern('uid','validid')");  
-        //                       $("validp").setAttribute("onchange","validatePasswd('upwd', 'confpasswd')"); 
-        //                $sel("")
-//        $("rsmethod").onchange = () => {//toggle methods
-//            var id = $("rsmethod").id;
-//            var val = $("rsmethod").value;
-//            console.log(val);
-//        };
-    };
-
-
-    var cancel = function (form_id) {
-//    var p = prompt();
-
-        if (c === true) {
-            $("step").value = "";
-            $(form_id).submit();
-        }
-
-    }
-//            if ($("email"))
-
         </script>
     </head>
 
@@ -100,13 +51,13 @@
             <div class="form-box">
                 <div class="social-icons">
                     <a href="https://www.mypatientchart.org/MyChart/Authentication/Login?">
-                        <img src="download.png">
+                        <img src="../image/download.png">
                     </a>
                     <a href="https://physicians.wustl.edu/for-patients/mychart-patient-portal/">
-                        <img src="washu2.png">
+                        <img src="../image/washu2.png">
                     </a>
                     <a href="https://www.mymercy.net/login">
-                        <img src="mercy.jpg">
+                        <img src="../image/mercy.jpg">
                     </a>
                 </div>
 
@@ -115,8 +66,8 @@
                     <table>
                         <tr>
                             <td style="width: 280px; ">
-                                <input type="text" class="input-field" name="userid" id="userid"
-                                       placeholder="UserID" value="${u.username}" required>
+                                <input type="text" class="input-field" name="userid" id="userid" value="${u.username}"
+                                       placeholder="UserID"  required>
                             </td>
                         </tr>
                         <tr>
@@ -130,7 +81,7 @@
                                 <td>Select Reset Method</td>
                             </tr>
                             <tr>
-                                <td><select name="rsmethod" id="methodtype" onchange="toggle()">
+                                <td><select name="rsmethod" id="methodtype">
                                         <option value="">Select</option>
                                         <option value="sendCode">Reset Code via Email</option>
                                         <option value="Challenge Question">Challenge Question</option>
@@ -139,17 +90,23 @@
                                     </select></td>
                                 <!--<td><button type="submit" onclick="pageAction('method')">Submit</button></td>-->
                             </tr>
-                            <tr name="methodtype" class="Hint" id="out" style="display: none;">
-                                <td></td>
-                            </tr>
-                            <tr name="methodtype" class="Hint" id="passwd_1" style="display: none;">
-                                <td></td>
-                            </tr>
-                            <!--                            <tr><button type="button" class="rsmethod">Challenge</button> <br>
-                                                        <input type="text" class="in" name="ques" id="" value="${u.question}"></tr>
-                                                        <tr>-->
-                            <td></td>
-                            </tr>
+                            <!--                            <tr>
+                                                            <td><input class="Hint rsmethod" type="text" name="Hint" id="hint" value="${hint}" readonly></td>
+                                                        </tr>
+                                                        <tr  id="passwd_1" style="display: none;">
+                                                            <td><input class="Hint" type="text" name="opasswd" value=""></td>
+                                                        </tr>-->
+                            <tr><td><input type="submit"
+                                           name="sendCode" value="Send Code to email" onclick="pageAction('sendCode')">
+                                </td></tr>
+                            <tr><td><input type="number" maxlength="6" 
+                                           class="input-field sendCode" name="rcode" 
+                                           id="rcode" value="" placeholder="6-digit code"></td></tr>
+                            <tr><td><input type="text" class="input-field  sendCode" 
+                                           name="ques" id="ques" value="${u.question}" readonly></td></tr>
+                            <tr><td><input type="text" class="input-field  sendCode" name="ans" 
+                                           id="ans" value="" placeholder="Answer"></td></tr>
+                            <tr><td></td></tr>
                         </c:if>
 
                         <!--                            <tr>
@@ -201,16 +158,26 @@
                     </table>
                     <!--<input type="submit"  onclick="">Login</button>-->
 
-                    <c:if test="${ver != 'y-d'}">
-                        <button type="submit" class="submit-btn" onclick="pageAction('search')"> Continue </button>
-                    </c:if>
+
+                    <c:choose>
+                        <c:when test="${ver != 'y-d' && searched != 'true'}">
+                            <button type="submit" class="submit-btn" onclick="pageAction('search')"> Continue </button>
+                        </c:when>
+                        <c:when test="${ver != 'y-d' && searched == 'true'}">
+                            <button type="submit" class="submit-btn" onclick="pageAction('ResetPasswd')"> Reset Password </button>
+                        </c:when>
+                        <c:when test="${ver == 'y-d' && searched=='true'}">
+                            <button type="submit" class="submit-btn" onclick="pageAction('UpdatePasswd')">Update Account</button>
+                        </c:when>
+                        <c:otherwise>
+                            
+                        </c:otherwise>
+                    </c:choose>
 
                     <!--<input type="submit" name="" value="Reset">-->
                     <!--<a href="#">Forgot Password?</a>-->
                     <br>
-                    <c:if test="${ver == 'y-d'}">
-                        <button type="submit" onclick="pageAction('UpdatePasswd')">Update Account</button>
-                    </c:if>
+
                     <!--<button  class="submit-btn" onclick="document.location = 'ForgotPassword.jsp'"><i class="fas fa-angle-right"> Forgot Password?</i></button>-->
 
                     <!--                    <div class="toggle-box">
@@ -233,7 +200,38 @@
             <script>
                 var x = document.getElementById("passwdreset");
                 x.style.left = "50px";
-
+                function toggle() {// toggle methods
+                    var element = document.getElementById("methodtype");
+                    var val = element.value;
+                    if (val === 'Hint') {
+                        var es = document.getElementsByClassName("Hint");
+                        for (var i = 0; i < es.length; i++) {
+//                es[i]
+                            if (es[i].classList.contains("show")) {
+                                es[i].classList.remove('show');
+                            } else if (!es[i].classList.contains("show")) {
+                                es[i].classList.toggle('show');
+                            }
+                        }
+                    } else {
+                        var es = document.getElementsByClassName(val);
+                        for (var i = 0; i < es.length; i++) {
+                            if (es[i].style.display === 'none') {
+                                es[i].style.display = 'block';
+                            } else if (es[i].style.display === 'block') {
+                                es[i].style.display = 'none';
+                            }
+                        }
+                    }
+                }
+                document.getElementById("passwdreset").onsubmit = function () {
+                    var e = document.getElementsByClassName("submit-btn");
+                    for (var i = 0; i < e.length; i++) {
+                        if (!e[i].hasAttribute("disabled")) {
+                            e[i].setAttribute("disabled", null);
+                        }
+                    }
+                };
             </script>
 
     </body>

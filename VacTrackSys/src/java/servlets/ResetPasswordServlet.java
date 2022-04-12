@@ -16,6 +16,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Enumeration;
+import java.util.Optional;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -57,26 +59,26 @@ public class ResetPasswordServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         //
         String URL = "", msg = "", userid = "", email = "", code = "", webloc = "";
-        String sql = "", hint = "", dir = "", salt = "";
+        String sql = "", ac_lvl="",hint = "", dir = "", salt = "";
         int step = 0;
         User u = new User();
         try {
             String x = String.valueOf(request.getRequestURL());
             if (x.contains("DoctorLogin")) {
                 webloc = "/DoctorLogin";
-                // ac_lvl = "MedicalStaff";
+                 ac_lvl = "MedicalStaff";
                 dir = "DoctorLogin";
             } else if (x.contains("PatientLogin")) {
                 webloc = "/PatientLogin";
-                // ac_lvl = "Patient";
+                 ac_lvl = "Patient";
                 dir = "PatientLogin";
             } else if (x.contains("AdminConsole")) {
                 webloc = "/AdminConsole";
-                // ac_lvl = "Administrator";
+                 ac_lvl = "Administrator";
                 dir = "PatientLogin";
             } else if (x.contains("CDC")) {
-                webloc = "/CDC";
-                // ac_lvl = "CDC";
+//                webloc = "/CDC";
+                 ac_lvl = "CDC";
                 dir = "CDC";
                 webloc = "/CDC";
             }
@@ -90,9 +92,14 @@ public class ResetPasswordServlet extends HttpServlet {
             email = String.valueOf(request.getParameter("email"));
             if (userid.isEmpty() || userid.equals("")) {
                 msg += "Missing Username <br>";
+            } else {
+                u.setUsername(userid);
+
             }
             if (email.isEmpty() || email.equals("")) {
                 msg += "Missing Email";
+            } else {
+                u.setEmail(email);
             }
             String stp = request.getParameter("step");
             if (stp.isEmpty() || stp.equalsIgnoreCase("")) {
@@ -106,21 +113,29 @@ public class ResetPasswordServlet extends HttpServlet {
 
                     Statement s = conn.createStatement();
                     ResultSet r = s.executeQuery(sql);
-                    u = new User();
+                    User user = new User();
                     if (r.next()) {
 //                        request.
-                        u.setUsername(r.getString("Username"));
-                        u.setEmail(r.getString("Email_Address"));
+                        user.setUsername(r.getString("Username"));
+                        user.setEmail(r.getString("Email_Address"));
 //                      u.setPassword(r.getString);
-                        u.setSearched(true);
-                        u.setLocation(r.getString("Location"));
-                        u.setQuestion(r.getString("Question"));
+                        user.setSearched(true);
+                        user.setLocation(r.getString("Location"));
+                        user.setQuestion(r.getString("Question"));
+                        user.setAccesslevel(r.getString("Access_Level"));
 //                        Cookie res = new Cookie("re", u.getUsername());
 //                        res.setHttpOnly(true);
 //                        res.setPath(ur);
-
-                        request.getSession().setAttribute("searched", "true");
-                      request.getSession().setAttribute("u", u);
+                        hint = r.getString("Hint");
+                        if (!u.getAccesslevel().equals(ac_lvl)) {// return message if account access level does not match location
+                           
+                        } else {
+                          
+                        }
+                          msg = "User Found in database <br>";
+                            request.getSession().setAttribute("searched", "true");
+                            request.getSession().setAttribute("u", user);
+                            request.getSession().setAttribute("hint", hint);
                     } else {
                         msg += "username not found in database <br>";
                     }
@@ -129,64 +144,117 @@ public class ResetPasswordServlet extends HttpServlet {
                 }
             } else if (stp.equalsIgnoreCase("sendCode")) {
                 //send code to user using email
+                u = (User) request.getSession().getAttribute("u");
                 if (msg.isEmpty() || msg.equals("")) {
                     sql = "SELECT * FROM USERS WHERE Username='" + String.valueOf(request.getParameter("userid")) + "'";
                     Statement s = conn.createStatement();
                     ResultSet r = s.executeQuery(sql);
-                    u = new User();
+
                     if (r.next()) {
 //                        request.
 //                       u.getEmail();
 //                        u.setEmail(r.getString("Email_Address"));
 //                        u.setUsername(r.getString("Username"));
 //                       u.set
+                        int rcode = AppSecurity.getGenCode();
+
+                        boolean sent = AppSecurity.sendEmail(u.getEmail(), "Security Code", "Your Reset Code is: " + String.valueOf(rcode));
+                        if (sent == true) {
+                            request.getSession().setAttribute("rcode", rcode);
+                            msg += "Code Sent. <br>";
+                        } else {
+                            msg += "Unnable to send <br>";
+
+                        }
+
                     }
                 } else {
 
                 }
             } else if (stp.equalsIgnoreCase("ResetPasswd")) {
-                if (msg.isEmpty() || msg.equals("")) {
-                    sql = "SELECT * FROM USERS WHERE Username='" + String.valueOf(request.getParameter("userid")) + "'";
-                    Statement s = conn.createStatement();
-                    ResultSet r = s.executeQuery(sql);
-
-                    if (r.next()) {
-
-                        u.setUsername(userid);
-                        u.setPassword(r.getString("Password"));
-                        hint = r.getString("Hint");
-                        u.setAccesslevel(r.getString("Access_Level"));
-                        u.setEmail(r.getString("Email_Address"));
-                        u.setLocation(r.getString("Location"));
-
-                    }
-                    if (!u.getLocation().equals(dir)) {// return message if account access level does not match location
-                        msg += "Cannot Reset Account <br>";
-                        URL = webloc + "/Password_Reset.jsp";
+                String method = request.getParameter("rsmethod");
+                u = (User) request.getSession().getAttribute("u");
+                if (method.equals("")) {
+                    msg += "missing reset method <br>";
+                } else if (method.equalsIgnoreCase("sendCode")) {
+                    String rcode = String.valueOf(request.getParameter("rcode"));
+                    String scode = String.valueOf(request.getSession().getAttribute("rcode"));
+                    if (rcode.matches(scode)) {
+                        request.getSession().setAttribute("ver", "y-d");
 
                     } else {
-                        if (hint.equals(request.getParameter("hint"))) {
-                            boolean reset = true;
-
-//                            AppSecurity.sendEmail(u.getEmail(), "Password Reset", "");
-                            request.getSession().setAttribute("found", true);
-                            request.getSession().setAttribute("ver", "y-d");
-                            msg += "Password Reset <br>";
-
-                            URL = webloc + "/Password_Reset.jsp";
-//                    Cookie res = new Cookie("ver", );
-
-                        } else {
-                            boolean reset = false;
-                            request.setAttribute("found", false);
-                            msg += "Hint Does Not Match <br>";
-                            request.getSession().setAttribute("ver", "x-v");
-//                    request.setAttribute("resetu", u);
-                        }
+                        msg += "";
                     }
+                } else if (method.equalsIgnoreCase("Challenge Question")) {
 
-                    r.close();
-                    s.close();
+                    String ans = request.getParameter("ans");
+                    if (ans.equals("")) {
+                        msg += "Missing Answer";
+                    }
+                    if (msg.isEmpty() || msg.equals("")) {
+                        sql = "SELECT * FROM USER WHERE Username='" + u.getUsername() + "'";
+                        Statement s = conn.createStatement();
+                        ResultSet r = s.executeQuery(sql);
+
+                        if (r.next()) {
+                            String sav2 = r.getString("SAV2");
+                            String a = r.getString("Answer");
+                            Optional<String> en_ans = AppSecurity.hashValue(ans, sav2);
+                            boolean v = AppSecurity.verify(en_ans.get(), a, sav2);
+                            if (u.getLocation().matches(ac_lvl)){
+                                msg+="cannot reset account. <br>";
+                            }else{
+                                 if (v == true && en_ans.get().equalsIgnoreCase(a)) {
+                                request.getSession().setAttribute("ver", "y-d");
+
+                            } else {
+                                msg += "Unable to reset password <br>";
+                            }
+                            }
+                           
+                        }
+                        r.close();
+                        s.close();
+                    }
+                }
+                if (msg.isEmpty() || msg.equals("")) {
+//                    sql = "SELECT * FROM USERS WHERE Username='" + String.valueOf(request.getParameter("userid")) + "'";
+//                    Statement s = conn.createStatement();
+//                    ResultSet r = s.executeQuery(sql);
+//
+//                    if (r.next()) {
+//
+////                        u.setUsername(userid);
+//                        u.setPassword(r.getString("Password"));
+//                        hint = r.getString("Hint");
+////                        u.setAccesslevel(r.getString("Access_Level"));
+//                        u.setEmail(r.getString("Email_Address"));
+//                        u.setLocation(r.getString("Location"));
+//
+//                    }
+
+//                    else {
+//                        if (hint.equals(request.getParameter("hint"))) {
+//                            boolean reset = true;
+//
+////                            AppSecurity.sendEmail(u.getEmail(), "Password Reset", "");
+//                            request.getSession().setAttribute("found", true);
+//                            request.getSession().setAttribute("ver", "y-d");
+//                            msg += "Password Reset <br>";
+//
+//                            URL = webloc + "/Password_Reset.jsp";
+////                    Cookie res = new Cookie("ver", );
+//
+//                        } else {
+//                            boolean reset = false;
+//                            request.setAttribute("found", false);
+//                            msg += "Hint Does Not Match <br>";
+//                            request.getSession().setAttribute("ver", "x-v");
+////                    request.setAttribute("resetu", u);
+//                        }
+//                    }
+//                    r.close();
+//                    s.close();
                 }
             } else if (stp.equalsIgnoreCase("updatePasswd")) {
                 String newpasswd = request.getParameter("upwd");
@@ -206,6 +274,10 @@ public class ResetPasswordServlet extends HttpServlet {
                     msg += "missing new hint";
                 }
                 if (msg.isEmpty() || msg.equalsIgnoreCase("")) {
+                    Optional<String> sav = AppSecurity.generateSalt();
+                    Optional<String> en_p = AppSecurity.hashValue(newpasswd, sav.get());
+//                    u.setPassword(en_p.get());
+//                    salt = AppSecurity.generateSalt();
                     sql = "SELECT * FROM USERS WHERE Username='" + String.valueOf(request.getParameter("userid")) + "'";
                     Statement s = conn.createStatement();
                     ResultSet r = s.executeQuery(sql);
@@ -228,12 +300,14 @@ public class ResetPasswordServlet extends HttpServlet {
                             } else {
                                 sql = "UPDATE USERS "
                                         + "SET Password = ?,"
-                                        + "Hint = ?"
+                                        + "Hint = ?,"
+                                        + "SAV = ?"
                                         + "WHERE Username = ?;";
                                 PreparedStatement ps = conn.prepareStatement(sql);
-                                ps.setString(1, newpasswd);
+                                ps.setString(1, en_p.get());
                                 ps.setString(2, stp);
-                                ps.setString(3, u.getUsername());
+                                ps.setString(3, sav.get());
+                                ps.setString(4, u.getUsername());
                                 int rc = ps.executeUpdate();
                                 if (rc == 0) {
                                     msg += "Error: Cannot update password <br>";
@@ -259,8 +333,14 @@ public class ResetPasswordServlet extends HttpServlet {
             } else if (stp.equalsIgnoreCase("cancel")) {
                 String ver_1 = (String) request.getAttribute("ver");
                 String v_2 = (String) request.getAttribute("found");
+                Enumeration<String> attrs = request.getSession().getAttributeNames();
+                if (attrs.hasMoreElements()) {
+
+                }
                 if (!ver_1.isEmpty() || !ver_1.equalsIgnoreCase("")) {
-                    request.removeAttribute("ver");
+                    request.getSession().removeAttribute("ver");
+                    request.getSession().removeAttribute("search");
+                    request.getSession().removeAttribute("u");
 
                 }
                 URL = webloc + "/index1.jsp";
