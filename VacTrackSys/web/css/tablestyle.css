@@ -1,0 +1,62 @@
+/*
+Team Name: J.O.D.E.A.
+Project:Vaccination Tracking System 
+School: STLCC
+Members: Elena Miller, Jaccob Stanton, Deshane Sims,
+Alexander Breitnebach, and Osama Aater
+*/
+
+
+/* 
+    Created on : Mar 19, 2022, 4:49:01 PM
+    Author     : eVmPr
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+.table-content {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2.5px;
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    padding: 5px;
+}
+
+.table-content thead {
+    position: fixed;
+}
+
+.table-content tr th,
+.table-content thead tr th {
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: left;
+}
+
+.table-content tbody tr:hover {
+    background-color: #ddd;
+}
+
+.table-content tbody {}
+
+.table-content td,
+.table-content tbody tr:nth-child(even) {}
+
+
+/* #name-col {
+    background-color:bisque;
+} */
+
+
+/* #info-col {
+    /* background-color: aquamarine; */
+
+
+}
+*/
+/* #vac-col {
+    /*background-color: color: rgb(0,0,0);*/
+
+}
+*/

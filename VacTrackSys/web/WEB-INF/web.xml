@@ -123,7 +123,8 @@
         <url-pattern>/AdminConsole/Provider</url-pattern>
     </servlet-mapping>
     <session-config>
-        <session-timeout>60</session-timeout>
+        <session-timeout>30</session-timeout>
+<!--        <tracking-mode>COOKIE</tracking-mode>-->
     </session-config>
     <welcome-file-list>
         <welcome-file>DoctorLogin/index1.jsp</welcome-file>

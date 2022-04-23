@@ -10,7 +10,6 @@ package servlets;
 import business.User;
 import business.Vaccine;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -19,7 +18,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -178,7 +176,7 @@ public class EditVaccineServlet extends HttpServlet {
                                     }
                                 }
                             }else{
-                                msg+="Vaccine Added <br>";
+                                msg+="Vaccine Added. <br>";
                                  url = webloc + "/VaccinationDB.jsp";
                             }
                         }
@@ -197,7 +195,7 @@ public class EditVaccineServlet extends HttpServlet {
                     r = ps.executeQuery();
 
                     if (r.next()) {// if item exists return message
-                        msg += "Vaccine item already exists";
+                        msg += "Vaccine item already exists <br>";
                         url = webloc + "/VaccinationDB.jsp";
                     } else {//add vaccine to db
 

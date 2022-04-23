@@ -61,12 +61,18 @@
         <!--<script src="../js/searchPatient.js" type="text/javascript"></script>-->
         <script src="https://kit.fontawesome.com/98e4c48f68.js" crossorigin="anonymous"></script>
         <script src="../js/functions.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="script.js"type="text/javascript">
+
+        </script>
+
+
     </head>
     <c:if test="${!u.authenticated}">
         <script type="text/javascript">
-    window.window.location = "/VacTrackSys/Redirect_Home.jsp";
-        </script>
-    </c:if>
+            window.window.location = "/VacTrackSys/Redirect_Home.jsp";
+            ``````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````</script>
+        </c:if>
     <body>
         <!-- Authentication -->
         <!-- 
@@ -90,12 +96,12 @@ For Searching through database
                     <p>${msg}</p>
                 </div>
             </div>
-            
+
             <div class="toggle-box" id="help-box">
                 <div class="toggle-content" id="help-content" style="display: none;">
                     <span style="font-weight: bold ;">Help/Tips</span>
                     <ul>
-                        <li>Click on the Message icon on the database icon to
+                        <li>Click on the Message icon (<i class="fas fa-database"></i>) to
                             view any error messages then click on it again to close it.</li>
                         <li> Try not to refresh the page too many times at once.
                             Otherwise, your search input may not go through.</li>
@@ -107,63 +113,123 @@ For Searching through database
             </div>
             <div class="container" id="input-form">
                 <i class="fas fa-user-circle fa-1-5x toggle-btn" class="vac-btn" id="prof-btn"
-
                    title="User profile">${u.username} - ${u.accesslevel}</i>
 
                 <div class="title">Patient/Vaccine Records
-                    <i class="fas fa-1-x fa-question-circle toggle-btn" id="help-btn"
+                    <i class="fas fa-1-x fa-question-circle toggle-btn" id="help-btn" title="Click to open Help/Guide"
                        style="float: right;"></i>
-                    <i class="fa-1-x fas fa-database toggle-btn" onclick="" id="msg-btn" style="float: right;"></i>
+                    <i class="fa-1-x fas fa-database toggle-btn" title="Click to view Transaction Messages" onclick="" id="msg-btn" style="float: right;"></i>
                     <div class="toggle-box" id="pro-box">
-                <div class="toggle-content" id="msg-content" style="display: none;">
-                    <span style="font-weight: bold ;">${u.username}</span> <br>
-                    <p></p>
-                </div>
-            </div>
+                        <div class="toggle-content" id="msg-content" style="display: none;">
+                            <span style="font-weight: bold ;">${u.username}</span> <br>
+                            <p></p>
+                        </div>
+                    </div>
                 </div><br>
 
                 <div class="content">
                     <form name="dbaction" 
                           id="dbaction" action="DBAction" method="post" onsubmit="toggleList('loading-content')">
                         <div class="info">
+
                             <div class="user-details">
                                 <div class="input-box" id="pat-info">
-                                    <span class="details">Patient Info</span>
+                                    <span class="details">Select Action</span>
+                                    <div class="button">
+                                        <!--<input type="submit" class="fas fa-magnifying-glass" id="search" value="Search" onclick="pageAction2('SearchPatient', 's');">--> 
+                                        <table class="actions">
+                                            <tr>
+                                                <td><button type="button" title="Vaccine" >
+                                                        <i class="fas fa-syringe"></i><i class="fas fa-user"></i>Vaccine</button>
+                                                </td>
+                                                <td> <button type="button" title="Search Patient" value="SearchPatient" >
+                                                        <i class="fas fa-magnifying-glass"></i><i class="fas fa-user"></i>Patient</button>
+                                                </td>
+                                                <td> <button type="button" title="Add Patient" value="AddPatient" id="patadd">
+                                                        <i  class="fas fa-user-plus"></i> Patient</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+
+                                                <td></td>
+
+                                            </tr>
+                                        </table>
+                                        <!--&#8287; &#8287; &#8287; &#8287;-->
+                                        <!-- &#8287; &#8287; &#8287; &#8287; -->
+                                    </div>
+
                                     <table>
-                                        <tr>
-                                            <td><span class="details">SSN</span></td>
-                                            <td><input type="number" name="ssn" id="ssn" maxlength="10" placeholder="(000-00-0000)"></td>
+                                        <tr class="sch" style="display: none;">
+                                            <td>
+                                                <input type="button" name="list-btn" class="sortbtn" id="list-btn" value="Search By: " onclick="toggleList('searchlist')">
+                                                <!--<span class="detailes">Search By: </span>-->
+                                            </td>
+                                            <td><div name="list" class="sort">
+                                                    <div class="items" id="searchlist" style="display: none;">
+                                                        <ul>
+                                                            <li>
+                                                                <input type="checkbox" name="sortval" class="sortval" value="ssn1">
+                                                                <span class="details">Social Security</span> 
+                                                            </li>
+                                                            <!--                                                            <li>
+                                                                                                                            <input type="checkbox" name="sortval" class="sortval"  value="pat_type" >
+                                                                                                                            <span class="details">Patient Name</span> 
+                                                                                                                        </li>-->
+                                                            <!--                                                            <li>
+                                                                                                                            <input type="checkbox" name="sortval" class="sortval" value="P_Type">
+                                                                                                                            <span class="details">Patient Name</span> 
+                                                                                                                        </li>-->
+
+                                                            <li><input type="checkbox" name="sortval"  class="sortval" value="fname1">
+                                                                <span class="details">First Name</span>
+                                                            </li>
+                                                            <li><input type="checkbox" name="sortval" class="sortval" value="lname1">
+                                                                <span class="details">Last Name</span></li>
+                                                            <li><input type="checkbox" name="sortval" class="sortval"  value="midinit1">
+                                                                <span class="details">Middle Initial</span></li>
+                                                            <li><input type="checkbox" name="sortval" class="sortval"  value="vac_id1">
+                                                                <span class="details">Vaccine (ID)</span></li>
+                                                            <li><input type="checkbox" name="sortval" class="sortval"  value="man1">
+                                                                <span class="details">Vaccine (Manufacturer)</span></li>
+                                                        </ul>
+                                                    </div>
+                                                </div></td>
+                                        </tr>
+                                        <tr id="ssn1" style="display: none;">
+                                            <td><span class="details">SSN: </span></td>
+                                            <td><input class="pat_info" type="number" name="ssn" id="ssn" maxlength="10" pattern="[0-9]{9}" placeholder="(000-00-0000)"></td>
                                                 <c:if test="${u.accesslevel=='MedicalStaff' || u.accesslevel=='Admin'}">
                                                 <td><i class="vac-btn fas fa-pen-square fa-2x" name="edit_v3" id="edit_v3" title="Edit Vaccine" value="Edit Patient"
                                                        onclick="pageAction2('EditPatient', '')"></i></td></c:if>
                                             </tr>
-                                            <tr>
+                                            <tr id="fname1" style="display: none;">
                                                 <td><span class="details">First Name:</span></td>
-                                                <td><input type="text" name="fname" id="fname" size=""></td>
+                                                <td><input class="pat_info" type="text" name="fname" id="fname" pattern="[a-zA-z].{1,}"></td>
                                                 <!-- pattern="[A-Za-z]{100}"  -->
                                             </tr>
-                                            <tr>
+                                            <tr  id="midinit1" style="display: none;">
                                                 <td><span class="details">Middle Init:</span></td>
-                                                <td><input type="text" name="midinit" id="midinit" maxlength="1" width="5"></td>
+                                                <td><input class="pat_info" type="text" name="midinit" id="midinit" maxlength="1" pattern="[a-zA-Z]{1}" width="5"></td>
                                                 <td></td>
                                                 <td></td>
                                             </tr>
-                                            <tr>
+                                            <tr id="lname1" style="display: none;">
                                                 <td><span class="details">Last Name:</span></td>
-                                                <td><input type="text" name="lname" id="lname" size=""></td>
+                                                <td><input  type="text" class="pat_info" name="lname" id="lname" pattern="[a-zA-z].{1,}"></td>
 
                                             </tr>
-                                            <tr>
-                                                <td>DOB</td>
-                                                <td><input type="date" name="dob" id="dob" max=""></td>
+                                            <tr id="dob1" style="display: none;">
+                                                <td><span class="details">Birth Date: </span></td>
+                                                <td><input type="date" class="pat_info" name="dob" id="dob" max=""></td>
                                             </tr>
-                                            <tr>
-                                                <td>Vaccination Date</td>
-                                                <td><input type="date" name="vac_date" id="vac_date" min="2021-11-30" max=""></td>
+                                            <tr  class="vac_date" style="display: none;">
+                                                <td><span class="details">Vaccination Date: </span></td>
+                                                <td><input type="date" class="pat_info" name="vac_date" id="vac_date" min="2021-11-30" max=""></td>
                                             </tr>
-                                            <tr>
+                                            <tr id="pat_type1" style="display: none;">
                                                 <td><span class="details">Patient Type</span></td>
-                                                <td><select id="pat_type">
+                                                <td><select id="pat_type" class="pat_info">
                                                         <option value="">Select</option>
                                                         <option svalue="PAT">Regular</option>
                                                         <option value="INP">Inpatient</option>
@@ -172,21 +238,31 @@ For Searching through database
                                                         <option value="N/A">N/A</option>
                                                     </select></td>
                                             </tr>
-                                            <tr>
-                                                <td><span class="details">Order</span></td>
-                                                <td><select name="order">
-                                                        <option value="ASC">Ascending</option>
-                                                        <option value="DESC">Descending</option>
-                                                    </select></td>
-                                            </tr>
-                                            <tr>
+
+                                            <tr id="vac_id1" style="display: none;">
+                                                <td><span class="details">Vaccine ID:</span></td>
                                                 <td>
-                                                    <input type="button" name="list-btn" class="sortbtn" id="list-btn" value="Sort By" onclick="toggleList('sortlist')">
-                                                </td>
-                                                <td>
-                                                    <input type="text" name="txtsort" id="sort" value="" readonly>
+                                                    <input type="number" class="pat_info" name="vac_id" id="vac_id" pattern="[0-9]{8}" placeholder="00000000" >
                                                 </td>
 
+
+                                            </tr>
+                                            <tr id="man1" style="display: none;">
+                                                <td><span class="details">Manufacturer</span>
+                                                    <input type="text" name="man" id="man" 
+                                                           placeholder="Enter vaccine manufacturer here"
+                                                           value="" pattern=""></td>
+                                                <td> <select name="man" id="man" class="vac_info">
+                                                        <option value="">Select</option>
+                                                        <option value="Pfizer">Pfizer</option>
+                                                        <option value="Johnson & Johnson">Johnson & Johnson</option>
+                                                        <option value="Mederma">Mederma</option>
+                                                    </select></td>
+                                            </tr>
+                                            <tr class="sch"  style="display: none;">
+                                                <td><i class="fas fa-magnifying-glass"></i>
+                                                    <!--<input type="submit" value="Search Patient" onclick="">-->
+                                                </td>
                                             </tr>
                                             <!--                                    <tr>
                                                                                     <td>Edit</td>
@@ -195,30 +271,8 @@ For Searching through database
                                     </div>
                                 </div>
                                 <!--<span class="details">Sort By:</span>-->
-<!--                                <div name="list" class="sort">
-                                    <div class="items" id="sortlist" style="display: none;">
-                                        <ul>
-                                            <li>
-                                                <input type="checkbox" name="sortval" class="sortval" id="sort_ptype" value="P_Type" onclick="sort_ptype">Patient Type
-                                                <span class="details">Patient Name</span> 
-                                            </li>
 
-                                            <li><input type="checkbox" name="sortval" class="sortval" id="sort_fname" value="First_Name" onclick="toggleSortVal('p_type')">First Name
-                                                <span class="details">First Name</span>
-                                            </li>
-                                            <li><input type="checkbox" name="sortval" class="sortval" id="sort_lname" value="Last_Name">Last Name</li>
-                                            <li><input type="checkbox" name="sortval" class="sortval" id="sort_v1id" value="Vaccine_1">Vaccine #1</li>
-                                            <li><input type="checkbox" name="sortval" class="sortval" id="sort_v2id" value="Vaccine_2"> Vaccine #2</li>
-                                            <li><input type="checkbox" name="sortval" class="sortval" id="sort_v3id" value="Vaccine_3"> Vaccine #3</li>
-                                            <li><input type="checkbox" name="sortval" class="sortval" id="sort_v4id" value="Vaccine_4"> Vaccine #4</li>
-                                            <li></li>
-                                            <li></li>
-                                            <li></li>
-                                        </ul>
-                                    </div>
-
-                                </div>-->
-                                <div class="vac-details">
+                                <div class="vac-details" style="display: none;">
 
                                     <div class="input-box" id="vac-info">
                                         <table>
@@ -284,45 +338,32 @@ For Searching through database
                                 </div>
                             </div>
                             <div class="button">
-                                <input type="submit" class="fas fa-magnifying-glass" id="search" value="Search" onclick="pageAction2('SearchPatient', 's');"> 
-                                &#8287; &#8287; &#8287; &#8287;
-                                <!--                        <input type="button" name="btnClear" id="btnClear" value="Add"
-                                           onclick="document.location = 'VacRecordCreate.jsp';">-->
+                                <button type="submit" title="Add Patient" class="fas fa-user-plus" id="patadd" onclick="pageAction('AddPatient', '')"></button>
+                                <button type="submit" title="Search Patient" id="search" onclick="pageAction('SearchPatient', '')">
+                                    <i class="fas fa-magnifying-glass"></i><i class="fas fa-user"></i></button>
+<!--                                <button type="submit" title="Vaccine" id="search" onclick="pageAction('AddVaccine', '')">
+                                    <i class="fas fa-syringe"></i><i class="fas fa-user"></i></button>
+                                <input type="submit" class="fas fa-magnifying-glass" id="search" value="Search" onclick="pageAction2('SearchPatient', 's');"> -->
 
+                                <!--&#8287; &#8287; &#8287; &#8287;-->
                                 <!-- &#8287; &#8287; &#8287; &#8287; -->
-                                <input type="reset" class="actionBtn" name="btnClear" id="btnClear" value="Clear"> &#8287; &#8287; &#8287; &#8287;
-                                <!--<input type="bu" class="actionBtn" name="btnClear" id="btnClear" value="Edit" onclick="pageAction2('')"> &#8287; &#8287; &#8287; &#8287;-->
-                                <!--<i class="fas fa-spin fa-spinner fa-1-5x" style="float: right;"></i>-->
+                                <input type="reset"  name="btnClear" id="btnClear" value="Clear">
+                                <button type="reset"></button>
                                 <i class="fas fa-2x fa-door-open toggle-btn" title="Logout" 
                                    style=" cursor: pointer;" onclick="pageAction2('Logout', '')"></i>
                             </div>
                             <input type="hidden" name="actiontype" id="actiontype" value="">
                         </form>
-
-                    </div>
-
-                </div>
-
-
-                <!--</div>-->
-                <div class="container" id="rs-form">
-                    <div class="title">Results</div>
-                    <div class="content" id="rs-content">
-                        <hr>
-                        <div id="results"></div>
                     </div>
                 </div>
-                <script type="text/javascript">
-                    var today = getTodayDate();
-                    $("vac_date").setAttribute("max", today);
-                    $("dob").setAttribute("max", today);
-                    $("msg-btn").setAttribute("onclick", "toggleList('msg-content')");
-                    $("help-btn").setAttribute("onclick", "toggleList('help-content')");
-//        $("help-btn").style.float = "right";
-                </script>
+                <!--                <div class="container" id="rs-form">
+                                    <div class="title">Results</div>
+                                    <div class="content" id="rs-content">
+                                        <hr>
+                                        <div id="results"></div>
+                                    </div>
+                                </div>-->
+
         </c:if>
-                
-
     </body>
-
 </html>

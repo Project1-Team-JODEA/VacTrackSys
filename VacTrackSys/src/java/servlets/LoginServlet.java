@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Optional;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -71,14 +72,25 @@ public class LoginServlet extends HttpServlet {
             pw = String.valueOf(request.getParameter("passwd"));
             if (username.isEmpty() || username.equals("")) {
                 msg += "";
+            } else if (! username.equals("")&& username.length() < 8) {
+                msg += "Invalid Username. Must be at least 8 characters long. <br>";
+            } else if (webloc.contains("DoctorLogin") && username.length() < 8) {
+                
+               
             }
-            if (username.length() < 8) {
-                msg += "Invalid Username <br>";
-            }
-            if (pw.equals("")) {
-                msg += "Missing Password <br>";
-            }
-
+             if (pw.equals("")) {
+                    msg += "Missing Password <br>";
+                }else if (!pw.equals("")){
+                    if (webloc.contains("DoctorLogin")|| webloc.contains("AdminConsole")){
+                        if ( pw.length() < 15){
+                       msg+="Password Must be at least 16 characters long. <br>";
+                        }
+                    }else if (webloc.contains("PatientLogin")|| webloc.contains("CDC")){
+                        if (pw.length() < 10){
+                            msg+="Password Must be at least 16 Characters Long";
+                        }
+                    }
+                }
             if (!msg.isEmpty() || !msg.equalsIgnoreCase("")) {
                 URL = webloc + "/index1.jsp";
 
@@ -118,23 +130,42 @@ public class LoginServlet extends HttpServlet {
                             u.setEmail("Email_Address");
                             u.setLocation("Location");
                             msg += "User " + username + " authenticated! <br>";
-                            if (webloc.equals("Patient")) {
-                                URL = webloc + "/";
-                            } else {
+                            if (webloc.equals("/PatientLogin")) {
+                                URL = webloc + "/Report";
+                            } else if (webloc.equals("/CDC")){
+                                sql = "SELECT * FROM VAC_SITES";
+                                ArrayList<Location> loc = new ArrayList<>();
+                                s = conn.createStatement();
+                                r = s.executeQuery(sql);
+                                if (r.next()){
+                                    while(r.next()){
+                                        Location lo = new Location();
+                                        lo.setId(r.getInt("SITE_ID"));
+                                        lo.setName(r.getString("SITE_NAME"));
+                                        lo.setLtype(r.getString("SITE_TYPE"));
+                                        lo.setStreet1(r.getString("STREET"));
+                                        lo.setCity(r.getString("CITY"));
+                                        lo.setZip(r.getInt("ZIP"));
+                                        loc.add(lo);
+                                    }
+                                    request.getSession().setAttribute("loc", loc);
+                                }
+                            }
+                            else {
                                 URL = webloc + "/VaccinationDB.jsp";
                             }
 
                         }
 
                     } else {
-                        msg += "User " + username + " on file but not authenticated. <br>";
+                        msg += "User " + username + " on file but password does not match. <br>";
                         URL = webloc + "/index1.jsp";
                     }
                     request.getSession().setAttribute("u", u);
                 } else {
 //                URL = "/DoctorLogin/index1.jsp";
                     URL = webloc + "/index1.jsp";
-                    msg += "User " + username + " not found in db.<br>";
+                    msg += "User " + username + " not found in Database.<br>";
                 }
                 r.close();
                 s.close();
@@ -148,13 +179,16 @@ public class LoginServlet extends HttpServlet {
             msg += "Connection error: " + e.getMessage() + ".<br>";
             URL = webloc + "/index1.jsp";
         } catch (Exception e) {
-            msg += "Servlet error: " + e.getMessage() + ".<br>";
+            if (e.getMessage().equalsIgnoreCase("null")){
+                
+            }
+            msg += "Internal Webpage error: " + e.getMessage() + ".<br>";
             URL = webloc + "/index1.jsp";
         }
 //        URL = "/DoctorLogin/VaccinationDB.jsp";
         Cookie uid = new Cookie("usid", username);
         uid.setMaxAge(120);
-        uid.setPath("/");
+        uid.setPath("/VacTrackSys");
         uid.setSecure(true);
 
         response.addCookie(uid);

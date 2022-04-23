@@ -11,7 +11,11 @@
     background-size: cover;
     position: absolute;
 }
-
+#cancel{
+    display: block;
+   position: fixed;
+    bottom: 0;
+}
 .form-box{
     width: 400px;
     height: 550px;

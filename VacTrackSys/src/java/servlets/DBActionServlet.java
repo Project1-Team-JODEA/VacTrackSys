@@ -71,6 +71,8 @@ public class DBActionServlet extends HttpServlet {
                 webloc = "/PatientLogin";
             } else if (x.contains("AdminConsole")) {
                 webloc = "/AdminConsole";
+            }else if (x.contains("CDC")){
+                webloc = "/CDC";
             }
 //            String h_request = reque
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -90,11 +92,11 @@ public class DBActionServlet extends HttpServlet {
                 info[5] = String.valueOf(request.getParameter("dob"));
                 info[6] = String.valueOf(request.getParameter("pat_type"));
                 info[7] = "";//Vaccine_ID will remain blank;
-                info[8] = String.valueOf(request.getParameter("v1id"));
-                info[9] = String.valueOf(request.getParameter("v2id"));
-                info[10] = String.valueOf(request.getParameter("v3id"));
-                info[11] = String.valueOf(request.getParameter("v4id"));
-                //N/A will be used to filter out the empty input params
+//                info[8] = String.valueOf(request.getParameter("v1id"));
+//                info[9] = String.valueOf(request.getParameter("v2id"));
+//                info[10] = String.valueOf(request.getParameter("v3id"));
+//                info[11] = String.valueOf(request.getParameter("v4id"));
+//                //N/A will be used to filter out the empty input params
                 int isE = 0;
                 String newV = "";
                 for (int i = 0; i < info.length; i++) {
@@ -126,7 +128,7 @@ public class DBActionServlet extends HttpServlet {
                 // info array will be used for filter criteria
                 if (msg.isEmpty() || msg.equals("")) {
                     // continue with transaction
-                    sql = "SELECT * FROM PATIENTS";
+                    sql = "SELECT * FROM PATIENTS";//SELECT 
 //                        + " WHERE Social_Security='" + ssn + "';";
                     String sqlw = " WHERE ";
                     newVal.remove("");

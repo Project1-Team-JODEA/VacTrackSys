@@ -7,7 +7,7 @@
  */
 package servlets;
 
-import business.Patient;
+import business.*;
 import business.User;
 import business.Vaccine;
 import java.io.IOException;
@@ -126,8 +126,8 @@ public class EditPatientServlet extends HttpServlet {
                             + "Last_Name = ?, "
                             + "DOB = ?, "
                             + "P_Type = ?, "
-                            + "Vaccine_ID = ?, "
-                            + "Vaccination_Site= ?, "
+//                            + "Vaccine_ID = ?, "
+//                            + "Vaccination_Site= ?, "
                             + "Vaccine_1 = ?, "
                             + "Vaccine_2 = ?, "
                             + "Vaccine_3 = ?, "
@@ -145,13 +145,13 @@ public class EditPatientServlet extends HttpServlet {
                     System.out.println(Date.valueOf(request.getParameter("dob")));
                     ps.setDate(5, Date.valueOf(request.getParameter("dob")));
                     ps.setString(6, p.getPtype());
-                    ps.setString(7, String.valueOf(request.getParameter("v1id")));
-                    ps.setString(8, u.getLocation());//request.getParameter("loc"));//.getSession().getAttribute("u")
-                    ps.setString(9, String.valueOf(request.getParameter("v1id").trim()));
-                    ps.setString(10, String.valueOf(request.getParameter("v2id").trim()));
-                    ps.setString(11, String.valueOf(request.getParameter("v3id").trim()));
-                    ps.setString(12, String.valueOf(request.getParameter("v4id").trim()));
-                    ps.setString(13, p.getSsn());
+//                    ps.setString(7, String.valueOf(request.getParameter("v1id")));
+//                    ps.setString(8, u.getLocation());//request.getParameter("loc"));//.getSession().getAttribute("u")
+                    ps.setString(7, String.valueOf(request.getParameter("v1id").trim()));
+                    ps.setString(8, String.valueOf(request.getParameter("v2id").trim()));
+                    ps.setString(9, String.valueOf(request.getParameter("v3id").trim()));
+                    ps.setString(10, String.valueOf(request.getParameter("v4id").trim()));
+                    ps.setString(11, p.getSsn());
                     int rc = ps.executeUpdate();
                     if (rc == 0) {
                         msg += "Record cannot update. <br>";
@@ -168,9 +168,9 @@ public class EditPatientServlet extends HttpServlet {
                 r.close();
             } else if (action.equalsIgnoreCase("add")) {
                 sql = "INSERT INTO PATIENTS (Social_Security, First_Name, Middle_Init, "
-                        + "Last_Name,DOB, P_Type,Vaccine_ID,Vaccination_Site,"
+                        + "Last_Name,DOB, P_Type,"//Vaccine_ID,Vaccination_Site,
                         + " Vaccine_1, Vaccine_2, Vaccine_3, Vaccine_4) "
-                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)";
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
                 PreparedStatement ps = conn.prepareStatement(sql);
 
 //                PreparedStatement ps = conn.prepareStatement(sql);
@@ -180,12 +180,12 @@ public class EditPatientServlet extends HttpServlet {
                 ps.setString(4, p.getLname());
                 ps.setDate(5, Date.valueOf(request.getParameter("dob")));
                 ps.setString(6, p.getPtype());
+//                ps.setString(7, String.valueOf(request.getParameter("v1id")));
+//                ps.setString(8, u.getLocation());//request.getParameter("loc"));
                 ps.setString(7, String.valueOf(request.getParameter("v1id")));
-                ps.setString(8, u.getLocation());//request.getParameter("loc"));
-                ps.setString(9, String.valueOf(request.getParameter("v1id")));
-                ps.setString(10, String.valueOf(request.getParameter("v2id")));
-                ps.setString(11, String.valueOf(request.getParameter("v3id")));
-                ps.setString(12, String.valueOf(request.getParameter("v4id")));
+                ps.setString(8, String.valueOf(request.getParameter("v2id")));
+                ps.setString(9, String.valueOf(request.getParameter("v3id")));
+                ps.setString(10, String.valueOf(request.getParameter("v4id")));
 
                 int rc = ps.executeUpdate();
                 if (rc == 0) {
@@ -195,6 +195,7 @@ public class EditPatientServlet extends HttpServlet {
                     msg += "Recorded Added. <br>";
                     url = webloc + "/VaccinationDB.jsp";
                 }
+                AppSecurity.write(u, p, ur, "add");
             } else if (action.equals("cancel")) {
                 url = webloc + "/VaccinationDB.jsp";
             } else {
@@ -217,7 +218,7 @@ public class EditPatientServlet extends HttpServlet {
             }
             url = webloc + "/PatientView.jsp";
         } catch (SQLException e) {
-            msg += "SQL Error:" + e.getMessage() + " <br> StackTrace: ";
+            msg += "Database Error:" + e.getMessage() + " <br> StackTrace: ";
             for (StackTraceElement stackTrace : e.getStackTrace()) {
                 msg += stackTrace + "<br>";
             }

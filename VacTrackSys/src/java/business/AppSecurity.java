@@ -243,9 +243,6 @@ public class AppSecurity {
             Multipart multipart = new MimeMultipart();
             multipart.addBodyPart(mimeBodyPart);
             message.setContent(multipart);
-
-//            Provider pv = session.
-//            Transport tr = session.
             Transport.send(message);
             System.out.println("message sent.");
             return true;
@@ -258,7 +255,20 @@ public class AppSecurity {
         }
 
     }
-
+    /**
+     * 
+     * @param value
+     * @param valtype
+     * @return 
+     */
+public static boolean checkValidation(String value, String valtype){
+    switch(valtype){
+       case "name": ;break;
+           case "phone": ;break;
+           case "":;break;
+    }
+    return false;
+}
     public static void sendVerificationEmail(String recip) throws AddressException, MessagingException {
         String msg = "<h1>This is my first email using JavaMailer</h1>";
 //        SimpleEmail email = new SimpleEMail();

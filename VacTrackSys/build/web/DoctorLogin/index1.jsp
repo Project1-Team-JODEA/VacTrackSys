@@ -14,33 +14,56 @@
         <script src="../js/validate.js" type="text/javascript"></script>
         <script src="../js/functions.js"></script>
         <script src="https://kit.fontawesome.com/98e4c48f68.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script>
             // Add attribute events
-            window.onload = () => {
-                $("v-btn-p").setAttribute("onclick", "toggleV('upwd', 'v-btn-p')");
-                $("v-btn-c").setAttribute("onclick", "toggleV('confpasswd', 'v-btn-c')");
-//                $("terms").setAttribute("onclick", "t()");
-                $("validc").setAttribute("onchange", "validatePasswd('upwd', 'confpasswd')");
-//                $("email").setAttribute("onchange", "validatePattern('email','valide')");
-
-//                $("terms").setAttribute("onclick", "t()");
-                $("terms").onclick = () => {
+            $(document).ready(() => {
+               
+                $("#v-btn-p").click(evt => {
+                    toggleV('upwd', 'v-btn-p');
+                    evt.preventDefault();
+                });
+                $("#v-btn-c").click(evt => {
+                    toggleV('confpasswd', 'v-btn-c');
+                    evt.preventDefault();
+                });
+                $("#terms").click(evt=>{
                     var c = document.getElementById("terms");
-                    var a = c.checked;
-                    //            console.log(c);
-                    if (a === null) {
+                    if (c.getAttribute("checked") === null){
                         c.setAttribute("checked", null);
-//                    $("terms").removeAttribute("disabled");
-                    } else {
+                        if (!document.getElementById("newacct").getAttribute('disabled') === null){
+                            document.getElementById("newacct").removeAttribute("disabled");
+                        }
+                       
+                   }else{
                         c.removeAttribute("checked");
-//                    $("check").setAttribute("disabled", null);
-    
-                    }                    
-                };
-                $("register").onsubmit = ()=> {$("newacct").disabled = true;};
-            };
-
-        </script>
+                        if (document.getElementById("newacct").getAttribute('disabled') === null){
+                            document.getElementById("newacct").setAttribute("disabled", null);
+                        }
+                        
+                    }
+                });
+                document.getElementById("newacct").onsubmit=()=>{
+                    $("newacct").disabled = true;
+                }; 
+                document.getElementById("upwd").addEventListener('invalid', function(ev){
+                    ev.target.setCustomValidity('password must be at least 15 characters long. (255 characters max)');
+                });
+               document.getElementById("passwd").addEventListener('invalid', function(ev){
+                    ev.target.setCustomValidity('password must be at least 15 characters long.');
+                });
+                document.getElementById("userid").addEventListener('invalid', function(ev){
+                    ev.target.setCustomValidity('Employee ID must contain only numbers and must be at least 8 characters long.');
+                });
+                document.getElementById("uid").addEventListener('invalid', function(ev){
+                    ev.target.setCustomValidity('Employee ID must contain only numbers and must be at least 8 characters long.');
+                });
+                document.getElementById("email").addEventListener('invalid', function(ev){
+                    ev.target.setCustomValidity('Email Address must have: no special characters(e.g. &,*,(),#,!,$,%, etc.) after @ symbol.\n\
+             ');
+                });
+            });
+  </script>
     </head>
 
     <body>
@@ -76,7 +99,7 @@
                         <tr>
                             <td style="width: 280px; ">
                                 <input type="password" class="input-field" name="passwd" id="passwd"
-                                       placeholder="Enter Password" required>
+                                       placeholder="Enter Password" pattern=".{15,}" required>
                             </td>
                         </tr>
                         <tr>
@@ -103,16 +126,15 @@
                     <table>
                         <tr>
                             <td style="width: 240px;"><input type="text" class="input-field" name="uid" id="uid"
-                                                             placeholder="Employee ID"
+                                                             placeholder="Employee ID" pattern="[0-9]*.{8,}"
                                                              required></td>
                             <td style="width: 40px;"> <i id="validid" class="fas " style="color: green;"></i></td>
-
-
                         </tr>
                         <tr>
                             <td style="width: 240px;"><input type="email" name="email" id="email"
-                                                             class="input-field" placeholder="characters@characters.domain"
-                                                             onchange="validatePattern('email', 'valide')" oninvalid="this.setCustomValidity('Not Valid')" required></td>
+                                                             class="input-field" placeholder="Email: characters@characters.domain"
+                                                             pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+                                                             onchange="validatePattern('email', 'valide')" required></td>
                             <td style="width: 40px;"> <i id="valide" class="fas " style="color: green;">
 
                                 </i></td>
@@ -125,7 +147,8 @@
                         </tr>
                         <tr>
                             <td style="width: 240px;"><input type="password" name="upwd" class="input-field"
-                                                             id="upwd" placeholder="Password"
+                                                             id="upwd" placeholder="Password" pattern=".{15,}"
+                                                             
                                                              onchange="validatePattern('upwd', 'validp')" required>
                             </td>
                             <td style="width: 40px;">
@@ -181,7 +204,7 @@
                     <!--<button type="button" id="check" class="submit-btn" onclick="validateUserReg('newacct')">Check</button>-->
                     <button type="submit" id="newacct" class="submit-btn">Register</button>
                     <!--<input type="hidden" id="isValid" value="">-->
-
+                    <a href="index.html">Return Home</a>
                 </form>
                 <!--                <form id="register-p" class="input-group" style="overflow-y: auto; max-height: 275px;"
                                       action="NewAccount" method="post">
