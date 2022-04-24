@@ -173,16 +173,20 @@ public class LoginServlet extends HttpServlet {
             }
 
         } catch (ClassNotFoundException e) {
+            
             msg += "JDBC Driver not found in project.<br>";
             URL = webloc + "/index1.jsp";
         } catch (SQLException e) {
-            msg += "Connection error: " + e.getMessage() + ".<br>";
+            msg += "Database error: " + e.getMessage() + ".<br>";
             URL = webloc + "/index1.jsp";
         } catch (Exception e) {
             if (e.getMessage().equalsIgnoreCase("null")){
+                msg += "Internal Webpage error: " ;
                 
+            }else{
+                 msg += "Internal Webpage error: " + e.getMessage() + ".<br>";
+           
             }
-            msg += "Internal Webpage error: " + e.getMessage() + ".<br>";
             URL = webloc + "/index1.jsp";
         }
 //        URL = "/DoctorLogin/VaccinationDB.jsp";

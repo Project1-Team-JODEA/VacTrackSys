@@ -80,10 +80,10 @@ public class SearchServlet extends HttpServlet {
             info[5] = String.valueOf(request.getParameter("dob"));
             info[6] = String.valueOf(request.getParameter("pat_type"));
             info[7] = "";//Vaccine_ID will remain blank;
-            info[8] = String.valueOf(request.getParameter("v1id"));
-            info[9] = String.valueOf(request.getParameter("v2id"));
-            info[10] = String.valueOf(request.getParameter("v3id"));
-            info[11] = String.valueOf(request.getParameter("v4id"));
+//            info[8] = String.valueOf(request.getParameter("v1id"));
+//            info[9] = String.valueOf(request.getParameter("v2id"));
+//            info[10] = String.valueOf(request.getParameter("v3id"));
+//            info[11] = String.valueOf(request.getParameter("v4id"));
             //N/A will be used to filter out the empty input params
             int isE = 0, j = 0;
             String newV = "";

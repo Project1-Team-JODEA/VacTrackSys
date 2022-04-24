@@ -17,14 +17,19 @@
 //    window.onload = init;
 
     function pageAction(action) {
-
+//        $.
         if (ajax && action == 'SearchPatient') {
             ajax.open('get', 'DBAction?actiontype=SearchPatient', true);
 //            alert("readyState = "+ajax.readyState);
             ajax.send();
+            /**  $.get('DBAction', 'actiontype=SearchPatient', function (data, status) {
+             $.
+             });*/
         } else {
             document.dbaction.submit();
         }
+
+
     }
     function pageAction2(action, val_id) {
 //        var a = window
@@ -52,7 +57,9 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title> Vaccination Database</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Team_JODEA"> 
+               <title> Vaccination Database</title>
         <link rel="stylesheet" href="formstyle.css" type="text/css">
         <link rel="stylesheet" href="../css/all.css" type="text/css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -79,7 +86,7 @@
 For Searching through database
         -->
         <c:if test="${u.authenticated}">
-            
+
             <div class="toggle-box" id="loading-box">
                 <div class="toggle-content" id="loading-content" style="display: none;">
                     <i class="fas fa-spin fa-spinner"
@@ -134,25 +141,30 @@ For Searching through database
 
                             <div class="user-details">
                                 <div class="input-box" id="pat-info">
-                                    <span class="details">Select Action</span>
-                                    <div class="button">
+                                    <span class="details">Select Record Action</span>
+                                    <div class="button" style="margin: 25px 0;">
                                         <!--<input type="submit" class="fas fa-magnifying-glass" id="search" value="Search" onclick="pageAction2('SearchPatient', 's');">--> 
                                         <table class="actions">
                                             <tr>
-                                                <td><button type="button" title="Vaccine" >
-                                                        <i class="fas fa-syringe"></i><i class="fas fa-user"></i>Vaccine</button>
+                                                <td><i class="fas fa-user fa-2x" title="Patient Record Actions">Patient</i></td>
+
+                                                <td> <button type="button" title="Search Patient" value="SearchPatient">
+                                                        <i class="fas fa-magnifying-glass" id="SearchPatient"></i></button>
                                                 </td>
-                                                <td> <button type="button" title="Search Patient" value="SearchPatient" >
-                                                        <i class="fas fa-magnifying-glass"></i><i class="fas fa-user"></i>Patient</button>
+                                                <td> <button type="button" title="Edit Patient" value="EditPatient">
+                                                        <i class="fas fa-user-edit" id="EditPatient"></i></button>
                                                 </td>
                                                 <td> <button type="button" title="Add Patient" value="AddPatient" id="patadd">
-                                                        <i  class="fas fa-user-plus"></i> Patient</button>
+                                                        <i  class="fas fa-user-plus" id="AddPatient"></i></button>
                                                 </td>
                                             </tr>
                                             <tr>
-
-                                                <td></td>
-
+                                                <td><i class="fas fa-syringe fa-2x">Vaccine</i></td>
+                                                <td><button type="button" >
+                                                        <i class="fas fa-plus" title="Add Vaccine" id="AddVaccine" ></i></button>
+                                                </td>
+                                                <td><button type="button" title="Edit Vaccine" >
+                                                       <i class="fas fa-pen fa-1x"  title="Edit Vaccine" id="EditVaccine"></i></button></td>
                                             </tr>
                                         </table>
                                         <!--&#8287; &#8287; &#8287; &#8287;-->
@@ -260,8 +272,9 @@ For Searching through database
                                                     </select></td>
                                             </tr>
                                             <tr class="sch"  style="display: none;">
-                                                <td><i class="fas fa-magnifying-glass"></i>
-                                                    <!--<input type="submit" value="Search Patient" onclick="">-->
+                                                <td>
+                                                    <!--<i class="fas fa-magnifying-glass"></i>-->
+                                                    <input type="submit" value="Search">
                                                 </td>
                                             </tr>
                                             <!--                                    <tr>
@@ -336,33 +349,34 @@ For Searching through database
                                     </div>
                                     <input type="hidden" name="vid" id="vid" value="" hidden>
                                 </div>
+
                             </div>
                             <div class="button">
-                                <button type="submit" title="Add Patient" class="fas fa-user-plus" id="patadd" onclick="pageAction('AddPatient', '')"></button>
-                                <button type="submit" title="Search Patient" id="search" onclick="pageAction('SearchPatient', '')">
-                                    <i class="fas fa-magnifying-glass"></i><i class="fas fa-user"></i></button>
-<!--                                <button type="submit" title="Vaccine" id="search" onclick="pageAction('AddVaccine', '')">
-                                    <i class="fas fa-syringe"></i><i class="fas fa-user"></i></button>
-                                <input type="submit" class="fas fa-magnifying-glass" id="search" value="Search" onclick="pageAction2('SearchPatient', 's');"> -->
+                                <!--                                <button type="submit" title="Add Patient" class="fas fa-user-plus" id="patadd" onclick="pageAction('AddPatient', '')"></button>
+                                                                <button type="submit" title="Search Patient" id="search" onclick="pageAction('SearchPatient', '')">
+                                                                    <i class="fas fa-magnifying-glass"></i><i class="fas fa-user"></i></button>
+                                                                <button type="submit" title="Vaccine" id="search" onclick="pageAction('AddVaccine', '')">
+                                                                    <i class="fas fa-syringe"></i><i class="fas fa-user"></i></button>
+                                                                <input type="submit" class="fas fa-magnifying-glass" id="search" value="Search" onclick="pageAction2('SearchPatient', 's');"> -->
 
                                 <!--&#8287; &#8287; &#8287; &#8287;-->
                                 <!-- &#8287; &#8287; &#8287; &#8287; -->
-                                <input type="reset"  name="btnClear" id="btnClear" value="Clear">
-                                <button type="reset"></button>
-                                <i class="fas fa-2x fa-door-open toggle-btn" title="Logout" 
-                                   style=" cursor: pointer;" onclick="pageAction2('Logout', '')"></i>
+
+                                <button type="reset" >CLEAR</button>
+                                <i class="fas fa-2x fa-door-closed " title="Logout" 
+                                   style=" cursor: pointer; " onclick="pageAction2('Logout', '')"></i>
                             </div>
                             <input type="hidden" name="actiontype" id="actiontype" value="">
                         </form>
                     </div>
                 </div>
-                <!--                <div class="container" id="rs-form">
-                                    <div class="title">Results</div>
-                                    <div class="content" id="rs-content">
-                                        <hr>
-                                        <div id="results"></div>
-                                    </div>
-                                </div>-->
+                <div class="container" id="rs-form">
+                    <div class="title">Results</div>
+                    <div class="content" id="rs-content">
+                        <hr>
+                        <div id="results"></div>
+                    </div>
+                </div>
 
         </c:if>
     </body>

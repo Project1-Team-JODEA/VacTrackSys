@@ -8,6 +8,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Team_JODEA"> 
+
         <title>Reset Password</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link rel="stylesheet" href="style.css">
@@ -35,10 +38,10 @@
 
 
             window.onload = () => {
-                if ($("#methodtype").val() !== ' ') {
-
-                    $("." + document.getElementById("methodtype").value + " input").css("display", "block");
-                }
+//                if (document.getElementById("methodtype").value !== ' ') {
+//                    let x = "." + document.getElementById("methodtype").value+' input';
+//                    $( x).css("display", "block");
+//                }
 
                 try {
                     document.getElementById("methodtype").onchange = (evt) => {
@@ -80,15 +83,13 @@
                 }
             };
             $(document).ready(() => {
-                $("#userid").attr("oninvalid", function (ev) {
-                    ev.target.setCustomValidity('Employee ID must contain only numbers and must be at least 8 characters long.');
-
-                });
-                $("#email").
+                $("#userid").attr("oninvalid",  "setCustomValidity('Employee ID must contain only numbers and must be at least 8 characters long.');"
+                        +"$('#valid').attr('value', 'false')");
+//                $("#email").
 //         document.getElementById("email").addEventListener('invalid', function(ev){
 //             ev.target.setCustomValidity('Email is invalid.');
 //         });
-                        $("#cancel").click(evt => {
+                $("#cancel").click(evt => {
 
 
                     var c = confirm("Are you sure you want to cancel? Your input data may be lost.");
@@ -99,8 +100,17 @@
                     }
                 });
                 $("#searchbtn").click(() => {
+                    let user = $("#userid").val();
+                    let email = $("#email").val();
+                    if (user === null || email === null){
+                        
+                    }else if (user === "" || email === ""){
+                        
+                    }else if (user !== null && email !== null){
+                        
+                    }
                     alert("You will have a 5 minute time limit to reset your password.");
-                    PageAction('search');
+                    pageAction('search');
                 });
 //                $("#update-btn").click((evt) => {
 //                    pageAction('UpdatePasswd');
@@ -149,14 +159,14 @@
 
                         }
                     } else if (c1.getName().equals("rcode")) {
-                       oldrcode = c1;
+                        oldrcode = c1;
                         if (acct == null || act == null) {
                             // delete cookies
                             oldrcode.setMaxAge(1);
                             oldact.setMaxAge(1);
                             response.addCookie(oldrcode);
                             response.addCookie(oldact);
-                            
+
                         }
                     }
                 }
@@ -259,18 +269,19 @@
                         %>
                     </table>
                     <!--<input type="submit"  onclick="">Login</button>-->
-
+                    
                     <% if (!act.contains("ver") && !act.contains("found")) { %>
-                    <button type="submit" class="submit-btn" id="searchbtn"> Continue </button>
+                    <button type="button" class="submit-btn" id="searchbtn"> Continue </button>
                     <%} else if (!act.contains("ver") && act.contains("found")) { %>
                     <button type="submit" class="submit-btn" id="reset-btn" onclick="pageAction('ResetPasswd')"> Reset Password </button>
                     <%} else if (act.contains("ver") && act.contains("found")) { %>
                     <button type="submit" class="submit-btn" id="update-btn">Update Account</button>
-                    <%}%>
-
+                    <%}%><br>
+                    <button type="button" class="submit-btn" id="cancel">Cancel</button>
+                    
                     <!--<input type="submit" name="" value="Reset">-->
                     <!--<a href="#">Forgot Password?</a>-->
-                    <br>
+                    
 
                     <!--<button  class="submit-btn" onclick="document.location = 'ForgotPassword.jsp'"><i class="fas fa-angle-right"> Forgot Password?</i></button>-->
 
@@ -282,7 +293,7 @@
 
                     <input type="hidden" name="step" id="step" value="" hidden="">
                     <!--<input type="hidden" name="ver" id="ver" value="${ver}">-->
-                    <button type="button" class="submit-btn" id="cancel">Cancel</button>
+                    <data id="valid" value="" hidden=""></data>
                     <div id="message" style="padding: 
                          5px; background: white;">${msg}</div>
                 </form>
@@ -324,6 +335,7 @@
                             e[i].setAttribute("disabled", null);
                         }
                     }
+                   
                 };
 //                let toggleMethod = function () {
 //                    var method = document.getElementById("methodtype").value;

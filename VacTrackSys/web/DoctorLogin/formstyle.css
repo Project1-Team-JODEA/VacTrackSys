@@ -30,7 +30,7 @@ html {
 
 body {
     height: 100vh;
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
     padding: 10px;
@@ -64,9 +64,10 @@ hr{
 #input-form .button {}
 
 #rs-form {
-    float: right;
+    float: left;
     width: 500px;
     min-width: 450px;
+    display: block;
     /* height: 100%; */
 }
 
@@ -130,7 +131,7 @@ hr{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin: 20px 0 12px 0;
+    margin: 0 0 12px 0;
 }
 
 form .user-details .input-box {
@@ -138,7 +139,7 @@ form .user-details .input-box {
     width: calc(100% / 2 - 20px);
 }
 
-form .input-box span.details {
+form .input-box span.details, form .input-box input.details {
     display: block;
     font-weight: 500;
     margin-bottom: 5px;
@@ -298,20 +299,28 @@ form input[type="radio"] {
 form .button {
     height: 45px;
     margin: 15px 0;
+
 }
-.button table{
-    width: 50vh;
+.button .actions{
+    width: 20em;
+    height: 5em;
 }
-.button table td{
-    width: 30%;
-    height: 45px;
+/*.actions table tr{
+    height: 20px;
+}*/
+
+.actions td{
+    font-size: 1em; 
+    width: 60px;
+    height: auto;
 }
 .button table button{
     height: 100%;
+    /*width: 3em;*/
     width: 100%;
 }
 .button button{
-    font-size: 18px;
+    font-size: 1.25em;
     cursor: pointer;
     transition: all 0.3s ease;
     height: 100%;
@@ -335,7 +344,7 @@ form .button input{
     background: linear-gradient(135deg, #ff105f, #ffad06);
 }
 
-form .button input:hover  {
+form .button input:hover, .button button:hover  {
     /* transform: scale(0.99); */
     background: linear-gradient(-135deg, #ff105f, #ffad06);
 }
@@ -351,18 +360,14 @@ form .button input:hover  {
 }
 
 
-/* #results {
-    width: 100%;
+#results {
+/*    width: 100%;*/
     overflow: auto;
-} */
-
-#logout:before {
-    content: "e9ba";
-    cursor: pointer;
-}
+} 
 
 .toggle-btn:hover {
     color: var(--blue);
+    cursor: pointer;
 }
 
 .toggle-content {
@@ -376,8 +381,11 @@ form .button input:hover  {
     margin: 5px;
     max-height: 250px;
     overflow-y: auto;
-}
 
+}
+#loading-content{
+
+}
 .toggle-content span {
     font-size: 1.15em;
 }

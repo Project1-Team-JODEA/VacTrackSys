@@ -101,7 +101,7 @@ var toggleSortVal = function (inputid) {
  */
 const toggleList = function (id) {
     const sortList = document.getElementById(id);//document.querySelector("#sortlist");
-    const items_cont = $_("#items");
+    //const items_cont = $_("#items");
     // let styleSheet = document.styleSheets[];
     if (sortList.style.display === "none") {
         sortList.style.display = "block";
