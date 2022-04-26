@@ -18,7 +18,7 @@
         <script src="../js/functions.js" type="text/javascript"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="script.js" type="text/javascript">
-
+            
         </script>
     </head>
     <c:if test="${!u.authenticated}">
@@ -103,12 +103,12 @@ For Searching through database
                                     </tr>
 
 
-                                    <tr><td>Filters (Optional)</td></tr>
-                                    <tr class="filter">
+                                    <!--<tr><td>Filters (Optional)</td></tr>-->
+<!--                                    <tr class="filter">
                                         <td>Vaccination Date</td>
                                         <td><input type="date" name="vac_date" id="vac_date" min="2021-11-30" max=""></td>
-                                    </tr>
-                                    <tr>
+                                    </tr>-->
+<!--                                    <tr>
                                         <td><span class="details">Manufacture</span></td>
                                         <td><select name="man" id="man">
                                                 <option value="">Select</option>
@@ -117,7 +117,7 @@ For Searching through database
                                                 <option value="Mederma">Mederma</option>
                                             </select></td>
 
-                                    </tr>
+                                    </tr>-->
                                 </table>
                             </div>
                         </div>

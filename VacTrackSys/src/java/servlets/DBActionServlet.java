@@ -29,10 +29,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "DBActionServlet", urlPatterns = {"/CDC/DBAction", "/DoctorLogin/DBAction", "/DoctorLogin/DBAction/*"},
-        initParams = {
-            @WebInitParam(name = "actiontype", value = "none")
-        })
+@WebServlet(name = "DBActionServlet", urlPatterns = {"/CDC/DBAction", "/DoctorLogin/DBAction", "/DoctorLogin/DBAction/*"})
 public class DBActionServlet extends HttpServlet {
 
     /**

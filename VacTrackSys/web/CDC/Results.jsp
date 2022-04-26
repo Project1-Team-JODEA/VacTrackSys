@@ -28,11 +28,12 @@
 
         <script>
             $(document).ready(() => {
-                $("#newReport").click(evt => {
-                    $("#actiontype").val("NewReport");
+                $("#download").click(evt => {
+                    $("#actiontype").val("download");
                     document.reportaction.submit();
                     evt.preventDefault();
                 });
+
             });
         </script>
     </head>
@@ -40,46 +41,37 @@
         <div class="container" id="rs-form">
             <div class="title">Vaccination Report</div>
             <%
-                User u = (User) request.getSession().getAttribute("u");
-                String filename = "CDC REPORT-" + u.getUsername() + " .txt";
-                String filepath = getServletContext().getRealPath("/WEB-INF/");
-                BufferedReader br = new BufferedReader(new FileReader(getServletContext().getRealPath("/WEB-INF/CDC REPORT.txt")));
-                String st = "";
+ User u = (User) request.getSession().getAttribute("u");
+     String filename = "CDC REPORT-" + u.getUsername() + ".txt";
+     String filepath = getServletContext().getRealPath("/WEB-INF/");
+                    
                 try {
+                   BufferedReader br = new BufferedReader(new FileReader(filepath+filename));
+                    String st = "";
                     while ((st = br.readLine()) != null) {
-//                    x = br.
             %>
             <p><%= st%> <br></p>
                 <%}
-                        br.close();
-                    } catch (Exception e) {
-                    }%>
+                    br.close();
+                } catch (Exception e) {
+              }%>
 
             <form action="CreateReport" id="reportaction" method="post">
                 <div class="button">
-                    <input type="submit" id="newreport" value="New Report">
-                    &#8287;  &#8287;  &#8287;  &#8287; 
-                    &#8287;  &#8287;  &#8287;  &#8287; 
+                    <input type="button" id="newreport" value="New Report"
+                           onclick="window.location = './VaccinationDB.jsp'">
+                    
                 </div>
-
+ <!--<input type="submit" id="download" value="New Report"  >-->
+                   
                 <input type="hidden" name="actiontype" id="actiontype" value=""> 
-                <a href="../download.jsp">Download Report</a>
+                <a href="download.jsp">Download Report</a>
                 <br /><br />
                 <a href="#Vaccination Report">Back To Top</a>
 
             </form>
 
         </div>
-
-
-        <!--        <div class="container">
-                    <span class="title">Patient Records</span>
-                    <div class="content">
-                        
-                    </div>
-                </div>-->
-
-        <%--<c:if test="${u.access_level}"--%>
 
     </body>
 </html>
