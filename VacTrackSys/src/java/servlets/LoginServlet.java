@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author alexs
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"Member/Login", "CDC/Login", "DoctorLogin/Login"})
+//@WebServlet(name = "LoginServlet", urlPatterns = {"/Member/Login", "/CDC/Login", "/DoctorLogin/Login"})
 public class LoginServlet extends HttpServlet {
 
     /**
@@ -47,8 +47,7 @@ public class LoginServlet extends HttpServlet {
 //        Stringsalt = Optional.empty();
 
         String dbURL = "jdbc:ucanaccess://localhost:3306/MoVaxDB";
-        String dbUSER = "root";
-        String dbPWD = "sesame";
+       
         try {
             // get Username and Passattempt from form
 
@@ -137,8 +136,7 @@ public class LoginServlet extends HttpServlet {
                                 ArrayList<Location> loc = new ArrayList<>();
                                 s = conn.createStatement();
                                 r = s.executeQuery(sql);
-                                if (r.next()){
-                                    while(r.next()){
+                                while(r.next()){
                                         Location lo = new Location();
                                         lo.setId(r.getInt("SITE_ID"));
                                         lo.setName(r.getString("SITE_NAME"));
@@ -149,7 +147,9 @@ public class LoginServlet extends HttpServlet {
                                         loc.add(lo);
                                     }
                                     request.getSession().setAttribute("loc", loc);
-                                }
+                               
+//                               request.getRequestDispatcher("/CDC/vac");
+                                 URL = webloc + "/VaccinationDB.jsp";
                             }
                             else {
                                 URL = webloc + "/VaccinationDB.jsp";

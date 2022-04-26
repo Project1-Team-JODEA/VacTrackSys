@@ -95,20 +95,20 @@
                         </div>
                         <div class="input-box">
                             <span class="details">Vaccines</span>
-                            <input type="text" name="v1id" id="v1id" value="${selectedPatient.vac1.vid}" 
-                                   placeholder="Vaccine #1 ID"></div>
+<!--                            <input type="text" name="v1id" id="v1id" value="${selectedPatient.vac1.vid}" 
+                                   placeholder="Vaccine #1 ID"></div>-->
                         <div class="input-box"><input type="text" name="fname" id="fname" value="${selectedPatient.fname}" size=""
                                                       placeholder="First Name"></div>
-                        <div class="input-box"><input type="text" name="v2id" id="v2id" value="${selectedPatient.vac2.vid}" 
-                                                      placeholder="Vaccine #2 ID"></div>
+<!--                        <div class="input-box"><input type="text" name="v2id" id="v2id" value="${selectedPatient.vac2.vid}" 
+                                                      placeholder="Vaccine #2 ID"></div>-->
                         <div class="input-box"><input type="text" name="lname" id="lname" value="${selectedPatient.lname}" size=""
                                                       placeholder="Last Name" > </div>
-                        <div class="input-box"><input type="text" name="v3id" id="v3id" value="${selectedPatient.vac4.vid}" 
-                                                      placeholder="Vaccine #3 ID"></div>
+<!--                        <div class="input-box"><input type="text" name="v3id" id="v3id" value="${selectedPatient.vac4.vid}" 
+                                                      placeholder="Vaccine #3 ID"></div>-->
                         <div class="input-box"> <input type="text" name="midinit" id="midinit" value="${selectedPatient.mname}" 
                                                        placeholder="Middle Init" maxlength="1"></div>
-                        <div class="input-box"><input type="text" name="v4id" id="v4id" value="${selectedPatient.vac4.vid}" 
-                                                      placeholder="Vaccine #4 ID"></div>                        
+<!--                        <div class="input-box"><input type="text" name="v4id" id="v4id" value="${selectedPatient.vac4.vid}" 
+                                                      placeholder="Vaccine #4 ID"></div>                        -->
                         <div class="input-box">
                             <span class="details">Patient Type</span>
                             <select id="pat_type">

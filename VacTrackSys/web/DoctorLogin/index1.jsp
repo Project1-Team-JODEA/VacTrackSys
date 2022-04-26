@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Team_JODEA"> 
-       
+
         <title>Doctor Login and Registration Form</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link rel="stylesheet" href="style.css">
@@ -18,55 +18,7 @@
         <script src="../js/functions.js"></script>
         <script src="https://kit.fontawesome.com/98e4c48f68.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script>
-            // Add attribute events
-            $(document).ready(() => {
-               
-                $("#v-btn-p").click(evt => {
-                    toggleV('upwd', 'v-btn-p');
-                    evt.preventDefault();
-                });
-                $("#v-btn-c").click(evt => {
-                    toggleV('confpasswd', 'v-btn-c');
-                    evt.preventDefault();
-                });
-                $("#terms").click(evt=>{
-                    var c = document.getElementById("terms");
-                    if (c.getAttribute("checked") === null){
-                        c.setAttribute("checked", null);
-                        if (!document.getElementById("newacct").getAttribute('disabled') === null){
-                            document.getElementById("newacct").removeAttribute("disabled");
-                        }
-                       
-                   }else{
-                        c.removeAttribute("checked");
-                        if (document.getElementById("newacct").getAttribute('disabled') === null){
-                            document.getElementById("newacct").setAttribute("disabled", null);
-                        }
-                        
-                    }
-                });
-                document.getElementById("newacct").onsubmit=()=>{
-                    $("newacct").disabled = true;
-                }; 
-                document.getElementById("upwd").addEventListener('invalid', function(ev){
-                    ev.target.setCustomValidity('password must be at least 15 characters long. (255 characters max)');
-                });
-               document.getElementById("passwd").addEventListener('invalid', function(ev){
-                    ev.target.setCustomValidity('password must be at least 15 characters long.');
-                });
-                document.getElementById("userid").addEventListener('invalid', function(ev){
-                    ev.target.setCustomValidity('Employee ID must contain only numbers and must be at least 8 characters long.');
-                });
-                document.getElementById("uid").addEventListener('invalid', function(ev){
-                    ev.target.setCustomValidity('Employee ID must contain only numbers and must be at least 8 characters long.');
-                });
-                document.getElementById("email").addEventListener('invalid', function(ev){
-                    ev.target.setCustomValidity('Email Address must have: no special characters(e.g. &,*,(),#,!,$,%, etc.) after @ symbol.\n\
-             ');
-                });
-            });
-  </script>
+        <script src="../js/index1.js" type="text/javascript"> </script>
     </head>
 
     <body>
@@ -113,6 +65,8 @@
                     </table>
                     <input type="submit" class="submit-btn" value="Login" onclick="">
                     <a href="Password_Reset.jsp">Forgot Password?</a>
+                    <br /><br />
+                    <a href="../index.html">Return Home</a>
                     <br>
                     <!--<button  class="submit-btn" onclick="document.location = 'ForgotPassword.jsp'"><i class="fas fa-angle-right"> Forgot Password?</i></button>-->
                     <div id="message" style="padding: 
@@ -151,8 +105,8 @@
                         <tr>
                             <td style="width: 240px;"><input type="password" name="upwd" class="input-field"
                                                              id="upwd" placeholder="Password" pattern=".{15,}"
-                                                             
-                                                             onchange="validatePattern('upwd', 'validp')" required>
+                                                             oninput=""
+                                                              required>
                             </td>
                             <td style="width: 40px;">
                                 <i class="fas fa-1-5x fa-eye" id="v-btn-p"></i>
@@ -160,7 +114,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <!--<td id="msg"></td>-->
+                            <td id="msg"></td>
                         </tr>
                         <tr>
                             <td style="width: 240px;">
@@ -173,6 +127,9 @@
                             </td>
                         </tr>
                         <tr>
+                            <td id="msgc"></td>
+                        </tr>
+                        <tr>
                             <td><input type="text" class="input-field" name="hint" id="hint"
                                        title="hint for password" placeholder="Hint" required></td>
                         </tr>
@@ -180,7 +137,7 @@
                             <td>
                                 <select name="quest" class="input-field" id="quest" title="security question" id="quest">
                                     <option value="">Select</option>
-                                    <option value="What is your Mother's Maiden Name?">What is your Mother's Maiden Name</option>
+                                    <option title="What is your Mother's Maiden Name?" value="What is your Mother's Maiden Name?">What is your Mother's Maiden Name</option>
                                     <option value="Whats your favorite College?">Whats your favorite College? </option>
                                     <option value="What City were you born in?">What City were you born in?</option>
                                     <option value="What is your childhood nickname?">What is your childhood nickname?</option>
@@ -194,7 +151,7 @@
                         <tr>
                             <td>
                                 <input type="text" class="input-field" name="answer" id="answer"
-                                       placeholder="Answer">
+                                       placeholder="Answer" disabled="">
                             </td>
                         </tr>
                         <tr>
@@ -207,7 +164,7 @@
                     <!--<button type="button" id="check" class="submit-btn" onclick="validateUserReg('newacct')">Check</button>-->
                     <button type="submit" id="newacct" class="submit-btn">Register</button>
                     <!--<input type="hidden" id="isValid" value="">-->
-                    <a href="index.html">Return Home</a>
+
                 </form>
                 <!--                <form id="register-p" class="input-group" style="overflow-y: auto; max-height: 275px;"
                                       action="NewAccount" method="post">

@@ -11,7 +11,7 @@
 <%@taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="ajax.js" lang="javascript" type="text/javascript"></script>
 <script lang="javascript" type="text/javascript">
-    function pageAction(){
+    function pageAction() {
         document.rec.actiontype.value = action;
         document.rec.submit();
     }
@@ -31,56 +31,56 @@
         <link rel="icon" type="image/x-icon" href="../image/favicon_16x16.png"/>
     </head>
     <body>
+        <div class="container" id="rs-form">
+            <div class="title">Results</div>
+            <div class="content" id="rs-content">
+                <hr>
+                <table class="table-content" border="1">
+                    <tr>
+                        <th>SSN</th>
+                        <th>First Name</th>
+                        <th>Middle Init:</th>
+                        <th>Last Name:</th>
+                        <th>DOB</th>
+                        <th>P Type</th>
+                        <th>Vaccine 1</th>
+                        <th>Vaccine 2</th>  
+                        <th>Vaccine 3</th>
+                        <th>Vaccine 4</th>
+                    </tr>
+                    <c:forEach var="p" items="${patientset}">
+                        <tr>
+                            <td>${p.ssn}</td>
+                            <td>${p.fname}</td>
+                            <td>${p.mname}</td>
+                            <td>${p.lname}</td>
+                            <td>${p.dob}</td>
+                            <td>${p.ptype}</td>
+                            <td>${p.vac1.vid}</td>
+                            <td>${p.vac2.vid}</td>
+                            <td>${p.vac3.vid}</td>
+                            <td>${p.vac4.vid}</td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
+        </div>
+<!--
         <table>
             <tr>
                 <td><input type="number" name="ssn" id="ssn" maxlength="10" placeholder="(000-00-0000)"></td>
                 <td><</td>
             </tr>
-        </table>
-        <table class="table-content" border="1">
-            <tr>
-                <th>SSN</th>
-                <th>First Name</th>
-                <th>Middle Init:</th>
-                <th>Last Name:</th>
-                <th>DOB</th>
-                <th>P Type</th>
-                <th>Vaccine 1</th>
-                <th>Vaccine 2</th>  
-                <th>Vaccine 3</th>
-                <th>Vaccine 4</th>
-            </tr>
-            <c:forEach var="p" items="${patientset}">
-                <tr>
-                    <td>${p.ssn}</td>
-                    <td>${p.fname}</td>
-                    <td>${p.mname}</td>
-                    <td>${p.lname}</td>
-                    <td>${p.dob}</td>
-                    <td>${p.ptype}</td>
-                    <td>${p.vac1.vid}</td>
-                    <td>${p.vac2.vid}</td>
-                    <td>${p.vac3.vid}</td>
-                    <td>${p.vac4.vid}</td>
-                </tr>
-            </c:forEach>
-        </table>
-        <br>
-        <div class="button">
-            <!--                    <input type="submit" name="edit" id="edit" value="Edit Patient" onclick="alert('WIP')">-->
-            <!--&#8287;  &#8287;  &#8287;  &#8287;--> 
-            <!--<input type="submit" form="rec" name="back" id="back" value="Go Back" onclick="pageAction(action)">-->
-            &#8287;  &#8287;  &#8287;  &#8287; 
-            <!--<input type="submit" name="report" id="report" value="Print Report" onclick="alert('To Be Implemented')">-->
+        </table>-->
 
-            &#8287;  &#8287;  &#8287;  &#8287; 
-        </div>
-<!--        <form id="rec" action="DBAction">
-            <input type="hidden" name="actiontype" id="actiontype" value="">
-        </form>-->
+        <br>
+
+        <!--        <form id="rec" action="DBAction">
+                    <input type="hidden" name="actiontype" id="actiontype" value="">
+                </form>-->
         <%--<c:if test="${u.access_level == 'Admin' || u.access_level == 'MedicalStaff'}>"--%>
         <form action="DBAction">
-            
+
         </form>
     </body>
 </html>

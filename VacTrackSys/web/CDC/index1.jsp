@@ -6,24 +6,18 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Doctor Login and Registration Form</title>
+        <title>CDC Login and Registration Form</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="../css/all.css">
         <link rel="icon" type="image/x-icon" href="../image/favicon_16x16.png" />
         <script src="../js/validate.js" type="text/javascript"></script>
         <script src="../js/functions.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <script src="index1.js" type="text/javascript"></script>
         <script src="https://kit.fontawesome.com/98e4c48f68.js" crossorigin="anonymous"></script>
-        <script>
-            // Add attribute events
-            window.onload = () => {
-                $("v-btn-p").setAttribute("onclick", "toggleV('upwd', 'v-btn-p')");
-                $("v-btn-c").setAttribute("onclick", "toggleV('confpasswd', 'v-btn-c')");
-                $("terms").setAttribute("onclick", "t()");
-                $("validc").setAttribute("onchange", "validatePasswd('upwd', 'confpasswd')");
-                $("email").setAttribute("onchange", "validatePattern('email','valide')");
-            };
-        </script>
+
     </head>
 
     <body>
@@ -68,7 +62,7 @@
                         </tr>
                     </table>
                     <input type="submit" class="submit-btn" value="Login" onclick="">
-                    <a href="Password_Reset.jsp">Forgot Password?</a>
+                    <a href="./Password_Reset.jsp">Forgot Password?</a>
                     <br>
                     <!--<button  class="submit-btn" onclick="document.location = 'ForgotPassword.jsp'"><i class="fas fa-angle-right"> Forgot Password?</i></button>-->
                     <div id="message" style="padding: 
@@ -77,32 +71,33 @@
                 </form>
                 <form id="register" class="input-group" style="overflow-y: auto; max-height: 275px;"
                       action="NewAccount" method="post">
-                    <i class="fas fa-1-5x fa-circle-info" id="req-btn" style="color: blue;"
-                       title="Click for Requirements"></i>
-<!--                    <div class="help" style="display: none;">
-                        Password: At Least 15 Characters <br>
-                    </div>-->
+         
+                    <!--                    <div class="help" style="display: none;">
+                                            Password: At Least 15 Characters <br>
+                                        </div>-->
                     <table>
                         <tr>
                             <td style="width: 240px;"><input type="text" class="input-field" name="uid" id="uid"
-                                                             placeholder="Employee ID" required></td>
+                                                             placeholder="User ID"
+                                                             required></td>
                             <td style="width: 40px;"> <i id="validid" class="fas " style="color: green;"></i></td>
-                            </td>
                         </tr>
                         <tr>
                             <td style="width: 240px;"><input type="email" name="email" id="email"
-                                                             class="input-field" placeholder="characters@characters.domain"
-                                                             required></td>
-                            <td style="width: 40px;"> <i id="valide" class="fas " style="color: green;"></i></td>
+                                                             class="input-field" placeholder="Email: characters@characters.domain"
+                                                             pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$"
+                                                             onchange="validatePattern('email', 'valide')" required></td>
+                            <td style="width: 40px;"> <i id="valide" class="fas " style="color: green;">
+
+                                </i></td>
                             </td>
                         </tr>
-                        <tr>
-                            <td style="width: 240px;"><input type="text" name="loc" id="loc" class="input-field"
-                                                             placeholder="Location" required></td>
-                        </tr>
+
                         <tr>
                             <td style="width: 240px;"><input type="password" name="upwd" class="input-field"
-                                                             id="upwd" placeholder="Password" required>
+                                                             id="upwd" placeholder="Password" pattern=".{15,}"
+                                                             oninput=""
+                                                             required>
                             </td>
                             <td style="width: 40px;">
                                 <i class="fas fa-1-5x fa-eye" id="v-btn-p"></i>
@@ -110,34 +105,55 @@
                             </td>
                         </tr>
                         <tr>
-                            <!--<td id="msg"></td>-->
+                            <td id="msg"></td>
                         </tr>
                         <tr>
                             <td style="width: 240px;">
                                 <input type="password" name="confpasswd" class="input-field" name="confpasswd"
-                                       id="confpasswd" placeholder="Confirm Password" required>
+                                       id="confpasswd" placeholder="Confirm Password" 
+                                       onchange="validatePattern('confpasswd', 'validc')" required>
                             </td>
                             <td style="width: 40px;"><i class="fas fa-1-5x fa-eye" id="v-btn-c"></i>
                                 <i id="validc" class="fas fa-check" style="color: green;"></i>
                             </td>
                         </tr>
                         <tr>
+                            <td id="msgc"></td>
+                        </tr>
+                        <tr>
                             <td><input type="text" class="input-field" name="hint" id="hint"
                                        title="hint for password" placeholder="Hint" required></td>
                         </tr>
                         <tr>
-                            <td style="font-size: 12px;"><input type="checkbox" class="check-box" id="terms">
+                            <td>
+                                <select name="quest" class="input-field" id="quest" title="security question" id="quest">
+                                    <option value="">Select</option>
+                                    <option title="What is your Mother's Maiden Name?" value="What is your Mother's Maiden Name?">What is your Mother's Maiden Name</option>
+                                    <option value="Whats your favorite College?">Whats your favorite College? </option>
+                                    <option value="What City were you born in?">What City were you born in?</option>
+                                    <option value="What is your childhood nickname?">What is your childhood nickname?</option>
+                                    <option value="What street did you live on in 3rd grade?">What street did you live on in 3rd grade?</option>
+                                    <option value="In what city did you meet your spouse/significant other?">In what city did you meet your spouse/significant other?</option>
+                                    <!--                                    <option id="" value="">Select</option>-->
+                                </select>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" class="input-field" name="answer" id="answer"
+                                       placeholder="Answer" disabled="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 12px;"><input type="checkbox" class="check-box" id="terms"
+                                                                onclick="">
                                 I agree to the terms & conditions</td>
                         </tr>
                     </table>
-                    <button type="submit" id="newacct" class="submit-btn" disabled>Register</button>
-                    <!--<input type="hidden" id="isValid" value="">-->
-                    
+                    <button type="submit" id="newacct" class="submit-btn">Register</button>
                 </form>
-
             </div>
-            <!--<script src =" ../js/functions" type="text/javascript"></script>-->
-
         </div>
 
         <script>
@@ -149,7 +165,6 @@
                 y.style.left = "50px";
                 z.style.left = "110px";
             }
-
             function login() {
                 x.style.left = "50px";
                 y.style.left = "450px";

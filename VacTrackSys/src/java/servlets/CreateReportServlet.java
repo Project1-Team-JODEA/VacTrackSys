@@ -5,9 +5,25 @@
  */
 package servlets;
 
+import business.Location;
+import business.User;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,13 +42,142 @@ public class CreateReportServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String msg = "", url = "", webloc = "", sql = "", f_vacdate = "";
-        
-        try {
-            String action = request.getParameter("action");
-            
-        } catch (Exception e) {
+        String msg = "", URL = "",
+                webloc = "", sql = "",
+                f_vacdate = "", dose = "", loc = "";
+        int dose1 = 0, dose2 = 0, dose3 = 0, dose4 = 0, pf = 0, jj = 0, ma = 0;
+        int[] doses = {dose1 = 0, dose2 = 0, dose3 = 0, dose4 = 0};
+
+        String x = String.valueOf(request.getRequestURL());// URL Access Level
+
+        User u = (User) request.getSession().getAttribute("u");
+        if (x.contains("DoctorLogin")) {
+            webloc = "/DoctorLogin";
+        } else if (x.contains("PatientLogin")) {
+            webloc = "/PatientLogin";
+        } else if (x.contains("AdminConsole")) {
+            webloc = "/AdminConsole";
+        } else if (x.contains("CDC")) {
+            webloc = "/CDC";
         }
+        try {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            ServletContext context = getServletContext();
+            String ur = context.getRealPath("/Team_JODEA1.accdb");
+//            String ur = context.getRealPath("/Team_JODEA1.accdb");
+            Connection conn = DriverManager.getConnection("jdbc:ucanaccess://" + ur);
+
+            loc = request.getParameter("location");
+            String action = request.getParameter("actiontype");
+            String man = request.getParameter("man");
+//            User u = (User) request.getSession().getAttribute("u");
+            if (action.equals("CreateReport")) {
+                if (loc.isEmpty() || loc.equals("")) {
+                    msg += "Missing Location";
+                }
+                if (man.isEmpty() || man.equals("")) {
+
+                }
+                if (msg.isEmpty() || msg.equals("")) {
+//                sql = "SELECT VACCINATIONS.PAT_ID, VACCINES"
+//                        + " FROM VACCINATIONS INNER JOIN VACCINES ON VACCINATIONS.Vaccine_ID = VACCINES.Vaccine_ID"
+//                        + " WHERE SITE_ID = ? AND "
+//                        + "DoseNo = ?;";
+                    sql = "SELECT SITE_NAME FROM VAC_SITES WHERE SITE_ID = ?;";
+                    PreparedStatement ps = conn.prepareStatement(sql);
+                    ps.setInt(1, Integer.parseInt(loc));
+                    ResultSet r = ps.executeQuery();
+
+                    //int dose1 =0,dose2 =0,dose3 =0,dose4 =0;
+                    String a = context.getRealPath("/WEB-INF/");
+                    PrintWriter out = new PrintWriter(new FileWriter(a + "CDC REPORT-" + u.getUsername() + ".txt", true));
+                    out.println("-----------------VACCINATION REPORT-----------------");
+                    Date today = new Date();
+                    Calendar cal = Calendar.getInstance();
+                    DateFormat df = DateFormat.getInstance();
+                    out.println("Date: " + today);//date
+                    if (!man.equals("")) {
+                        out.println("Vaccine Manufaturer: "+ man );
+                    }
+                    if (r.next()) {
+                        out.println("Location: " + r.getString("SITE_NAME"));
+                        //out.print("Total vaccinated patients: " + String.valueOf(r.getInt("TotalPatients")));
+//                        sql = "SELECT";
+                        sql = "SELECT COUNT(PAT_ID) AS TotalPatients "
+                                + "FROM VACCINATIONS AS vn, VACCINES AS v, VAC_SITES AS vst "
+                                + "WHERE vn.SITE_ID=? AND vn.Vaccine_ID=v.Vaccine_ID AND vn.SITE_ID=vst.SITE_ID;";
+                        ps = conn.prepareStatement(sql);
+                        ps.setInt(1, Integer.parseInt(loc));
+                        r = ps.executeQuery();
+                        if (r.next()) {
+                            out.println("Total People vaccinated: " + r.getInt("TotalPatients"));
+
+                        }
+                        sql = "SELECT COUNT(PAT_ID) FROM VACCINATIONS AS vn, VACCINES AS v, VAC_SITES AS vst "
+                                + "WHERE vn. =";
+                        out.println("# of people fully vaccinated (4/4 vaccines): ");
+                        out.println("# of people partially vaccinated: ");
+                    } else {
+                        out.print("Total vaccinated Patients: 0");
+
+                    }
+//                    sql = "SELECT COUNT(PAT_ID) AS TotalPatients"
+//                            + "FROM VACCINATIONS AS vn, VACCINES AS v, VAC_SITES AS vst"
+//                            + "WHERE vn.SITE_ID=? AND vn.Vaccine_ID=v.Vaccine_ID AND vn.SITE_ID=vst.SITE_ID;";
+//                    if (r.next()) {
+//
+//                    }
+                    out.close();
+                    r.close();
+                    ps.close();
+                    
+                } else {
+                    msg += "Processing Error: Unable to perform unknown action. <br>";
+                }
+                URL = webloc + "/Results.jsp";
+            }else if (action.equals("NewReport")){
+              sql = "SELECT * FROM VAC_SITES";
+                                ArrayList<Location> l = new ArrayList<>();
+                               Statement s = conn.createStatement();
+                                ResultSet r = s.executeQuery(sql);
+                                while(r.next()){
+                                        Location lo = new Location();
+                                        lo.setId(r.getInt("SITE_ID"));
+                                        lo.setName(r.getString("SITE_NAME"));
+                                        lo.setLtype(r.getString("SITE_TYPE"));
+                                        lo.setStreet1(r.getString("STREET"));
+                                        lo.setCity(r.getString("CITY"));
+                                        lo.setZip(r.getInt("ZIP"));
+                                        l.add(lo);
+                                    }
+                                    request.getSession().setAttribute("loc", l);
+                               URL = webloc + "/VaccinationDB.jsp";
+            } 
+            else if (action.equals("download")) {
+//              Cookie c = new Cookie("download", "downloadFIle");
+                URL = "/download.jsp";
+              
+            } else if (action.equals("Logout")) {
+                URL = webloc + "/index1.jsp";
+            }
+
+        } catch (ClassNotFoundException e) {
+            msg += "Connection Error: Class Not Found <br>";
+            URL = webloc + "/VaccinationDB.jsp";
+        } catch (SQLException ex) {
+            msg += "Database Error: " + ex + "<br>";
+            URL = webloc + "/VaccinationDB.jsp";
+        } catch (Exception e) {
+            //msg += "Servlet Error: " + e.getMessage() + "<br>";
+            msg += "Processing Error: " + e.getMessage() + "<br>TackTrace: ";
+            for (StackTraceElement stackTrace : e.getStackTrace()) {
+                msg += stackTrace + "<br>";
+            }
+            URL = webloc + "/VaccinationDB.jsp";
+        }
+        request.setAttribute("msg", msg);
+        RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);
+        disp.forward(request, response);
 
     }
 

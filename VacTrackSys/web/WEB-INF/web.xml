@@ -53,6 +53,10 @@
         <servlet-name>ProviderServlet</servlet-name>
         <servlet-class>servlets.ProviderServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateReportServlet</servlet-name>
+        <servlet-class>servlets.CreateReportServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewAccountServlet</servlet-name>
         <url-pattern>/CDC/NewAccount</url-pattern>
@@ -69,12 +73,6 @@
         <url-pattern>/Member/Login</url-pattern>
         <url-pattern>/DoctorLogin/Login</url-pattern>
         <url-pattern>/AdminConsole/Login</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DBActionServlet</servlet-name>
-        <url-pattern>/CDC/DBAction</url-pattern>
-        <url-pattern>/Member/DBAction</url-pattern>
-        <url-pattern>/DoctorLogin/DBAction</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
@@ -122,15 +120,26 @@
         <url-pattern>/DoctorLogin/Provider</url-pattern>
         <url-pattern>/AdminConsole/Provider</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DBActionServlet</servlet-name>
+        <url-pattern>/CDC/DBAction</url-pattern>
+        <url-pattern>/DoctorLogin/DBAction/*</url-pattern>
+        <url-pattern>/Member/DBAction</url-pattern>
+        <url-pattern>/DoctorLogin/DBAction</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateReportServlet</servlet-name>
+        <url-pattern>/CDC/CreateReport</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
-<!--        <tracking-mode>COOKIE</tracking-mode>-->
+        <!--        <tracking-mode>COOKIE</tracking-mode>-->
     </session-config>
     <welcome-file-list>
         <welcome-file>DoctorLogin/index1.jsp</welcome-file>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
-<!--    <security-constraint>
+    <!--    <security-constraint>
         <display-name>VacTrackSysConst</display-name>
         <web-resource-collection>
             <web-resource-name>VacTrackSys</web-resource-name>

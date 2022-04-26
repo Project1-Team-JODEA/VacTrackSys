@@ -33,7 +33,7 @@ import javax.mail.internet.MimeMultipart;
  * <ul>
  * <li>getGenCode() </li>
  * <li>generateSate() </li>
- * 
+ *
  * <li>hasValue(String value, String salt) </li>
  * <li>write() </li>
  * </ul>
@@ -73,12 +73,12 @@ public class AppSecurity {
     }
 
     /**
-     * Creates a <code>byte[]</code> array with specified <code>KEYLENGTH</code><br>
-     * and generates random bytes with a SecureRandom object
-     *      *
-     * @see java.security.SecureRandom 
+     * Creates a <code>byte[]</code> array with specified
+     * <code>KEYLENGTH</code><br>
+     * and generates random bytes with a SecureRandom object * @see
+     * java.security.SecureRandom
      * @see java.util.Optional
-     * 
+     *
      * @return
      */
     public static Optional<String> generateSalt() {
@@ -125,44 +125,6 @@ public class AppSecurity {
         return new String();
     }
 
-    /**
-     * Takes valud and encrypts it.
-     *
-     * @exception
-     * @param val
-     * @return newval String
-     */
-//    public static String encrypt(String data) {
-//        String encryptedVal = null;
-//        try {
-//            //        SecureRando
-//            SecureRandom random = new SecureRandom();
-//            char[] d = data.toCharArray();
-//            byte[] salt = new byte[30];//;;getSaltValue();//new byte[30];
-//            String xd = getSaltValue();
-//
-//            random.nextBytes(salt);
-//            /* generate hash value*/
-//
-////            System.out.println(hash);
-//            /* generate hash value */
-//            KeySpec spec = new PBEKeySpec(d, salt, iterations, keylength);
-//            Arrays.fill(d, Character.MIN_VALUE);
-//            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-//            byte[] hash = factory.generateSecret(spec).getEncoded();
-////            byte[] secureVal = get
-////            String e = hash.toString();
-//            /*Encrypt password using */
-//            encryptedVal = Base64.getEncoder().encodeToString(hash);
-//
-//            return encryptedVal;
-//        } catch (InvalidKeySpecException ex) {
-//            // Logger.getLogger(AppSecurity.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (NoSuchAlgorithmException ex) {
-//            // Logger.getLogger(AppSecurity.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return data;
-//    }
     public static boolean verify(String p, String k, String s) {
         Optional<String> optEncrypted = hashValue(p, s);
         if (!optEncrypted.isPresent()) {
@@ -170,6 +132,7 @@ public class AppSecurity {
         }
         return optEncrypted.get().equals(k);
     }
+
     public String getEncryptedValue(String val) throws NoSuchAlgorithmException {
 //        String en
         String encrypteval = null;
@@ -177,24 +140,6 @@ public class AppSecurity {
         byte[] bytes = val.getBytes();
         SecretKey sk = (SecretKey) KeyGenerator.getInstance("AES");
 
-        /*Array Hex to String */
-//        PBKeySpec spec = new PBEKeySpec();
-//                    String saltval = PassBasedEnc.getSaltvalue(30);  
-//create cipher
-//        MessageDigest mg = MessageDigest.getInstance("MD5");
-//        mg.update(u.getPassword().getBytes());
-//        byte[] b = mg.digest();
-//        StringBuilder s = new StringBuilder();
-//        for (int i = 0; i < b.length; i++) {
-//
-//        }
-//        Cipher cipher = Cipher.getInstance("RSA/ECB/NoPadding");
-//                    nitialize cipher object
-//        cipher.init(Cipher.ENCRYPT_MODE, pair.getPublic());
-//        byte[] pas = u.getPassword().getBytes();
-//        cipher.update(pas);
-//        byte[] cipherText = cipher.doFinal();
-//        u.setPassword(new String(cipherText, "UTF-8"));
         return new String();
     }
 
@@ -255,20 +200,25 @@ public class AppSecurity {
         }
 
     }
+
     /**
-     * 
+     *
      * @param value
      * @param valtype
-     * @return 
+     * @return
      */
-public static boolean checkValidation(String value, String valtype){
-    switch(valtype){
-       case "name": ;break;
-           case "phone": ;break;
-           case "":;break;
+    public static boolean checkValidation(String value, String valtype) {
+        switch (valtype) {
+            case "name": ;
+                break;
+            case "phone": ;
+                break;
+            case "":;
+                break;
+        }
+        return false;
     }
-    return false;
-}
+
     public static void sendVerificationEmail(String recip) throws AddressException, MessagingException {
         String msg = "<h1>This is my first email using JavaMailer</h1>";
 //        SimpleEmail email = new SimpleEMail();
@@ -310,23 +260,8 @@ public static boolean checkValidation(String value, String valtype){
     }
 
     public static void write(User u, Patient p, String url, String input) throws IOException, ClassNotFoundException, SQLException {
-//        try{
-//        String test = System.getProperty("user.dir");
-//        File myFile = new File(System.getProperty("user.dir"), "SecurityLog.txt");
-//        if (myFile.createNewFile()) {
-//            // file creation successful
-//      } else {
-//            // File already exists
-//      }
-//        } catch (Exception e){
-//            
-//        }
-//        FileWriter myWriter = new FileWriter("SecurityLog.txt");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-//        output += timestamp.toString();
-//        output += "   ";
-//        output += u.getUsername();
-//        output += "   ";
+
         String userid = u.getUsername();
         String eventtime = timestamp.toString();
         String patientssn = p.getSsn();

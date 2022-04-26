@@ -14,15 +14,30 @@
  * @description description
  * 
  */
-
 /**
- * @function document.getElementById(id)
- * @param {String} id
- * @returns {Element} Element
+ * validate input pattern
+ * @param {type} id
+ * @param {type} type
+ * @param {type} e
+ * @returns {undefined}
  */
-//var $ = function (id) {
-//    return document.getElementById(id);
-//};
+function validateInput(id, type, userType) {
+    if (type === 'email') {
+
+    } else if (type === 'password') {
+        let val = $(id).val();
+        if (userType === 'DOC' || userType === 'ADM') {
+            if (val.length < 15) {                
+                $("#msg").text('Must be 15 chraracters long');
+            }
+        }
+        if (userType === 'PAT') {
+
+        }
+    } else if (type === 'username') {
+
+    }
+}
 
 /**
  * Uses Selector
@@ -47,8 +62,10 @@ var $sel = function (selector) {
 function validateLogin(form_id, userType) {
     // alert("Work In Progress");
     let regexUid = "(){}", regexPasswd = "";
-    var userid, passwd; var msg = "";
-    var result = new Array(); var i = 0;
+    var userid, passwd;
+    var msg = "";
+    var result = new Array();
+    var i = 0;
     if (userType === "MT") {
         userid = document.getElementById("userid").value.trim();
         passwd = document.getElementById("passwd").value.trim();
@@ -87,10 +104,16 @@ function validateLogin(form_id, userType) {
  */
 function validateSearch(form_id) {
     var ssn, dob, vacdate, fname, lname, minit,
-        v1id, v2id, v3id, v4id;
-    ssn = document.getElementById("").value; dob = document.getElementById("").value; vacdate = document.getElementById("").value;
-    fname = document.getElementById("").value; lname = document.getElementById("").value; minit = document.getElementById("").value;
-    v1id = document.getElementById("").value; v2id = document.getElementById("").value; v3id = document.getElementById("").value;
+            v1id, v2id, v3id, v4id;
+    ssn = document.getElementById("").value;
+    dob = document.getElementById("").value;
+    vacdate = document.getElementById("").value;
+    fname = document.getElementById("").value;
+    lname = document.getElementById("").value;
+    minit = document.getElementById("").value;
+    v1id = document.getElementById("").value;
+    v2id = document.getElementById("").value;
+    v3id = document.getElementById("").value;
     v4id = document.getElementById("").value;
 
 }
@@ -182,55 +205,57 @@ function validatePasswd(passwd_id, confpwd_id) {
  * @param {String} i_id Icon element
  */
 function validatePattern(input_id, i_id) {
-    var valid = false; var s = ""; var pattern, msg;
+    var valid = false;
+    var s = "";
+    var pattern, msg;
     if (document.getElementById(input_id).getAttribute("type") === "email") {
         var email = document.getElementById(input_id).value;
         // pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-pattern =  /^\w+([\.-]?\w+)*@\w+([\.-]) /;
+        pattern = /^\w+([\.-]?\w+)*@\w+([\.-]) /;
         console.log(pattern.toString());
-        
+
         const p = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]*@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;///[a-zA-Z0-9]+@[a-zA-Z0-9].{3,}$ /g ;
-       const pa = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        const pa = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         valid = pa.test(email);//returns true if matched false otherwise
 
         console.log(valid);
-        if (valid === false){
-            msg="Invalid Email";
-        }else{
-            msg="Valid Email";
-        }
-    } 
-    // end of validating email 
-    else if (document.getElementById(input_id).getAttribute("type") ==="text"){
-        if (document.getElementById(input_id).id==="uid" || document.getElementById(input_id).id==="userid"){
-            let val = document.getElementById(input_id).value;
-            if (val.length < 10){
-                valid = false;
-                msg="";
-            }
-        }
-    } else if (document.getElementById(input_id).getAttribute("type")=== "password"){
-        if (document.getElementById(input_id).value.length <15){
-            valid = false;
-            msg+="password must be at least 15 characters";
+        if (valid === false) {
+            msg = "Invalid Email";
+        } else {
+            msg = "Valid Email";
         }
     }
-    
+    // end of validating email 
+    else if (document.getElementById(input_id).getAttribute("type") === "text") {
+        if (document.getElementById(input_id).id === "uid" || document.getElementById(input_id).id === "userid") {
+            let val = document.getElementById(input_id).value;
+            if (val.length < 10) {
+                valid = false;
+                msg = "";
+            }
+        }
+    } else if (document.getElementById(input_id).getAttribute("type") === "password") {
+        if (document.getElementById(input_id).value.length < 15) {
+            valid = false;
+            msg += "password must be at least 15 characters";
+        }
+    }
+
 // validating password
-    
-   else if (document.getElementById(input_id).getAttribute("id") === "upwd") {
+
+    else if (document.getElementById(input_id).getAttribute("id") === "upwd") {
         pattern = /.{10,}/g;
-        if (document.getElementById(input_id).value.length < 15){
+        if (document.getElementById(input_id).value.length < 15) {
             valid = false;
             msg = "Password must be at least 15 characters in length.";
         }
 //        valid = pattern.test(document.getElementById(input_id).value);
-        
-    }else if (document.getElementById(input_id).getAttribute("id")==="confpasswd"){
-        if (document.getElementById("confpasswd").value===document.getElementById("upwd").value){
+
+    } else if (document.getElementById(input_id).getAttribute("id") === "confpasswd") {
+        if (document.getElementById("confpasswd").value === document.getElementById("upwd").value) {
             valid = true;
-            
-        }else {
+
+        } else {
             valid = false;
             msg = "Passwords Do not Match";
         }
@@ -259,7 +284,7 @@ pattern =  /^\w+([\.-]?\w+)*@\w+([\.-]) /;
         }
 
     }
-    
+
 }
 /**
  * 

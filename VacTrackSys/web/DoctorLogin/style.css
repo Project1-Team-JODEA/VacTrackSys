@@ -16,11 +16,9 @@
     position: relative;
     bottom: 0;
 }
-.input-field:invalid{
-    color: rgb(255,0,0);
-}
 
-.input-field:valid{
+
+input.input-field:valid{
     color: #32bea6;
 }
 .form-box{

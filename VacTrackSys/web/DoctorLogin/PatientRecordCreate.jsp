@@ -30,8 +30,6 @@
             document.RecordsSelection.submit();
         }
     }
-
-
 </script>
 <html lang="en">
     <head>
@@ -57,9 +55,7 @@
              </script>
          </c:if>--%>
 
-        <!-- 
-                For Searching through database
-        -->
+        <!-- For Searching through database -->
         <p>
             <%--User: ${u.userid}, ${u.access_level} Level--%>
         </p>

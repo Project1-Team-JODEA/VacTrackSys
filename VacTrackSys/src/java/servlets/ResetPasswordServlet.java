@@ -49,7 +49,7 @@ public class ResetPasswordServlet extends HttpServlet {
      *
      * when step value = "verify" the servlet will take the verification
      * information and
-     * 
+     *
      *
      * @param request servlet request
      * @param response servlet response
@@ -112,7 +112,7 @@ public class ResetPasswordServlet extends HttpServlet {
             } else if (stp.equals("search")) {//
 
                 Cookie[] cs = null;
-                Cookie c = null, ac=null;
+                Cookie c = null, ac = null;
                 cs = request.getCookies();
 
                 if (cs != null) {
@@ -121,7 +121,7 @@ public class ResetPasswordServlet extends HttpServlet {
                             if (c1.getName().equalsIgnoreCase("account")) {
                                 c = c1;
                             }
-                            if (c1.getName().equalsIgnoreCase("act")){
+                            if (c1.getName().equalsIgnoreCase("act")) {
                                 ac = c1;
                             }
                         }
@@ -146,41 +146,40 @@ public class ResetPasswordServlet extends HttpServlet {
                         user.setQuestion(r.getString("Question"));
                         user.setAccesslevel(r.getString("Access_Level"));
 
-                        hint = r.getString("Hint");                      if (c != null) {
-                             c.setPath(x); 
+                        hint = r.getString("Hint");
+                        if (c != null) {
+                            c.setPath(x);
                             c.setValue(user.getUsername());
-                            c.setMaxAge(5*100);
+                            c.setMaxAge(5 * 100);
                             c.setSecure(true);
                             c.setComment("account");
                         } else {
                             c = new Cookie("account", user.getUsername());
                             c.setPath(x);
                             c.setMaxAge(180);
-                             c.setSecure(true);
+                            c.setSecure(true);
                             c.setComment("reset account");
                             response.setContentType("text/html");
                             response.addCookie(c);
-                            c =new Cookie("act", "found");
-                             c.setPath(x);
-                            c.setMaxAge(5*100);
-                             c.setSecure(true);
-                            c.setComment("reset account action");                                               
+                            c = new Cookie("act", "found");
+                            c.setPath(x);
+                            c.setMaxAge(5 * 100);
+                            c.setSecure(true);
+                            c.setComment("reset account action");
                         }
-                        if (ac != null){
-                            if (!ac.getValue().contains("found")){
-                                ac.setValue("found"); 
-                                ac.setMaxAge(5*100);
+                        if (ac != null) {
+                            if (!ac.getValue().contains("found")) {
+                                ac.setValue("found");
+                                ac.setMaxAge(5 * 100);
                             }
-                        }else{
+                        } else {
                             ac = new Cookie("act", "found");
                             ac.setComment("action");
                             ac.setPath(x);
-                            ac.setMaxAge(5*100);
+                            ac.setMaxAge(5 * 100);
                             ac.setSecure(true);
                             ac.setHttpOnly(true);
                         }
-                      
-
                         response.setContentType("text/html");
                         response.addCookie(c);
                         response.addCookie(ac);
@@ -192,15 +191,7 @@ public class ResetPasswordServlet extends HttpServlet {
                         }
 
                         msg = "User Found in database <br>";
-//                        Cookie sc = new Cookie("ac", "found");
-//                        sc.setSecure(true);
-//                        sc.setMaxAge(180);
-//                        sc.setPath(URL);
-//                        response.addCookie(sc);
-//                        request.getSession().setAttribute("searched", "true");
                         request.getSession().setAttribute("u", user);
-
-//                        request.getSession().setAttribute("hint", hint);
                     } else {
                         msg += "username not found in database <br>";
                     }
@@ -240,15 +231,21 @@ public class ResetPasswordServlet extends HttpServlet {
                 }
             } else if (stp.equalsIgnoreCase("ResetPasswd")) {
                 String method = request.getParameter("rsmethod");
+
                 u = (User) request.getSession().getAttribute("u");
-                String account = "";
+                String account = ""; String scode = "";
                 Cookie c = null;
                 Cookie[] cs = request.getCookies();
                 if (cs.length > 0) {
                     for (Cookie cookie : cs) {
-                        if (cookie.getName().equals("ac")) {
+                        if (cookie.getName().equals("act")) {
                             account = cookie.getValue();
                             c = cookie;
+                            
+                        }else if (cookie.getName().equals("rcode")){
+                            if (cookie.getPath().equals(webloc+"/Password_Reset.jsp")){
+                                scode = cookie.getValue();
+                            }
                         }
                     }
                 }
@@ -256,7 +253,8 @@ public class ResetPasswordServlet extends HttpServlet {
                     msg += "missing reset method <br>";
                 } else if (method.equalsIgnoreCase("sendCode")) {
                     String rcode = String.valueOf(request.getParameter("rcode"));
-                    String scode = String.valueOf(request.getSession().getAttribute("rcode"));
+//                    String 
+                    //String scode = String.valueOf(request.getSession().getAttribute("rcode"));
                     if (rcode.matches(scode)) {
                         if (c != null) {
                             c.setValue(account + "ver");
@@ -272,30 +270,37 @@ public class ResetPasswordServlet extends HttpServlet {
 
                     String ans = request.getParameter("ans");
                     if (ans.equals("")) {
-                        msg += "Missing Answer";
+                        msg += "Missing Answer <br>";
                     }
                     if (msg.isEmpty() || msg.equals("")) {
-                        sql = "SELECT * FROM USER WHERE Username='" + u.getUsername() + "'";
+                        sql = "SELECT * FROM USERS WHERE Username='" + u.getUsername() + "'";
                         Statement s = conn.createStatement();
                         ResultSet r = s.executeQuery(sql);
 
                         if (r.next()) {
                             String sav2 = r.getString("SAV2");
                             String a = r.getString("Answer");
+
                             Optional<String> en_ans = AppSecurity.hashValue(ans, sav2);
+
                             boolean v = AppSecurity.verify(en_ans.get(), a, sav2);
-                            if (u.getLocation().matches(ac_lvl)) {
-                                msg += "Cannot reset account; if <br> ";
-                            } else {
-                                if (v == true && en_ans.get().equalsIgnoreCase(a)) {
-                                    if (c != null) {
-                                        c.setValue(account + "ver");
-                                        response.setContentType("text/html");
-                                        response.addCookie(c);
-                                    }
+                            if (en_ans.get().equalsIgnoreCase(a)) {
+                                if (c != null) {
+                                    c.setValue(account + "ver");
+                                    response.setContentType("text/html");
+                                    response.addCookie(c);
                                 } else {
-                                    msg += "Unable to reset password. <br>";
+                                    c = new Cookie("account", "foundver");
+                                    c.setPath("/VacTrackSys" + webloc);
+                                    c.setSecure(true);
+                                    c.setMaxAge(5*100);
+                                    c.setHttpOnly(true);
+                                    response.setContentType("text/html");
+                                    response.addCookie(c);
+
                                 }
+                            } else {
+                                msg += "Unable to reset password. <br>";
                             }
 
                         }
@@ -304,43 +309,7 @@ public class ResetPasswordServlet extends HttpServlet {
                     }
                 }
                 if (msg.isEmpty() || msg.equals("")) {
-//                    sql = "SELECT * FROM USERS WHERE Username='" + String.valueOf(request.getParameter("userid")) + "'";
-//                    Statement s = conn.createStatement();
-//                    ResultSet r = s.executeQuery(sql);
-//
-//                    if (r.next()) {
-//
-////                        u.setUsername(userid);
-//                        u.setPassword(r.getString("Password"));
-//                        hint = r.getString("Hint");
-////                        u.setAccesslevel(r.getString("Access_Level"));
-//                        u.setEmail(r.getString("Email_Address"));
-//                        u.setLocation(r.getString("Location"));
-//
-//                    }
 
-//                    else {
-//                        if (hint.equals(request.getParameter("hint"))) {
-//                            boolean reset = true;
-//
-////                            AppSecurity.sendEmail(u.getEmail(), "Password Reset", "");
-//                            request.getSession().setAttribute("found", true);
-//                            request.getSession().setAttribute("ver", "y-d");
-//                            msg += "Password Reset <br>";
-//
-//                            URL = webloc + "/Password_Reset.jsp";
-////                    Cookie res = new Cookie("ver", );
-//
-//                        } else {
-//                            boolean reset = false;
-//                            request.setAttribute("found", false);
-//                            msg += "Hint Does Not Match <br>";
-//                            request.getSession().setAttribute("ver", "x-v");
-////                    request.setAttribute("resetu", u);
-//                        }
-//                    }
-//                    r.close();
-//                    s.close();
                 }
             } else if (stp.equalsIgnoreCase("updatePasswd")) {
                 String newpasswd = request.getParameter("upwd");
@@ -420,7 +389,7 @@ public class ResetPasswordServlet extends HttpServlet {
                         }
 
                     } else {
-                        msg += "Username not found in db. <br>";
+                        msg += "Username not found in Database. <br>";
                     }
                     r.close();
                     s.close();
@@ -433,43 +402,26 @@ public class ResetPasswordServlet extends HttpServlet {
                 if (c != null) {
                     if (c.length > 0) {
                         for (Cookie c1 : c) {
-                            c1.setValue("");
-                            c1.setMaxAge(0);
-                            response.addCookie(c1);
+                            if (c1.getName().equals("account") || c1.getName().equals("act")
+                                    || c1.getName().equals("rcode") || c1.getName().equals("ver")) {
+                                c1.setValue("");
+                                c1.setMaxAge(0);
+                                response.addCookie(c1);
+                            }
+
                         }
                     }
                 }
-
-//                String ver_1 = (String) request.getAttribute("ver");
-//                String v_2 = (String) request.getAttribute("found");
-//                Enumeration<String> attrs = request.getSession().getAttributeNames();
-//                if (attrs.hasMoreElements()) {
-//                    
-//                }
-//                if (!ver_1.isEmpty() || !ver_1.equalsIgnoreCase("")) {
-//                    request.getSession().removeAttribute("ver");
-//                    request.getSession().removeAttribute("search");
-//                    request.getSession().removeAttribute("u");
-//
-//                }
                 URL = webloc + "/index1.jsp";
-//                response.setBufferSize(step);
             }
-
-
-            /**/
-//            Properties properties = System.getProperties();
-//            host = "localhost";
-//            properties.setProperty("mail.stmp.host", host);
-//            Session session = Session.getDefaultInstance(properties);
-//            MimeMessage message = new MimeMessage(session);
-//            message.setFrom(new InternetAddress(from));
-//            message.addRecipients(Message.RecipientType.TO, u.getEmail());
         } catch (ClassNotFoundException e) {
-            msg += "Class Error: " + e.getMessage() + "<br>";
+            msg += "Connection Error: " + e.getMessage() + "<br>";
             URL = webloc + "/Password_Reset.jsp";
         } catch (SQLException e) {
             msg += "Database Error:" + e.getMessage() + " <br>";
+            URL = webloc + "/Password_Reset.jsp";
+        } catch (Exception e) {
+            msg += "Web Processing Error: " + e.getMessage() + ". Please Try Again Later. <br>";
             URL = webloc + "/Password_Reset.jsp";
         }
         request.setAttribute("msg", msg);

@@ -24,6 +24,7 @@
         <script>
             // Add attribute events
 //    var es = document.getElementsByClassName("rsmethod");
+
             function pageAction(action) {
                 document.getElementById("step").value = action;
                 if (action === 'method') {
@@ -83,8 +84,8 @@
                 }
             };
             $(document).ready(() => {
-                $("#userid").attr("oninvalid",  "setCustomValidity('Employee ID must contain only numbers and must be at least 8 characters long.');"
-                        +"$('#valid').attr('value', 'false')");
+                $("#userid").attr("oninvalid", "setCustomValidity('Employee ID must contain only numbers and must be at least 8 characters long.');"
+                        + "$('#valid').attr('value', 'false')");
 //                $("#email").
 //         document.getElementById("email").addEventListener('invalid', function(ev){
 //             ev.target.setCustomValidity('Email is invalid.');
@@ -95,43 +96,24 @@
                     var c = confirm("Are you sure you want to cancel? Your input data may be lost.");
                     if (c === true) {
                         // clear out all reset cookies from form if any
-                        var cookie = document.cookie;
-                        window.window.location = './index1.jsp';
+                        pageAction('cancel');
+                        // document.getElementById("passwdreset").submit();
                     }
                 });
                 $("#searchbtn").click(() => {
                     let user = $("#userid").val();
                     let email = $("#email").val();
-                    if (user === null || email === null){
-                        
-                    }else if (user === "" || email === ""){
-                        
-                    }else if (user !== null && email !== null){
-                        
+                    if (user === null || email === null) {
+
+                    } else if (user === "" || email === "") {
+
+                    } else if (user !== null && email !== null) {
+
                     }
                     alert("You will have a 5 minute time limit to reset your password.");
                     pageAction('search');
                 });
-//                $("#update-btn").click((evt) => {
-//                    pageAction('UpdatePasswd');
-//                });
-
             });
-            var c = document.cookie;
-
-//    document.getElementById("email").addEventListener("input", function (e) {
-//        //clear old status
-//        if (this.rangeOverflow) {
-//            this.setCustomValidity("");
-//        } else if (this.rangeUnderflow) {
-//            this.setCustomValidity("");
-//        }
-//
-//    });
-//    window.onload = () => {
-//        document.getElementById("methodtype").setAttribute("onchange", "toggleMethod();");
-////document.getElementById("cancel").
-//    };
         </script>
     </head>
 
@@ -141,6 +123,7 @@
             Cookie[] c = request.getCookies();
             Cookie oldrcode = null, oldact = null;
 //  clear old cookies
+            User u = (User) request.getSession().getAttribute("u");
 
             if (c.length > 0) {
                 for (Cookie c1 : c) {
@@ -212,7 +195,10 @@
                             if (acct == null) {
                                 acct = "";
                             }
-                            if (act.contains("found")) { %>                        
+                            if (u == null) {
+                                u = new User();
+                            }
+                            if (act.contains("found") && !u.getUsername().equals("")) { %>                        
                         <tr>
                             <td>Select Reset Method</td>
                         </tr>
@@ -269,19 +255,21 @@
                         %>
                     </table>
                     <!--<input type="submit"  onclick="">Login</button>-->
-                    
-                    <% if (!act.contains("ver") && !act.contains("found")) { %>
+
+                    <% if (!act.contains("ver") && !act.contains("found") || u.getUsername().equals("")) { %>
                     <button type="button" class="submit-btn" id="searchbtn"> Continue </button>
-                    <%} else if (!act.contains("ver") && act.contains("found")) { %>
+                    <% if (u.getUsername().equals("")) {%>
+                    <%}%>
+                    <%  } else if (!act.contains("ver") && act.contains("found") && !u.getUsername().equals("")) { %>
                     <button type="submit" class="submit-btn" id="reset-btn" onclick="pageAction('ResetPasswd')"> Reset Password </button>
-                    <%} else if (act.contains("ver") && act.contains("found")) { %>
-                    <button type="submit" class="submit-btn" id="update-btn">Update Account</button>
+                    <%} else if (act.contains("ver") && act.contains("found") && !u.getUsername().equals("")) { %>
+                    <button type="submit" class="submit-btn" id="update-btn" onclick="pageAction('updatePasswd')">Update Account</button>
                     <%}%><br>
                     <button type="button" class="submit-btn" id="cancel">Cancel</button>
-                    
+
                     <!--<input type="submit" name="" value="Reset">-->
                     <!--<a href="#">Forgot Password?</a>-->
-                    
+
 
                     <!--<button  class="submit-btn" onclick="document.location = 'ForgotPassword.jsp'"><i class="fas fa-angle-right"> Forgot Password?</i></button>-->
 
@@ -335,7 +323,7 @@
                             e[i].setAttribute("disabled", null);
                         }
                     }
-                   
+
                 };
 //                let toggleMethod = function () {
 //                    var method = document.getElementById("methodtype").value;

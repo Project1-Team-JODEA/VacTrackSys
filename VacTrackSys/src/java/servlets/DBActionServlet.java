@@ -23,12 +23,16 @@ import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "DBActionServlet", urlPatterns = {"/CDC/DBAction", "/DoctorLogin/DBAction"})
+@WebServlet(name = "DBActionServlet", urlPatterns = {"/CDC/DBAction", "/DoctorLogin/DBAction", "/DoctorLogin/DBAction/*"},
+        initParams = {
+            @WebInitParam(name = "actiontype", value = "none")
+        })
 public class DBActionServlet extends HttpServlet {
 
     /**
@@ -54,8 +58,7 @@ public class DBActionServlet extends HttpServlet {
         String ssn, fname, minit, lname, vac_date = "", dob = "", ptype, vsite, vid, v1id, v2id, v3id, v4id;
         String[] filters = new String[12];
 
-        String[] msg_html = {"<div class=\"toggle-box\" id=\"msg-box\">", "", "", ""};
-        String[] info = {ssn = "", fname = "", minit = "", lname = "", dob = "", ptype = "", vid = "", vsite = "", v1id = "",
+         String[] info = {ssn = "", fname = "", minit = "", lname = "", dob = "", ptype = "", vid = "", vsite = "", v1id = "",
             v2id = "", v3id = "", v4id = ""};
         String[] fields = {"Social_Security", "First_Name", "Middle_Init", "Last_Name", "DOB", //"Vaccine_ID",
             "P_Type", "Vaccine_ID", "Vaccination_Site", "Vaccine_1", "Vaccine_2", "Vaccine_3", "Vaccine_4"};
@@ -71,10 +74,10 @@ public class DBActionServlet extends HttpServlet {
                 webloc = "/PatientLogin";
             } else if (x.contains("AdminConsole")) {
                 webloc = "/AdminConsole";
-            }else if (x.contains("CDC")){
+            } else if (x.contains("CDC")) {
                 webloc = "/CDC";
             }
-//            String h_request = reque
+           //            String h_request = reque
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             ServletContext context = getServletContext();
             String ur = context.getRealPath("/Team_JODEA1.accdb");
@@ -84,6 +87,9 @@ public class DBActionServlet extends HttpServlet {
                 msg += "Error: Unable to Perform Action <br>";
                 URL = webloc + "/VaccinationDB.jsp";
             } else if (action.equalsIgnoreCase("SearchPatient")) {
+                System.out.println(request.getHeader("actiontype"));
+//                 response.
+
                 info[0] = String.valueOf(request.getParameter("ssn"));
                 info[1] = String.valueOf(request.getParameter("fname"));
                 info[2] = String.valueOf(request.getParameter("lname"));
@@ -190,26 +196,13 @@ public class DBActionServlet extends HttpServlet {
                     u.setSearched(true);
                     request.getSession().setAttribute("u", u);
                     URL = webloc + "/PatientRecords.jsp";
+//                    response.set
+
+//                  response.SETc
                 } else {
                     URL = webloc + "/VaccinationDB.jsp";
                 }
             } else if (action.equalsIgnoreCase("EditPatient")) {
-                // code editing script
-//                sql = "SELECT SITE_NAME FROM VAC_SITES";
-//                Statement s = conn.createStatement();
-//                ResultSet r = s.executeQuery(sql);
-//                ArrayList<Location> loc= new ArrayList<>();
-//                
-//                //create a locations list
-//                while (r.next()){
-//                   Location l = new Location();
-//                l.setId(r.getInt("SITE_ID"));
-//                l.setName(r.getString("SITE_NAME"));
-//                l.setLtype(r.getString("SITE_TYPE"));
-//                loc.add(l);
-//                
-//                }
-//                request.getSession().setAttribute("vloc", loc);
                 sql = "SELECT * FROM PATIENTS WHERE Social_Security = '" + request.getParameter("ssn").trim() + "'";
                 Statement s = conn.createStatement();
                 s.clearBatch();
@@ -224,19 +217,19 @@ public class DBActionServlet extends HttpServlet {
                     pat.setDob(String.valueOf(r.getDate("DOB")));
                     pat.setPtype(r.getString("P_Type"));
                     // adding temporary dummy vaccines
-                    Vaccine vac1 = new Vaccine();
-                    vac1.setVid(r.getString("Vaccine_1"));
-                    pat.setVac1(vac1);
-                    Vaccine vac2 = new Vaccine();
-                    vac2.setVid(r.getString("Vaccine_2"));
-                    pat.setVac2(vac2);
-                    Vaccine vac3 = new Vaccine();
-                    vac3.setVid(r.getString("Vaccine_3"));
-                    pat.setVac3(vac3);
-                    Vaccine vac4 = new Vaccine();
-                    vac4.setVid(r.getString("Vaccine_4"));
-                    pat.setVac4(vac4);
-                    patientset.add(pat);
+//                    Vaccine vac1 = new Vaccine();
+//                    vac1.setVid(r.getString("Vaccine_1"));
+//                    pat.setVac1(vac1);
+//                    Vaccine vac2 = new Vaccine();
+//                    vac2.setVid(r.getString("Vaccine_2"));
+//                    pat.setVac2(vac2);
+//                    Vaccine vac3 = new Vaccine();
+//                    vac3.setVid(r.getString("Vaccine_3"));
+//                    pat.setVac3(vac3);
+//                    Vaccine vac4 = new Vaccine();
+//                    vac4.setVid(r.getString("Vaccine_4"));
+//                    pat.setVac4(vac4);
+//                    patientset.add(pat);
                     // 
                     request.getSession().setAttribute("selectedPatient", pat);
                     URL = webloc + "/PatientView.jsp";
@@ -308,9 +301,8 @@ public class DBActionServlet extends HttpServlet {
 
                 v.setLocation(u.getLocation());
                 v.setManufacturer("Company X");
-               
+
 //                String v.date = String.format("yyyy-MM-dd", today);
-                
 //                v.setDate(d_format.format(LocalDate.parse(t)));
 //                v.setLotnum("00000000");
                 v.setVtype("REG");
@@ -320,9 +312,12 @@ public class DBActionServlet extends HttpServlet {
             } else if (action.equalsIgnoreCase("SearchVaccinations")) {
 
             } else if (action.equalsIgnoreCase("Cancel")) {
-                URL = webloc + "Vaccination.jsp";
+                URL = webloc + "/VaccinationDB.jsp";
 
-            } else if (action.equalsIgnoreCase("Logout")) {
+            }else if (action.equalsIgnoreCase("CreateReport")){
+                
+            }
+            else if (action.equalsIgnoreCase("Logout")) {
                 // Get Patient using SSN
                 URL = webloc + "/index1.jsp";
                 //
@@ -330,14 +325,14 @@ public class DBActionServlet extends HttpServlet {
 
             }
         } catch (ClassNotFoundException e) {
-            msg = "Error: Class Not Found <br>";
+            msg = "Connection Error: Class Not Found <br>";
             URL = webloc + "/VaccinationDB.jsp";
         } catch (SQLException ex) {
-            msg += "Error: " + ex + "<br>";
+            msg += "Database Error: " + ex + "<br>";
             URL = webloc + "/VaccinationDB.jsp";
         } catch (Exception e) {
             //msg += "Servlet Error: " + e.getMessage() + "<br>";
-            msg += "Error: " + e.getMessage() + "<br>TackTrace: ";
+            msg += "Processing Error: " + e.getMessage() + "<br>TackTrace: ";
             for (StackTraceElement stackTrace : e.getStackTrace()) {
                 msg += stackTrace + "<br>";
             }
@@ -366,6 +361,12 @@ public class DBActionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+//        response.setContentType("text/");
+        
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+        String action = request.getQueryString();
+        System.out.println(action);
         processRequest(request, response);
     }
 
