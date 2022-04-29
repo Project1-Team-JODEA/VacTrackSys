@@ -16,29 +16,15 @@
     </head>
 
     <body>
-        <!--        <div class="hero">
-                    <div class="form-box">
-                        <form class="input-group">
-                                            </form>
-        
-                        <div class="input-group">
-        
-                        </div>
-                        
-                        
-                        
-                    </div>
-                </div>-->
         <div class="box-container">
             <div class="box">
                 <h1 style="color: red"> Page Error  <i class="fas fa-exclamation-triangle"></i></h1>
 
                 Uh oh! It looks like one of the following happened:
                 <blockquote><ul>
-                    <li>Your Session Had Expired.</li>
-                    <li>Your User Account was not authenticated.</li>
-                    <li>An Error occurred within the Server or Client.</li>
-                    </ul></blockquote>
+                        <li>Your Session Had Expired.</li>
+                        <li>Your User Account was not authenticated.</li>
+                       </ul></blockquote>
                 You can return to the Home Page or 
                 Go to the 1 of the login pages:
                 <br>
@@ -54,13 +40,13 @@
                             <i class="fas fa-notes-medical"></i> Patient Portal <i class="fas fa-chevron-right"></i>
                         </a></li>
                     <li class="rlist-item"><a href="AdminConsole/index1.jsp" class="btn">
-                           <i class="fas fa-pills"></i> Administrator <br>Login<i class="fas fa-chevron-right"></i>
+                            <i class="fas fa-pills"></i> Administrator <br>Login<i class="fas fa-chevron-right"></i>
                         </a></li>
                     <li class="rlist-item"><a href="index.html" class="btn">
                             <i class="fas fa-home"></i>Home<i class="fas fa-chevron-right"></i></a></li>   
                 </ul>
             </div>
-            
+
         </div>
     </body>
 

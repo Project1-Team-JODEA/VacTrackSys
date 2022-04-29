@@ -174,14 +174,14 @@ public class LoginServlet extends HttpServlet {
 
         } catch (ClassNotFoundException e) {
             
-            msg += "JDBC Driver not found in project.<br>";
+            msg += "Connection Error: JDBC Driver not found in project.<br>";
             URL = webloc + "/index1.jsp";
         } catch (SQLException e) {
             msg += "Database error: " + e.getMessage() + ".<br>";
             URL = webloc + "/index1.jsp";
         } catch (Exception e) {
             if (e.getMessage().equalsIgnoreCase("null")){
-                msg += "Internal Webpage error: " ;
+                msg += "Internal Webpage error: AN empty value occured during Login Process. <br>" ;
                 
             }else{
                  msg += "Internal Webpage error: " + e.getMessage() + ".<br>";

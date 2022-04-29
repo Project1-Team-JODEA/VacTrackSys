@@ -22,6 +22,7 @@
  * @returns {undefined}
  */
 function validateInput(id, type, userType) {
+    var valid=false;
     if (type === 'email') {
 
     } else if (type === 'password') {
@@ -32,11 +33,16 @@ function validateInput(id, type, userType) {
             }
         }
         if (userType === 'PAT') {
-
+            
         }
     } else if (type === 'username') {
 
+    }else if(type === 'ssn'){
+         var regex = "^(?!666|000|9\\d{2})\\d{3}"
+                       + "-(?!00)\\d{2}-"
+                       +"(?!0{4})\\d{4}$";
     }
+    
 }
 
 /**

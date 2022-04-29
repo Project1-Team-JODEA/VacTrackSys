@@ -19,9 +19,9 @@
     <body>
         <%
             User u = (User) request.getSession().getAttribute("u");
-            String filename = "CDC REPORT-" + u.getUsername() + " .txt";
+            String filename = "CDC REPORT-" + u.getUsername() + ".txt";
             String filepath = getServletContext().getRealPath("/WEB-INF/");
-            response.setContentType("APPLICATION/OCTET-STREAM");
+            response.setContentType("APPLICATION/OCTET-STREAM;");
             response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
             java.io.FileInputStream fileInputStream = new java.io.FileInputStream(filepath + filename);
             int i;

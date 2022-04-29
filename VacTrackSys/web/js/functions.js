@@ -54,7 +54,7 @@ function getTodayDate() {
     if (m < 10) {
         m = "0" + m;
     }
-   today = y + "-" + m + "-" + d;
+    today = y + "-" + m + "-" + d;
     return today;
 }
 // toggle sort values for sorting 
@@ -67,23 +67,23 @@ var toggleSortVal = function (inputid) {
     var input = document.getElementById(inputid);
     //    var 
     var ftxt = document.getElementById("sort");
-    document.getElementById("txtsort").value ;
+    document.getElementById("txtsort").value;
     var ref_val = document.getElementById(inputid).value;
-    if (document.getElementById(inputid).getAttribute("checked")===null){
+    if (document.getElementById(inputid).getAttribute("checked") === null) {
         //set atribute and value to textbox
         document.getElementById(inputid).setAttribute("checked", null);
         // document.getElementById(inputid).
-        
-    } else if (document.getElementById(inputid).getAttribute("checked")!==null){
+
+    } else if (document.getElementById(inputid).getAttribute("checked") !== null) {
         document.getElementById(inputid).removeAttribute("checked");
 
     }
 
-    if (document.getElementById("sort").value.contains(input.value)){
+    if (document.getElementById("sort").value.contains(input.value)) {
 
-    }else if (document.getElementById("sort").value.contains(input.value)){
-        
-    }else if (document.getElementById("sort").value===""){
+    } else if (document.getElementById("sort").value.contains(input.value)) {
+
+    } else if (document.getElementById("sort").value === "") {
 
     }
 
@@ -105,12 +105,12 @@ const toggleList = function (id) {
     // let styleSheet = document.styleSheets[];
     if (sortList.style.display === "none") {
         sortList.style.display = "block";
-        } else if (sortList.style.display === "block") {
+    } else if (sortList.style.display === "block") {
         sortList.style.display = "none";
-        
-        }
-        // sortList.style.display
-        
+
+    }
+    // sortList.style.display
+
 
 };
 // toggles list
@@ -121,18 +121,18 @@ const toggleList = function (id) {
  * @param {type} id
  * @returns {undefined}
  */
-function toggleV(id, btn_id){
+function toggleV(id, btn_id) {
 
-    if (document.getElementById(id).getAttribute("type") === "password"){
+    if (document.getElementById(id).getAttribute("type") === "password") {
         document.getElementById(id).type = "text";
         document.getElementById(id).setAttribute("type", "text");
-        if (document.getElementById(btn_id).classList.contains("fa-eye")){
+        if (document.getElementById(btn_id).classList.contains("fa-eye")) {
             document.getElementById(btn_id).classList.replace("fa-eye", "fa-eye-slash");
-        } 
-    } else if (document.getElementById(id).getAttribute("type") === "text"){
+        }
+    } else if (document.getElementById(id).getAttribute("type") === "text") {
         document.getElementById(id).setAttribute("type", "password");
-        if (document.getElementById(btn_id).classList.contains("fa-eye-slash")){
-            document.getElementById(btn_id).classList.replace( "fa-eye-slash", "fa-eye");
+        if (document.getElementById(btn_id).classList.contains("fa-eye-slash")) {
+            document.getElementById(btn_id).classList.replace("fa-eye-slash", "fa-eye");
         }
     }
 }

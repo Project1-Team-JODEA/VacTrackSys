@@ -57,6 +57,15 @@
         <servlet-name>CreateReportServlet</servlet-name>
         <servlet-class>servlets.CreateReportServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchRecords</servlet-name>
+        <jsp-file>/DoctorLogin/records.jsp</jsp-file>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewAccountServlet</servlet-name>
         <url-pattern>/CDC/NewAccount</url-pattern>
@@ -77,13 +86,6 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/Logout</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SearchServlet</servlet-name>
-        <url-pattern>/CDC/Search</url-pattern>
-        <url-pattern>/Search</url-pattern>
-        <url-pattern>/AdminConsole/Search</url-pattern>
-        <url-pattern>/DoctorLogin/Search</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>newRecordServlet</servlet-name>
@@ -131,14 +133,23 @@
         <servlet-name>CreateReportServlet</servlet-name>
         <url-pattern>/CDC/CreateReport</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchRecords</servlet-name>
+        <url-pattern>/DoctorLogin/records.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/Search/*</url-pattern>
+        <url-pattern>/AdminConsole/Search</url-pattern>
+        <url-pattern>/DoctorLogin/Search/*</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
-        <!--        <tracking-mode>COOKIE</tracking-mode>-->
-    </session-config>
-    <welcome-file-list>
-        <welcome-file>DoctorLogin/index1.jsp</welcome-file>
-        <welcome-file>index.html</welcome-file>
-    </welcome-file-list>
+     </session-config>
     <!--    <security-constraint>
         <display-name>VacTrackSysConst</display-name>
         <web-resource-collection>
@@ -151,4 +162,16 @@
             <transport-guarantee>NONE</transport-guarantee>
         </user-data-constraint>
     </security-constraint>-->
+    <welcome-file-list>
+        <welcome-file>DoctorLogin/index1.jsp</welcome-file>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error_404.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/error_java.jsp</location>
+    </error-page>
 </web-app>

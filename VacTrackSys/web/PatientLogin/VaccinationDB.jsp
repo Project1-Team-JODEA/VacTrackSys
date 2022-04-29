@@ -1,4 +1,4 @@
-<%-- Vaccination Tracking System File name : VaccinationDB Date : Feb 18, 2022, 3:49:10 PM Author(s) : Elena Miller,
+s<%-- Vaccination Tracking System File name : VaccinationDB Date : Feb 18, 2022, 3:49:10 PM Author(s) : Elena Miller,
     DeShane` Sims Supporting File(s): --%>
 <!DOCTYPE html>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
@@ -125,7 +125,8 @@ For Searching through database
                                     <table>
                                         <tr>
                                             <td><span class="details">SSN</span></td>
-                                            <td><input type="number" name="ssn" id="ssn" maxlength="10" placeholder="(000-00-0000)"></td>
+                                            <td><input type="number" name="ssn" id="ssn" maxlength="10"
+                                                       placeholder="(000-00-0000)"></td>
                                                 <c:if test="${u.accesslevel=='MedicalStaff' || u.accesslevel=='Admin'}">
                                                 <td><i class="vac-btn fas fa-pen-square fa-2x" name="edit_v3" id="edit_v3" title="Edit Vaccine" value="Edit Patient"
                                                        onclick="pageAction2('EditPatient', '')"></i></td></c:if>

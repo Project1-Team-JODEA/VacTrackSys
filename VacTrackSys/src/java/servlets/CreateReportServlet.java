@@ -70,13 +70,13 @@ public class CreateReportServlet extends HttpServlet {
 
             loc = request.getParameter("location");
             String action = request.getParameter("actiontype");
-            
+
 //            User u = (User) request.getSession().getAttribute("u");
             if (action.equals("CreateReport")) {
                 if (loc.isEmpty() || loc.equals("")) {
                     msg += "Missing Location";
                 }
-             
+
                 if (msg.isEmpty() || msg.equals("")) {
 //                sql = "SELECT VACCINATIONS.PAT_ID, VACCINES"
 //                        + " FROM VACCINATIONS INNER JOIN VACCINES ON VACCINATIONS.Vaccine_ID = VACCINES.Vaccine_ID"
@@ -95,7 +95,7 @@ public class CreateReportServlet extends HttpServlet {
                     Calendar cal = Calendar.getInstance();
                     DateFormat df = DateFormat.getInstance();
                     out.println("Date: " + today);//date
-                   
+
                     if (r.next()) {
                         out.println("Location: " + r.getString("SITE_NAME"));
                         //out.print("Total vaccinated patients: " + String.valueOf(r.getInt("TotalPatients")));
@@ -110,24 +110,10 @@ public class CreateReportServlet extends HttpServlet {
                             out.println("Total People vaccinated: " + r.getInt("TotalPatients"));
 
                         }
-                        sql = "SELECT COUNT(PAT_ID) AS TotalPatients FROM VACCINATIONS AS vn, VAC_SITES AS vst "
-                                + "WHERE vn.SITE_ID=? vn.Vaccine_ID=v.Vaccine_ID AND vn.SITE_ID=vst.SITE_ID AND vn.Dose_No =4; ";
-                        ps.setInt(1, Integer.parseInt(loc));
-                        r = ps.executeQuery();
-                        if (r.next()) {
-
-                            out.println("# of people fully vaccinated (4/4 vaccines): " + r.getInt("TotalPatients"));
-                        }
+                        
                         sql = "SELECT COUNT(PAT_ID) AS Total FROM VACCINATIONS AS vn, VAC_SITES AS vst "
-                                + "WHERE vn.SITE_ID=? vn.Vaccine_ID=v.Vaccine_ID AND vn.SITE_ID=vst.SITE_ID AND vn.Dose_No =4; ";
-                        ps.setInt(1, Integer.parseInt(loc));
-                        r = ps.executeQuery();
-                        if (r.next()) {
-
-                            out.println("# of people fully vaccinated (4/4 vaccines): " + r.getInt("Total"));
-                        }
-
-                        out.println("# of people partially vaccinated: ");
+                                + "WHERE vn.SITE_ID=? AND vn.SITE_ID=vst.SITE_ID AND vn.Dose_No =4; ";
+                       
                     } else {
                         out.print("Total vaccinated Patients: 0");
 

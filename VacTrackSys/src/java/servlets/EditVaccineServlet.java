@@ -254,25 +254,25 @@ public class EditVaccineServlet extends HttpServlet {
             }
 
         } catch (SQLException e) {
-            msg += "SQL Error: " + e.getMessage() + " <br> StackTrace: ";
+            msg += "Database Error: " + e.getMessage() + " <br> StackTrace: ";
             for (StackTraceElement stackTrace : e.getStackTrace()) {
                 msg += stackTrace + "<br>";
             }
             url = webloc + "/VacView.jsp";
         } catch (ClassNotFoundException e) {
-            msg += "Class Error: " + e.getMessage() + " <br> StackTrace: ";
+            msg += "Connection Error: " + e.getMessage() + " <br> StackTrace: ";
             for (StackTraceElement stackTrace : e.getStackTrace()) {
                 msg += stackTrace + "<br>";
             }
             url = webloc + "/VacView.jsp";
         } catch (ParseException e) {
-            msg += "Parse Error: " + e.getMessage() + " <br> StackTrace: ";
+            msg += "Decoding Error: " + e.getMessage() + " <br> StackTrace: ";
             for (StackTraceElement stackTrace : e.getStackTrace()) {
                 msg += stackTrace + "<br>";
             }
             url = webloc + "/VacView.jsp";
         } catch (Exception e) {
-            msg += "Servlet Error: " + e.getMessage() + " <br> StackTrace: ";
+            msg += "Processing Error: " + e.getMessage() + " <br> StackTrace: ";
             for (StackTraceElement stackTrace : e.getStackTrace()) {
                 msg += stackTrace + "<br>";
             }

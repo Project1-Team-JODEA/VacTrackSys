@@ -92,9 +92,7 @@
 
                         <div class="input-box">
                             <span class="details">Manufacturer</span>
-                            <input type="text" name="man" id="man" 
-                                   placeholder="Enter vaccine manufacturer here"
-                                   value="${vac.manufacturer}"  required>
+                            
                             <select name="man" id="man">
                                 <option value="">Select</option>
                                 <option value="Pfizer">Pfizer</option>
@@ -132,7 +130,7 @@
                         <input type="reset" value="Clear">
                         &#8287;  &#8287;  &#8287;  &#8287; 
                     </div>
-                    <button type="submit" style="float: right;" onclick="document.location = 'DoctorLogin/VaccinationDB.jsp';">Go back<i class="fas fa-arrow-right"></i></button>
+                    <button type="submit" style="float: right;" onclick="window.location = './VaccinationDB.jsp';">Go back<i class="fas fa-arrow-right"></i></button>
                     <input type="hidden" name="actiontype" id="actiontype" value="">
                 </form>
                 <!--                        <form action="DBAction">

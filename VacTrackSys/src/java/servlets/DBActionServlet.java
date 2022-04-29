@@ -55,7 +55,7 @@ public class DBActionServlet extends HttpServlet {
         String ssn, fname, minit, lname, vac_date = "", dob = "", ptype, vsite, vid, v1id, v2id, v3id, v4id;
         String[] filters = new String[12];
 
-         String[] info = {ssn = "", fname = "", minit = "", lname = "", dob = "", ptype = "", vid = "", vsite = "", v1id = "",
+        String[] info = {ssn = "", fname = "", minit = "", lname = "", dob = "", ptype = "", vid = "", vsite = "", v1id = "",
             v2id = "", v3id = "", v4id = ""};
         String[] fields = {"Social_Security", "First_Name", "Middle_Init", "Last_Name", "DOB", //"Vaccine_ID",
             "P_Type", "Vaccine_ID", "Vaccination_Site", "Vaccine_1", "Vaccine_2", "Vaccine_3", "Vaccine_4"};
@@ -74,7 +74,7 @@ public class DBActionServlet extends HttpServlet {
             } else if (x.contains("CDC")) {
                 webloc = "/CDC";
             }
-           //            String h_request = reque
+            //            String h_request = reque
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             ServletContext context = getServletContext();
             String ur = context.getRealPath("/Team_JODEA1.accdb");
@@ -84,10 +84,7 @@ public class DBActionServlet extends HttpServlet {
                 msg += "Error: Unable to Perform Action <br>";
                 URL = webloc + "/VaccinationDB.jsp";
             } else if (action.equalsIgnoreCase("SearchPatient")) {
-                System.out.println(request.getHeader("actiontype"));
-//                 response.
-
-                info[0] = String.valueOf(request.getParameter("ssn"));
+                 info[0] = String.valueOf(request.getParameter("ssn"));
                 info[1] = String.valueOf(request.getParameter("fname"));
                 info[2] = String.valueOf(request.getParameter("lname"));
                 info[3] = String.valueOf(request.getParameter("midinit"));
@@ -95,11 +92,6 @@ public class DBActionServlet extends HttpServlet {
                 info[5] = String.valueOf(request.getParameter("dob"));
                 info[6] = String.valueOf(request.getParameter("pat_type"));
                 info[7] = "";//Vaccine_ID will remain blank;
-//                info[8] = String.valueOf(request.getParameter("v1id"));
-//                info[9] = String.valueOf(request.getParameter("v2id"));
-//                info[10] = String.valueOf(request.getParameter("v3id"));
-//                info[11] = String.valueOf(request.getParameter("v4id"));
-//                //N/A will be used to filter out the empty input params
                 int isE = 0;
                 String newV = "";
                 for (int i = 0; i < info.length; i++) {
@@ -110,6 +102,16 @@ public class DBActionServlet extends HttpServlet {
                     } else {
                         // adds a new condition clause for WHERE clause
                         if (fields[i].equals("Social_Security")) {
+//                            if (info[i].contains("000"))
+                            String[] ssn2 = info[i].split("-");
+                            if (ssn2[0].equals("000")){
+                                
+                            }
+                            if (ssn2[1].equals("00")){
+                                
+                            }if (ssn2[2].equals("0000")){
+                                
+                            }
                             newV = fields[i] + "=" + info[i];
                             filters[i] = newV; //String.valueOf(newV);
 
@@ -162,43 +164,39 @@ public class DBActionServlet extends HttpServlet {
                     sql += sqlw;// + ";";
                     Statement s = conn.createStatement();
                     ResultSet r = s.executeQuery(sql);
-                    while (r.next()) {
+
+                    if (r.next()) {
                         Patient pat = new Patient();
                         pat.setSsn(String.valueOf(r.getInt("Social_Security")));
-                        //
                         pat.setFname(r.getString("First_Name"));
                         pat.setMname(r.getString("Middle_Init"));
                         pat.setLname(r.getString("Last_Name"));
                         pat.setDob(String.valueOf(r.getDate("DOB")));
                         pat.setPtype(r.getString("P_Type"));
-                        // adding temporary dummy vaccines
-                        Vaccine vac1 = new Vaccine();
-                        vac1.setVid(r.getString("Vaccine_1"));
-                        pat.setVac1(vac1);
-                        Vaccine vac2 = new Vaccine();
-                        vac2.setVid(r.getString("Vaccine_2"));
-                        pat.setVac2(vac2);
-                        Vaccine vac3 = new Vaccine();
-                        vac3.setVid(r.getString("Vaccine_3"));
-                        pat.setVac3(vac3);
-                        Vaccine vac4 = new Vaccine();
-                        vac4.setVid(r.getString("Vaccine_4"));
-                        pat.setVac4(vac4);
                         patientset.add(pat);
+                        while (r.next()) {
+                            pat = new Patient();
+                            pat.setSsn(String.valueOf(r.getInt("Social_Security")));
+                            pat.setFname(r.getString("First_Name"));
+                            pat.setMname(r.getString("Middle_Init"));
+                            pat.setLname(r.getString("Last_Name"));
+                            pat.setDob(String.valueOf(r.getDate("DOB")));
+                            pat.setPtype(r.getString("P_Type"));
+                            patientset.add(pat);
+                        }
+                    } else {
+                        msg += " Could Not Find any Matching Records <br>";
                     }
+
                     r.close();
                     s.close();
                     request.getSession().setAttribute("patientset", patientset);
-//                    User u = (User) request.getSession().getAttribute("u");
-                    u.setSearched(true);
-                    request.getSession().setAttribute("u", u);
-                    URL = webloc + "/PatientRecords.jsp";
-//                    response.set
-
-//                  response.SETc
+                    URL = webloc + "/records.jsp";
+//                    URL = webloc + "/PatientRecords.jsp";
                 } else {
                     URL = webloc + "/VaccinationDB.jsp";
                 }
+                
             } else if (action.equalsIgnoreCase("EditPatient")) {
                 sql = "SELECT * FROM PATIENTS WHERE Social_Security = '" + request.getParameter("ssn").trim() + "'";
                 Statement s = conn.createStatement();
@@ -213,21 +211,6 @@ public class DBActionServlet extends HttpServlet {
                     pat.setLname(r.getString("Last_Name"));
                     pat.setDob(String.valueOf(r.getDate("DOB")));
                     pat.setPtype(r.getString("P_Type"));
-                    // adding temporary dummy vaccines
-//                    Vaccine vac1 = new Vaccine();
-//                    vac1.setVid(r.getString("Vaccine_1"));
-//                    pat.setVac1(vac1);
-//                    Vaccine vac2 = new Vaccine();
-//                    vac2.setVid(r.getString("Vaccine_2"));
-//                    pat.setVac2(vac2);
-//                    Vaccine vac3 = new Vaccine();
-//                    vac3.setVid(r.getString("Vaccine_3"));
-//                    pat.setVac3(vac3);
-//                    Vaccine vac4 = new Vaccine();
-//                    vac4.setVid(r.getString("Vaccine_4"));
-//                    pat.setVac4(vac4);
-//                    patientset.add(pat);
-                    // 
                     request.getSession().setAttribute("selectedPatient", pat);
                     URL = webloc + "/PatientView.jsp";
 
@@ -292,16 +275,11 @@ public class DBActionServlet extends HttpServlet {
                 Date today = new Date();
                 System.out.println(today);
 //                User u = (User) request.getSession().getAttribute("u");
-                DateTimeFormatter d_format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//                 d_format.parse(Lo)                
+                DateTimeFormatter d_format = DateTimeFormatter.ofPattern("yyyy-MM-dd");   
                 String t = String.valueOf(today);
 
                 v.setLocation(u.getLocation());
                 v.setManufacturer("Company X");
-
-//                String v.date = String.format("yyyy-MM-dd", today);
-//                v.setDate(d_format.format(LocalDate.parse(t)));
-//                v.setLotnum("00000000");
                 v.setVtype("REG");
 
                 request.getSession().setAttribute("vac", v);
@@ -311,10 +289,9 @@ public class DBActionServlet extends HttpServlet {
             } else if (action.equalsIgnoreCase("Cancel")) {
                 URL = webloc + "/VaccinationDB.jsp";
 
-            }else if (action.equalsIgnoreCase("CreateReport")){
-                
-            }
-            else if (action.equalsIgnoreCase("Logout")) {
+            } else if (action.equalsIgnoreCase("CreateReport")) {
+
+            } else if (action.equalsIgnoreCase("Logout")) {
                 // Get Patient using SSN
                 URL = webloc + "/index1.jsp";
                 //
@@ -359,12 +336,8 @@ public class DBActionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        response.setContentType("text/");
-        
-        response.setContentType("text/html");
-        response.setCharacterEncoding("UTF-8");
-        String action = request.getQueryString();
-        System.out.println(action);
         processRequest(request, response);
+       
     }
 
     /**

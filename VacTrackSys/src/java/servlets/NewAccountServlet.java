@@ -131,11 +131,13 @@ public class NewAccountServlet extends HttpServlet {
                 boolean ma = m.matches();
                 boolean mf = m.find();
                 if (!m.matches()) {
-                    msg += "invalid email. <br>";
+                    msg += "invalid email: Email should contain only one &QUOT;@&QUOT; symbol<br>"
+                            + "No special characters after the @ symbol (unless it's a period) <br>"
+                            + "";
                 }
             }
             if (hint.equals("") || hint.isEmpty()) {
-                msg += "Missing Hint";
+                msg += "Missing Hint <br>";
             }
             if (u.getQuestion().equals("")) {
                 msg += "Missing Security Question. <br>";

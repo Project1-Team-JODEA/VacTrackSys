@@ -267,28 +267,12 @@
                     <%}%><br>
                     <button type="button" class="submit-btn" id="cancel">Cancel</button>
 
-                    <!--<input type="submit" name="" value="Reset">-->
-                    <!--<a href="#">Forgot Password?</a>-->
-
-
-                    <!--<button  class="submit-btn" onclick="document.location = 'ForgotPassword.jsp'"><i class="fas fa-angle-right"> Forgot Password?</i></button>-->
-
-                    <!--                    <div class="toggle-box">
-                                            <div id="Qustions" class="toggle-content">
-                                                
-                                            </div>
-                                        </div>-->
-
-                    <input type="hidden" name="step" id="step" value="" hidden="">
+                      <input type="hidden" name="step" id="step" value="" hidden="">
                     <!--<input type="hidden" name="ver" id="ver" value="${ver}">-->
                     <data id="valid" value="" hidden=""></data>
                     <div id="message" style="padding: 
                          5px; background: white;">${msg}</div>
-                </form>
-
-                <!--<input type="submit" id="cancel" value="Cancel">-->
-            </div>
-            <!--<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
+               </div>
             <script>
                 var x = document.getElementById("passwdreset");
                 x.style.left = "50px";

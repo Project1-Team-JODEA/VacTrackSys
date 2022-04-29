@@ -42,14 +42,21 @@
         <script src="https://kit.fontawesome.com/98e4c48f68.js" crossorigin="anonymous"></script>
         <link rel="icon" type="image/x-icon" href="../image/favicon_16x16.png">
         <script src="../js/functions.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script type="text/javascript">
     var $ = function (id) {
         return document.getElementById(id);
     };
-    function clrscrn() {
-        //$("Records").reset();
-//                $("rid").focus();
+    function cancel() {
+        let c = confirm("Are you sure you would like to cancel this entry");
+        if (c === true) {
+            window.location = "./VaccinationDB.jsp";
+        }
     }
+$(document).ready(()=>{
+    $("#dob").attr('max', getTodayDate());
+});
+
         </script>
     </head>
     <c:if test="${!u.authenticated}">
@@ -83,34 +90,29 @@
         <div class="container">
             <i class="fas fa-user-circle fa-2x" class="vac-btn" id="prof-btn"
                title="User profile"></i><p>User: ${u.username} - ${u.accesslevel} </p>
-            <div class="title">Patient Database Records - New Entry</div>
+            <div class="title">Patient Database Records - Entry</div>
             <div class="content">
 
                 <form name="NewRecord" id="NewRecord" action="EditPatient" method="post">
                     <div class="user-details">
 
                         <div class="input-box">
-                            <span class="details">Patient Info</span>
-                            <input type="text" name="ssn" id="ssn" value="${selectedPatient.ssn}" placeholder="SSN" required>
+                            <label class="details">Social Security</label>
+                            <input type="text" name="ssn" id="ssn" value="${selectedPatient.ssn}"
+                                   placeholder="###-##-####" maxlength="11" required>
                         </div>
+                        <div class="input-box">  <label class="details">First Name</label>
+                            <input type="text" name="fname" id="fname" value="${selectedPatient.fname}" size=""
+                                   placeholder="First Name"></div>
                         <div class="input-box">
-                            <span class="details">Vaccines</span>
-<!--                            <input type="text" name="v1id" id="v1id" value="${selectedPatient.vac1.vid}" 
-                                   placeholder="Vaccine #1 ID"></div>-->
-                        <div class="input-box"><input type="text" name="fname" id="fname" value="${selectedPatient.fname}" size=""
-                                                      placeholder="First Name"></div>
-<!--                        <div class="input-box"><input type="text" name="v2id" id="v2id" value="${selectedPatient.vac2.vid}" 
-                                                      placeholder="Vaccine #2 ID"></div>-->
-                        <div class="input-box"><input type="text" name="lname" id="lname" value="${selectedPatient.lname}" size=""
-                                                      placeholder="Last Name" > </div>
-<!--                        <div class="input-box"><input type="text" name="v3id" id="v3id" value="${selectedPatient.vac4.vid}" 
-                                                      placeholder="Vaccine #3 ID"></div>-->
-                        <div class="input-box"> <input type="text" name="midinit" id="midinit" value="${selectedPatient.mname}" 
-                                                       placeholder="Middle Init" maxlength="1"></div>
-<!--                        <div class="input-box"><input type="text" name="v4id" id="v4id" value="${selectedPatient.vac4.vid}" 
-                                                      placeholder="Vaccine #4 ID"></div>                        -->
+                            <label class="details">Last Name</label>
+                            <input type="text" name="lname" id="lname" value="${selectedPatient.lname}" size=""
+                                   placeholder="Last Name" > </div>
+                        <div class="input-box"> <label class="details">Middle Name</label>
+                            <input type="text" name="midinit" id="midinit" value="${selectedPatient.mname}" 
+                                   placeholder="Middle Init" maxlength="1"></div>
                         <div class="input-box">
-                            <span class="details">Patient Type</span>
+                            <label class="details">Patient Type</label>
                             <select id="pat_type">
                                 <option id="reg-patient" value="PAT">Regular</option>
                                 <option id="Inpatient" value="IN">Inpatient</option>
@@ -120,7 +122,7 @@
                             </select>
                         </div>
                         <div class="input-box">
-                            <span class="details">DOB</span>
+                            <label class="details">Date of Birth</label>
                             <input type="date" name="dob" id="dob" value="${selectedPatient.dob}">
                         </div>
                         <!--                        <div class="input-box">
@@ -143,11 +145,16 @@
                                         </div>-->
 
                     <div class="button">
-                        <input type="submit" name="add" id="add" value="Add" onclick="pageAction('add')" ><!--onclick="pageAction2('add')" -->
+                        <input type="submit" name="add" id="add" title="Add New Patient Entry" 
+                               value="Add" onclick="pageAction('add')" ><!--onclick="pageAction2('add')" -->
                         &#8287;  &#8287;  &#8287;  &#8287; 
-                        <input type="submit" name="edit" id="edit" value="Update" onclick="pageAction('update')" ><!--onclick="pageAction2('add')" -->
+                        <input type="submit" name="edit" id="edit"  title="Update Existing Patient Infomation" 
+                               value="Update" onclick="pageAction('update')" ><!--onclick="pageAction2('add')" -->
                         &#8287;  &#8287;  &#8287;  &#8287; 
-                        <input type="submit" name="backbtn" id="back" value="Cancel" onclick="pageAction('cancel')" >
+                        <input type="button" name="backbtn" id="cancel" value="Cancel" onclick=' let c = confirm("Are you sure you would like to cancel this entry");
+                                if (c === true) {
+                                    window.location = "./VaccinationDB.jsp";
+                                }' title="Cancel Patient Entry" >
 
                     </div>
 

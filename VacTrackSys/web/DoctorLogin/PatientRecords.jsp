@@ -43,10 +43,6 @@
                         <th>Last Name:</th>
                         <th>DOB</th>
                         <th>P Type</th>
-                        <th>Vaccine 1</th>
-                        <th>Vaccine 2</th>  
-                        <th>Vaccine 3</th>
-                        <th>Vaccine 4</th>
                     </tr>
                     <c:forEach var="p" items="${patientset}">
                         <tr>
@@ -56,15 +52,12 @@
                             <td>${p.lname}</td>
                             <td>${p.dob}</td>
                             <td>${p.ptype}</td>
-                            <td>${p.vac1.vid}</td>
-                            <td>${p.vac2.vid}</td>
-                            <td>${p.vac3.vid}</td>
-                            <td>${p.vac4.vid}</td>
                         </tr>
                     </c:forEach>
                 </table>
             </div>
         </div>
+        <button type="button" onclick="window.location = './VaccinationDB.jsp';">Go Back</button>
 <!--
         <table>
             <tr>

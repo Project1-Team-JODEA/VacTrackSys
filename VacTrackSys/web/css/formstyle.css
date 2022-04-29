@@ -225,7 +225,9 @@ input.sortval:checked {
     /*float: left;*/
     width: 50px;
 }
-
+#action{
+    padding: 5px;
+}
 .user-details .input-box input:focus,
 .user-details .input-box input:valid {
     border-color: #9b59b6;
