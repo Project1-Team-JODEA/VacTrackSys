@@ -1,0 +1,4 @@
+-----------------VACCINATION REPORT-----------------
+Date: Sun May 01 20:39:28 CDT 2022
+Location: North Point Hospital                                                                                                                                                                                                                                           
+Total People vaccinated: 4
