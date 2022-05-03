@@ -133,7 +133,9 @@ public class EditPatientServlet extends HttpServlet {
                         + "Last_Name,DOB, P_Type) "
                         + "VALUES (?, ?, ?, ?, ?, ?)";
                 PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setString(1, p.getSsn());
+                String[] ssn1 = p.getSsn().split("-");
+                String ssn2 = ssn1[0] + ssn1[1]+ssn1[2];
+                ps.setString(1, ssn2);
                 ps.setString(2, p.getFname());
                 ps.setString(3, p.getMname());
                 ps.setString(4, p.getLname());

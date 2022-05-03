@@ -157,6 +157,7 @@ public class EditVaccineServlet extends HttpServlet {
                                 //add vaccine batch to database
                                 sql = "SELECT * FROM VAC_BATCHES WHERE BATCH_NUM=?";
                                 ps = conn.prepareStatement(sql);
+                                ps.setString(1, v.getLotnum());
                                 r = ps.executeQuery();
                                 if (r.next()) {
                                     msg += "Batch already Exists <br>";

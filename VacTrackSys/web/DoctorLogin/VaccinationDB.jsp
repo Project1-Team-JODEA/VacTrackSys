@@ -112,6 +112,7 @@ For Searching through database
                 </div>
                 <div class="toggle-box" id="help-box">
                     <div class="toggle-content" id="help-content" style="display: none; ">
+
                         <span style="font-weight: bold ;">Help/Tips</span>
                         <ul>
                             <li>Click on the Message icon (<i class="fas fa-database"></i>) to
@@ -122,7 +123,10 @@ For Searching through database
                             <li><details>
                                     <summary>Patient Records</summary>
                                     <ol>
-                                        <li></li>
+                                        <li>searching patient records: Click on the Search (<i class="fas fa-magnifying-glass"></i>) icon. two buttons will appear (a &QUOT;Search By&QUOT; button &amp; a submit button.
+                                            . Click on the “Search By” button to open a list of fields (Click on the button again to close it). Select the check box next to the name of the field, it will toggle the appearance of the text field.
+
+                                        </li>
                                         <li></li>
                                         <li></li>
                                         <li></li>
@@ -313,7 +317,7 @@ For Searching through database
                             <i class="fas fa-2x fa-door-closed " id="Logout"  title="Logout" 
                                style=" cursor: pointer; "></i>
                         </div>
-                         <input type="hidden" name="vid" id="vid" value="">
+                        <input type="hidden" name="vid" id="vid" value="">
                         <input type="hidden" name="actiontype" id="actiontype" value="">
                     </form>
                 </div>
