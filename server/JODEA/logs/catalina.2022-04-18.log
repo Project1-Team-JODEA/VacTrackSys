@@ -1,0 +1,272 @@
+18-Apr-2022 16:51:13.662 WARNING [main] org.apache.catalina.core.AprLifecycleListener.init The Apache Tomcat Native library failed to load. The error reported was [D:\book\servers\tomcat-8.5.72\bin\tcnative-1.dll: Can't load IA 32-bit .dll on a AMD 64-bit platform]
+	java.lang.UnsatisfiedLinkError: D:\book\servers\tomcat-8.5.72\bin\tcnative-1.dll: Can't load IA 32-bit .dll on a AMD 64-bit platform
+		at java.base/java.lang.ClassLoader$NativeLibrary.load0(Native Method)
+		at java.base/java.lang.ClassLoader$NativeLibrary.load(ClassLoader.java:2430)
+		at java.base/java.lang.ClassLoader$NativeLibrary.loadLibrary(ClassLoader.java:2487)
+		at java.base/java.lang.ClassLoader.loadLibrary0(ClassLoader.java:2684)
+		at java.base/java.lang.ClassLoader.loadLibrary(ClassLoader.java:2649)
+		at java.base/java.lang.Runtime.loadLibrary0(Runtime.java:827)
+		at java.base/java.lang.System.loadLibrary(System.java:1871)
+		at org.apache.tomcat.jni.Library.<init>(Library.java:41)
+		at org.apache.tomcat.jni.Library.initialize(Library.java:173)
+		at org.apache.catalina.core.AprLifecycleListener.init(AprLifecycleListener.java:195)
+		at org.apache.catalina.core.AprLifecycleListener.isAprAvailable(AprLifecycleListener.java:104)
+		at org.apache.catalina.connector.Connector.setProtocol(Connector.java:641)
+		at org.apache.catalina.connector.Connector.<init>(Connector.java:81)
+		at org.apache.catalina.startup.ConnectorCreateRule.begin(ConnectorCreateRule.java:62)
+		at org.apache.tomcat.util.digester.Digester.startElement(Digester.java:1235)
+		at java.xml/com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.startElement(AbstractSAXParser.java:510)
+		at java.xml/com.sun.org.apache.xerces.internal.parsers.AbstractXMLDocumentParser.emptyElement(AbstractXMLDocumentParser.java:183)
+		at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanStartElement(XMLDocumentFragmentScannerImpl.java:1377)
+		at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:2710)
+		at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:605)
+		at java.xml/com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:534)
+		at java.xml/com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:888)
+		at java.xml/com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:824)
+		at java.xml/com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+		at java.xml/com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1216)
+		at java.xml/com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:635)
+		at org.apache.tomcat.util.digester.Digester.parse(Digester.java:1496)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:611)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:662)
+		at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+		at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+		at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+		at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+		at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:305)
+		at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:475)
+18-Apr-2022 16:51:13.801 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/8.5.72
+18-Apr-2022 16:51:13.801 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Oct 1 2021 15:15:33 UTC
+18-Apr-2022 16:51:13.801 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 8.5.72.0
+18-Apr-2022 16:51:13.801 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Windows 10
+18-Apr-2022 16:51:13.802 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.0
+18-Apr-2022 16:51:13.802 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+18-Apr-2022 16:51:13.802 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             C:\Program Files\Java\jdk-11.0.10
+18-Apr-2022 16:51:13.803 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           11.0.10+8-LTS-162
+18-Apr-2022 16:51:13.803 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+18-Apr-2022 16:51:13.803 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         D:\book\servers\tomcat-8.5.72
+18-Apr-2022 16:51:13.803 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         D:\book\servers\tomcat-8.5.72
+18-Apr-2022 16:51:13.804 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+18-Apr-2022 16:51:13.804 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+18-Apr-2022 16:51:13.804 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util=ALL-UNNAMED
+18-Apr-2022 16:51:13.805 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+18-Apr-2022 16:51:13.805 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+18-Apr-2022 16:51:13.805 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=D:\book\servers\tomcat-8.5.72\conf\logging.properties
+18-Apr-2022 16:51:13.805 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+18-Apr-2022 16:51:13.806 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dhttp.nonProxyHosts=localhost|127.0.0.1|LAPTOP-BIGDQEP0
+18-Apr-2022 16:51:13.806 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+18-Apr-2022 16:51:13.806 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+18-Apr-2022 16:51:13.806 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+18-Apr-2022 16:51:13.806 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=D:\book\servers\tomcat-8.5.72
+18-Apr-2022 16:51:13.806 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=D:\book\servers\tomcat-8.5.72
+18-Apr-2022 16:51:13.806 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=D:\book\servers\tomcat-8.5.72\temp
+18-Apr-2022 16:51:13.908 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+18-Apr-2022 16:51:14.130 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+18-Apr-2022 16:51:14.147 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 1230 ms
+18-Apr-2022 16:51:14.249 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+18-Apr-2022 16:51:14.249 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/8.5.72]
+18-Apr-2022 16:51:14.280 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDescriptor Deploying deployment descriptor [D:\book\servers\tomcat-8.5.72\conf\Catalina\localhost\VacTracker.xml]
+18-Apr-2022 16:51:14.753 WARNING [localhost-startStop-1] org.apache.tomcat.util.descriptor.web.WebXml.setVersion Unknown version string [4.0]. Default version will be used.
+18-Apr-2022 16:51:16.665 SEVERE [localhost-startStop-1] org.apache.catalina.core.ContainerBase.addChildInternal ContainerBase.addChild: start: 
+	org.apache.catalina.LifecycleException: Failed to start component [StandardEngine[Catalina].StandardHost[localhost].StandardContext[/VacTracker]]
+		at org.apache.catalina.util.LifecycleBase.handleSubClassException(LifecycleBase.java:440)
+		at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:198)
+		at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:753)
+		at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:727)
+		at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:695)
+		at org.apache.catalina.startup.HostConfig.deployDescriptor(HostConfig.java:673)
+		at org.apache.catalina.startup.HostConfig$DeployDescriptor.run(HostConfig.java:1881)
+		at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+		at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+		at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+		at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+		at java.base/java.lang.Thread.run(Thread.java:834)
+	Caused by: java.lang.IllegalArgumentException: Invalid <url-pattern> [Member/Login] in servlet mapping
+		at org.apache.catalina.core.StandardContext.addServletMappingDecoded(StandardContext.java:3210)
+		at org.apache.catalina.core.StandardContext.addServletMappingDecoded(StandardContext.java:3196)
+		at org.apache.catalina.startup.ContextConfig.configureContext(ContextConfig.java:1338)
+		at org.apache.catalina.startup.ContextConfig.webConfig(ContextConfig.java:1115)
+		at org.apache.catalina.startup.ContextConfig.configureStart(ContextConfig.java:779)
+		at org.apache.catalina.startup.ContextConfig.lifecycleEvent(ContextConfig.java:299)
+		at org.apache.catalina.util.LifecycleBase.fireLifecycleEvent(LifecycleBase.java:123)
+		at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5130)
+		at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+		... 10 more
+18-Apr-2022 16:51:16.667 SEVERE [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDescriptor Error deploying deployment descriptor [D:\book\servers\tomcat-8.5.72\conf\Catalina\localhost\VacTracker.xml]
+	java.lang.IllegalStateException: Error starting child
+		at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:757)
+		at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:727)
+		at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:695)
+		at org.apache.catalina.startup.HostConfig.deployDescriptor(HostConfig.java:673)
+		at org.apache.catalina.startup.HostConfig$DeployDescriptor.run(HostConfig.java:1881)
+		at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+		at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+		at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+		at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+		at java.base/java.lang.Thread.run(Thread.java:834)
+	Caused by: org.apache.catalina.LifecycleException: Failed to start component [StandardEngine[Catalina].StandardHost[localhost].StandardContext[/VacTracker]]
+		at org.apache.catalina.util.LifecycleBase.handleSubClassException(LifecycleBase.java:440)
+		at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:198)
+		at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:753)
+		... 9 more
+	Caused by: java.lang.IllegalArgumentException: Invalid <url-pattern> [Member/Login] in servlet mapping
+		at org.apache.catalina.core.StandardContext.addServletMappingDecoded(StandardContext.java:3210)
+		at org.apache.catalina.core.StandardContext.addServletMappingDecoded(StandardContext.java:3196)
+		at org.apache.catalina.startup.ContextConfig.configureContext(ContextConfig.java:1338)
+		at org.apache.catalina.startup.ContextConfig.webConfig(ContextConfig.java:1115)
+		at org.apache.catalina.startup.ContextConfig.configureStart(ContextConfig.java:779)
+		at org.apache.catalina.startup.ContextConfig.lifecycleEvent(ContextConfig.java:299)
+		at org.apache.catalina.util.LifecycleBase.fireLifecycleEvent(LifecycleBase.java:123)
+		at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5130)
+		at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+		... 10 more
+18-Apr-2022 16:51:16.770 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDescriptor Deployment of deployment descriptor [D:\book\servers\tomcat-8.5.72\conf\Catalina\localhost\VacTracker.xml] has finished in [2,489] ms
+18-Apr-2022 16:51:16.771 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [D:\book\servers\tomcat-8.5.72\webapps\docs]
+18-Apr-2022 16:51:16.971 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+18-Apr-2022 16:51:17.219 WARNING [localhost-startStop-1] org.apache.catalina.util.SessionIdGeneratorBase.createSecureRandom Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [211] milliseconds.
+18-Apr-2022 16:51:17.256 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [D:\book\servers\tomcat-8.5.72\webapps\docs] has finished in [485] ms
+18-Apr-2022 16:51:17.257 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [D:\book\servers\tomcat-8.5.72\webapps\examples]
+18-Apr-2022 16:51:17.712 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+18-Apr-2022 16:51:17.791 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [D:\book\servers\tomcat-8.5.72\webapps\examples] has finished in [533] ms
+18-Apr-2022 16:51:17.791 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [D:\book\servers\tomcat-8.5.72\webapps\host-manager]
+18-Apr-2022 16:51:17.890 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+18-Apr-2022 16:51:17.896 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [D:\book\servers\tomcat-8.5.72\webapps\host-manager] has finished in [105] ms
+18-Apr-2022 16:51:17.896 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [D:\book\servers\tomcat-8.5.72\webapps\manager]
+18-Apr-2022 16:51:17.968 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+18-Apr-2022 16:51:17.971 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [D:\book\servers\tomcat-8.5.72\webapps\manager] has finished in [75] ms
+18-Apr-2022 16:51:17.971 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [D:\book\servers\tomcat-8.5.72\webapps\ROOT]
+18-Apr-2022 16:51:18.029 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+18-Apr-2022 16:51:18.034 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [D:\book\servers\tomcat-8.5.72\webapps\ROOT] has finished in [62] ms
+18-Apr-2022 16:51:18.040 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+18-Apr-2022 16:51:18.058 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 3910 ms
+18-Apr-2022 16:51:20.080 INFO [http-nio-8080-exec-10] org.apache.catalina.startup.HostConfig.deployDescriptor Deploying deployment descriptor [D:\book\servers\tomcat-8.5.72\conf\Catalina\localhost\terminal.xml]
+18-Apr-2022 16:51:20.219 WARNING [http-nio-8080-exec-10] org.apache.tomcat.util.descriptor.web.WebXml.setVersion Unknown version string [4.0]. Default version will be used.
+18-Apr-2022 16:51:21.737 INFO [http-nio-8080-exec-10] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+18-Apr-2022 16:51:21.824 INFO [http-nio-8080-exec-10] org.springframework.web.context.ContextLoader.initWebApplicationContext Root WebApplicationContext: initialization started
+18-Apr-2022 16:51:21.948 INFO [http-nio-8080-exec-10] org.springframework.web.context.support.XmlWebApplicationContext.prepareRefresh Refreshing Root WebApplicationContext: startup date [Mon Apr 18 16:51:21 CDT 2022]; root of context hierarchy
+18-Apr-2022 16:51:22.022 INFO [http-nio-8080-exec-10] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions Loading XML bean definitions from ServletContext resource [/WEB-INF/applicationContext.xml]
+18-Apr-2022 16:51:22.218 INFO [http-nio-8080-exec-10] org.springframework.web.context.ContextLoader.initWebApplicationContext Root WebApplicationContext: initialization completed in 394 ms
+18-Apr-2022 16:51:22.265 INFO [http-nio-8080-exec-10] org.apache.struts.action.ActionServlet.initChain Loading chain catalog from jar:file:/D:/github/Unknown-Rep/terminal/target/terminal-1.0-SNAPSHOT/WEB-INF/lib/struts-core-1.3.10.jar!/org/apache/struts/chain/chain-config.xml
+18-Apr-2022 16:51:22.612 INFO [http-nio-8080-exec-10] org.apache.struts.tiles.TilesPlugin.initDefinitionsFactory Tiles definition factory loaded for module ''.
+18-Apr-2022 16:51:22.617 INFO [http-nio-8080-exec-10] org.apache.struts.validator.ValidatorPlugIn.initResources Loading validation rules file from '/WEB-INF/validator-rules.xml'
+18-Apr-2022 16:51:22.618 INFO [http-nio-8080-exec-10] org.apache.struts.validator.ValidatorPlugIn.initResources Loading validation rules file from '/WEB-INF/validation.xml'
+18-Apr-2022 16:51:22.751 INFO [http-nio-8080-exec-10] org.springframework.web.servlet.DispatcherServlet.initServletBean FrameworkServlet 'dispatcher': initialization started
+18-Apr-2022 16:51:22.763 INFO [http-nio-8080-exec-10] org.springframework.web.context.support.XmlWebApplicationContext.prepareRefresh Refreshing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Mon Apr 18 16:51:22 CDT 2022]; parent: Root WebApplicationContext
+18-Apr-2022 16:51:22.763 INFO [http-nio-8080-exec-10] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions Loading XML bean definitions from ServletContext resource [/WEB-INF/dispatcher-servlet.xml]
+18-Apr-2022 16:51:22.953 INFO [http-nio-8080-exec-10] org.springframework.web.servlet.handler.SimpleUrlHandlerMapping.registerHandler Mapped URL path [/index.htm] onto handler 'indexController'
+18-Apr-2022 16:51:23.047 INFO [http-nio-8080-exec-10] org.springframework.web.servlet.DispatcherServlet.initServletBean FrameworkServlet 'dispatcher': initialization completed in 296 ms
+18-Apr-2022 16:51:23.054 INFO [http-nio-8080-exec-10] org.apache.catalina.startup.HostConfig.deployDescriptor Deployment of deployment descriptor [D:\book\servers\tomcat-8.5.72\conf\Catalina\localhost\terminal.xml] has finished in [2,974] ms
+18-Apr-2022 16:51:23.063 INFO [http-nio-8080-exec-1] org.apache.catalina.util.LifecycleBase.start The start() method was called on component [StandardEngine[Catalina].StandardHost[localhost].StandardContext[/terminal]] after start() had already been called. The second call will be ignored.
+18-Apr-2022 17:14:33.446 INFO [http-nio-8080-exec-7] org.springframework.web.context.support.XmlWebApplicationContext.doClose Closing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Mon Apr 18 16:51:22 CDT 2022]; parent: Root WebApplicationContext
+18-Apr-2022 17:14:33.476 INFO [http-nio-8080-exec-7] org.springframework.web.context.support.XmlWebApplicationContext.doClose Closing Root WebApplicationContext: startup date [Mon Apr 18 16:51:21 CDT 2022]; root of context hierarchy
+18-Apr-2022 17:14:34.227 INFO [http-nio-8080-exec-7] org.apache.catalina.startup.HostConfig.undeploy Undeploying context [/terminal]
+18-Apr-2022 17:14:34.327 INFO [http-nio-8080-exec-2] org.apache.catalina.startup.HostConfig.deployDescriptor Deploying deployment descriptor [D:\book\servers\tomcat-8.5.72\conf\Catalina\localhost\terminal.xml]
+18-Apr-2022 17:14:34.473 WARNING [http-nio-8080-exec-2] org.apache.tomcat.util.descriptor.web.WebXml.setVersion Unknown version string [4.0]. Default version will be used.
+18-Apr-2022 17:14:36.395 INFO [http-nio-8080-exec-2] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+18-Apr-2022 17:14:36.463 INFO [http-nio-8080-exec-2] org.springframework.web.context.ContextLoader.initWebApplicationContext Root WebApplicationContext: initialization started
+18-Apr-2022 17:14:36.533 INFO [http-nio-8080-exec-2] org.springframework.web.context.support.XmlWebApplicationContext.prepareRefresh Refreshing Root WebApplicationContext: startup date [Mon Apr 18 17:14:36 CDT 2022]; root of context hierarchy
+18-Apr-2022 17:14:36.582 INFO [http-nio-8080-exec-2] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions Loading XML bean definitions from ServletContext resource [/WEB-INF/applicationContext.xml]
+18-Apr-2022 17:14:36.656 INFO [http-nio-8080-exec-2] org.springframework.web.context.ContextLoader.initWebApplicationContext Root WebApplicationContext: initialization completed in 193 ms
+18-Apr-2022 17:14:36.685 INFO [http-nio-8080-exec-2] org.apache.struts.action.ActionServlet.initChain Loading chain catalog from jar:file:/D:/github/Unknown-Rep/terminal/target/terminal-1.0-SNAPSHOT/WEB-INF/lib/struts-core-1.3.10.jar!/org/apache/struts/chain/chain-config.xml
+18-Apr-2022 17:14:36.892 INFO [http-nio-8080-exec-2] org.apache.struts.tiles.TilesPlugin.initDefinitionsFactory Tiles definition factory loaded for module ''.
+18-Apr-2022 17:14:36.895 INFO [http-nio-8080-exec-2] org.apache.struts.validator.ValidatorPlugIn.initResources Loading validation rules file from '/WEB-INF/validator-rules.xml'
+18-Apr-2022 17:14:36.896 INFO [http-nio-8080-exec-2] org.apache.struts.validator.ValidatorPlugIn.initResources Loading validation rules file from '/WEB-INF/validation.xml'
+18-Apr-2022 17:14:36.983 INFO [http-nio-8080-exec-2] org.springframework.web.servlet.DispatcherServlet.initServletBean FrameworkServlet 'dispatcher': initialization started
+18-Apr-2022 17:14:36.996 INFO [http-nio-8080-exec-2] org.springframework.web.context.support.XmlWebApplicationContext.prepareRefresh Refreshing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Mon Apr 18 17:14:36 CDT 2022]; parent: Root WebApplicationContext
+18-Apr-2022 17:14:36.996 INFO [http-nio-8080-exec-2] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions Loading XML bean definitions from ServletContext resource [/WEB-INF/dispatcher-servlet.xml]
+18-Apr-2022 17:14:37.102 INFO [http-nio-8080-exec-2] org.springframework.web.servlet.handler.SimpleUrlHandlerMapping.registerHandler Mapped URL path [/index.htm] onto handler 'indexController'
+18-Apr-2022 17:14:37.149 INFO [http-nio-8080-exec-2] org.springframework.web.servlet.DispatcherServlet.initServletBean FrameworkServlet 'dispatcher': initialization completed in 166 ms
+18-Apr-2022 17:14:37.153 INFO [http-nio-8080-exec-2] org.apache.catalina.startup.HostConfig.deployDescriptor Deployment of deployment descriptor [D:\book\servers\tomcat-8.5.72\conf\Catalina\localhost\terminal.xml] has finished in [2,826] ms
+18-Apr-2022 17:14:37.157 INFO [http-nio-8080-exec-4] org.apache.catalina.util.LifecycleBase.start The start() method was called on component [StandardEngine[Catalina].StandardHost[localhost].StandardContext[/terminal]] after start() had already been called. The second call will be ignored.
+18-Apr-2022 17:15:21.801 INFO [http-nio-8080-exec-12] org.springframework.web.context.support.XmlWebApplicationContext.doClose Closing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Mon Apr 18 17:14:36 CDT 2022]; parent: Root WebApplicationContext
+18-Apr-2022 17:15:21.972 INFO [http-nio-8080-exec-12] org.springframework.web.context.support.XmlWebApplicationContext.doClose Closing Root WebApplicationContext: startup date [Mon Apr 18 17:14:36 CDT 2022]; root of context hierarchy
+18-Apr-2022 17:15:22.661 INFO [http-nio-8080-exec-12] org.apache.catalina.startup.HostConfig.undeploy Undeploying context [/terminal]
+18-Apr-2022 17:15:22.777 INFO [http-nio-8080-exec-16] org.apache.catalina.startup.HostConfig.deployDescriptor Deploying deployment descriptor [D:\book\servers\tomcat-8.5.72\conf\Catalina\localhost\terminal.xml]
+18-Apr-2022 17:15:22.849 WARNING [http-nio-8080-exec-16] org.apache.tomcat.util.descriptor.web.WebXml.setVersion Unknown version string [4.0]. Default version will be used.
+18-Apr-2022 17:15:23.809 INFO [http-nio-8080-exec-16] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+18-Apr-2022 17:15:23.863 INFO [http-nio-8080-exec-16] org.springframework.web.context.ContextLoader.initWebApplicationContext Root WebApplicationContext: initialization started
+18-Apr-2022 17:15:23.931 INFO [http-nio-8080-exec-16] org.springframework.web.context.support.XmlWebApplicationContext.prepareRefresh Refreshing Root WebApplicationContext: startup date [Mon Apr 18 17:15:23 CDT 2022]; root of context hierarchy
+18-Apr-2022 17:15:23.979 INFO [http-nio-8080-exec-16] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions Loading XML bean definitions from ServletContext resource [/WEB-INF/applicationContext.xml]
+18-Apr-2022 17:15:24.044 INFO [http-nio-8080-exec-16] org.springframework.web.context.ContextLoader.initWebApplicationContext Root WebApplicationContext: initialization completed in 181 ms
+18-Apr-2022 17:15:24.076 INFO [http-nio-8080-exec-16] org.apache.struts.action.ActionServlet.initChain Loading chain catalog from jar:file:/D:/github/Unknown-Rep/terminal/target/terminal-1.0-SNAPSHOT/WEB-INF/lib/struts-core-1.3.10.jar!/org/apache/struts/chain/chain-config.xml
+18-Apr-2022 17:15:24.260 INFO [http-nio-8080-exec-16] org.apache.struts.tiles.TilesPlugin.initDefinitionsFactory Tiles definition factory loaded for module ''.
+18-Apr-2022 17:15:24.262 INFO [http-nio-8080-exec-16] org.apache.struts.validator.ValidatorPlugIn.initResources Loading validation rules file from '/WEB-INF/validator-rules.xml'
+18-Apr-2022 17:15:24.263 INFO [http-nio-8080-exec-16] org.apache.struts.validator.ValidatorPlugIn.initResources Loading validation rules file from '/WEB-INF/validation.xml'
+18-Apr-2022 17:15:24.344 INFO [http-nio-8080-exec-16] org.springframework.web.servlet.DispatcherServlet.initServletBean FrameworkServlet 'dispatcher': initialization started
+18-Apr-2022 17:15:24.355 INFO [http-nio-8080-exec-16] org.springframework.web.context.support.XmlWebApplicationContext.prepareRefresh Refreshing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Mon Apr 18 17:15:24 CDT 2022]; parent: Root WebApplicationContext
+18-Apr-2022 17:15:24.355 INFO [http-nio-8080-exec-16] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions Loading XML bean definitions from ServletContext resource [/WEB-INF/dispatcher-servlet.xml]
+18-Apr-2022 17:15:24.466 INFO [http-nio-8080-exec-16] org.springframework.web.servlet.handler.SimpleUrlHandlerMapping.registerHandler Mapped URL path [/index.htm] onto handler 'indexController'
+18-Apr-2022 17:15:24.516 INFO [http-nio-8080-exec-16] org.springframework.web.servlet.DispatcherServlet.initServletBean FrameworkServlet 'dispatcher': initialization completed in 171 ms
+18-Apr-2022 17:15:24.520 INFO [http-nio-8080-exec-16] org.apache.catalina.startup.HostConfig.deployDescriptor Deployment of deployment descriptor [D:\book\servers\tomcat-8.5.72\conf\Catalina\localhost\terminal.xml] has finished in [1,743] ms
+18-Apr-2022 17:15:24.525 INFO [http-nio-8080-exec-19] org.apache.catalina.util.LifecycleBase.start The start() method was called on component [StandardEngine[Catalina].StandardHost[localhost].StandardContext[/terminal]] after start() had already been called. The second call will be ignored.
+18-Apr-2022 17:15:26.031 INFO [http-nio-8080-exec-15] org.apache.struts.tiles.TilesRequestProcessor.initDefinitionsMapping Tiles definition factory found for request processor ''.
+18-Apr-2022 17:15:26.513 WARNING [http-nio-8080-exec-15] org.apache.struts.util.PropertyMessageResources.loadLocale   Resource com/myapp/struts/ApplicationResource_en_US.properties Not Found.
+18-Apr-2022 17:15:26.513 WARNING [http-nio-8080-exec-15] org.apache.struts.util.PropertyMessageResources.loadLocale   Resource com/myapp/struts/ApplicationResource_en.properties Not Found.
+18-Apr-2022 17:15:26.513 WARNING [http-nio-8080-exec-15] org.apache.struts.util.PropertyMessageResources.loadLocale   Resource com/myapp/struts/ApplicationResource.properties Not Found.
+18-Apr-2022 17:15:26.515 WARNING [http-nio-8080-exec-15] org.apache.struts.util.PropertyMessageResources.loadLocale   Resource org/apache/struts/taglib/bean/LocalStrings_en_US.properties Not Found.
+18-Apr-2022 17:15:26.516 WARNING [http-nio-8080-exec-15] org.apache.struts.util.PropertyMessageResources.loadLocale   Resource org/apache/struts/taglib/bean/LocalStrings_en.properties Not Found.
+18-Apr-2022 17:16:46.450 INFO [http-nio-8080-exec-21] org.springframework.web.context.support.XmlWebApplicationContext.doClose Closing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Mon Apr 18 17:15:24 CDT 2022]; parent: Root WebApplicationContext
+18-Apr-2022 17:16:46.499 INFO [http-nio-8080-exec-21] org.springframework.web.context.support.XmlWebApplicationContext.doClose Closing Root WebApplicationContext: startup date [Mon Apr 18 17:15:23 CDT 2022]; root of context hierarchy
+18-Apr-2022 17:16:46.598 WARNING [http-nio-8080-exec-26] org.apache.tomcat.util.descriptor.web.WebXml.setVersion Unknown version string [4.0]. Default version will be used.
+18-Apr-2022 17:16:47.787 INFO [http-nio-8080-exec-26] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+18-Apr-2022 17:16:47.826 INFO [http-nio-8080-exec-26] org.springframework.web.context.ContextLoader.initWebApplicationContext Root WebApplicationContext: initialization started
+18-Apr-2022 17:16:47.886 INFO [http-nio-8080-exec-26] org.springframework.web.context.support.XmlWebApplicationContext.prepareRefresh Refreshing Root WebApplicationContext: startup date [Mon Apr 18 17:16:47 CDT 2022]; root of context hierarchy
+18-Apr-2022 17:16:47.940 INFO [http-nio-8080-exec-26] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions Loading XML bean definitions from ServletContext resource [/WEB-INF/applicationContext.xml]
+18-Apr-2022 17:16:48.011 INFO [http-nio-8080-exec-26] org.springframework.web.context.ContextLoader.initWebApplicationContext Root WebApplicationContext: initialization completed in 185 ms
+18-Apr-2022 17:16:48.106 INFO [http-nio-8080-exec-26] org.apache.struts.action.ActionServlet.initChain Loading chain catalog from jar:file:/D:/github/Unknown-Rep/terminal/target/terminal-1.0-SNAPSHOT/WEB-INF/lib/struts-core-1.3.10.jar!/org/apache/struts/chain/chain-config.xml
+18-Apr-2022 17:16:48.334 INFO [http-nio-8080-exec-26] org.apache.struts.tiles.TilesPlugin.initDefinitionsFactory Tiles definition factory loaded for module ''.
+18-Apr-2022 17:16:48.338 INFO [http-nio-8080-exec-26] org.apache.struts.validator.ValidatorPlugIn.initResources Loading validation rules file from '/WEB-INF/validator-rules.xml'
+18-Apr-2022 17:16:48.338 INFO [http-nio-8080-exec-26] org.apache.struts.validator.ValidatorPlugIn.initResources Loading validation rules file from '/WEB-INF/validation.xml'
+18-Apr-2022 17:16:48.435 INFO [http-nio-8080-exec-26] org.springframework.web.servlet.DispatcherServlet.initServletBean FrameworkServlet 'dispatcher': initialization started
+18-Apr-2022 17:16:48.453 INFO [http-nio-8080-exec-26] org.springframework.web.context.support.XmlWebApplicationContext.prepareRefresh Refreshing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Mon Apr 18 17:16:48 CDT 2022]; parent: Root WebApplicationContext
+18-Apr-2022 17:16:48.453 INFO [http-nio-8080-exec-26] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions Loading XML bean definitions from ServletContext resource [/WEB-INF/dispatcher-servlet.xml]
+18-Apr-2022 17:16:48.617 INFO [http-nio-8080-exec-26] org.springframework.web.servlet.handler.SimpleUrlHandlerMapping.registerHandler Mapped URL path [/index.htm] onto handler 'indexController'
+18-Apr-2022 17:16:48.686 INFO [http-nio-8080-exec-26] org.springframework.web.servlet.DispatcherServlet.initServletBean FrameworkServlet 'dispatcher': initialization completed in 250 ms
+18-Apr-2022 17:16:49.974 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.startup.HostConfig.reload Reloading context [/terminal]
+18-Apr-2022 17:16:49.975 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/terminal] has started
+18-Apr-2022 17:16:49.981 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.springframework.web.context.support.XmlWebApplicationContext.doClose Closing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Mon Apr 18 17:16:48 CDT 2022]; parent: Root WebApplicationContext
+18-Apr-2022 17:16:50.026 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.springframework.web.context.support.XmlWebApplicationContext.doClose Closing Root WebApplicationContext: startup date [Mon Apr 18 17:16:47 CDT 2022]; root of context hierarchy
+18-Apr-2022 17:16:50.100 WARNING [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.tomcat.util.descriptor.web.WebXml.setVersion Unknown version string [4.0]. Default version will be used.
+18-Apr-2022 17:16:51.133 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+18-Apr-2022 17:16:51.169 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.springframework.web.context.ContextLoader.initWebApplicationContext Root WebApplicationContext: initialization started
+18-Apr-2022 17:16:51.225 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.springframework.web.context.support.XmlWebApplicationContext.prepareRefresh Refreshing Root WebApplicationContext: startup date [Mon Apr 18 17:16:51 CDT 2022]; root of context hierarchy
+18-Apr-2022 17:16:51.266 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions Loading XML bean definitions from ServletContext resource [/WEB-INF/applicationContext.xml]
+18-Apr-2022 17:16:51.324 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.springframework.web.context.ContextLoader.initWebApplicationContext Root WebApplicationContext: initialization completed in 155 ms
+18-Apr-2022 17:16:51.391 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.struts.action.ActionServlet.initChain Loading chain catalog from jar:file:/D:/github/Unknown-Rep/terminal/target/terminal-1.0-SNAPSHOT/WEB-INF/lib/struts-core-1.3.10.jar!/org/apache/struts/chain/chain-config.xml
+18-Apr-2022 17:16:51.582 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.struts.tiles.TilesPlugin.initDefinitionsFactory Tiles definition factory loaded for module ''.
+18-Apr-2022 17:16:51.585 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.struts.validator.ValidatorPlugIn.initResources Loading validation rules file from '/WEB-INF/validator-rules.xml'
+18-Apr-2022 17:16:51.586 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.struts.validator.ValidatorPlugIn.initResources Loading validation rules file from '/WEB-INF/validation.xml'
+18-Apr-2022 17:16:51.676 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.springframework.web.servlet.DispatcherServlet.initServletBean FrameworkServlet 'dispatcher': initialization started
+18-Apr-2022 17:16:51.690 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.springframework.web.context.support.XmlWebApplicationContext.prepareRefresh Refreshing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Mon Apr 18 17:16:51 CDT 2022]; parent: Root WebApplicationContext
+18-Apr-2022 17:16:51.690 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions Loading XML bean definitions from ServletContext resource [/WEB-INF/dispatcher-servlet.xml]
+18-Apr-2022 17:16:51.812 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.springframework.web.servlet.handler.SimpleUrlHandlerMapping.registerHandler Mapped URL path [/index.htm] onto handler 'indexController'
+18-Apr-2022 17:16:51.864 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.springframework.web.servlet.DispatcherServlet.initServletBean FrameworkServlet 'dispatcher': initialization completed in 188 ms
+18-Apr-2022 17:16:51.866 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/terminal] is completed
+18-Apr-2022 17:41:05.611 INFO [http-nio-8080-exec-38] org.springframework.web.context.support.XmlWebApplicationContext.doClose Closing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Mon Apr 18 17:16:51 CDT 2022]; parent: Root WebApplicationContext
+18-Apr-2022 17:41:05.668 INFO [http-nio-8080-exec-38] org.springframework.web.context.support.XmlWebApplicationContext.doClose Closing Root WebApplicationContext: startup date [Mon Apr 18 17:16:51 CDT 2022]; root of context hierarchy
+18-Apr-2022 17:41:06.270 INFO [http-nio-8080-exec-38] org.apache.catalina.startup.HostConfig.undeploy Undeploying context [/terminal]
+18-Apr-2022 17:41:06.429 INFO [http-nio-8080-exec-31] org.apache.catalina.startup.HostConfig.deployDescriptor Deploying deployment descriptor [D:\book\servers\tomcat-8.5.72\conf\Catalina\localhost\terminal.xml]
+18-Apr-2022 17:41:06.560 WARNING [http-nio-8080-exec-31] org.apache.tomcat.util.descriptor.web.WebXml.setVersion Unknown version string [4.0]. Default version will be used.
+18-Apr-2022 17:41:07.792 INFO [http-nio-8080-exec-31] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+18-Apr-2022 17:41:07.860 INFO [http-nio-8080-exec-31] org.springframework.web.context.ContextLoader.initWebApplicationContext Root WebApplicationContext: initialization started
+18-Apr-2022 17:41:08.031 INFO [http-nio-8080-exec-31] org.springframework.web.context.support.XmlWebApplicationContext.prepareRefresh Refreshing Root WebApplicationContext: startup date [Mon Apr 18 17:41:08 CDT 2022]; root of context hierarchy
+18-Apr-2022 17:41:08.085 INFO [http-nio-8080-exec-31] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions Loading XML bean definitions from ServletContext resource [/WEB-INF/applicationContext.xml]
+18-Apr-2022 17:41:08.172 INFO [http-nio-8080-exec-31] org.springframework.web.context.ContextLoader.initWebApplicationContext Root WebApplicationContext: initialization completed in 312 ms
+18-Apr-2022 17:41:08.200 INFO [http-nio-8080-exec-31] org.apache.struts.action.ActionServlet.initChain Loading chain catalog from jar:file:/D:/github/Unknown-Rep/terminal/target/terminal-1.0-SNAPSHOT/WEB-INF/lib/struts-core-1.3.10.jar!/org/apache/struts/chain/chain-config.xml
+18-Apr-2022 17:41:08.503 INFO [http-nio-8080-exec-31] org.apache.struts.tiles.TilesPlugin.initDefinitionsFactory Tiles definition factory loaded for module ''.
+18-Apr-2022 17:41:08.510 INFO [http-nio-8080-exec-31] org.apache.struts.validator.ValidatorPlugIn.initResources Loading validation rules file from '/WEB-INF/validator-rules.xml'
+18-Apr-2022 17:41:08.511 INFO [http-nio-8080-exec-31] org.apache.struts.validator.ValidatorPlugIn.initResources Loading validation rules file from '/WEB-INF/validation.xml'
+18-Apr-2022 17:41:08.637 INFO [http-nio-8080-exec-31] org.springframework.web.servlet.DispatcherServlet.initServletBean FrameworkServlet 'dispatcher': initialization started
+18-Apr-2022 17:41:08.654 INFO [http-nio-8080-exec-31] org.springframework.web.context.support.XmlWebApplicationContext.prepareRefresh Refreshing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Mon Apr 18 17:41:08 CDT 2022]; parent: Root WebApplicationContext
+18-Apr-2022 17:41:08.655 INFO [http-nio-8080-exec-31] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions Loading XML bean definitions from ServletContext resource [/WEB-INF/dispatcher-servlet.xml]
+18-Apr-2022 17:41:08.794 INFO [http-nio-8080-exec-31] org.springframework.web.servlet.handler.SimpleUrlHandlerMapping.registerHandler Mapped URL path [/index.htm] onto handler 'indexController'
+18-Apr-2022 17:41:08.857 INFO [http-nio-8080-exec-31] org.springframework.web.servlet.DispatcherServlet.initServletBean FrameworkServlet 'dispatcher': initialization completed in 220 ms
+18-Apr-2022 17:41:08.860 INFO [http-nio-8080-exec-31] org.apache.catalina.startup.HostConfig.deployDescriptor Deployment of deployment descriptor [D:\book\servers\tomcat-8.5.72\conf\Catalina\localhost\terminal.xml] has finished in [2,431] ms
+18-Apr-2022 17:41:08.866 INFO [http-nio-8080-exec-37] org.apache.catalina.util.LifecycleBase.start The start() method was called on component [StandardEngine[Catalina].StandardHost[localhost].StandardContext[/terminal]] after start() had already been called. The second call will be ignored.
+18-Apr-2022 18:44:36.865 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+18-Apr-2022 18:44:36.876 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+18-Apr-2022 18:44:37.121 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+18-Apr-2022 18:44:37.248 INFO [localhost-startStop-2] org.springframework.web.context.support.XmlWebApplicationContext.doClose Closing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Mon Apr 18 17:41:08 CDT 2022]; parent: Root WebApplicationContext
+18-Apr-2022 18:44:37.268 INFO [localhost-startStop-2] org.springframework.web.context.support.XmlWebApplicationContext.doClose Closing Root WebApplicationContext: startup date [Mon Apr 18 17:41:08 CDT 2022]; root of context hierarchy
+18-Apr-2022 18:44:37.453 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+18-Apr-2022 18:44:37.473 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]

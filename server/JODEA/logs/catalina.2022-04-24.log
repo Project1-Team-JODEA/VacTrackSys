@@ -1,0 +1,431 @@
+24-Apr-2022 18:55:01.714 WARNING [main] org.apache.catalina.core.AprLifecycleListener.init The Apache Tomcat Native library failed to load. The error reported was [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\bin\tcnative-1.dll: Can't load IA 32-bit .dll on a AMD 64-bit platform]
+	java.lang.UnsatisfiedLinkError: C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\bin\tcnative-1.dll: Can't load IA 32-bit .dll on a AMD 64-bit platform
+		at java.lang.ClassLoader$NativeLibrary.load(Native Method)
+		at java.lang.ClassLoader.loadLibrary0(ClassLoader.java:1941)
+		at java.lang.ClassLoader.loadLibrary(ClassLoader.java:1857)
+		at java.lang.Runtime.loadLibrary0(Runtime.java:870)
+		at java.lang.System.loadLibrary(System.java:1122)
+		at org.apache.tomcat.jni.Library.<init>(Library.java:41)
+		at org.apache.tomcat.jni.Library.initialize(Library.java:173)
+		at org.apache.catalina.core.AprLifecycleListener.init(AprLifecycleListener.java:195)
+		at org.apache.catalina.core.AprLifecycleListener.isAprAvailable(AprLifecycleListener.java:104)
+		at org.apache.catalina.connector.Connector.setProtocol(Connector.java:641)
+		at org.apache.catalina.connector.Connector.<init>(Connector.java:81)
+		at org.apache.catalina.startup.ConnectorCreateRule.begin(ConnectorCreateRule.java:62)
+		at org.apache.tomcat.util.digester.Digester.startElement(Digester.java:1235)
+		at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.startElement(AbstractSAXParser.java:509)
+		at com.sun.org.apache.xerces.internal.parsers.AbstractXMLDocumentParser.emptyElement(AbstractXMLDocumentParser.java:182)
+		at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanStartElement(XMLDocumentFragmentScannerImpl.java:1339)
+		at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:2784)
+		at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:602)
+		at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:505)
+		at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:841)
+		at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:770)
+		at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+		at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1213)
+		at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:643)
+		at org.apache.tomcat.util.digester.Digester.parse(Digester.java:1496)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:611)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:662)
+		at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+		at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+		at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+		at java.lang.reflect.Method.invoke(Method.java:498)
+		at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:305)
+		at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:475)
+24-Apr-2022 18:55:01.908 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/8.5.72
+24-Apr-2022 18:55:01.908 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Oct 1 2021 15:15:33 UTC
+24-Apr-2022 18:55:01.908 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 8.5.72.0
+24-Apr-2022 18:55:01.908 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Windows 10
+24-Apr-2022 18:55:01.909 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.0
+24-Apr-2022 18:55:01.909 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+24-Apr-2022 18:55:01.909 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             C:\Program Files\Java\jdk1.8.0_111\jre
+24-Apr-2022 18:55:01.909 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_111-b14
+24-Apr-2022 18:55:01.909 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+24-Apr-2022 18:55:01.909 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA
+24-Apr-2022 18:55:01.909 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA
+24-Apr-2022 18:55:01.909 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\conf\logging.properties
+24-Apr-2022 18:55:01.910 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+24-Apr-2022 18:55:01.910 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+24-Apr-2022 18:55:01.910 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+24-Apr-2022 18:55:01.910 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+24-Apr-2022 18:55:01.910 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA
+24-Apr-2022 18:55:01.910 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA
+24-Apr-2022 18:55:01.911 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\temp
+24-Apr-2022 18:55:02.109 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8090"]
+24-Apr-2022 18:55:02.513 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+24-Apr-2022 18:55:02.539 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 1339 ms
+24-Apr-2022 18:55:02.616 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+24-Apr-2022 18:55:02.616 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/8.5.72]
+24-Apr-2022 18:55:02.645 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDescriptor Deploying deployment descriptor [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\conf\Catalina\localhost\terminal.xml]
+24-Apr-2022 18:55:03.224 WARNING [localhost-startStop-1] org.apache.tomcat.util.descriptor.web.WebXml.setVersion Unknown version string [4.0]. Default version will be used.
+24-Apr-2022 18:55:06.702 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 18:55:06.840 INFO [localhost-startStop-1] org.springframework.web.context.ContextLoader.initWebApplicationContext Root WebApplicationContext: initialization started
+24-Apr-2022 18:55:06.962 INFO [localhost-startStop-1] org.springframework.web.context.support.XmlWebApplicationContext.prepareRefresh Refreshing Root WebApplicationContext: startup date [Sun Apr 24 18:55:06 CDT 2022]; root of context hierarchy
+24-Apr-2022 18:55:07.074 INFO [localhost-startStop-1] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions Loading XML bean definitions from ServletContext resource [/WEB-INF/applicationContext.xml]
+24-Apr-2022 18:55:07.329 INFO [localhost-startStop-1] org.springframework.web.context.ContextLoader.initWebApplicationContext Root WebApplicationContext: initialization completed in 488 ms
+24-Apr-2022 18:55:07.402 INFO [localhost-startStop-1] org.apache.struts.action.ActionServlet.initChain Loading chain catalog from jar:file:/D:/github/Unknown-Rep/terminal/target/terminal-1.0-SNAPSHOT/WEB-INF/lib/struts-core-1.3.10.jar!/org/apache/struts/chain/chain-config.xml
+24-Apr-2022 18:55:08.055 INFO [localhost-startStop-1] org.apache.struts.tiles.TilesPlugin.initDefinitionsFactory Tiles definition factory loaded for module ''.
+24-Apr-2022 18:55:08.060 INFO [localhost-startStop-1] org.apache.struts.validator.ValidatorPlugIn.initResources Loading validation rules file from '/WEB-INF/validator-rules.xml'
+24-Apr-2022 18:55:08.061 INFO [localhost-startStop-1] org.apache.struts.validator.ValidatorPlugIn.initResources Loading validation rules file from '/WEB-INF/validation.xml'
+24-Apr-2022 18:55:08.302 INFO [localhost-startStop-1] org.springframework.web.servlet.DispatcherServlet.initServletBean FrameworkServlet 'dispatcher': initialization started
+24-Apr-2022 18:55:08.325 INFO [localhost-startStop-1] org.springframework.web.context.support.XmlWebApplicationContext.prepareRefresh Refreshing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Sun Apr 24 18:55:08 CDT 2022]; parent: Root WebApplicationContext
+24-Apr-2022 18:55:08.326 INFO [localhost-startStop-1] org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions Loading XML bean definitions from ServletContext resource [/WEB-INF/dispatcher-servlet.xml]
+24-Apr-2022 18:55:08.574 INFO [localhost-startStop-1] org.springframework.web.servlet.handler.SimpleUrlHandlerMapping.registerHandler Mapped URL path [/index.htm] onto handler 'indexController'
+24-Apr-2022 18:55:08.694 INFO [localhost-startStop-1] org.springframework.web.servlet.DispatcherServlet.initServletBean FrameworkServlet 'dispatcher': initialization completed in 391 ms
+24-Apr-2022 18:55:08.722 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDescriptor Deployment of deployment descriptor [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\conf\Catalina\localhost\terminal.xml] has finished in [6,076] ms
+24-Apr-2022 18:55:08.722 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDescriptor Deploying deployment descriptor [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\conf\Catalina\localhost\VacTracker.xml]
+24-Apr-2022 18:55:08.937 WARNING [localhost-startStop-1] org.apache.tomcat.util.descriptor.web.WebXml.setVersion Unknown version string [4.0]. Default version will be used.
+24-Apr-2022 18:55:10.998 SEVERE [localhost-startStop-1] org.apache.catalina.core.ContainerBase.addChildInternal ContainerBase.addChild: start: 
+	org.apache.catalina.LifecycleException: Failed to start component [StandardEngine[Catalina].StandardHost[localhost].StandardContext[/VacTracker]]
+		at org.apache.catalina.util.LifecycleBase.handleSubClassException(LifecycleBase.java:440)
+		at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:198)
+		at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:753)
+		at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:727)
+		at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:695)
+		at org.apache.catalina.startup.HostConfig.deployDescriptor(HostConfig.java:673)
+		at org.apache.catalina.startup.HostConfig$DeployDescriptor.run(HostConfig.java:1881)
+		at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+		at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+		at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+		at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+		at java.lang.Thread.run(Thread.java:745)
+	Caused by: java.lang.IllegalArgumentException: Invalid <url-pattern> [Member/Login] in servlet mapping
+		at org.apache.catalina.core.StandardContext.addServletMappingDecoded(StandardContext.java:3210)
+		at org.apache.catalina.core.StandardContext.addServletMappingDecoded(StandardContext.java:3196)
+		at org.apache.catalina.startup.ContextConfig.configureContext(ContextConfig.java:1338)
+		at org.apache.catalina.startup.ContextConfig.webConfig(ContextConfig.java:1115)
+		at org.apache.catalina.startup.ContextConfig.configureStart(ContextConfig.java:779)
+		at org.apache.catalina.startup.ContextConfig.lifecycleEvent(ContextConfig.java:299)
+		at org.apache.catalina.util.LifecycleBase.fireLifecycleEvent(LifecycleBase.java:123)
+		at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5130)
+		at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+		... 10 more
+24-Apr-2022 18:55:10.999 SEVERE [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDescriptor Error deploying deployment descriptor [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\conf\Catalina\localhost\VacTracker.xml]
+	java.lang.IllegalStateException: Error starting child
+		at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:757)
+		at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:727)
+		at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:695)
+		at org.apache.catalina.startup.HostConfig.deployDescriptor(HostConfig.java:673)
+		at org.apache.catalina.startup.HostConfig$DeployDescriptor.run(HostConfig.java:1881)
+		at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+		at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+		at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+		at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+		at java.lang.Thread.run(Thread.java:745)
+	Caused by: org.apache.catalina.LifecycleException: Failed to start component [StandardEngine[Catalina].StandardHost[localhost].StandardContext[/VacTracker]]
+		at org.apache.catalina.util.LifecycleBase.handleSubClassException(LifecycleBase.java:440)
+		at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:198)
+		at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:753)
+		... 9 more
+	Caused by: java.lang.IllegalArgumentException: Invalid <url-pattern> [Member/Login] in servlet mapping
+		at org.apache.catalina.core.StandardContext.addServletMappingDecoded(StandardContext.java:3210)
+		at org.apache.catalina.core.StandardContext.addServletMappingDecoded(StandardContext.java:3196)
+		at org.apache.catalina.startup.ContextConfig.configureContext(ContextConfig.java:1338)
+		at org.apache.catalina.startup.ContextConfig.webConfig(ContextConfig.java:1115)
+		at org.apache.catalina.startup.ContextConfig.configureStart(ContextConfig.java:779)
+		at org.apache.catalina.startup.ContextConfig.lifecycleEvent(ContextConfig.java:299)
+		at org.apache.catalina.util.LifecycleBase.fireLifecycleEvent(LifecycleBase.java:123)
+		at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5130)
+		at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+		... 10 more
+24-Apr-2022 18:55:11.064 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDescriptor Deployment of deployment descriptor [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\conf\Catalina\localhost\VacTracker.xml] has finished in [2,341] ms
+24-Apr-2022 18:55:11.065 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\docs]
+24-Apr-2022 18:55:11.248 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 18:55:11.255 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\docs] has finished in [190] ms
+24-Apr-2022 18:55:11.255 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\examples]
+24-Apr-2022 18:55:11.905 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 18:55:12.060 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\examples] has finished in [805] ms
+24-Apr-2022 18:55:12.061 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\host-manager]
+24-Apr-2022 18:55:12.273 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 18:55:12.285 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\host-manager] has finished in [222] ms
+24-Apr-2022 18:55:12.285 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\manager]
+24-Apr-2022 18:55:12.536 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 18:55:12.548 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\manager] has finished in [263] ms
+24-Apr-2022 18:55:12.549 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\ROOT]
+24-Apr-2022 18:55:12.752 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 18:55:12.759 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\ROOT] has finished in [210] ms
+24-Apr-2022 18:55:12.769 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8090"]
+24-Apr-2022 18:55:12.792 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 10252 ms
+24-Apr-2022 19:04:21.904 INFO [http-nio-8090-exec-6] org.apache.catalina.startup.HostConfig.deployDescriptor Deploying deployment descriptor [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\conf\Catalina\localhost\VacTrackSys.xml]
+24-Apr-2022 19:04:22.676 INFO [http-nio-8090-exec-6] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 19:04:22.749 INFO [http-nio-8090-exec-6] org.apache.catalina.startup.HostConfig.deployDescriptor Deployment of deployment descriptor [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\conf\Catalina\localhost\VacTrackSys.xml] has finished in [846] ms
+24-Apr-2022 19:04:22.761 INFO [http-nio-8090-exec-6] org.apache.catalina.util.LifecycleBase.start The start() method was called on component [StandardEngine[Catalina].StandardHost[localhost].StandardContext[/VacTrackSys]] after start() had already been called. The second call will be ignored.
+24-Apr-2022 19:04:46.131 INFO [http-nio-8090-exec-10] org.apache.catalina.startup.HostConfig.undeploy Undeploying context [/examples]
+24-Apr-2022 19:04:48.178 INFO [http-nio-8090-exec-2] org.springframework.web.context.support.XmlWebApplicationContext.doClose Closing WebApplicationContext for namespace 'dispatcher-servlet': startup date [Sun Apr 24 18:55:08 CDT 2022]; parent: Root WebApplicationContext
+24-Apr-2022 19:04:48.180 INFO [http-nio-8090-exec-2] org.springframework.web.context.support.XmlWebApplicationContext.doClose Closing Root WebApplicationContext: startup date [Sun Apr 24 18:55:06 CDT 2022]; root of context hierarchy
+24-Apr-2022 19:04:48.704 INFO [http-nio-8090-exec-2] org.apache.catalina.startup.HostConfig.undeploy Undeploying context [/terminal]
+24-Apr-2022 19:04:56.435 INFO [http-nio-8090-exec-5] org.apache.catalina.startup.HostConfig.undeploy Undeploying context [/VacTracker]
+24-Apr-2022 20:39:10.125 INFO [http-nio-8090-exec-22] org.apache.catalina.startup.HostConfig.undeploy Undeploying context [/VacTrackSys]
+24-Apr-2022 20:39:10.199 INFO [http-nio-8090-exec-22] org.apache.catalina.startup.HostConfig.deployDescriptor Deploying deployment descriptor [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\conf\Catalina\localhost\VacTrackSys.xml]
+24-Apr-2022 20:39:11.497 INFO [http-nio-8090-exec-22] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 20:39:11.578 INFO [http-nio-8090-exec-22] org.apache.catalina.startup.HostConfig.deployDescriptor Deployment of deployment descriptor [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\conf\Catalina\localhost\VacTrackSys.xml] has finished in [1,379] ms
+24-Apr-2022 20:39:11.590 INFO [http-nio-8090-exec-22] org.apache.catalina.util.LifecycleBase.start The start() method was called on component [StandardEngine[Catalina].StandardHost[localhost].StandardContext[/VacTrackSys]] after start() had already been called. The second call will be ignored.
+24-Apr-2022 20:54:18.135 INFO [http-nio-8090-exec-24] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/VacTrackSys] has started
+24-Apr-2022 20:54:18.161 WARNING [http-nio-8090-exec-24] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [VacTrackSys] registered the JDBC driver [net.ucanaccess.jdbc.UcanaccessDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+24-Apr-2022 20:54:18.161 WARNING [http-nio-8090-exec-24] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [VacTrackSys] registered the JDBC driver [org.hsqldb.jdbc.JDBCDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+24-Apr-2022 20:54:18.162 WARNING [http-nio-8090-exec-24] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [VacTrackSys] appears to have started a thread named [Timer-0] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.Object.wait(Object.java:502)
+ java.util.TimerThread.mainLoop(Timer.java:526)
+ java.util.TimerThread.run(Timer.java:505)
+24-Apr-2022 20:54:18.163 SEVERE [http-nio-8090-exec-24] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [VacTrackSys] created a ThreadLocal with key of type [java.lang.ThreadLocal] (value [java.lang.ThreadLocal@353d189c]) and a value of type [net.ucanaccess.jdbc.Context] (value [net.ucanaccess.jdbc.Context@2dd51831]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+24-Apr-2022 20:54:19.001 INFO [http-nio-8090-exec-24] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 20:54:19.082 INFO [http-nio-8090-exec-24] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/VacTrackSys] is completed
+24-Apr-2022 20:54:26.442 INFO [http-nio-8090-exec-24] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/VacTrackSys] has started
+24-Apr-2022 20:54:27.366 INFO [http-nio-8090-exec-24] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 20:54:27.473 INFO [http-nio-8090-exec-24] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/VacTrackSys] is completed
+24-Apr-2022 20:59:34.978 INFO [http-nio-8090-exec-42] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/VacTrackSys] has started
+24-Apr-2022 20:59:35.008 WARNING [http-nio-8090-exec-42] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [VacTrackSys] registered the JDBC driver [net.ucanaccess.jdbc.UcanaccessDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+24-Apr-2022 20:59:35.008 WARNING [http-nio-8090-exec-42] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [VacTrackSys] registered the JDBC driver [org.hsqldb.jdbc.JDBCDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+24-Apr-2022 20:59:35.009 WARNING [http-nio-8090-exec-42] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [VacTrackSys] appears to have started a thread named [Timer-1] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.Object.wait(Object.java:502)
+ java.util.TimerThread.mainLoop(Timer.java:526)
+ java.util.TimerThread.run(Timer.java:505)
+24-Apr-2022 20:59:35.892 INFO [http-nio-8090-exec-42] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 20:59:35.979 INFO [http-nio-8090-exec-42] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/VacTrackSys] is completed
+24-Apr-2022 21:20:36.270 INFO [http-nio-8090-exec-50] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/VacTrackSys] has started
+24-Apr-2022 21:20:36.290 WARNING [http-nio-8090-exec-50] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [VacTrackSys] registered the JDBC driver [net.ucanaccess.jdbc.UcanaccessDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+24-Apr-2022 21:20:36.291 WARNING [http-nio-8090-exec-50] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [VacTrackSys] registered the JDBC driver [org.hsqldb.jdbc.JDBCDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+24-Apr-2022 21:20:36.292 WARNING [http-nio-8090-exec-50] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [VacTrackSys] appears to have started a thread named [Timer-2] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.Object.wait(Object.java:502)
+ java.util.TimerThread.mainLoop(Timer.java:526)
+ java.util.TimerThread.run(Timer.java:505)
+24-Apr-2022 21:20:37.142 INFO [http-nio-8090-exec-50] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 21:20:37.245 INFO [http-nio-8090-exec-50] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/VacTrackSys] is completed
+24-Apr-2022 21:21:11.247 INFO [http-nio-8090-exec-56] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/VacTrackSys] has started
+24-Apr-2022 21:21:12.283 INFO [http-nio-8090-exec-56] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 21:21:12.548 INFO [http-nio-8090-exec-56] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/VacTrackSys] is completed
+24-Apr-2022 21:24:12.794 INFO [http-nio-8090-exec-57] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/VacTrackSys] has started
+24-Apr-2022 21:24:12.821 WARNING [http-nio-8090-exec-57] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [VacTrackSys] registered the JDBC driver [net.ucanaccess.jdbc.UcanaccessDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+24-Apr-2022 21:24:12.821 WARNING [http-nio-8090-exec-57] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [VacTrackSys] registered the JDBC driver [org.hsqldb.jdbc.JDBCDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+24-Apr-2022 21:24:12.822 WARNING [http-nio-8090-exec-57] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [VacTrackSys] appears to have started a thread named [Timer-3] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.Object.wait(Object.java:502)
+ java.util.TimerThread.mainLoop(Timer.java:526)
+ java.util.TimerThread.run(Timer.java:505)
+24-Apr-2022 21:24:13.842 INFO [http-nio-8090-exec-57] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 21:24:13.947 INFO [http-nio-8090-exec-57] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/VacTrackSys] is completed
+24-Apr-2022 21:30:46.775 INFO [http-nio-8090-exec-70] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/VacTrackSys] has started
+24-Apr-2022 21:30:46.797 WARNING [http-nio-8090-exec-70] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [VacTrackSys] registered the JDBC driver [net.ucanaccess.jdbc.UcanaccessDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+24-Apr-2022 21:30:46.797 WARNING [http-nio-8090-exec-70] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [VacTrackSys] registered the JDBC driver [org.hsqldb.jdbc.JDBCDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+24-Apr-2022 21:30:46.798 WARNING [http-nio-8090-exec-70] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [VacTrackSys] appears to have started a thread named [Timer-4] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.Object.wait(Object.java:502)
+ java.util.TimerThread.mainLoop(Timer.java:526)
+ java.util.TimerThread.run(Timer.java:505)
+24-Apr-2022 21:30:47.464 INFO [http-nio-8090-exec-70] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 21:30:47.537 INFO [http-nio-8090-exec-70] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/VacTrackSys] is completed
+24-Apr-2022 21:31:40.830 INFO [http-nio-8090-exec-80] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/VacTrackSys] has started
+24-Apr-2022 21:31:40.850 WARNING [http-nio-8090-exec-80] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [VacTrackSys] registered the JDBC driver [net.ucanaccess.jdbc.UcanaccessDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+24-Apr-2022 21:31:40.850 WARNING [http-nio-8090-exec-80] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [VacTrackSys] registered the JDBC driver [org.hsqldb.jdbc.JDBCDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+24-Apr-2022 21:31:40.852 WARNING [http-nio-8090-exec-80] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [VacTrackSys] appears to have started a thread named [Timer-5] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.Object.wait(Object.java:502)
+ java.util.TimerThread.mainLoop(Timer.java:526)
+ java.util.TimerThread.run(Timer.java:505)
+24-Apr-2022 21:31:41.535 INFO [http-nio-8090-exec-80] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 21:31:41.610 INFO [http-nio-8090-exec-80] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/VacTrackSys] is completed
+24-Apr-2022 21:33:27.515 INFO [http-nio-8090-exec-81] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/VacTrackSys] has started
+24-Apr-2022 21:33:27.543 WARNING [http-nio-8090-exec-81] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [VacTrackSys] registered the JDBC driver [net.ucanaccess.jdbc.UcanaccessDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+24-Apr-2022 21:33:27.543 WARNING [http-nio-8090-exec-81] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [VacTrackSys] registered the JDBC driver [org.hsqldb.jdbc.JDBCDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+24-Apr-2022 21:33:27.544 WARNING [http-nio-8090-exec-81] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [VacTrackSys] appears to have started a thread named [Timer-6] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.Object.wait(Object.java:502)
+ java.util.TimerThread.mainLoop(Timer.java:526)
+ java.util.TimerThread.run(Timer.java:505)
+24-Apr-2022 21:33:28.292 INFO [http-nio-8090-exec-81] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 21:33:28.376 INFO [http-nio-8090-exec-81] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/VacTrackSys] is completed
+24-Apr-2022 21:35:09.366 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+24-Apr-2022 21:35:09.369 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8090"]
+24-Apr-2022 21:35:09.550 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+24-Apr-2022 21:35:09.587 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [VacTrackSys] registered the JDBC driver [net.ucanaccess.jdbc.UcanaccessDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+24-Apr-2022 21:35:09.587 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [VacTrackSys] registered the JDBC driver [org.hsqldb.jdbc.JDBCDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+24-Apr-2022 21:35:09.588 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [VacTrackSys] appears to have started a thread named [Timer-7] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.Object.wait(Object.java:502)
+ java.util.TimerThread.mainLoop(Timer.java:526)
+ java.util.TimerThread.run(Timer.java:505)
+24-Apr-2022 21:35:09.600 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8090"]
+24-Apr-2022 21:35:09.606 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8090"]
+24-Apr-2022 21:35:12.894 WARNING [main] org.apache.catalina.core.AprLifecycleListener.init The Apache Tomcat Native library failed to load. The error reported was [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\bin\tcnative-1.dll: Can't load IA 32-bit .dll on a AMD 64-bit platform]
+	java.lang.UnsatisfiedLinkError: C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\bin\tcnative-1.dll: Can't load IA 32-bit .dll on a AMD 64-bit platform
+		at java.lang.ClassLoader$NativeLibrary.load(Native Method)
+		at java.lang.ClassLoader.loadLibrary0(ClassLoader.java:1941)
+		at java.lang.ClassLoader.loadLibrary(ClassLoader.java:1857)
+		at java.lang.Runtime.loadLibrary0(Runtime.java:870)
+		at java.lang.System.loadLibrary(System.java:1122)
+		at org.apache.tomcat.jni.Library.<init>(Library.java:41)
+		at org.apache.tomcat.jni.Library.initialize(Library.java:173)
+		at org.apache.catalina.core.AprLifecycleListener.init(AprLifecycleListener.java:195)
+		at org.apache.catalina.core.AprLifecycleListener.isAprAvailable(AprLifecycleListener.java:104)
+		at org.apache.catalina.connector.Connector.setProtocol(Connector.java:641)
+		at org.apache.catalina.connector.Connector.<init>(Connector.java:81)
+		at org.apache.catalina.startup.ConnectorCreateRule.begin(ConnectorCreateRule.java:62)
+		at org.apache.tomcat.util.digester.Digester.startElement(Digester.java:1235)
+		at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.startElement(AbstractSAXParser.java:509)
+		at com.sun.org.apache.xerces.internal.parsers.AbstractXMLDocumentParser.emptyElement(AbstractXMLDocumentParser.java:182)
+		at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanStartElement(XMLDocumentFragmentScannerImpl.java:1339)
+		at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:2784)
+		at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:602)
+		at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:505)
+		at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:841)
+		at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:770)
+		at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+		at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1213)
+		at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:643)
+		at org.apache.tomcat.util.digester.Digester.parse(Digester.java:1496)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:611)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:662)
+		at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+		at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+		at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+		at java.lang.reflect.Method.invoke(Method.java:498)
+		at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:305)
+		at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:475)
+24-Apr-2022 21:35:13.002 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/8.5.72
+24-Apr-2022 21:35:13.002 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Oct 1 2021 15:15:33 UTC
+24-Apr-2022 21:35:13.002 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 8.5.72.0
+24-Apr-2022 21:35:13.003 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Windows 10
+24-Apr-2022 21:35:13.003 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.0
+24-Apr-2022 21:35:13.003 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+24-Apr-2022 21:35:13.003 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             C:\Program Files\Java\jdk1.8.0_111\jre
+24-Apr-2022 21:35:13.003 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_111-b14
+24-Apr-2022 21:35:13.003 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+24-Apr-2022 21:35:13.003 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA
+24-Apr-2022 21:35:13.003 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA
+24-Apr-2022 21:35:13.004 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\conf\logging.properties
+24-Apr-2022 21:35:13.004 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+24-Apr-2022 21:35:13.004 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+24-Apr-2022 21:35:13.005 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+24-Apr-2022 21:35:13.005 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -agentlib:jdwp=transport=dt_shmem,address=tomcat_shared_memory_id,server=y,suspend=n
+24-Apr-2022 21:35:13.005 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+24-Apr-2022 21:35:13.006 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA
+24-Apr-2022 21:35:13.006 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA
+24-Apr-2022 21:35:13.006 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\temp
+24-Apr-2022 21:35:13.186 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8090"]
+24-Apr-2022 21:35:13.444 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+24-Apr-2022 21:35:13.457 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 1042 ms
+24-Apr-2022 21:35:13.506 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+24-Apr-2022 21:35:13.506 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/8.5.72]
+24-Apr-2022 21:35:13.522 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDescriptor Deploying deployment descriptor [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\conf\Catalina\localhost\VacTrackSys.xml]
+24-Apr-2022 21:35:14.836 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 21:35:15.025 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDescriptor Deployment of deployment descriptor [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\conf\Catalina\localhost\VacTrackSys.xml] has finished in [1,505] ms
+24-Apr-2022 21:35:15.027 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\docs]
+24-Apr-2022 21:35:15.124 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 21:35:15.127 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\docs] has finished in [100] ms
+24-Apr-2022 21:35:15.127 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\host-manager]
+24-Apr-2022 21:35:15.235 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 21:35:15.243 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\host-manager] has finished in [116] ms
+24-Apr-2022 21:35:15.244 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\manager]
+24-Apr-2022 21:35:15.363 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 21:35:15.370 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\manager] has finished in [126] ms
+24-Apr-2022 21:35:15.370 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\ROOT]
+24-Apr-2022 21:35:15.510 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 21:35:15.515 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\ROOT] has finished in [145] ms
+24-Apr-2022 21:35:15.521 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8090"]
+24-Apr-2022 21:35:15.536 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 2078 ms
+24-Apr-2022 21:35:20.563 INFO [http-nio-8090-exec-8] org.apache.catalina.startup.HostConfig.undeploy Undeploying context [/VacTrackSys]
+24-Apr-2022 21:35:20.614 INFO [http-nio-8090-exec-8] org.apache.catalina.startup.HostConfig.deployDescriptor Deploying deployment descriptor [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\conf\Catalina\localhost\VacTrackSys.xml]
+24-Apr-2022 21:35:21.846 INFO [http-nio-8090-exec-8] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 21:35:21.923 INFO [http-nio-8090-exec-8] org.apache.catalina.startup.HostConfig.deployDescriptor Deployment of deployment descriptor [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\conf\Catalina\localhost\VacTrackSys.xml] has finished in [1,309] ms
+24-Apr-2022 21:35:21.938 INFO [http-nio-8090-exec-8] org.apache.catalina.util.LifecycleBase.start The start() method was called on component [StandardEngine[Catalina].StandardHost[localhost].StandardContext[/VacTrackSys]] after start() had already been called. The second call will be ignored.
+24-Apr-2022 21:46:27.107 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+24-Apr-2022 21:46:27.107 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8090"]
+24-Apr-2022 21:46:27.263 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+24-Apr-2022 21:46:27.307 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [VacTrackSys] registered the JDBC driver [net.ucanaccess.jdbc.UcanaccessDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+24-Apr-2022 21:46:27.307 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [VacTrackSys] registered the JDBC driver [org.hsqldb.jdbc.JDBCDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+24-Apr-2022 21:46:27.308 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [VacTrackSys] appears to have started a thread named [Timer-0] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.Object.wait(Object.java:502)
+ java.util.TimerThread.mainLoop(Timer.java:526)
+ java.util.TimerThread.run(Timer.java:505)
+24-Apr-2022 21:46:27.315 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8090"]
+24-Apr-2022 21:46:27.319 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8090"]
+24-Apr-2022 21:47:50.954 WARNING [main] org.apache.catalina.core.AprLifecycleListener.init The Apache Tomcat Native library failed to load. The error reported was [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\bin\tcnative-1.dll: Can't load IA 32-bit .dll on a AMD 64-bit platform]
+	java.lang.UnsatisfiedLinkError: C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\bin\tcnative-1.dll: Can't load IA 32-bit .dll on a AMD 64-bit platform
+		at java.lang.ClassLoader$NativeLibrary.load(Native Method)
+		at java.lang.ClassLoader.loadLibrary0(ClassLoader.java:1941)
+		at java.lang.ClassLoader.loadLibrary(ClassLoader.java:1857)
+		at java.lang.Runtime.loadLibrary0(Runtime.java:870)
+		at java.lang.System.loadLibrary(System.java:1122)
+		at org.apache.tomcat.jni.Library.<init>(Library.java:41)
+		at org.apache.tomcat.jni.Library.initialize(Library.java:173)
+		at org.apache.catalina.core.AprLifecycleListener.init(AprLifecycleListener.java:195)
+		at org.apache.catalina.core.AprLifecycleListener.isAprAvailable(AprLifecycleListener.java:104)
+		at org.apache.catalina.connector.Connector.setProtocol(Connector.java:641)
+		at org.apache.catalina.connector.Connector.<init>(Connector.java:81)
+		at org.apache.catalina.startup.ConnectorCreateRule.begin(ConnectorCreateRule.java:62)
+		at org.apache.tomcat.util.digester.Digester.startElement(Digester.java:1235)
+		at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.startElement(AbstractSAXParser.java:509)
+		at com.sun.org.apache.xerces.internal.parsers.AbstractXMLDocumentParser.emptyElement(AbstractXMLDocumentParser.java:182)
+		at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanStartElement(XMLDocumentFragmentScannerImpl.java:1339)
+		at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:2784)
+		at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:602)
+		at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:505)
+		at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:841)
+		at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:770)
+		at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+		at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1213)
+		at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:643)
+		at org.apache.tomcat.util.digester.Digester.parse(Digester.java:1496)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:611)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:662)
+		at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+		at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+		at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+		at java.lang.reflect.Method.invoke(Method.java:498)
+		at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:305)
+		at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:475)
+24-Apr-2022 21:47:51.080 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/8.5.72
+24-Apr-2022 21:47:51.080 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Oct 1 2021 15:15:33 UTC
+24-Apr-2022 21:47:51.080 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 8.5.72.0
+24-Apr-2022 21:47:51.080 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Windows 10
+24-Apr-2022 21:47:51.080 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.0
+24-Apr-2022 21:47:51.080 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+24-Apr-2022 21:47:51.080 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             C:\Program Files\Java\jdk1.8.0_111\jre
+24-Apr-2022 21:47:51.080 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_111-b14
+24-Apr-2022 21:47:51.080 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+24-Apr-2022 21:47:51.080 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA
+24-Apr-2022 21:47:51.080 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA
+24-Apr-2022 21:47:51.080 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\conf\logging.properties
+24-Apr-2022 21:47:51.080 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+24-Apr-2022 21:47:51.080 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+24-Apr-2022 21:47:51.080 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+24-Apr-2022 21:47:51.080 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+24-Apr-2022 21:47:51.080 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA
+24-Apr-2022 21:47:51.081 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA
+24-Apr-2022 21:47:51.081 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\temp
+24-Apr-2022 21:47:51.216 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8090"]
+24-Apr-2022 21:47:51.503 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+24-Apr-2022 21:47:51.523 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 932 ms
+24-Apr-2022 21:47:51.574 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+24-Apr-2022 21:47:51.574 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/8.5.72]
+24-Apr-2022 21:47:51.590 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDescriptor Deploying deployment descriptor [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\conf\Catalina\localhost\VacTrackSys.xml]
+24-Apr-2022 21:47:53.159 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 21:47:53.323 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDescriptor Deployment of deployment descriptor [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\conf\Catalina\localhost\VacTrackSys.xml] has finished in [1,732] ms
+24-Apr-2022 21:47:53.324 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\docs]
+24-Apr-2022 21:47:53.415 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 21:47:53.420 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\docs] has finished in [96] ms
+24-Apr-2022 21:47:53.420 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\host-manager]
+24-Apr-2022 21:47:53.529 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 21:47:53.536 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\host-manager] has finished in [115] ms
+24-Apr-2022 21:47:53.536 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\manager]
+24-Apr-2022 21:47:53.610 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 21:47:53.614 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\manager] has finished in [77] ms
+24-Apr-2022 21:47:53.614 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\ROOT]
+24-Apr-2022 21:47:53.706 INFO [localhost-startStop-1] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+24-Apr-2022 21:47:53.709 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\Users\eVmPr\Documents\IS240\JODEA_Project\server\JODEA\webapps\ROOT] has finished in [95] ms
+24-Apr-2022 21:47:53.711 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8090"]
+24-Apr-2022 21:47:53.722 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 2197 ms
+24-Apr-2022 22:24:03.591 WARNING [http-nio-8090-exec-7] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [VacTrackSys] registered the JDBC driver [net.ucanaccess.jdbc.UcanaccessDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+24-Apr-2022 22:24:03.592 WARNING [http-nio-8090-exec-7] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc The web application [VacTrackSys] registered the JDBC driver [org.hsqldb.jdbc.JDBCDriver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+24-Apr-2022 22:24:03.592 WARNING [http-nio-8090-exec-7] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [VacTrackSys] appears to have started a thread named [Timer-0] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.Object.wait(Object.java:502)
+ java.util.TimerThread.mainLoop(Timer.java:526)
+ java.util.TimerThread.run(Timer.java:505)
+24-Apr-2022 22:24:03.594 SEVERE [http-nio-8090-exec-7] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [VacTrackSys] created a ThreadLocal with key of type [java.lang.ThreadLocal] (value [java.lang.ThreadLocal@197a506]) and a value of type [net.ucanaccess.jdbc.Context] (value [net.ucanaccess.jdbc.Context@3c01f279]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+24-Apr-2022 22:24:04.119 INFO [http-nio-8090-exec-7] org.apache.catalina.startup.HostConfig.undeploy Undeploying context [/VacTrackSys]
