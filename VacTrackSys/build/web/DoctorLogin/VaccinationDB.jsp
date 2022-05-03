@@ -29,12 +29,7 @@
     function pageAction(action) {
         if (ajax && action === 'SearchPatient') {
             ajax.open('get', 'DBAction?type=SearchPatient', true);
-
             ajax.send();
-            /**  $.get('DBAction', 'actiontype=SearchPatient', function (data, status) {
-             $.
-             });*/
-
         } else {
             document.dbaction.submit();
         }
@@ -50,15 +45,18 @@
             document.dbaction.vid.value = val;
             document.dbaction.submit();
         } else if (action == 'EditVaccine') {
-            var val = $(val_id).value;
-            document.dbaction.vid.value = val;
-            document.dbaction.submit();
+            document.getElementById("dbaction").setAttribute("method", "post");
+//            document.getElementById("vid");
+            var val = $("#vac_id").val();
+            document.getElementById("vid").value = val;
+            document.getElementById("dbaction").submit();
         }
         // else if (ajax && action == 'AddPatient'){
         //     ajax.open('get', 'RecordsSelection?actiontype=SearchPatient');
         //     ajax.send(null);
         // }
         else {
+            document.getElementById("dbaction").setAttribute("method", "post");
             document.dbaction.submit();
         }
     }
@@ -137,7 +135,7 @@ For Searching through database
                 </div> 
                 <div class="content">
                     <form name="dbaction" 
-                          id="dbaction" action="DBAction"  onsubmit="toggleList('loading-content')">
+                          id="dbaction" action="DBAction" method='post' onsubmit="toggleList('loading-content')">
                         <div class="info">
 
                             <div class="user-details">
@@ -160,11 +158,14 @@ For Searching through database
                                             </tr>
                                             <tr>
                                                 <td><i class="fas fa-syringe fa-2x">Vaccine</i></td>
-                                                <td><button type="button"  class="fas fa-plus" title="Add Vaccine" value="AddVaccine" >
+                                                <td><button type="button"  class="fas fa-plus" title="Add Vaccine" value="AddVaccine"  >
                                                     </button>
                                                 </td>
-                                                <td><button type="button"  class="fas fa-pen fa-1x" title="Edit Vaccine"value="Edit Vaccine" >
+                                                <td><button type="button"  class="fas fa-pen fa-1x" title="Edit Vaccine"value="EditVaccine" >
                                                     </button></td>
+                                                <td> <button type="button" class="fas fa-heartbeat" title="Add Patient Vaccination" value="AddVaccination" onclick="pageAction2('AddVaccination', '')">
+                                                    </button>
+                                                </td>
                                             </tr>
                                         </table>
                                         <!--&#8287; &#8287; &#8287; &#8287;-->
@@ -312,6 +313,7 @@ For Searching through database
                             <i class="fas fa-2x fa-door-closed " id="Logout"  title="Logout" 
                                style=" cursor: pointer; "></i>
                         </div>
+                         <input type="hidden" name="vid" id="vid" value="">
                         <input type="hidden" name="actiontype" id="actiontype" value="">
                     </form>
                 </div>

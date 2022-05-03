@@ -99,7 +99,7 @@ public class EditPatientServlet extends HttpServlet {
                             + "Middle_Init = ?, "
                             + "Last_Name = ?, "
                             + "DOB = ?, "
-                            + "P_Type = ?, "
+                            + "P_Type = ? "
                             + "WHERE Social_Security = ?";
 
                     PreparedStatement ps = conn.prepareStatement(sql);
@@ -110,7 +110,7 @@ public class EditPatientServlet extends HttpServlet {
 //                    java.sql.Date.valueOf(ur);
 //String f_dob = dob_format.format(LocalDate.parse(request.getParameter("dob")));                    
 //Date dob = new java.sql.Date(Date.parse(p.getDob()));//Date.valueOf(p.getDob());
-                    System.out.println(Date.valueOf(request.getParameter("dob")));
+//                    System.out.println(Date.valueOf(request.getParameter("dob")));
                     ps.setDate(5, Date.valueOf(request.getParameter("dob")));
                     ps.setString(6, p.getPtype());
                     ps.setString(7, p.getSsn());

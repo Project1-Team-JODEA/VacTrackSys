@@ -73,10 +73,6 @@
         <url-pattern>/DoctorLogin/NewAccount</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>addRecordServlet</servlet-name>
-        <url-pattern>/addRecord</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/CDC/Login</url-pattern>
         <url-pattern>/Member/Login</url-pattern>
@@ -147,9 +143,14 @@
         <url-pattern>/AdminConsole/Search</url-pattern>
         <url-pattern>/DoctorLogin/Search/*</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addRecordServlet</servlet-name>
+        <url-pattern>/addRecord</url-pattern>
+        <url-pattern>/DoctorLogin/addRecord</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
-     </session-config>
+    </session-config>
     <!--    <security-constraint>
         <display-name>VacTrackSysConst</display-name>
         <web-resource-collection>

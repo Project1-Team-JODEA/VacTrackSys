@@ -11,16 +11,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script src="../js/ajax.js" type="text/javascript"></script>
-<script type="text/javascript">
-    function pageAction(action) {
-        document.vacrecord.actiontype.value = action;
 
-        document.vacrecord.submit();
-    }
-
-
-</script>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -29,18 +20,28 @@
         <link rel="stylesheet" href="../css/all.css" type="text/css"/>
         <link rel="icon" type="image/x-icon" href="../image/favicon_16x16.png">
         <script src="../js/functions.js" type="text/javascript"></script>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script type="text/javascript">
-    window.onload = () => {
-        $("vac_date").max = getTodayMaxDate();
-    };
+
+            function pageAction(action) {
+                document.getElementById("actiontype").value = action;
+                document.getElementById("vacrecord").submit();
+
+            }
+            window.onload = () => {
+                $("#vac_date").max = getTodayMaxDate();
+            };
 //            var $ = function (id) {
 //                return document.getElementById(id);
 //            };
-    document.getElementById("vacrecord").onsubmit = () => {
-        $("update").setAttribute("disabled", null);
-        $("add").setAttribute("disabled", null);
-        toggleList('loading-content');
-    };
+            document.getElementById("vacrecord").onsubmit = () => {
+                $("update").setAttribute("disabled", null);
+                $("add").setAttribute("disabled", null);
+                toggleList('loading-content');
+            };
+            $(document).ready(()=>{
+                
+            })
         </script>
     </head>
     <body>
@@ -71,28 +72,24 @@
                       onsubmit="">
                     <div class="user-details">
                         <div class="input-box">
-                            <span class="details">Vaccination ID</span>
-                            <input type="number" name="vid" id="vid" maxlength="8"
+                            <span class="details">Vaccine_ID</span>
+                            <input type="number" name="vid" id="vid" min="0" maxlength="8"
                                    placeholder="Enter Vaccine ID here"
                                    value="${vac.vid}" required>
                         </div>
-                        <!--                        <div class="input-box">
-                                                    <span class="details">Location</span>
-                                                    <select></select> 
-                                                    <datalist id="loc">
-                                                        <data></data>
-                                                    </datalist>
-                                                  
-                                                </div>-->
                         <div class="input-box">
                             <span class="details">Location</span>
-                            <input type="text" name="loc" id="loc" placeholder="Location" 
-                                   value="${vac.location}"required>
+                            <select name="loc" title="Location" id="loc">
+                                <option value="">Select</option>
+                                <c:forEach var="lc" items="${loc}">
+                                    <option value="${lc.id}">${lc.name}</option>
+                                </c:forEach>
+                            </select>
                         </div>
 
                         <div class="input-box">
                             <span class="details">Manufacturer</span>
-                            
+
                             <select name="man" id="man">
                                 <option value="">Select</option>
                                 <option value="Pfizer">Pfizer</option>

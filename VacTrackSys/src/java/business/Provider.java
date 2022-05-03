@@ -13,17 +13,22 @@ package business;
  */
 public class Provider {
 
-    private String fname, lname, minit, dob, etype;
+    private String fname, lname, minit, dob, etype, id, userid;
     private User u;
+
     public Provider() {
-        this.fname="";
-         this.fname = "";
+        this.fname = "";
+        this.fname = "";
         this.minit = "";
-        this.lname = ""; 
-        this.etype="";
+        this.lname = "";
+        this.etype = "";
         this.dob = "";
+        this.id = "";
+
     }
-    public Provider( String fname, String minit, String lname, String etype, String dob){
+
+    public Provider(String id, String fname, String minit, String lname, String etype, String dob) {
+        this.id = id;
         this.fname = fname;
         this.minit = minit;
         this.lname = lname;
@@ -100,5 +105,33 @@ public class Provider {
     public void setEtype(String etype) {
         this.etype = etype;
     }
-    
+
+    /**
+     * @return the id
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * @return the userid
+     */
+    public String getUserid() {
+        return userid;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * @param userid the userid to set
+     */
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
 }

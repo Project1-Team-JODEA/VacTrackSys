@@ -136,7 +136,7 @@ public class EditVaccineServlet extends HttpServlet {
                         sql = "UPDATE VACCINES "
                                 + "SET Vaccine_ID = ?, "
                                 + "Vaccine_Type = ?, "
-                                + "Vaccine_Location = ?, "
+                                + "SITE_ID = ?, "
                                 + "Vaccine_Date = ?, "
                                 + "Manufacturer = ? "
                                 + "WHERE Vaccine_ID = ?";
@@ -144,7 +144,7 @@ public class EditVaccineServlet extends HttpServlet {
 
                         ps.setString(1, v.getVid());
                         ps.setString(2, v.getVtype());
-                        ps.setString(3, u.getLocation());
+                        ps.setInt(3, Integer.parseInt(request.getParameter("loc")));
                         ps.setDate(4, java.sql.Date.valueOf(request.getParameter("vac_date")));
                         ps.setString(5, v.getManufacturer());
                         ps.setString(6, v.getVid());
@@ -200,7 +200,7 @@ public class EditVaccineServlet extends HttpServlet {
                     } else {//add vaccine to db
 
                         sql = "INSERT INTO VACCINES(Vaccine_ID,Vaccine_Type,"
-                                + "Vaccine_Location, Vaccine_date, Manufacturer) "
+                                + "SITE_ID, Vaccine_date, Manufacturer) "
                                 + "VALUES (?,?,?,?,?);";
                         ps = conn.prepareStatement(sql);
                         // add 

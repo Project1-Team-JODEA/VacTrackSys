@@ -21,21 +21,16 @@ function fieldFormatter(field, type) {
             const slength = input.value.length;
             var fval = ``;
             if (slength < 4)
-                fval= ssn;
-            if (slength < 6){
-                fval =`${ssn.slice(0, 3)}-${ssn.slice(3)}`;
-            }else{
+                fval = ssn;
+            if (slength < 6) {
+                fval = `${ssn.slice(0, 3)}-${ssn.slice(3)}`;
+            } else {
                 fval = `${ssn.slice(0, 3)}-${ssn.slice(3, 5)}-${ssn.slice(5, 9)}`;
             }
-            input.value = fval; 
+            input.value = fval;
             ;
             break;
         case '':
-            ;
-            break;
-        case 'o':
-            ;
-            break;
     }
 }
 function init() {
@@ -153,13 +148,28 @@ $(document).ready(() => {
     } else if (uri.indexOf('Patient Login') !== -1) {
 
     }
-    $("#resetForm").click(evt=>{
-        $(".pat_info").each((i, e)=>{
+    $("#resetForm").click(evt => {
+        $(".pat_info").each((i, e) => {
             let eid = e.id;
-        let id = '#' + eid;
-        if ($(id).css("display") === 'block'){
-            $(id).css("display", 'none');
+            let id = '#' + eid;
+            if ($(id).css("display") === 'block') {
+                $(id).css("display", 'none');
+            }
+
+        });
+        if ($(".sch").css("display") === "block") {
+            $(".sch").css("display", "none");
         }
+        if ($("#ssn1").css("display") === 'block') {
+            $("#ssn1").css("display", 'none');
+        }
+        if ($("#vac_id1").css("display") === 'block') {
+            $("#vac_id1").css("display", "none");
+        }
+        $(".sortval input").each((index, e) => {
+            if (e.hasAttribute("checked")) {
+                e.removeAttribute("checked");
+            }
         });
     });
     var ty = getTodayDate();
@@ -170,9 +180,12 @@ $(document).ready(() => {
     $("#dob").attr("max", maxDate);
     $("#msg-btn").attr("onclick", "toggleList('msg-content')");
     $("#help-btn").attr("onclick", "toggleList('help-content')");
-    $("#ssn").attr('onkeydown',"fieldFormatter('ssn', 'ssn')"); 
-    $("#ssn").attr('onchange',"fieldFormatter('ssn', 'ssn')"); 
-               
+    $("#ssn").attr('onkeydown', "fieldFormatter('ssn', 'ssn')");
+    $("#ssn").attr('onchange', "fieldFormatter('ssn', 'ssn')");
+//                $("tr").each((index, e)=>{
+//                    if (e.hasAttribut) 
+//                });
+//    });
     $(".actions button").click(evt => {
         let e = evt.currentTarget;
         if (e.value === "AddPatient") {
@@ -196,17 +209,18 @@ $(document).ready(() => {
 
             if ($(".sch").css("display") === "none") {
                 $(".sch").css("display", "block");
-                
                 $("#action").val('Edit Vaccine');
                 $("#actiontype").val("EditVaccine");
-                if ($("#vac_id1").css("display")=== 'none'){
+                if ($("#vac_id1").css("display") === 'none') {
                     $("#vac_id1").css("display", "block");
                 }
             } else if ($(".sch").css("display") === "block") {
                 $(".sch").css("display", "none");
-
                 if ($("#ssn1").css("display") === 'block') {
                     $("#ssn1").css("display", 'none');
+                }
+                if ($("#vac_id1").css("display") === 'block') {
+                    $("#vac_id1").css("display", "none");
                 }
             }
         } else if (e.value === "EditPatient") {
@@ -218,7 +232,8 @@ $(document).ready(() => {
             }
             $("#action").val('Edit Patient');
         } else if (e.value === "AddVaccine") {
-            window.location = "./VacView.jsp";
+            $("#actiontype").val("AddVaccine");
+           pageAction("AddVaccine");
         } else if (e.value === 'EditPatient') {
             $("#action").val('Search Patient');
 //            let sicon = document.createElement(i);
@@ -230,16 +245,15 @@ $(document).ready(() => {
     });
     $("#action").click(evt => {
         let val = $("#action").val();
-        if (val === 'Search Patient'){
-             document.getElementById("dbaction").setAttribute("method", "get");
-        }else{
+        if (val === 'Search Patient') {
+            document.getElementById("dbaction").setAttribute("method", "get");
+        } else {
             document.getElementById("dbaction").setAttribute("method", "post");
         }
         switch (val) {
             case 'Search Patient':
                 $("#actiontype").val('SearchPatient');
                 pageAction("SearchPatient");
-                
                 ;
                 break;
             case 'Add Patient':
@@ -255,18 +269,20 @@ $(document).ready(() => {
                         ;
                 break;
             case 'Edit Vaccine':
-                $("#actiontype").val('EditVaccine')
-                        ;
+                $("#actiontype").val('EditVaccine');
+                       pageAction2("EditVaccine", '');
+                ;
                 break;
             case 'Add Vaccine':
-                $("#actiontype").val('AddVaccine')
+                $("#actiontype").val('AddVaccine');
+                  document.getElementById("dbaction").setAttribute("method", "post");
+                pageAction("AddVaccine")
                         ;
                 break;
             default:
                 ;
         }
     });
-    
     $("#Logout").click(() => {
         let c = confirm("Are you Sure you want to logout?");
         if (c === true) {
@@ -304,7 +320,7 @@ $(document).ready(() => {
     });
     $('.sch #action').click(evt => {
         pageAction("SearchPatient", "");
-       evt.preventDefault();
+        evt.preventDefault();
     });
     document.getElementById("dbaction").onsubmit = evt => {
 
@@ -322,7 +338,7 @@ $(document).ready(() => {
                             + ' Next 2 digits should be any digit between 01-99. '
                             + ' Last 4 digits should not be 0000.');
                 });
-                 break;
+                break;
             case 'fname':
                 $(id).attr("oninvalid", () => {
                     document.getElementById(eid).setCustomValidity('First Name must only contain letters.');

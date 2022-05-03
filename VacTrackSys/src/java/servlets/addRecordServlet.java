@@ -12,6 +12,11 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -58,124 +63,110 @@ public class addRecordServlet extends HttpServlet {
             webloc = "/AdminConsole";
 
         }
+        URL = webloc+"/View.jsp";
         try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             ServletContext context = getServletContext();
             String ur = context.getRealPath("/Team_JODEA1.accdb");
             Connection conn = DriverManager.getConnection("jdbc:ucanaccess://" + ur);
-            fname = String.valueOf(request.getParameter("fname"));
-            lname = String.valueOf(request.getParameter("lname"));
-            minit = String.valueOf(request.getParameter("midinit"));
-            ssn = String.valueOf(request.getParameter("ssn"));
+            String action = String.valueOf(request.getParameter("actiontype"));
 
-            if (updatePatient == true) {
-                // needs: get patient info from form
-                Patient p = new Patient();
-//                 Vaccine vac1 = new Vaccine();
-//                vac1.setVid();
-//                p.setVac1(vac1);
-//                Vaccine vac2 = new Vaccine();
-//                vac2.setVid(r.getString("Vaccine_2"));
-//                p.setVac2(vac2);
-//                Vaccine vac3 = new Vaccine();
-//                vac3.setVid(r.getString("Vaccine_3"));
-//                p.setVac3(vac3);
-//                Vaccine vac4 = new Vaccine();
-//                vac4.setVid(r.getString("Vaccine_4"));
-//                p.setVac4(vac4);
+            if (action.equals("")) {
+                msg += "Unable to perform action <br>";
+            } else if (action.equals("add")) {
+                int doseNo=0;
+                ssn = String.valueOf(request.getParameter("ssn"));
+                String vid = String.valueOf(request.getParameter("vid"));
+                String dose = String.valueOf(request.getParameter("doseno"));
+                String pv = String.valueOf(request.getParameter("provider"));
+                String loc = String.valueOf(request.getParameter("loc"));
+                String ssn2 = "";
+                Statement s = conn.createStatement();
+                // search parameters in database
+                if (ssn.equals("")) {
+                    msg += "Missing Social Security Number <br>";
+                } else {
+                    String[] ssn1 = ssn.split("-");
+                    ssn2 = ssn1[0] + ssn1[1] + ssn1[2];
+                    sql = "SELECT Social_Security FROM PATIENTS WHERE Social_Security=" + ssn2 + ";";
+                    ResultSet r = s.executeQuery(sql);
+                    if (r.next()) {
+                        r = s.executeQuery(sql);
+                    } else {
+                        msg += "Patient Not found in database <br>";
+                    }
+                    r.close();
+                }
+                if (vid.equals("")) {
+                    msg += "Missing Vaccine ID <br>";
+                } else {
+                 
+                }
+                if (dose.equals("")) {
+                    msg += "Missing Dose number <br>";
+                }else {
+                    if (dose.equals("1")){
+                        doseNo =1;
+                    }
+                     if (dose.equals("2")){
+                        doseNo =2;
+                    }
+                      if (dose.equals("3")){
+                        doseNo = 3;
+                    }
+                       if (dose.equals("4")){
+                        doseNo=4;
+                    }
+                }
+                if (pv.equals("")) {
+                    msg += "Missing provider id <br>";
+                } else {
+                    sql = "SELECT Provider_ID FROM PROVIDERS WHERE Provider_ID='" + pv + "';";
+                    ResultSet r = s.executeQuery(sql);
+                    if (r.next()) {
+                       
+                    } else {
+                        msg += "Vaccine Item Not found in database <br>";
+                    }
+                    r.close();
+                }
+                s.close();
+                if (msg.equals("") || msg.isEmpty()) {
+                //add record to database
+                    sql = "INSERT INTO VACCINATIONS (PAT_ID, Vaccine_ID, Dose_No, SITE_ID, Provider_ID)"
+                            + "VALUES (?,?,?,?,?);";
+                    PreparedStatement ps = conn.prepareStatement(sql);
+                    ps.setInt(1, Integer.parseInt(ssn2));
+                    ps.setString(2, vid);
+                    ps.setInt(3, doseNo);
+                    ps.setInt(4, Integer.parseInt(loc));
+                    ps.setString(5, pv);
 
-                // needs: validate p
-                sql = "UPDATE PATIENTS SET "
-                        + "RecipientID = ?, "
-                        + "Social_Security = ?, "
-                        + "FirstName = ?, "
-                        + "MiddleName = ?, "
-                        + "LastName = ?, "
-                        + //"DateOfBirth = ?, " +
-                        "Vaccine1 = ?, "
-                        + "Vaccine2 = ?, "
-                        + "Vaccine3 = ?, "
-                        + "Vaccine4 = ? ";
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setInt(1, p.getRid());
-                ps.setInt(2, Integer.parseInt(p.getSsn()));
-                ps.setString(3, p.getFname());
-                ps.setString(4, p.getMname());
-                ps.setString(5, p.getLname());
-                ps.setString(6, p.getDob());
-                ps.setString(7, p.getVac1().getVid());
-                ps.setString(8, p.getVac2().getVid());
-                ps.setString(9, p.getVac3().getVid());
-                ps.setString(10, p.getVac4().getVid());
-                int rc = ps.executeUpdate();
-                if (rc == 0) {
-                    msg += "Patient not updated. <br>";
-                } else if (rc == 1) {
-                    msg += "Patient updated. <br>";
-                } else {
-                    msg += "Warning: multiple records updated. <br>";
+                    int rc = ps.executeUpdate();
+                    if (rc == 0) {
+
+                    } else {
+                        URL = webloc + "/VaccinationDB.jsp";
+                        request.getSession().removeAttribute("loc");
+                        msg += "Vaccination Record Added <br>";
+                    }
+                    ps.close();
+                }else{//if message variable is not empty 
+                     URL = webloc+"/View.jsp";
                 }
-                updatePatient = false;
-            }
-            if (updateVaccine == true) {
-                // needs: get vaccine info from form
-                Vaccine v = new Vaccine();
-                // needs: validate v
-                sql = "UPDATE VACCINES SET "
-                        + "VaccineID = ?, "
-                        + "Date = ?, "
-                        + "Manufactuerer = ?, "
-                        + "LotNumber = ?, "
-                        + "Location = ?, "
-                        + "LocationType = ?, "
-                        + "Nurse = ?, ";
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setString(1, v.getVid());
-                ps.setString(2, v.getDate());
-                ps.setString(3, v.getManufacturer());
-                ps.setString(4, v.getLotnum());
-                ps.setString(5, v.getLocation());
-                ps.setString(6, v.getLocatype());
-                ps.setString(7, v.getNurse());
-                int rc = ps.executeUpdate();
-                if (rc == 0) {
-                    msg += "Vaccine not updated. <br>";
-                } else if (rc == 1) {
-                    msg += "Vaccine updated. <br>";
-                } else {
-                    msg += "Warning: multiple records updated. <br>";
-                }
-                updateVaccine = false;
-            }
-            if (updateUser == true) {
-                // needs: get user info from form
-                User u = new User();
-                // needs: validate u
-                sql = "UPDATE usertbl SET "
-                        + "Username = ?, "
-                        + "Password = ?, "
-                        + "Access_Level = ?, "
-                        + "Email_Address = ?, "
-                        + "Location = ? ";
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setString(1, u.getUsername());
-                ps.setString(2, u.getPassword());
-                ps.setString(3, u.getAccesslevel());
-                ps.setString(4, u.getEmail());
-                ps.setString(5, u.getLocation());
-                int rc = ps.executeUpdate();
-                if (rc == 0) {
-                    msg += "User not updated. <br>";
-                } else if (rc == 1) {
-                    msg += "User updated. <br>";
-                } else {
-                    msg += "Warning: multiple records updated. <br>";
-                }
-                updateUser = false;
+            } else if (action.equals("cancel")) {
+                URL = webloc + "/VaccinationDB.jsp";
             }
             conn.close();
+        } catch (ClassNotFoundException e) {
+            msg += "Connection Error: " + e.getMessage();
+             URL = "/DoctorLogin/View.jsp";
+        } catch (SQLException e) {
+            msg += "Database Error: " + e.getMessage();
+             URL = webloc+"/View.jsp";
         } catch (Exception e) {
-            msg += e.getMessage();
+            msg += "Processing Error: " + e.getMessage();
+            URL = webloc+"/View.jsp";
         }
         request.setAttribute("msg", msg);
         RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);

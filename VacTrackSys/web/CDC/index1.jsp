@@ -62,7 +62,8 @@
                         </tr>
                     </table>
                     <input type="submit" class="submit-btn" value="Login" onclick="">
-                    <a href="./Password_Reset.jsp">Forgot Password?</a>
+                    <a href="./Password_Reset.jsp">Forgot Password?</a><br>
+                      <a href="../index.html">Return to Homepage</a>
                     <br>
                     <!--<button  class="submit-btn" onclick="document.location = 'ForgotPassword.jsp'"><i class="fas fa-angle-right"> Forgot Password?</i></button>-->
                     <div id="message" style="padding: 

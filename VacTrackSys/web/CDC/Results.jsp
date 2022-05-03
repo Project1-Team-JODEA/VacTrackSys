@@ -40,7 +40,7 @@
     </head>
     <body>
         <div class="container" id="rs-form">
-            <div class="title">Vaccination Report</div>
+            <div id="title" class="title">Vaccination Report</div>
             <%
  User u = (User) request.getSession().getAttribute("u");
      String filename = "CDC REPORT-" + u.getUsername() + ".txt";
@@ -55,6 +55,8 @@
                 <%}
                     br.close();
                 } catch (Exception e) {
+%>${msg}
+                <%
               }%>
 
             <form action="CreateReport" id="reportaction" method="post">
@@ -66,12 +68,13 @@
  <!--<input type="submit" id="download" value="New Report"  >-->
                    
                 <input type="hidden" name="actiontype" id="actiontype" value=""> 
-                <a href="download.jsp">Download Report</a>
-                <br /><br />
-                <a href="#Vaccination Report">Back To Top</a>
+                
+                <a href="#title">Back To Top</a>
 
             </form>
-
+            <form action="CreateReport" id="" method="get">
+                <input type="submit" value="Download Report (txt)">
+            </form>
         </div>
 
     </body>
