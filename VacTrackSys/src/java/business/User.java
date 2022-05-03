@@ -5,7 +5,9 @@
 package business;
 //import AppSecurity;
 
-public class User {
+public class User implements java.io.Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     public boolean isSearchedPatients() {
         if (searched == true) {

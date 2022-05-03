@@ -1,8 +1,9 @@
 <%-- Project JODEA File name : index1.jsp Date : Mar 6, 2022, 1:05:54 PM Author(s) : JaccobStanton, Elena Miller --%>
+<%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@page import="java.util.Enumeration"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@page import="business.User" %>
 <!DOCTYPE html>
 <html>
@@ -39,7 +40,7 @@
 
 
             window.onload = () => {
-               
+
                 try {
                     document.getElementById("methodtype").onchange = (evt) => {
                         let m = evt.currentTarget;
@@ -114,31 +115,43 @@
     </head>
 
     <body>
+         <jsp:useBean id="u" scope="session" class="business.User"/>
+
+
         <%
-            String acct = null, ver = "", act = null;
+            String acct = null, ver = "", act = null, act1 = null, acct1 = null, p = null;
             Cookie[] c = request.getCookies();
             Cookie oldrcode = null, oldact = null;
-//  clear old cookies
-            User u = (User) request.getSession().getAttribute("u");
+            //  clear old cookies
 
+            u = (User) request.getSession().getAttribute("u");
+            act = String.valueOf(request.getAttribute("act"));
+            if (act == null) {
+                act = "";
+
+            }
             if (c.length > 0) {
                 for (Cookie c1 : c) {
                     String name = c1.getName();
                     if (c1.getName().contains("account")) {
-//                                request.getSession().
-                        request.getSession().setAttribute("acct", c1.getValue());
-                        acct = c1.getValue();
-                    } else if (c1.getName().equals("act")) {
-                        c1.setMaxAge(5 * 100);
-                        response.addCookie(c1);
-                        act = c1.getValue();
-                        oldact = c1;
-                    } else if (c1.getName().equals("reset")) {
-                        if (c1.getValue().equals("success")) {
+                        p = c1.getPath();
+                        if (p != null) {
+                            if (p.contains("/DoctorLogin")) {
+                                if (!p.contains("/faces")) {
+                                    request.getSession().setAttribute("acct", c1.getValue());
+                                    acct = c1.getValue();
+
+                                }
+                            }
+                        } else {
+                            c1.setMaxAge(0);
+                            c1.setHttpOnly(true);
+                            response.addCookie(c1);
 
                         }
+
                     } else if (c1.getName().equals("rcode")) {
-                        if (c1.getPath().contains("CDC")) {
+                        if (c1.getPath().contains("/DoctorLogin")) {
                             oldrcode = c1;
                             if (acct == null || act == null) {
                                 // delete cookies
@@ -149,13 +162,16 @@
 
                             }
                         }
+
                     }
                 }
             }
-
+          
+            if (u == null) {
+                u = new User();
+            }
         %>
-
-
+        <c:set var="state" value="<%= act%>"/>        
         <div class="hero">
             <div class="form-box">
                 <div class="social-icons">
@@ -187,16 +203,7 @@
                                        title="Email Address" required> <!-- pattern="[a-zA-z0-1_]+[]@[]{}.{2,}$" -->
                             </td>
                         </tr>
-                        <%if (act == null) {
-                                act = "";
-                            }
-                            if (acct == null) {
-                                acct = "";
-                            }
-                            if (u == null) {
-                                u = new User();
-                            }
-                            if (act.contains("found") && !u.getUsername().equals("")) { %>                        
+                       <c:if test='${state == "found"}'>                       
                         <tr>
                             <td>Select Reset Method</td>
                         </tr>
@@ -219,11 +226,9 @@
                         <tr><td class="cquestion"><input type="text" style="display: none;" class="input-field" 
                                                          name="ques" id="ques" value="${u.question}" readonly></td></tr>
                         <tr><td class="cquestion"><input type="text" style="display: none;" class="input-field" name="ans" 
-                                                         id="ans" value="" placeholder="Answer"></td></tr>
-                        <tr><td></td></tr>
-                        <%}
-                            if (act.contains("found") && act.contains("ver")) {
-                        %>
+                                </c:if>
+                        
+                        <c:if test='${state=="foundver"}'>
                         <tr>
                             <td style="width: 240px;"><input type="password" name="upwd" class="input-field"
                                                              id="upwd" value="" placeholder="Password" required>
@@ -249,35 +254,26 @@
                                        placeholder="New Hint" required>
                             </td>
                         </tr>
-                        <%}
-                        %>
+                        </c:if>
                     </table>
                     <!--<input type="submit"  onclick="">Login</button>-->
 
-                    <% if (!act.contains("ver") && !act.contains("found") || u.getUsername().equals("")) { %>
-                    <button type="button" class="submit-btn" id="searchbtn"> Continue </button>
-                    <% if (u.getUsername().equals("")) {%>
-                    <%}%>
-                    <%  } else if (!act.contains("ver") && act.contains("found") && !u.getUsername().equals("")) { %>
-                    <button type="submit" class="submit-btn" id="reset-btn" onclick="pageAction('ResetPasswd')"> Reset Password </button>
-                    <%} else if (act.contains("ver") && act.contains("found") && !u.getUsername().equals("")) { %>
-                    <button type="submit" class="submit-btn" id="update-btn" onclick="pageAction('updatePasswd')">Update Account</button>
-                    <%}%><br>
+                    <c:choose>
+                        <c:when test='${state !="found" && state != "foundver"}'>
+                            <button type="button" class="submit-btn" title="Click to Find your Account" id="searchbtn"> Search </button>
+
+                        </c:when>
+                        <c:when test='${state == "found" && state != "foundver"}'>
+                            <button type="submit" class="submit-btn" id="reset-btn" title="Reset account" onclick="pageAction('ResetPasswd')"> Reset Password </button>
+                        </c:when>
+                        <c:when test='${state=="foundver"}'>
+                                <button type="submit" title="update account password" class="submit-btn" id="update-btn" onclick="pageAction('updatePasswd')">Update Account</button>
+                        </c:when>
+                        <c:otherwise>
+                        </c:otherwise>
+                    </c:choose><br>
                     <button type="button" class="submit-btn" id="cancel">Cancel</button>
-
-                    <!--<input type="submit" name="" value="Reset">-->
-                    <!--<a href="#">Forgot Password?</a>-->
-
-
-                    <!--<button  class="submit-btn" onclick="document.location = 'ForgotPassword.jsp'"><i class="fas fa-angle-right"> Forgot Password?</i></button>-->
-
-                    <!--                    <div class="toggle-box">
-                                            <div id="Qustions" class="toggle-content">
-                                                
-                                            </div>
-                                        </div>-->
-
-                    <input type="hidden" name="step" id="step" value="" hidden="">
+              <input type="hidden" name="step" id="step" value="" hidden="">
                     <!--<input type="hidden" name="ver" id="ver" value="${ver}">-->
                     <data id="valid" value="" hidden=""></data>
                     <div id="message" style="padding: 

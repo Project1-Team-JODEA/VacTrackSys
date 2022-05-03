@@ -144,21 +144,13 @@ input#list-btn {
     cursor: pointer;
 }
 
-
-/* #list-btn::after{
-    content: "▼";
-} */
-
 div.sort {
     position: fixed;
-    /*background-color: white;*/
     display: inline-block;
 }
 
 div.items {
-    /*display: none;*/
     background-color: white;
-    /*border: 2px solid black;*/
     color: black;
     position: absolute;
     width: 200px;
@@ -171,10 +163,6 @@ div.items {
     /*align-items: flex-start;*/
 }
 
-
-/*.input-box input#sort{
-    width: 15px;
-}*/
 
 .items ul {
     display: list-item;
@@ -215,18 +203,29 @@ input.sortval:checked {
     font-weight: bold;
     /* cursor: pointer; */
 }
-
-
-/* input.sortval:hover, .sortval:focus{
-   
-} */
-
 .vac-details .input-box button.sortbtn {
     /*float: left;*/
     width: 50px;
 }
 #action{
     padding: 5px;
+}
+.button table button{
+    height: 100%;
+    width: 100%;
+     padding: 10px;
+}
+ .button button{
+    font-size: 1.25em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 100%;
+    width: 25%;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #ff105f, #ffad06);
+   
 }
 .user-details .input-box input:focus,
 .user-details .input-box input:valid {
@@ -277,7 +276,7 @@ form .button {
     margin: 25px 0;
 }
 
-form .button input, button[type='submit'] {
+form .button input,.button button {
     height: 100%;
     width: 25%;
     border-radius: 5px;
@@ -291,27 +290,13 @@ form .button input, button[type='submit'] {
     background: linear-gradient(135deg, #ff105f, #ffad06);
 }
 
-form .button input:hover {
+form .button input:hover, .button button:hover {
     /* transform: scale(0.99); */
     background: linear-gradient(-135deg, #ff105f, #ffad06);
 }
-
-
-/*     .content form .user-details{
-      max-height: 300px;
-      overflow-y: scroll;
-    }*/
-
 .content form .user-details .input-box .sortlist input {
     font-size: 14px;
 }
-
-
-/* #results {
-    width: 100%;
-    overflow: auto;
-} */
-
 #logout:before {
     content: "e9ba";
 }
@@ -322,9 +307,8 @@ form .button input:hover {
 }
 
 .toggle-content {
-    width: 450px;
-    height: 650px;
-    /* border-radius: 10%; */
+    width: 75vh;
+    height: 100vh;
     background-color: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
     z-index: 1;

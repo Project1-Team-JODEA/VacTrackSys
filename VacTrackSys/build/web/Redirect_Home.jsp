@@ -18,14 +18,9 @@
     <body>
         <div class="box-container">
             <div class="box">
-                <h1 style="color: red"> Page Error  <i class="fas fa-exclamation-triangle"></i></h1>
-
-                Uh oh! It looks like one of the following happened:
-                <blockquote><ul>
-                        <li>Your Session Had Expired.</li>
-                        <li>Your User Account was not authenticated.</li>
-                       </ul></blockquote>
-                You can return to the Home Page or 
+                <h1 style="color: red"> Session Expired  <i class="fas fa-exclamation-triangle"></i></h1>
+                It Looks like your session has expired or reseted. 
+              You can return to the Home Page or 
                 Go to the 1 of the login pages:
                 <br>
                 <ul id="rlist">

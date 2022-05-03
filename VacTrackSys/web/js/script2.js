@@ -19,7 +19,7 @@ function validate(id, type) {
             val = $(id).val();
             regex = /^(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$/;
             if (val.type() === 'undefined'){
-                alert("Error: ")
+                alert("Error: ");
             }
             ;
             break;

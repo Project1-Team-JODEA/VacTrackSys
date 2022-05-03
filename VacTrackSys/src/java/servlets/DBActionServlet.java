@@ -17,13 +17,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -54,7 +52,6 @@ public class DBActionServlet extends HttpServlet {
         String msg = "", action = "", sql = "", sql_vac = "", webloc = "";
         String ssn, fname, minit, lname, vac_date = "", dob = "", ptype, vsite, vid, v1id, v2id, v3id, v4id;
         String[] filters = new String[12];
-
         String[] info = {ssn = "", fname = "", minit = "", lname = "", dob = "", ptype = "", vid = "", vsite = "", v1id = "",
             v2id = "", v3id = "", v4id = ""};
         String[] fields = {"Social_Security", "First_Name", "Middle_Init", "Last_Name", "DOB", //"Vaccine_ID",
@@ -84,7 +81,7 @@ public class DBActionServlet extends HttpServlet {
                 msg += "Error: Unable to Perform Action <br>";
                 URL = webloc + "/VaccinationDB.jsp";
             } else if (action.equalsIgnoreCase("SearchPatient")) {
-                 info[0] = String.valueOf(request.getParameter("ssn"));
+                info[0] = String.valueOf(request.getParameter("ssn"));
                 info[1] = String.valueOf(request.getParameter("fname"));
                 info[2] = String.valueOf(request.getParameter("lname"));
                 info[3] = String.valueOf(request.getParameter("midinit"));
@@ -104,15 +101,16 @@ public class DBActionServlet extends HttpServlet {
                         if (fields[i].equals("Social_Security")) {
 //                            if (info[i].contains("000"))
                             String[] ssn2 = info[i].split("-");
-                            if (ssn2[0].equals("000")){
-                                
+                            if (ssn2[0].equals("000")) {
+                                msg += "";
                             }
-                            if (ssn2[1].equals("00")){
-                                
-                            }if (ssn2[2].equals("0000")){
-                                
+                            if (ssn2[1].equals("00")) {
+
                             }
-                            newV = fields[i] + "=" + info[i];
+                            if (ssn2[2].equals("0000")) {
+
+                            }
+                            newV = fields[i] + "=" + ssn2[0] + ssn2[1] + ssn2[2];
                             filters[i] = newV; //String.valueOf(newV);
 
                         } else if (fields[i].equals("DOB")) {
@@ -196,7 +194,7 @@ public class DBActionServlet extends HttpServlet {
                 } else {
                     URL = webloc + "/VaccinationDB.jsp";
                 }
-                
+
             } else if (action.equalsIgnoreCase("EditPatient")) {
                 sql = "SELECT * FROM PATIENTS WHERE Social_Security = '" + request.getParameter("ssn").trim() + "'";
                 Statement s = conn.createStatement();
@@ -275,7 +273,7 @@ public class DBActionServlet extends HttpServlet {
                 Date today = new Date();
                 System.out.println(today);
 //                User u = (User) request.getSession().getAttribute("u");
-                DateTimeFormatter d_format = DateTimeFormatter.ofPattern("yyyy-MM-dd");   
+                DateTimeFormatter d_format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 String t = String.valueOf(today);
 
                 v.setLocation(u.getLocation());
@@ -318,8 +316,11 @@ public class DBActionServlet extends HttpServlet {
         request.setAttribute("msg", msg);
 //response.setHeader(lname, vsite);
 //request.getHeader(lname)
-        RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);
+        if (request.getMethod().equalsIgnoreCase("POST")){
+              RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);
         disp.forward(request, response);
+        }
+      
 
     }
 
@@ -335,9 +336,20 @@ public class DBActionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
 //        response.setContentType("text/");
         processRequest(request, response);
-       
+//        String URL = "";
+//        String msg = "", action = "", sql = "", sql_vac = "", webloc = "";
+//        ArrayList<Patient> patientset = new ArrayList<>();
+//        ArrayList<String> newVal = new ArrayList<>();
+//        String ssn, fname, minit, lname, vac_date = "", dob = "", ptype, vsite, vid, v1id, v2id, v3id, v4id;
+//        String[] filters = new String[12];
+//        String[] info = {ssn = "", fname = "", minit = "", lname = "", dob = "", ptype = "", vid = "", vsite = "", v1id = "",
+//            v2id = "", v3id = "", v4id = ""};
+//        RequestDispatcher disp = getServletContext().getRequestDispatcher(URL);
+//        disp.forward(request, response);
+
     }
 
     /**

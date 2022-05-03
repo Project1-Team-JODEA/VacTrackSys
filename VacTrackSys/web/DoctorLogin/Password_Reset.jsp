@@ -1,9 +1,13 @@
 <%-- Project JODEA File name : index1.jsp Date : Mar 6, 2022, 1:05:54 PM Author(s) : JaccobStanton, Elena Miller --%>
 
 <%@page import="java.util.Enumeration"%>
+<%@page language="java" contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>  
+
 <%@page import="business.User" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,11 +24,7 @@
         <script src="../js/functions.js"></script>
         <script src="https://kit.fontawesome.com/98e4c48f68.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <style>.show{display: block;}</style>
         <script>
-            // Add attribute events
-//    var es = document.getElementsByClassName("rsmethod");
-
             function pageAction(action) {
                 document.getElementById("step").value = action;
                 if (action === 'method') {
@@ -35,15 +35,7 @@
                 }
 
             }
-
-
-
             window.onload = () => {
-//                if (document.getElementById("methodtype").value !== ' ') {
-//                    let x = "." + document.getElementById("methodtype").value+' input';
-//                    $( x).css("display", "block");
-//                }
-
                 try {
                     document.getElementById("methodtype").onchange = (evt) => {
                         let m = evt.currentTarget;
@@ -104,60 +96,79 @@
                     let user = $("#userid").val();
                     let email = $("#email").val();
                     if (user === null || email === null) {
+                        alert("Missing username or email.");
 
                     } else if (user === "" || email === "") {
-
+                        alert("Missing username or email.");
                     } else if (user !== null && email !== null) {
-
+                        alert("You will have a 5 minute time limit to reset your password.");
+                        pageAction('search');
+                        document.passwdreset.submit();
                     }
-                    alert("You will have a 5 minute time limit to reset your password.");
-                    pageAction('search');
+
                 });
             });
         </script>
     </head>
 
     <body>
+        <jsp:useBean id="u" scope="session" class="business.User"/>
+
+
         <%
-            String acct = null, ver = "", act = null;
+            String acct = null, ver = "", act = null, act1 = null, acct1 = null, p = null;
             Cookie[] c = request.getCookies();
             Cookie oldrcode = null, oldact = null;
-//  clear old cookies
-            User u = (User) request.getSession().getAttribute("u");
+            //  clear old cookies
 
+            u = (User) request.getSession().getAttribute("u");
+            act = String.valueOf(request.getAttribute("act"));
+            if (act == null) {
+                act = "";
+
+            }
             if (c.length > 0) {
                 for (Cookie c1 : c) {
                     String name = c1.getName();
                     if (c1.getName().contains("account")) {
-//                                request.getSession().
-                        request.getSession().setAttribute("acct", c1.getValue());
-                        acct = c1.getValue();
-                    } else if (c1.getName().equals("act")) {
-                        c1.setMaxAge(5 * 100);
-                        response.addCookie(c1);
-                        act = c1.getValue();
-                        oldact = c1;
-                    } else if (c1.getName().equals("reset")) {
-                        if (c1.getValue().equals("success")) {
+                        p = c1.getPath();
+                        if (p != null) {
+                            if (p.contains("/DoctorLogin")) {
+                                if (!p.contains("/faces")) {
+                                    request.getSession().setAttribute("acct", c1.getValue());
+                                    acct = c1.getValue();
+
+                                }
+                            }
+                        } else {
+                            c1.setMaxAge(0);
+                            c1.setHttpOnly(true);
+                            response.addCookie(c1);
 
                         }
+
                     } else if (c1.getName().equals("rcode")) {
-                        oldrcode = c1;
-                        if (acct == null || act == null) {
-                            // delete cookies
-                            oldrcode.setMaxAge(1);
-                            oldact.setMaxAge(1);
-                            response.addCookie(oldrcode);
-                            response.addCookie(oldact);
+                        if (c1.getPath().contains("/DoctorLogin")) {
+                            oldrcode = c1;
+                            if (acct == null || act == null) {
+                                // delete cookies
+                                oldrcode.setMaxAge(1);
+                                oldact.setMaxAge(1);
+                                response.addCookie(oldrcode);
+                                response.addCookie(oldact);
 
+                            }
                         }
+
                     }
                 }
             }
-
+          
+            if (u == null) {
+                u = new User();
+            }
         %>
-
-
+        <c:set var="state" value="<%= act%>"/>        
         <div class="hero">
             <div class="form-box">
                 <div class="social-icons">
@@ -173,7 +184,8 @@
                 </div>
 
                 <form id="passwdreset" class="input-group"
-                      action="ResetPassword" method="post"  style="align-content: center;">
+                      action="ResetPassword" method="post"
+                      style="align-content: center;" onsubmit="$('.submit-btn').attr('disabled', '');">
                     <table>
 
                         <tr>
@@ -189,90 +201,84 @@
                                        title="Email Address" required> <!-- pattern="[a-zA-z0-1_]+[]@[]{}.{2,}$" -->
                             </td>
                         </tr>
-                        <%if (act == null) {
-                                act = "";
-                            }
-                            if (acct == null) {
-                                acct = "";
-                            }
-                            if (u == null) {
-                                u = new User();
-                            }
-                            if (act.contains("found") && !u.getUsername().equals("")) { %>                        
-                        <tr>
-                            <td>Select Reset Method</td>
-                        </tr>
-                        <tr>
-                            <td><select title="Select Reset Method" name="rsmethod" id="methodtype" onchange="" value="">
-                                    <option title="none" value=" " selected>Select</option>
-                                    <option title="send code via email" value="sendCode">Reset Code via Email</option>
-                                    <option title="challenge question" value="cquestion">Challenge Question</option>
-                                    <!--<option value="Hint"></option>-->
-                                </select></td>
-                            <!--<td><button type="submit" onclick="pageAction('method')">Submit</button></td>-->
-                        </tr>
+                        <c:if test='${state == "found"}'>
+                            <tr>
+                                <td>Select Reset Method</td>
+                            </tr>
+                            <tr>
+                                <td><select title="Select Reset Method" name="rsmethod" id="methodtype" onchange="" value="">
+                                        <option title="none" value=" " selected>Select</option>
+                                        <option title="send code via email" value="sendCode">Reset Code via Email</option>
+                                        <option title="challenge question" value="cquestion">Challenge Question</option>
+                                        <!--<option value="Hint"></option>-->
+                                    </select></td>
+                                <!--<td><button type="submit" onclick="pageAction('method')">Submit</button></td>-->
+                            </tr>
+                            <tr><td class="sendCode" ><input class="submit-btn" style="display: none;" title="click send code" type="submit"
+                                                             name="sendCode" value="Send Code to email" onclick="pageAction('sendCode')">
+                                </td></tr>
+                            <tr><td class="sendCode"><input style="display: none;" title="type 6 digit code" type="number" maxlength="6"  max="999999"
+                                                            class="input-field " name="rcode" 
+                                                            id="rcode" value="" maxlength="6" placeholder="6-digit code"></td></tr>
+                            <tr><td class="cquestion"><input type="text" style="display: none;" class="input-field" title="security question" 
+                                                             name="ques" id="ques" value="${u.question}" readonly></td></tr>
+                            <tr><td class="cquestion"><input type="text" style="display: none;" class="input-field" name="ans" 
+                                                             id="ans" value="" placeholder="Answer"></td></tr>
+                            <tr><td></td></tr>
+                        </c:if>
 
-                        <tr><td class="sendCode" ><input class="submit-btn" style="display: none;" title="click send code" type="submit"
-                                                         name="sendCode" value="Send Code to email" onclick="pageAction('sendCode')">
-                            </td></tr>
-                        <tr><td class="sendCode"><input style="display: none;" title="type 6 digit code" type="number" maxlength="6" 
-                                                        class="input-field " name="rcode" 
-                                                        id="rcode" value="" placeholder="6-digit code"></td></tr>
-                        <tr><td class="cquestion"><input type="text" style="display: none;" class="input-field" 
-                                                         name="ques" id="ques" value="${u.question}" readonly></td></tr>
-                        <tr><td class="cquestion"><input type="text" style="display: none;" class="input-field" name="ans" 
-                                                         id="ans" value="" placeholder="Answer"></td></tr>
-                        <tr><td></td></tr>
-                        <%}
-                            if (act.contains("found") && act.contains("ver")) {
-                        %>
-                        <tr>
-                            <td style="width: 240px;"><input type="password" name="upwd" class="input-field"
-                                                             id="upwd" value="" placeholder="Password" required>
-                            </td>
-                            <td style="width: 40px;">
-                                <i class="fas fa-1-5x fa-eye" id="v-btn-p" onclick="toggleV('upwd', 'v-btn-p')"></i>
-                                <i id="validp" class="fas fa-check" style="color: green;"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 240px;">
-                                <input type="password" name="confpasswd" class="input-field" name="confpasswd"
-                                       id="confpasswd" placeholder="Confirm Password" required>
-                            </td>
-                            <td style="width: 40px;"><i class="fas fa-1-5x fa-eye" id="v-btn-c" onclick="toggleV('upwd', 'v-btn-c')"></i>
-                                <i id="validc" class="fas fa-check" style="color: green;"
-                                   onchange="validatePasswd('upwd', 'confpasswd')"></i>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 280px; ">
-                                <input type="text" class="input-field" name="newhint" id="newhint"
-                                       placeholder="New Hint" required>
-                            </td>
-                        </tr>
-                        <%}
-                        %>
+                        <c:if test='${state=="foundver"}'>
+                              <tr>
+                                  <td style="width: 240px;"><input type="password" name="upwd" class="input-field"
+                                                                   id="upwd" value="" placeholder="Password" required>
+                                  </td>
+                                  <td style="width: 40px;">
+                                      <i class="fas fa-1-5x fa-eye" id="v-btn-p" onclick="toggleV('upwd', 'v-btn-p')"></i>
+                                      <i id="validp" class="fas fa-check" style="color: green;"></i>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td style="width: 240px;">
+                                      <input type="password" name="confpasswd" class="input-field" name="confpasswd"
+                                             id="confpasswd" placeholder="Confirm Password" required>
+                                  </td>
+                                  <td style="width: 40px;"><i class="fas fa-1-5x fa-eye" id="v-btn-c" onclick="toggleV('upwd', 'v-btn-c')"></i>
+                                      <i id="validc" class="fas fa-check" style="color: green;"
+                                         onchange="validatePasswd('upwd', 'confpasswd')"></i>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td style="width: 280px; ">
+                                      <input type="text" class="input-field" name="newhint" id="newhint"
+                                             placeholder="New Hint" required>
+                                  </td>
+                              </tr>    
+                        </c:if>
+
                     </table>
-                    <!--<input type="submit"  onclick="">Login</button>-->
+                    <c:choose>
+                        <c:when test='${state !="found" && state != "foundver"}'>
+                            <button type="button" class="submit-btn" title="Click to Find your Account" id="searchbtn"> Search </button>
 
-                    <% if (!act.contains("ver") && !act.contains("found") || u.getUsername().equals("")) { %>
-                    <button type="button" class="submit-btn" id="searchbtn"> Continue </button>
-                    <% if (u.getUsername().equals("")) {%>
-                    <%}%>
-                    <%  } else if (!act.contains("ver") && act.contains("found") && !u.getUsername().equals("")) { %>
-                    <button type="submit" class="submit-btn" id="reset-btn" onclick="pageAction('ResetPasswd')"> Reset Password </button>
-                    <%} else if (act.contains("ver") && act.contains("found") && !u.getUsername().equals("")) { %>
-                    <button type="submit" class="submit-btn" id="update-btn" onclick="pageAction('updatePasswd')">Update Account</button>
-                    <%}%><br>
+                        </c:when>
+                        <c:when test='${state == "found" && state != "foundver"}'>
+                            <button type="submit" class="submit-btn" id="reset-btn" title="Reset account" onclick="pageAction('ResetPasswd')"> Reset Password </button>
+                        </c:when>
+                        <c:when test='${state=="foundver"}'>
+                                <button type="submit" title="update account password" class="submit-btn" id="update-btn" onclick="pageAction('updatePasswd')">Update Account</button>
+                        </c:when>
+                        <c:otherwise>
+                        </c:otherwise>
+                    </c:choose>
+                   <br>
                     <button type="button" class="submit-btn" id="cancel">Cancel</button>
 
-                      <input type="hidden" name="step" id="step" value="" hidden="">
-                    <!--<input type="hidden" name="ver" id="ver" value="${ver}">-->
+                    <input type="hidden" name="step" id="step" value="" hidden="">
+                  <!--<input type="hidden" name="ver" id="ver" value="${ver}">-->
                     <data id="valid" value="" hidden=""></data>
                     <div id="message" style="padding: 
                          5px; background: white;">${msg}</div>
-               </div>
+            </div>
             <script>
                 var x = document.getElementById("passwdreset");
                 x.style.left = "50px";
@@ -309,27 +315,27 @@
                     }
 
                 };
-//                let toggleMethod = function () {
-//                    var method = document.getElementById("methodtype").value;
-//                    let codein = document.getElementById("rcode");
-//                    let ans = document.getElementById("ans");
-//                    if (method === 'cquestion') {
-//                        if (!ans.hasAttribute("required")) {
-//                            ans.setAttribute("required", null);
-//                        }
-//                        if (codein.hasAttribute("required")) {
-//                            codein.removeAttribute("required");
-//                        }
-//                    } else if (method === 'sendCode') {
-//                        if (!codein.hasgetAttribute("required")) {
-//                            codein.setAttribute("required", null);
-//                        }
-//                        if (ans.hasAttribute("required")) {
-//                            ans.removeAttribute("required");
-//                        }
-//                        document.querySelector("#rcode")[0].setAttribute("required", null);
-//                    }
-//                };
+                //                let toggleMethod = function () {
+                //                    var method = document.getElementById("methodtype").value;
+                //                    let codein = document.getElementById("rcode");
+                //                    let ans = document.getElementById("ans");
+                //                    if (method === 'cquestion') {
+                //                        if (!ans.hasAttribute("required")) {
+                //                            ans.setAttribute("required", null);
+                //                        }
+                //                        if (codein.hasAttribute("required")) {
+                //                            codein.removeAttribute("required");
+                //                        }
+                //                    } else if (method === 'sendCode') {
+                //                        if (!codein.hasgetAttribute("required")) {
+                //                            codein.setAttribute("required", null);
+                //                        }
+                //                        if (ans.hasAttribute("required")) {
+                //                            ans.removeAttribute("required");
+                //                        }
+                //                        document.querySelector("#rcode")[0].setAttribute("required", null);
+                //                    }
+                //                };
             </script>
 
     </body>

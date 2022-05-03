@@ -153,6 +153,15 @@ $(document).ready(() => {
     } else if (uri.indexOf('Patient Login') !== -1) {
 
     }
+    $("#resetForm").click(evt=>{
+        $(".pat_info").each((i, e)=>{
+            let eid = e.id;
+        let id = '#' + eid;
+        if ($(id).css("display") === 'block'){
+            $(id).css("display", 'none');
+        }
+        });
+    });
     var ty = getTodayDate();
     document.getElementById("dbaction").onsubmit = () => {
 
@@ -257,16 +266,8 @@ $(document).ready(() => {
                 ;
         }
     });
-    $("#logout").attr("onhover",evt => {
-        let t = document.getElementById("logout");
-        if (t.classList.contains('fa-door-closed')) {
-            t.classList.replace('fa-door-closed', 'fa-door-open');
-        } else if (t.classList.contains('fa-door-open')) {
-            t.classList.replace('fa-door-open', 'fa-door-closed');
-        }
-        evt.preventDefault();
-    });
-    $("#logout").click(() => {
+    
+    $("#Logout").click(() => {
         let c = confirm("Are you Sure you want to logout?");
         if (c === true) {
             pageAction2('Logout');
@@ -315,12 +316,12 @@ $(document).ready(() => {
 
         switch (eid) {
             case "ssn":
-//                $(id).attr("oninvalid", () => {
-//                    document.getElementById(eid).setCustomValidity('Social Security Number must be in thie format: 123-45-6789'
-//                            + ' First 3 digits cannot start with 000, 666 or between 900 and 999.'
-//                            + ' Next 2 digits should be any digit between 01-99. '
-//                            + ' Last 4 digits should not be 0000.');
-//                });
+                $(id).attr("oninvalid", () => {
+                    document.getElementById(eid).setCustomValidity('Social Security Number must be in thie format: 123-45-6789'
+                            + ' First 3 digits cannot start with 000, 666 or between 900 and 999.'
+                            + ' Next 2 digits should be any digit between 01-99. '
+                            + ' Last 4 digits should not be 0000.');
+                });
                  break;
             case 'fname':
                 $(id).attr("oninvalid", () => {

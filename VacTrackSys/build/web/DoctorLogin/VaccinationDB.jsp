@@ -97,7 +97,7 @@ For Searching through database
 
                 <div class="title">Patient/Vaccine Records
                     <i class="fas fa-1-x fa-question-circle toggle-btn" id="help-btn" title="Click to open Help/Guide"
-                       style="float: right;"></i>
+                       style="float: right;">HELP</i>
                     <i class="fa-1-x fas fa-database toggle-btn" title="Click to view Transaction Messages" onclick="" id="msg-btn" style="float: right;"></i>
                     <div class="toggle-box" id="pro-box">
                         <div class="toggle-content" id="pro-content" style="display: none;">
@@ -113,14 +113,23 @@ For Searching through database
                     </div>
                 </div>
                 <div class="toggle-box" id="help-box">
-                    <div class="toggle-content" id="help-content" style="display: none;">
+                    <div class="toggle-content" id="help-content" style="display: none; ">
                         <span style="font-weight: bold ;">Help/Tips</span>
                         <ul>
                             <li>Click on the Message icon (<i class="fas fa-database"></i>) to
                                 view any error messages then click on it again to close it.</li>
+                            <li>When </li>
                             <li> Try not to refresh the page too many times at once.
                                 Otherwise, your search input may not go through.</li>
-                            <li></li>
+                            <li><details>
+                                    <summary>Patient Records</summary>
+                                    <ol>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                    </ol>
+                                </details></li>
                             <li></li>
                         </ul>
                         <!--<textarea readonly> </textarea>-->
@@ -195,7 +204,7 @@ For Searching through database
                                         </tr>
                                         <tr id="ssn1" style="display: none;">
                                             <td><label class="details">SSN: </label></td>
-                                            <td><input class="pat_info" type="text" name="ssn" id="ssn" maxlength="11" 
+                                            <td><input class="pat_info" type="text" name="ssn" id="ssn" maxlength="11" pattern="^(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$"
                                                        placeholder="(###-##-####)"  title="Nine digit social security code"></td><!--  pattern="[0-9]{3}-[0-9]{2}-[0-9]{4}$" pattern="^(?!666|000|9\d{2})\d{3}-(?!00{2})\d{2}-(?!0000{4})\d{4}$"pattern="\d{3}[\-]\d{2}[\-]\d{4}"-->
 
                                         </tr>
@@ -298,7 +307,8 @@ For Searching through database
 
                         </div>
                         <div class="button">
-                            <button type="reset" title="clear form input" >CLEAR</button>
+                            <button type="reset" title="Clear Text Fields" >CLEAR </button>
+                            <button type="button" id="resetForm" title="Reset Form" >Reset Form</button>
                             <i class="fas fa-2x fa-door-closed " id="Logout"  title="Logout" 
                                style=" cursor: pointer; "></i>
                         </div>

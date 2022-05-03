@@ -31,9 +31,12 @@
         <title>Records</title>
     </head>
     <body>
-        
+        <%
+     
+        %>
         <div class="container" id="rs-form">
             <div class="title">Results</div>
+            <!--<button onclick=""></button>-->
             <div class="content" id="rs-content">
 
 
@@ -55,7 +58,7 @@
                     info[3] = String.valueOf(request.getParameter("midinit"));
                     info[4] = String.valueOf(request.getParameter("dob"));
                     info[5] = String.valueOf(request.getParameter("pat_type"));
-                    
+
                     int isE = 0;
                     String newV = "";
                     for (int i = 0; i < info.length - 1; i++) {
@@ -66,8 +69,18 @@
                         } else {
                             // adds a new condition clause for WHERE clause
                             if (fields[i].equals("Social_Security")) {
-                                String[] nums = info[i].split("-");
-                                newV = fields[i] + "=" + info[i];
+                                String[] ssn2 = info[i].split("-");
+                            if (ssn2[0].equals("000")){
+                              
+                            }
+                            if (ssn2[1].equals("00")){
+                                
+                            }if (ssn2[2].equals("0000")){
+                                
+                            }
+                            newV = fields[i] + "=" + ssn2[0]+ssn2[1]+ssn2[2];
+//                                String[] nums = info[i].split("-");
+//                                newV = fields[i] + "=" + info[i];
                                 filters[i] = newV; //String.valueOf(newV);
 
                             } else if (fields[i].equals("DOB")) {
@@ -115,7 +128,13 @@
                     ResultSet r = s.executeQuery(sql);
                 %>
 
-                <table>
+
+                <%    if (r.next()) {
+                        String s1 = String.valueOf(r.getInt("Social_Security"));
+                        String ssn2 = "***-**-" + s1.substring(5, s1.length() - 1);
+
+                %>
+                <table border="1">
                     <thead>
                     <th>Social Security Number (SSN)</th>
                     <th>First Name</th>
@@ -125,11 +144,6 @@
                     <th>Patient Type</th>
                     </thead>
                     <tbody>
-                        <%    if (r.next()) {
-                                String s1 = String.valueOf(r.getInt("Social_Security"));
-                                String ssn2 = "***-**" + s1.substring(5, s1.length() - 1);
-
-                        %>
                     <td><%= ssn2%></td>
                     <td><%= r.getString("First_Name")%></td>
                     <td><%= r.getString("Middle_Init")%></td>
@@ -151,14 +165,14 @@
                     </tbody>
                 </table>
                 <% }
-                    }else{
-%><p>Could not find the request record.</p>
+                } else {
+                %><p>Could not find the request record.</p>
                 <%
-}
+                    }
                     r.close();
                     s.close();
                 %>
-
+                
             </div>
         </div>
     </body>
